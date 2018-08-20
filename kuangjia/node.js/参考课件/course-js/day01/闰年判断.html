@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闰年判断</title>
+	<script>
+		/*
+			闰年判断
+				1）能被4整除但不能被100整除，或者能被400整除的才叫闰年
+					1900，2000
+		 */ 
+		// 驼峰命名法：除第一个单词以外单词首字母用大写
+		function checkYear(){
+			var year = document.getElementById('year').value;
+
+			// 判断是否是闰年
+			if(year%4==0 && year%100 !=0 || year%400 == 0){
+				alert(year + '是闰年');
+			}else{
+				alert(year + '是平年');
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="year"><button onclick="checkYear()">是否闰年</button>
+</body>
+</html>

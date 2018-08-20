@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格选取</title>
+	<style>
+		body{padding:20px 50px;}
+		table{margin-top:10px;width:100%;border:1px solid #ddd;border-collapse:collapse;}
+		td,th{padding:3px 6px;border:1px solid #ddd;}
+		thead tr{text-align:left;background-color:#efefef;}
+		.odd{background-color:#efefef;}
+		.selected{background-color:#fc0;color:#fff;}
+	</style>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			// 获取第一行表格
+			$('.first').click(function(){
+				$('.data-list tbody tr').first().addClass('selected');
+				//得到10个tr			//得到第一行
+			});
+
+			// 选取最后一行
+			$('.last').click(function(){
+				$('.data-list tbody tr').last().addClass('selected')
+			});
+
+			// 第四行
+			$('.four').click(function(){
+				$('.data-list tbody tr').eq(3).addClass('selected')
+			});
+
+
+			// 倒数第四行
+			$('.dfour').click(function(){
+				$('.data-list tbody tr').eq(-4).addClass('selected');
+			});
+
+			// 选取前三行
+			$('.q3').click(function(){
+				$('.data-list tbody tr:lt(3)').addClass('selected');
+			});
+
+			// 后两行
+			$('.h2').click(function(){
+				$('.data-list tbody tr:gt(-3)').addClass('selected')
+			});
+
+			// 隔行换色
+			// odd获取索引值为奇数的元素
+			// even获取索引值为偶数的元素
+			$('.data-list tbody tr:odd').addClass('odd');
+
+			// 选中3-6行
+			$('.r3-6').click(function(){
+				// $('.data-list tbody tr:gt(1)').addClass('selected')
+				// $('.data-list tbody tr:gt(-5)').removeClass('selected')
+				$('.data-list tbody tr').slice(2,6).addClass('selected')
+			});
+		})
+	</script>
+</head>
+<body>
+	<button class="first">第一行</button>
+	<button class="last">最后一行</button>
+	<button class="four">第四行</button>
+	<button class="dfour">倒数第四行</button>
+	<button class="q3">前三行</button>
+	<button class="h2">后两行</button>
+	<button class="r3-6">3-6行</button>
+	<table class="data-list">
+		<thead>
+			<tr>
+				<th width="20">#</th>
+				<th>姓名</th>
+				<th>年龄</th>
+				<th>性别</th>
+				<th>婚姻状况</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>1</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>2</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>3</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>4</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>5</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>6</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>7</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>8</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>9</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+			<tr>
+				<td>10</td>				
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+				<td>单元格</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

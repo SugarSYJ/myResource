@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05火箭升空（先加速后减速）.html</title>
+    <style>
+        body{background-color:rgb(22,40,59);overflow:hidden;}
+        .rocket{height:150px;position:absolute;bottom:-50px;left:50%;}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+            /*
+                火箭升空：先加速后减速
+                    * 升空阶段：速度不断增加
+                    * 进入轨道阶段：速度不断减小
+             */
+            
+            let rocket = document.querySelector('.rocket');
+
+            let speed = 0;
+
+            let timer = setInterval(()=>{
+                let top = rocket.offsetTop;
+
+                // 升空阶段
+                speed -= 2;
+
+                // 到达页面中间位置，开始进入轨道
+                if(top <= window.innerHeight/2){
+                    speed += 3.5;
+                }
+
+                // 到达终点（轨道），停止定时器
+                if(speed >= 0){
+                    clearInterval(timer);
+                    speed = 0;
+                }
+
+
+                rocket.style.top = top + speed + 'px';
+            },20)
+        })
+    </script>
+</head>
+<body>
+    <img src="img/rocket.gif" class="rocket" />
+</body>
+</html>

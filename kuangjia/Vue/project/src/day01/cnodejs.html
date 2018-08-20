@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+        <script src="../js/jquery-2.1.1.min.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="(value,key) in dataset[0]">{{key}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(obj,index) in dataset" :key="obj.id">
+                        <td v-for="(value,key) in obj">{{value}}</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            <input type="button" v-for="page in 10" :value="page" @click="goto(page)"/>
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+            <h1>{{page}}</h1>
+        </div>
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    dataset:[],
+                    pageindex:1
+                },
+                methods:{
+                    goto:function(_page){
+                        this.page = _page;
+                    }
+                },
+                computed:{
+                    page:{
+                        get:function(){
+                            $.get('https://cnodejs.org/api/v1/topics',{page:this.pageindex,limit:10},function(res){
+                                console.log(res);
+                                vm.dataset = res.data;
+                                // vm.dataset = res.data instanceof Array ? res.data : JSON.parse(res).data.forecast;
+                            });
+                            // return this.pageindex;
+                        },
+                        set:function(_newval){
+                            // console.log('set');
+                            this.pageindex = _newval;
+                        }
+                    }
+                }
+            });
+            // $.get('https://cnodejs.org/api/v1/topics',{page:1,limit:10},function(res){
+            //     console.log(res);
+            //     vm.dataset = res.data;
+            // });
+        </script>
+    </body>
+</html>

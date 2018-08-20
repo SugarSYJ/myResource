@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            background-color: #000;
+            overflow: hidden;
+        }
+
+            body * {
+                position: absolute;
+            }
+
+        .boss {
+            width: 100px;
+            height: 100px;
+            background: url(../game/boss.png);
+            bottom: -100px;
+            left: 40%;
+            z-index: 100;
+        }
+
+        .bomb {
+            width: 10px;
+            height: 30px;
+            background: url(../game/bomb.png);
+        }
+
+        .enemy {
+            width: 12px;
+            height: 36px;
+            background: url(../game/enemy2.png);
+            background-position: 111px;
+            top: -12px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var Game = function () {
+            //初始化（生成）我方战机
+            this.initBoss = function () {
+                this.boss = document.createElement('div');
+                this.boss.className = 'boss';
+                document.body.appendChild(this.boss);
+                var self = this;
+                this.boss.timer = window.setInterval(function () {
+                    var top = self.boss.offsetTop;
+                    top -= 10;
+                    if (top <= document.documentElement.clientHeight - self.boss.clientHeight) {
+                        top = document.documentElement.clientHeight - self.boss.clientHeight;
+                        window.clearInterval(self.boss.timer);
+                    }
+                    self.boss.style.top = top + 'px';
+                }, 30);
+            };
+
+            //我方战机移动
+            this.bossMove = function (speed, direction) {
+                var left = this.boss.offsetLeft;
+                if (direction == 'left') {
+                    left -= speed;
+                    if (left <= 0) {
+                        left = 0;
+                    }
+                } else if (direction == 'right') {
+                    left += speed;
+                    if (left >= document.documentElement.clientWidth - this.boss.clientWidth) {
+                        left = document.documentElement.clientWidth - this.boss.clientWidth;
+                    }
+                }
+                this.boss.style.left = left + 'px';
+            };
+
+            //开火
+            this.fire = function () {
+                var bomb = document.createElement('div');
+                bomb.className = 'bomb';
+                bomb.style.left = this.boss.offsetLeft + (this.boss.clientWidth / 2) + 'px';
+                bomb.style.top = this.boss.offsetTop - bomb.clientHeight + 'px';
+                document.body.appendChild(bomb);
+
+                bomb.timer = window.setInterval(function () {
+                    var top = bomb.offsetTop;
+                    top -= 10;
+                    if (top <= 0) {
+                        document.body.removeChild(bomb);
+                        window.clearInterval(bomb.timer);
+                    }
+                    bomb.style.top = top + 'px';
+
+                    var enemys = document.getElementsByClassName('enemy');
+                    for (var i = 0; i < enemys.length; i++) {
+                        if (top >= enemys[i].offsetTop - 10 && top <= enemys[i].offsetTop + 10) {
+                            if (bomb.offsetLeft >= enemys[i].offsetLeft - 10 && bomb.offsetLeft <= enemys[i].offsetLeft + 10) {
+                                window.clearInterval(enemys[i].timer);
+                                window.clearInterval(bomb.timer);
+                                document.body.removeChild(enemys[i]);
+                                document.body.removeChild(bomb);
+                            }
+                        }
+                    }
+
+                }, 30);
+            };
+
+            //初始化（生成敌方）
+            this.initEnemy = function () {
+                var enemy = document.createElement('div');
+                enemy.className = 'enemy';
+                enemy.style.left = parseInt(Math.random() * document.documentElement.clientWidth) + 'px';
+                enemy.style.top =  '-10px';
+                document.body.appendChild(enemy);
+
+                enemy.timer = window.setInterval(function () {
+                    var top = enemy.offsetTop;
+                    top += 1;
+                    if (top >= document.documentElement.clientHeight) {
+                        document.body.removeChild(enemy);
+                        window.clearInterval(enemy.timer);
+                    }
+                    enemy.style.top = top + 'px';
+                }, 100);
+            };
+        }
+
+        var _game = new Game();
+        window.onload = function () {
+            _game.initBoss();
+            _game.initEnemy();
+            //window.setInterval(function () {
+            //    _game.initEnemy();
+            //}, 3000);
+        }
+
+        window.onkeydown = function (_event) {
+            _event = _event || window.event;
+            var keyCode = _event.keyCode;
+            if (keyCode == 37) {
+                _game.bossMove(50, 'left');
+            } else if (keyCode == 39) {
+                _game.bossMove(50, 'right');
+            } else if (keyCode == 32) {
+                _game.fire();
+            }
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

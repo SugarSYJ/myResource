@@ -1,0 +1,47 @@
+*{
+    margin:0;
+    padding:0;
+}
+ul li{
+    list-style:none;
+}
+a{
+    text-decoration:none;
+}
+.tengxun{
+    width: 100%;
+    height:3000px;
+    background:yellow;
+}
+.container{
+    width: 1066px;
+}
+#head{
+    width: 100%;
+    height: 78px;
+    background: #F1F5F8;
+}
+#head .container{
+    height: 78px;
+    margin:0 auto;
+    overflow:hidden;
+    /*background:url("../images/logo.png") no-repeat 0 center;*/
+    background-color:pink;/*padding-top:20px;
+*/}
+#head .container .head1{
+    width: 176px;
+    height: 37px;
+    border-left:1px solid #CFD3D7;
+    margin-left:195px;
+    margin-top:20px;
+}
+/*#head h2{
+    height: 31px;
+    width: 176px;
+    font-size:21px;
+    color:#333333;
+    line-height:31px;
+    padding-top:6px;
+    padding-left:21px;
+ } */  
+    

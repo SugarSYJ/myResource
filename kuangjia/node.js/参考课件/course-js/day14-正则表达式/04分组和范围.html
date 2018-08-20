@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>04分组和范围</title>
+    <style type="text/css">
+        div {
+            width: auto;
+            height: 38px;
+            line-height: 38px;
+            text-align: center;
+            border: solid 1px #ccc;
+            margin: 10px 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onclick = function (_event) {
+            var self = _event.target;
+            var txt = self.innerHTML;
+            if (self.id == 'div1') {
+                var reg = /(o)/g;
+                console.log(txt.match(reg));
+            } else if (self.id == 'div2') {;
+                var reg = /study[9]*/;
+                console.log(reg.exec(txt))
+            } else if (self.id == 'div3') {;
+                var reg = /([\u4e00-\u9fa5]|[a-zA-Z])+/;
+                console.log(reg.exec(txt));
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">good good study day day up</div>
+    <div id="div2">study979study</div>
+    <div id="div3">study张三</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>day03作业讲解</title>
+	<script>
+		/*
+			作业1：小王入职时月工资10k元，每年涨工资10%，10年后小王的工资是多少？这10年小王共赚了多少钱？
+			作业2: 求出1-1/2+1/3-1/4…..1/100的和
+		 */ 
+		
+		/*
+			作业1：小王入职时月工资10k元，每年涨工资10%，10年后小王的工资是多少？这10年小王共赚了多少钱？
+			思路：
+				1）得到第一年的工资和第一年赚了多少
+					var salary = 10000;
+					var sum = salary*12;
+				2）计算每一年的工资和每一各赚了多少
+					第二年工资：salary = salary + salary*0.1
+					第二年赚的钱：sum = sum + salary*12
+					...
+					直到第十年
+				3）直接输出
+		 */
+		
+			// 1）得到第一年的工资和第一年赚了多少
+			
+			// 第一年的月工资
+			var salary = 10000;
+
+			// 第一年赚了多少钱
+			var sum = salary*12;
+
+
+			// 2）计算每一年的工资和每一各赚了多少
+			for(var i=1;i<10;i++){
+				// 第一年到第九年对应的工资
+				salary += salary*0.1;
+
+				// 当年工资和之前的总和
+				sum += salary*12;
+			}
+
+			document.write('小王入职时月工资10k元，每年涨工资10%，10年后小王的工资是'+salary.toFixed(2)+'元，这10年小王共赚了' + sum.toFixed(2) +'元');
+
+			/*
+				作业2: 求出1/1-1/2+1/3-1/4…..1/100的和
+				思路：
+					1）观察规律
+						奇数相加，偶数相减
+
+				推导公式：-1的(i-1)次方/i
+			 */
+			var sum = 0;
+			for(var i=1;i<=100;i++){
+				// 判断奇偶
+				if(i%2 == 0){
+					sum -= 1/i;
+				}else{
+					sum += 1/i;
+				}
+			}
+			document.write('<br><br>1/1-1/2+1/3-1/4…..1/100的和：' + sum);
+
+			// Math
+			// Math.pow(x,y):表示x的y次方
+			var sum = 0;
+			for(var i=1;i<=100;i++){
+				sum += Math.pow(-1,i-1)/i;
+			}
+			console.log(sum);
+	</script>
+</head>
+<body>
+	<!-- (-1)<sup>(i-1)</sup>/i -->
+</body>
+</html>

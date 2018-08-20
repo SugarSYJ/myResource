@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>随机生成一个五位以内的数，然后输出该数共有多少位，每位分别是什么</h3>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            var res = randomNumber(0,99999);
+            var g = res%10;
+            var s = parseInt((res%100)/10);
+            var b = (parseInt(res/100))%10;
+            var q = parseInt(res/1000)%10;
+            var w = parseInt(res/10000);
+            document.write('随机数：' + res + '<br/>');
+            if(w>=1){
+                document.write('共有'+5+'位'+',个位数是'+g+',十位数是'+s+',百位数是'+b+',千位数是'+q+',万位数是'+w);
+            }
+            if(w<1 && q>=1){
+                document.write('共有'+4+'位'+',个位数是'+g+',十位数是'+s+',百位数是'+b+',千位数是'+q);
+            }
+            if(w<1 && q<1 && b>=1){
+                document.write('共有'+3+'位'+',个位数是'+g+',十位数是'+s+',百位数是'+b);
+            }
+            if(w<1 && q<1 && b<1 && s>=1){
+                document.write('共有'+2+'位'+',个位数是'+g+',十位数是'+s);
+            }
+            if(w<1 && q<1 && b<1 && s<1 && g>=0){
+                document.write('共有'+1+'位'+',个位数是'+g);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可编辑表格</title>
+    <style>
+        table{border:1px solid #ddd;border-collapse: collapse;width:100%;}
+        td{padding:0;border:1px solid #ddd;}
+    </style>
+    <script>
+        window.onload = function(){
+            var datalist = document.getElementById('datalist');
+            var tds = document.getElementsByTagName('td');
+            // for(var i=0;i<tds.length;i++){
+            //     tds[i].onclick = function(){
+            //         var input = document.createElement('input');
+            //         input.type = 'text';
+            //         input.value = this.innerText;
+            //         this.innerHTML = '';
+            //         this.appendChild(input);
+            //         input.focus();
+            //         var self = this;
+            //         input.onblur = function(){
+            //             self.innerHTML = input.value;
+            //         }
+            //     }
+                
+            // }
+            datalist.onclick = function(e){
+                e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(target.nodeName.toLowerCase()==='td'){
+                    var idx = target.cellIndex;
+                    if(idx===0 || idx===6){
+                        return;
+                    }
+                    var input = document.createElement('input');
+                    input.type = 'text';
+                    input.value = target.innerText;
+                    target.innerHTML = '';
+                    target.appendChild(input);
+                    input.focus();
+                    var self = target;
+                    input.onblur = function(){
+                        self.innerHTML = input.value;
+                    }
+                }
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>可编辑表格</h1>
+    <table id="datalist">
+        <tr>
+            <td>1</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>单元格01</td>
+            <td>单元格02</td>
+            <td>单元格03</td>
+            <td>单元格04</td>
+            <td>单元格05</td>
+            <td><button>删除</button></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html >
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>竖排导航</title>
+		<style>
+			li {
+				margin-bottom: 2px;
+				list-style: none;
+				background: url(bg.gif) repeat-x 0 1px;
+				float: left;
+				clear: left;
+				cursor: pointer-;
+			}
+			a {
+				display: block;
+				width: 120px;
+				height: 25px;
+				line-height: 25px;
+				position: relative;
+				padding: 0 6px;
+				border: 1px solid #d6d6d6;
+				text-decoration: none;
+				font-size: 12px;
+				color: #555;
+			}
+			a:hover {
+				font-weight: bold;
+				border: 1px solid #b5b5b5;
+			}
+			span {
+				display: block;
+				width: 9px;
+				height: 8px;
+				overflow: hidden;
+				background: url(ico.gif) no-repeat;
+				position: absolute;
+				top: 8px;
+				right: 10px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var menu = document.getElementById('menu');
+				var links = menu.getElementsByTagName('a');
+
+				// 遍历所有a元素，并绑定相应事件
+				for(var i=0;i<links.length;i++){
+					// 鼠标移入时
+					links[i].onmouseover = function(){
+						// 声明变量self,为了在定时器里使用当前a元素
+						var self = this;
+
+						// 鼠标移入时，如果<移出定时器>没有关闭，则先关闭
+						if(this.mouseouttimer){
+							clearInterval(this.mouseouttimer)
+						}
+
+						// 给当前a元素添加鼠标<移入定时器>，为了能在鼠标移出事件里清除
+						this.mouseovertimer = window.setInterval(function(){
+							var startWidth = parseFloat(getComputedStyle(self).width);
+
+							// 宽度变化到指定宽度(220px)后清除当前定时器
+							if(startWidth >= 220){
+								clearInterval(self.mouseovertimer);
+								startWidth = 210;
+							}
+							self.style.width = startWidth + 10 + 'px';//最终改成220
+						},50);
+						
+					}
+
+					// 鼠标移出时
+					links[i].onmouseout = function(){
+						// 声明变量self,为了在定时器里使用当前a元素
+						var self = this;
+
+						// 鼠标移出时，如果<移入定时器>没有关闭，则先关闭
+						if(this.mouseovertimer){
+							clearInterval(this.mouseovertimer)
+						}
+
+						// 给当前a元素添加鼠标<移出定时器>，为了能在鼠标移出事件里清除
+						this.mouseouttimer = window.setInterval(function(){
+							var startWidth = parseFloat(getComputedStyle(self).width);
+
+							// 宽度恢复到原始宽度(120px)后清除当前定时器
+							if(startWidth <= 120){
+								clearInterval(self.mouseouttimer);
+								startWidth = 130;
+							}
+							self.style.width = startWidth - 10 + 'px';//最终改成220
+						},50);
+					}
+				}
+
+				// 
+				var obj = {name:'abc'}
+				obj.name;
+				obj.age;//
+				obj.age = 18
+			}
+		</script>
+	</head>
+
+	<body>
+		<ul id="menu">
+			<li><a href="http://www.mobiletrain.org" target="_blank">首页<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">千锋精品课程<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">CSS相关知识<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">关于我们<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">联系我们<span></span></a></li>
+		</ul>
+
+	</body>
+
+</html>

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery使用</title>
+    <style type="text/css">
+        div {
+            width: 60px;
+            height: 60px;
+            margin: 5px;
+            float: left;
+        }
+        div, h1, span {
+        }
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript">
+        //html 加载完毕
+        window.onload = function () {
+            //console.log('onload');
+            //console.log(document.body)
+            var divs = document.getElementsByTagName('div');
+            for (var i = 0; i < divs.length; i++) {
+                divs[i].index = i;
+            }
+        };
+
+        //比 window.onload 先执行
+        //表示 dom 节点加载完毕
+        $(function () {
+            //标签选择器
+            $('body'); // => document.getElementsByTagName('body')
+            //类选择器 
+            $('.container');// => document.getElementsByClassName('class')
+            //ID 选择器
+            //链式操作
+            //dom 节点 document.getElementById('id').html
+            $('#container').html('<h1>this is a container</h1>').addClass('container').append('<h2>这是链式操作</h2>');// => document.getElementById('id').innerHTML = 
+
+            //多个选择可用逗号分隔
+            $('#container, #content')
+
+            //val 用于表单元素
+            $('#container').val();
+
+            $('#container').click(function () {
+
+            })
+
+            //jQuery 选择器会返回一个 jQuery 的数组对象
+            //所以在用 jQuery 判断一个元素是否存在，要在选择器后加上下标
+            $('#id')[0];
+            //选择器返回的长度
+            console.log($('div').size())// => console.log($('div').length);
+
+            //$(this) 指回事件源的本身， 返回的是 jQuery 的数组对象
+            //this
+            //$(this)
+
+            //把不是 jQuery 的对象转换成 jQuery 对象
+            var _content = document.getElementById('content');
+            var _html = "<h1>dk.lan</h1>";
+            //从左往右
+            $('#content').html(_html).css({ border: 'solid 3px red' });
+
+            $(_content).html($(_content).html() + "<h1>dk.lan</h1>");
+            $(_content).html($(_content).html() + "<h1>dk.lan1</h1>");
+
+            _content.innerHTML = "<h1>dk.lan</h1>";
+            _content.innerHTML += "<h1>dk.lan</h1>";
+
+
+            //var $ = {};
+            //$.html = function () {
+            //    return $;
+            //}
+
+            //$.css = function () {
+            //    return $;
+            //}
+        })
+
+        //$(document).ready(function () {
+        //    console.log('ready');
+        //})
+
+        //_args 可以为字符串或对像
+        //function jQuery(_args) {
+        //}
+        document.onclick = function () { }
+        $(document).click(function () { });
+        //打字通回的 jQuery 的数组对象
+        //$('div')[0].innerHTML
+        //$('div').size()
+
+	</script>
+</head>
+<body>
+    <div id="content" class="content"></div>
+    <div id="container" class="container"></div>
+    <a href="example.html" hreflang="en">Some text</a>
+
+    <a href="example.html" hreflang="en-UK">Some other text</a>
+
+    <a href="example.html" hreflang="eng-lish">will not be outlined</a>
+    <input name="man-news" />
+
+    <input name="milkman" />
+    <input name="letterman2" />
+    <input name="newmilk" />
+
+
+    <span id="result" f="1">&nbsp;</span>
+    <div style="background-color:blue;"></div>
+    <div style="background-color:rgb(15,99,30);"></div>
+
+    <div style="background-color:#123456;"></div>
+    <div style="background-color:#f11;"></div>
+   
+</body>
+</html>

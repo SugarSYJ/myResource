@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        .container {
+            width: 400px;
+            height: 200px;
+            background-color: #000000;
+            position:relative;
+        }
+        .box{width:10px; height:5px; background:#00ff90;  margin:1px; position:absolute; bottom:0; z-index:100;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var start = document.getElementById('start');
+            var stop = document.getElementById('stop');
+            var box = document.getElementsByClassName('box');
+            var left = 20;
+            for (var i = 0; i < box.length; i++) {
+                left += box[i].clientWidth + 1;
+                box[i].style.left = left + 'px';
+                box[i].style.height = '5px';
+            }
+            start.onclick = function () {
+                window.setInterval(function () {
+                    var r = parseInt(Math.random() * 255);
+                    var g = parseInt(Math.random() * 255);
+                    var b = parseInt(Math.random() * 255);
+                    for (var i = 0; i < box.length; i++) {
+                        var height = parseInt(Math.random() * 130);
+                        var r = parseInt(Math.random() * 255);
+                        var g = parseInt(Math.random() * 255);
+                        var b = parseInt(Math.random() * 255);
+                        box[i].style.height = height + 'px';
+                        //box[i].style.background = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+                    }
+                }, 100)
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
+    <button id="start">开始</button>
+    <button id="stop">停止</button>
+    <button id="start">开始</button>
+</body>
+</html>

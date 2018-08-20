@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dom操作--属性</title>
+    <style>
+       .test-box{padding:20px;margin:30px;width:300px;height:100px;border:5px solid #ddd;background-color:#ff9;}
+       p{font-size:30px;margin:30px 10px;}
+
+       /*垂直方向外边距合并现象*/
+       .test-margin{background-color:#efefef;}
+       .test-margin p{background-color:#fc0;}
+       .test-margin p.eq2{margin:50px 10px;}
+
+       .parent{position:relative;padding:20px;border:3px solid #ddd;width:200px;}
+       .parent2{position:relative;padding:30px;background:#efefef;}
+       .child{padding:20px;height:60px;background-color:#fc0;}
+
+       .scroll{width:300px;height:200px;overflow:auto;border:1px solid #ddd;}
+       .scroll .content{padding:600px;}
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script>
+    $(function() {
+        // $('body').append('<p>width:' + $('.test-box').width() + '</p>');
+        // $('body').append('<p>innerWidth:' + $('.test-box').innerWidth() + '</p>');
+        // $('body').append('<p>outerWidth:' + $('.test-box').outerWidth() + '</p>');
+        // $('body').append('<p>outerWidth(true):' + $('.test-box').outerWidth(true) + '</p>');
+        // $('body').append($('.test-box'));
+
+        /*
+            width = width;
+            innerWidth = width + pading;
+            outerWidth = width + padding + border;
+            outerWidth(true) = width + padding + border + margin;
+         */
+        
+        // offset() //获取匹配元素在当前视口的相对偏移(包含滚动条滚动的距离), 返回{left:xx,top:xx},。
+        var left = document.getElementsByClassName('test-box')[0].offsetLeft;
+        var top = document.getElementsByClassName('test-box')[0].offsetTop;
+        var _left = $('.test-box').offset().left;
+        var _top = $('.test-box').offset().top;
+        console.log(left,_left);
+        console.log(top,_top);
+
+        // position() //获取匹配元素相对父元素(设置了定位)的偏移,如果无设置定位的父元素，则相对于根元素的偏移。
+        console.log($('.child').position(),$('.child').offset());
+
+        // scrollTop()/scrollLeft([val]) 获取当前元素滚动条滚动过的距离
+        $(window).scrollTop();
+        $('.scroll').scrollLeft();
+    });
+    </script>
+</head>
+
+
+<body>
+    <div class="test-box"></div>
+    abc
+    <div class="test-margin">
+    <p>111111111</p>
+    <p class="eq2">222222222222</p>
+    <p>3333333333333333</p>
+    </div>
+
+    <div class="parent">
+        <div class="parent2">
+            <div class="child"></div>
+        </div>
+    </div>
+
+    <div class="scroll">
+        <div class="content"></div>
+    </div>
+</body>
+
+</html>

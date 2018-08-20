@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击表格时选择当前行</title>
+	<style>
+		table{margin-top:20px;width:100%;border:1px solid #ddd;border-collapse: collapse;}
+		td{padding:5px 15px;border:1px solid #ddd;}
+		.odd{background-color:#fc0;}
+		.selected{background-color:#fc0;color:#fff;}
+	</style>
+	<script>
+	window.onload = function(){
+		// 1、获取页面元素
+		var dataList = document.getElementById('dataList');
+		var trs = dataList.getElementsByTagName('tr');
+
+		// 2、给每个tr绑定点击事件
+		for(var i=0;i<trs.length;i++){
+			trs[i].onclick = function(){
+				// 先清除所有的选择行样式
+				for(var i=0;i<trs.length;i++){
+					trs[i].className = '';
+				}
+
+				// 给当前行加上selected
+				this.className = 'selected';
+			}
+		}
+	}
+	</script>
+</head>
+
+<body>
+<!-- emmet -->
+<table id="dataList">
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+	<tr>
+		<td>单元格1</td>
+		<td>单元格2</td>
+		<td>单元格3</td>
+		<td>单元格4</td>
+		<td>单元格5</td>
+	</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <!-- 
+
+    1.让所有文字居中
+    2.把作者毛泽东设灰色底白字(#999,#fff)
+    3.将所有的div和p，统一显示10像素间距
+    4.让id为mp的元素文字大小变成30px,红色加粗字体
+    5.将前四行文字用1px的灰色边框(#ddd)括起来
+    6.将紧跟着div的p标签文字加下划线
+    7.把class为blue的div元素变蓝色字体
+    -->
+    <script>
+    $(function(){
+        //标签选择器
+        $('body').css('text-align', 'center');
+        
+        // $('h2').css('background-color','#999').css('color','#fff').css('display','inline-block');
+        // key: value => 键值对
+        // var obj = {keyname: {}}; {"key(name)": 0}
+        // keyname(键名)在没有特殊符号（比如减号、空格、括号等）可以不用加引号，也可以加引号，如果有特殊字符则一定要加引号,建议全部加引号
+        $('h2').css({backgroundColor:'#ccc',color:'#fff',display:'inline-block'});
+
+        //id选择器
+        $('#mp').css('font-size',30).css('color','red').css('font-weight','bold');
+
+        // 组合选择器
+        $('div,p').css('margin','10px 0');
+
+        // 子选择器
+        $('.content > div').css({'border':'1px solid #ddd',display:'inline-block',padding:10})
+        
+        // 相邻兄弟选择器
+        // ~ 兄弟选择器 => 兄弟后所有节点
+        // + 兄弟选择器 => 兄弟后第一个节点
+        $('div + p').css('text-decoration','underline');
+
+        //标签选择器+类选择器组合
+        $('div.blue').css('color','blue');
+
+        // 链式调用的原理
+        /*function Student(name,age){
+            this.name = name;
+            this.age = age;
+
+            this.getName = function(){
+                alert(this.name);
+                return this;
+            }
+            this.sayAge = function(){
+                alert(this.age);
+                return this;
+            }
+        }
+
+        var s = new Student('小明',18)
+        s.sayAge().getName();*/
+    })
+    </script>
+</head>
+
+<body>
+    <!-- 综合案例 -->
+    <h1>沁园春·雪</h1>
+    <h2>毛泽东</h2>
+    <div class="content">
+        <div>
+            <span>北国风光，千里冰封，万里雪飘。</span>
+            <p>dk</p>
+            <div>望长城内外，惟余莽莽；大河上下，顿失滔滔。</div>
+            <p>山舞银蛇，原驰蜡象，欲与天公试比高。</p>
+            <p>须晴日，看红装素裹，分外妖娆。</p>
+        </div>
+        <p id="mp">江山如此多娇，引无数英雄竞折腰。</p>
+    </div>
+    <p class="blue">惜秦皇汉武，略输文采；唐宗宋祖，稍逊风骚。</p>
+    <p>dk-p</p>
+    <div class="blue">一代天骄，成吉思汗，只识弯弓射大雕。</div>
+    <p>俱往矣，数风流人物，还看今朝。</p>
+</body>
+
+</html>

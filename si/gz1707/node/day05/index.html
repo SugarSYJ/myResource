@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script>
+            var socket = new WebSocket("ws://localhost:1010");
+            socket.onopen = function(){
+                console.log('电话接通了');
+            }
+            socket.onmessage = function(_message){
+                console.log(_message.data);
+                // socket.send('haha');
+            }
+        </script>
+    </body>
+</html>

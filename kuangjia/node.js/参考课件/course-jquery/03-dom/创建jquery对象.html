@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建jquery对象</title>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			// $('<div>html5 1603</div>').appendTo('body');
+			$('<div/>').attr({
+				'title':'千锋教育',
+				'data-index':10
+			}).addClass('content').html('<h4>html5 1603</h4>').appendTo('body');
+
+			// **如果页面上已经存在了要添加的元素，append,prepend,after,before会把元素移动到页面相应的位置
+			$('.sidebar').appendTo('.main-body');
+		});
+	</script>
+</head>
+<body>
+	<div class="sidebar">侧栏</div>
+	<div class="main-body">主体结构</div>
+</body>
+</html>

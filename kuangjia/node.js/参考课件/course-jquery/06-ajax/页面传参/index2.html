@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <div id="keyword"></div>
+    <script type="text/javascript">
+        //js 刷新当前页面
+        // window.loaction.reload();
+        // window.location.href = window.location.href;
+        // window.location.search
+        // post 的信息不能直接通过 js 来获取
+        // post 的应该放在后端程序进行接受以体现其安全性
+        // get post 区别 => 安全性（信息体现形式的不一样导致）；get: url 有长度的限制（有内容大小的限制）; post 没有内容长度的限制
+        document.getElementById('keyword').innerHTML = decodeURI(window.location.search).replace('?', '').split('=')[1];
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>02匀速运动</title>
+    <style type="text/css">
+        .ball{border-radius:50%; width:30px; height:30px; background-color:#b6ff00; position:absolute; left:0;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var ball = document.getElementsByClassName('ball')[0];
+            var speed = 10;
+            var timer = window.setInterval(function () {
+                var left = ball.offsetLeft;
+                left += speed
+                if (left >= window.innerWidth - ball.clientWidth) {
+                    speed *= -1;
+                } else if (left <= 0) {
+                    speed *= -1;
+                }
+                ball.style.left = left + 'px';
+            }, 30);
+        }
+      
+    </script>
+</head>
+<body>
+    <div class="ball"></div>
+</body>
+</html>

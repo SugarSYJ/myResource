@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格选取</title>
+	<style>
+		body{padding:50px;}
+		.datalist{
+			border:1px solid #ccc;
+			width:100%;
+			border-collapse: collapse;
+		}
+		.datalist td,.datalist th{padding:5px 10px;border:1px solid #ccc;}
+		.datalist tr.even{background-color:#efefef;}
+		.datalist .selected{background-color:#fc0;color:#fff;}
+
+		/*.datalist tr:nth-child(even){background-color:#efefef;}*/
+	</style>
+    <script src="../../libs/jquery/jquery-1.11.0.js"></script>
+	<script>
+		$(function(){
+			/*
+				优化jquery代码
+					1）链式调用
+					2）用变量保存jquery对象
+					3）事件绑定优化
+						1>事件越多越影响性能
+						2>DOM节点数量越多，越影响性能
+						3>DOM节点操作越频繁，越影响性能
+			 */
+			/*
+					e.target:事件源对象，触发这个事件的原始对象
+						不管事件冒泡到哪个阶段，事件源对象保持不变
+				 */
+				
+			/*
+				作业：
+					1）反选
+					2）全选状态改变
+			 */
+			var $keyword = $('#keyword');
+			// var btnSelect = $('button').last();
+			var $btnSelect = $keyword.next();
+			var $tbody = $('.datalist tbody');
+
+			// 获取所有checkbox
+			var $checkbox = $tbody.find(':checkbox');
+
+			// 重置选中状态
+			$checkbox.prop('checked',false);
+			$('#all').prop('checked',false);
+
+			// 搜索选中
+			$btnSelect.click(function(){
+				var keyword = $keyword.val();
+
+				// 给tr添加选中样式
+				
+				$tbody.find('tr:contains('+keyword+')').addClass('selected')
+
+				// 勾选选择行下的复选框
+				.find(':checkbox').prop('checked',true);
+
+				checkAll();
+			});
+
+			// 点击选中
+			/*$('.datalist tbody tr').click(function(e){
+				console.log('tr:',e.target.tagName);
+				var $checkbox = $(this).find(':checkbox');
+				$(this).toggleClass('selected');
+				$checkbox.prop('checked',$(this).hasClass('selected'));
+			});
+			$(document).click(function(e){
+				console.log('document:',e.target.tagName)
+			});*/
+			// 事件绑定优化
+			$tbody.click(function(e){
+				// 先获取事件源对象所在的tr
+				var $tr = $(e.target).closest('tr');
+
+				// 根据tr获取下面的复选框
+				var $currentCheckbox = $tr.find(':checkbox');
+
+				$tr.toggleClass('selected');
+				$currentCheckbox.prop('checked',$tr.hasClass('selected'));
+
+				// 全选状态改变
+				// 如何判断全部选中
+				// 复选框的数量是否等于选中复选框的数量
+				checkAll();
+			});
+
+			// 全选/不选
+			$('#all').click(function(e){
+				//先获取#all的选择状态
+				var checked = $(this).prop('checked');
+				var $tr = $tbody.children('tr');
+				
+				$tr[checked ? 'addClass' : 'removeClass']('selected');
+				$checkbox.prop('checked',checked);
+			});
+
+			// 反选
+			// 选中的取消，未选中的选取
+			$('#btnFx').click(function(){
+				$tbody.find('tr').toggleClass('selected').find(':checkbox').prop('checked',function(idx,oldVal){
+					return !oldVal;
+				});
+				checkAll();
+			});
+
+			function checkAll(){
+				// var $checked = $tbody.find(':checkbox:checked');
+				var $checked = $checkbox.filter(':checked');
+				$('#all').prop('checked',$checkbox.length == $checked.length);
+			}
+		})
+	</script>
+</head>
+<body>
+	<button id="btnFx">反选</button>
+	<input type="text" id="keyword"><button>选择</button>
+
+		<table class="datalist">
+			<thead>
+				<tr>
+					<th width="20"><input type="checkbox" id="all"></th>
+					<th width="10">#</th>
+					<th>姓名</th>
+					<th>昵称</th>
+					<th>年龄</th>
+					<th>性别</th>
+					<th>是否单身</th>
+					<th>爱好</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><input type="checkbox" name="check"></td>
+					<td>1</td>
+					<td>关羽</td>
+					<td>关二哥</td>
+					<td>49</td>
+					<td>男</td>
+					<td>否</td>
+					<td>装逼</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check"></td>
+					<td>2</td>
+					<td>张飞</td>
+					<td>张三</td>
+					<td>45</td>
+					<td>男</td>
+					<td>是</td>
+					<td>喝酒</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check"></td>
+					<td>3</td>
+					<td>赵云</td>
+					<td>赵四</td>
+					<td>33</td>
+					<td>男</td>
+					<td>是</td>
+					<td>跳舞</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check"></td>
+					<td>4</td>
+					<td>奥巴马</td>
+					<td>小黑</td>
+					<td>56</td>
+					<td>男</td>
+					<td>否</td>
+					<td>打篮球，段子</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check"></td>
+					<td>5</td>
+					<td>李宇春</td>
+					<td>春哥</td>
+					<td>30</td>
+					<td>女</td>
+					<td>是</td>
+					<td>唱歌</td>
+				</tr>
+				<tr>
+					<td><input type="checkbox" name="check"></td>
+					<td>6</td>
+					<td>岳云鹏</td>
+					<td>小月月</td>
+					<td>32</td>
+					<td>男</td>
+					<td>否</td>
+					<td>相声，段子，唱歌</td>
+				</tr>
+			</tbody>
+		</table>
+</body>
+</html>

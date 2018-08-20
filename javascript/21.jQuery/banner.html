@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>banner</title>
+    <link rel="stylesheet" href="lib/jquery-syjCarousel/jquery.syjCarousel.css">
+</head>
+<body>
+    <div class="syj-carousel" id="carousel_1">
+        <ul class="carousel-inner">
+            <li class="carousel-item"><img src="img/g1.jpg" /></li>
+            <li class="carousel-item"><img src="img/g2.jpg" /></li>
+            <li class="carousel-item"><img src="img/g3.jpg" /></li>
+            <li class="carousel-item"><img src="img/g4.jpg" /></li>
+            <li class="carousel-item"><img src="img/g5.jpg" /></li>
+        </ul>
+    </div>
+    <script src="lib/jquery-3.2.1.js"></script>
+    <script src="lib/jquery-syjCarousel/jquery.syjCarousel.js"></script>
+    <script>
+        jQuery(function($){
+            $("#carousel_1").SyjCarousel();
+        })
+    </script>
+</body>
+</html>

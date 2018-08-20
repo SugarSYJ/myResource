@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+</head>
+<body>
+    <div id="app">
+        <a href="#/">root</a>
+        <router-link to="/a">a</router-link>
+        <router-link to="/b">b</router-link>
+        <router-link to="/user/1">user-1</router-link>
+        <router-link to="/user/2">user-2</router-link>
+        <router-link to="/login/sam/123">sam</router-link>
+        <router-link to="/login/tom/321">tom</router-link>
+        <router-view></router-view>
+    </div>
+    
+    <script type="text/javascript">
+        // var express = require('express');
+        // var app = express();
+        // app.get('/a',function(){});
+        // app.get('/b',function(){});
+        var router = new VueRouter({
+            routes:[
+                {path:'/',component:{template:'<h1>Root</h1>'}},
+                {path:'/a',component:{template:'<h1>A</h1>'}},
+                {path:'/b',component:{template:'<h1>B</h1>'}},
+                {path:'/user/:id',component:{template:'<h1>{{$route.params.id}}</h1>'}},
+                {path:'/login/:username/:password',component:{template:'<h1>{{$route.params.username}}-{{$route.params.password}}</h1>'}}
+            ]
+        })
+        var vm = new Vue({
+            el: '#app',
+            router:router
+        });
+    </script>
+</body>
+</html>

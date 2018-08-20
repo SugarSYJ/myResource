@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        table {
+            width: 100%;
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+        td,th {
+            border: solid 1px;
+            border-collapse: collapse;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var search = document.getElementById('search');
+            var suname = document.getElementById('suname');
+            var container = document.getElementById('container');
+
+            //创建 ajax 对像
+            var xhr = new XMLHttpRequest();
+            //监听事件
+            xhr.onreadystatechange = function () {
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    var _response = xhr.responseText;
+                    var _json = JSON.parse(_response);
+                    console.log(_json);
+                    initHtml(_json);
+                                        //init(_json);
+                }
+            }
+
+            //生成 html
+            var initHtml = function (json) {
+                var _html = "<table>";
+
+                //thead
+                _html += "<thead><tr>";
+                var colcount = 0;
+                for (var col in json.datagrid.data.rows[0].RowData) {
+                    _html += "<th>" + col + "</th>";
+                    colcount++;
+                }
+                _html += "</tr></thead>";
+
+                //tbody
+                _html += "<tbody>";
+                for (var i = 0; i < json.datagrid.data.rows.length; i++) {
+                    _html += "<tr>";
+                    for (var col in json.datagrid.data.rows[i].RowData) {
+                        _html += "<td>" + json.datagrid.data.rows[i].RowData[col].Value + "</td>";
+                    }
+                    _html += "</tr>";
+                }
+                _html += "</tbody>";
+
+                //tfoot
+                _html += "<tfoot>";
+                _html += "<tr><td colspan=" + colcount + ">";
+                for (var p = 1; p <= json.datagrid.data.pagecount; p++) {
+                    _html += "<button>" + p + "</button>";
+                }
+                _html += "</td></tr>";
+                _html += "</tfoot>";
+                
+
+                _html += "</table>";
+                container.innerHTML = _html; // => $('container').html(_html);
+                
+                document.getElementsByTagName('table')[0].onclick = function (_event) {
+                    var self = _event.target;
+                    if (self.tagName.toLowerCase() == 'button') {
+                        xhr.open('get', 'http://10.3.136.12/ctapi/dispatch/offers/FetchSupplier?pageindex=' + self.innerHTML + '&suname=' + search.value.trim() + '&_=' + Math.random());
+                        xhr.send();
+                    }
+                }
+            }
+           
+            //搜索
+            search.onclick = function () {
+                //发起请求
+                xhr.open('get', 'http://10.3.136.12/ctapi/dispatch/offers/FetchSupplier?pagesize=10&suname=' + search.value.trim() + '&_=' + Math.random());
+                xhr.send();
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <label>供应商名称</label>
+    <input type="text" id="suname" />
+    <button id="search">查询</button>
+    <div id="container"></div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            ul,li{list-style:none;}
+            .price span{color:red;}
+            .price span::before{content:'￥';}
+        </style>
+    </head>
+    <body>
+        <h3>用以上数据生成一个商品列表</h3>
+        <div id="datalist"></div>
+        <script type="text/javascript">
+            var goodslist = [{
+                id:'001',
+                name:'iphone7 plugs',
+                imgurl:'img/ip7.jpg',
+                price:5899.00,
+                sale:5888.00,
+                color:'土豪金'
+            },{
+                id:'002',
+                name:'Note7',
+                imgurl:'img/note7.jpg',
+                price:3899.00,
+                sale:998.00,
+                color:'黑色'
+            },{
+                id:'003',
+                name:'荣耀7',
+                imgurl:'img/honor7.jpg',
+                price:1990.00,
+                sale:1899.00,
+                color:'白色'
+            }];
+            var html ='<ul>';
+            for(var i=0;i<goodslist.length;i++){
+                var goods = goodslist[i];
+                html += '<li data-myid="' + goods.id + '"><img src="' + goods.imgurl + '"><h4>商品名称：' + goods.name +'</h4><p class="price">价格：<span>' + goods.price + '</span></p><p class="color">颜色：<span>' + goods.color + '</span></p></li>'
+            }
+            html += '</ul>';
+            var datalist = document.getElementById('datalist');
+            datalist.innerHTML = html;
+        </script>
+    </body>
+</html>

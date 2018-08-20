@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>draft</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var div_content = document.getElementById('div_content');
+            var sub_div = document.getElementById('sub_div');
+
+            //容器的滚动事件
+            div_content.onscroll = function () {
+                //容器事件的一个参数
+                var _event = arguments.length > 0 ? arguments[0] : window.event;
+                console.log(_event);
+            }
+
+            div_content.onclick = function (evt) {
+                console.log(evt.button);
+            }
+
+            //右键点击
+            window.oncontextmenu = function () {
+                console.log('右键点击');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="width:400px;height:500px; border:solid 5px red; overflow: hidden;" id="div_content">
+        <div style="width:200px; height:1500px; background-color:yellow;" id="sub_div"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript">
+        //var funA = function () {
+        //    console.log('funA');
+        //}
+
+        ////匿名方法
+        //(function () {
+        //    console.log(1);
+        //})
+
+        window.onload = function () {
+            var btns = document.getElementsByTagName('button');
+            for (var i = 0; i < btns.length; i++) {
+                //btns[i].index = i;
+                //btns[i].onclick = function () {
+                //    console.log(i);
+                //}
+                btns[i].index = i;
+                (function (index) {
+                    btns[i].onclick = function () {
+                        console.log(index);
+                    }
+                })(i)
+            }
+        };
+
+    </script>
+</head>
+<body>
+    <button>0</button>
+    <button>1</button>
+    <button>2</button>
+</body>
+</html>

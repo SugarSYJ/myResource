@@ -1,0 +1,237 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>运动效果</title>
+    <style type="text/css">
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    #focus {
+        position: relative;
+        width: 810px;
+    }
+    
+    #bigpic {
+        height: 320px;
+    }
+    
+    #bigpic li {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    
+    #smallpic {
+        margin-top: 10px;
+    }
+    
+    #smallpic li {
+        display: inline-block;
+    }
+    
+    #smallpic img {
+        width: 120px;
+    }
+    
+    .prev,
+    .next {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        margin-top: -40px;
+        padding: 10px;
+        background: rgba(0, 0, 0, .2);
+        font-size: 30px;
+        color: #ccc;
+        text-decoration: none;
+    }
+    
+    .next {
+        left: auto;
+        right: 10px;
+    }
+    
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, .5);
+    }
+    </style>
+    <script src="../../jquery/jquery-2.1.1.min.js"></script>
+    <script>
+    /*
+        作业要求：
+        把以下效果用jquery做出来
+            1）去掉common.js运动框架
+            2）用jquery选择器获取页面元素
+            3）使用jquery事件与动画
+     */
+        /*window.onload = function(){
+            var oFocus = document.getElementById('focus');
+            var oBigpic = document.getElementById('bigpic');
+            var oSmallpic = document.getElementById('smallpic');
+            var oButtons = oFocus.getElementsByTagName('a');
+
+            var index = 0;//显示图片索引
+            var imgs = oBigpic.getElementsByTagName('li');
+            var simgs = oSmallpic.getElementsByTagName('li');
+            var timer = setInterval(foucs,3000);
+            show();
+            
+
+            oFocus.onmouseout = function(){
+                timer = setInterval(foucs,3000);
+            }
+
+            oFocus.onmouseover = function(){
+                clearInterval(timer);
+            }
+
+            //小图绑定点击事件
+            for(var i=0;i<simgs.length;i++){
+                simgs[i].onclick = (function(idx){
+                    return function(){
+                        index = idx;
+                        show();
+                    }
+                })(i);
+            }
+
+            // 点击左右按钮实现图片跳转
+            for(var i=0;i<oButtons.length;i++){
+                oButtons[i].onclick = function(){
+                    if(this.className == 'prev'){
+                        index--;
+                    }else{
+                        index++;
+                    }
+
+                    //临界点的判断
+                    //当前index到达第一张后
+                    if(index<0){
+                        index = imgs.length -1;
+                    }else if(index >= imgs.length){
+                        index = 0;
+                    }
+                    show();
+                }
+            }
+
+
+            function foucs(){
+                if(index >= imgs.length){
+                    index = 0; 
+                }
+                show();
+                index++;
+            }
+
+            // 显示图片
+            function show(){
+                for(var i=0;i<simgs.length;i++){
+                    if(i == index){
+                        // imgs[i].style.display = 'block';
+                        animate(imgs[i],{opacity:1});
+                        // simgs[i].style.opacity = 1;
+                        animate(simgs[i],{opacity:1})
+                    }else{
+                        // imgs[i].style.display = 'none';
+                        animate(imgs[i],{opacity:0});
+                        // simgs[i].style.opacity = .5;
+                        animate(simgs[i],{opacity:0.5});
+                    }
+                }
+            }
+        }*/
+        $(function(){
+            // 2）用jquery选择器获取页面元素
+            var $focus = $('#focus');
+            var $bigpic = $('#bigpic');
+            var $smallpic = $('#smallpic');
+
+            var index = 0;
+            
+            // 图片数量
+            var len = $bigpic.find('li').length;
+
+            // 初始化
+            show();
+
+            // 设置定时器，3秒切换一张图片
+            var timer;;
+
+            // 鼠标移入清除定时器，鼠标移出重启定时器
+            $focus.on('mouseenter',function(){
+                clearInterval(timer);
+            }).on('mouseleave',function(){
+                timer = setInterval(carousel,3000);
+            }).trigger('mouseleave')
+
+            // 点击前后按钮实现切换
+            .on('click','.prev',function(){
+                index--;
+                show();
+            }).on('click','.next',function(){
+                index++;
+                show();
+            });
+
+            // 点击小图切换
+            $smallpic.on('click','li',function(){
+                index = $(this).index();
+                show();
+            });
+
+            
+
+
+
+            // 轮播函数
+            function carousel(){
+                index++;
+                show();
+            }
+
+
+            // 显示图片的函数
+            function show(){
+                // 处理index值，使其实现循环轮播
+                if(index<0){
+                    index = len - 1;
+                }else if(index > len - 1){
+                    index = 0;
+                }
+                // 大图
+                $bigpic.find('li').eq(index).animate({opacity:1}).siblings().animate({opacity:0});
+                // $bigpic.find('li').animate({opacity:0}).eq(index).animate({opacity:1})
+
+
+                // 小图
+                $smallpic.find('li').eq(index).animate({opacity:1}).siblings().animate({opacity:0.5})
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div id="focus">
+        <ul id="bigpic">
+            <li><img src="images/001.jpg"></li>
+            <li><img src="images/002.jpg"></li>
+            <li><img src="images/003.jpg"></li>
+        </ul>
+        <ul id="smallpic">
+            <li><img src="images/001.jpg"></li>
+            <li><img src="images/002.jpg"></li>
+            <li><img src="images/003.jpg"></li>
+        </ul>
+        <a href="#" class="prev">&lt;</a>
+        <a href="#" class="next">&gt;</a>
+    </div>
+</body>
+
+</html>

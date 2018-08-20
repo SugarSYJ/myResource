@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>封装一个函数afterDate(date,n)，得到日期date的n天后的日期</h3>
+        <script type="text/javascript">
+            function afterDate(date,n){
+                date = new Date(date);
+                var day = date.getDate();
+                date.setDate(day+n);
+                // document.write(date);
+                return date.toLocaleDateString().split('/').join('-');
+            }
+            var res = afterDate('2017-11-23',5);
+            document.write(res);
+        </script>
+    </body>
+</html>

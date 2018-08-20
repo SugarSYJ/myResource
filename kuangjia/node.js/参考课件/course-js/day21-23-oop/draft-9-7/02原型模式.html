@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript">
+        //工厂模式
+        function PersonFactory(name, age, job) {
+            var obj2 = new Object();
+            var obj = {
+                name: name,
+                age: age,
+                job: job,
+                sayName: function () {
+                    //console.log(obj.name);
+                }
+            };
+            return obj;
+        }
+        PersonFactory.prototype.changePassword = function (_pwd) {
+            console.log(_pwd)
+        }
+        var p = PersonFactory("Nick", 21, "Front-end-Engineer");
+        //p.changePassword(123456);
+        //构造函数模式
+        /*
+            函数名首写字母为大写
+            没有显示的创建对象
+            直接将属性和方法赋值给了this对象
+            使用new创建对象
+            没有return语句
+            构造函数的原型能正常访问，工厂模式不能访问
+            能够识别对象（这正是构造函数模式胜于工厂模式的地方）instanceof        
+        */
+        //构造器
+        //属性 => 实体
+        function Person(name, age, job) {
+            this.name = name;
+            this.age = age;
+            this.job = job;
+            this.sayName = function sayName() { 
+                //console.log(this.name); 
+            };
+        };
+        //原型
+        Person.prototype.password = '123456';
+        Person.prototype.pwds = [];
+        //正在运行的函数所依附的对象
+        Person.prototype.changePassword = function (_pwd) {
+            this.pwds.push(_pwd);
+            console.log(this.pwds);
+        };
+        //实列化
+        //person1 => 实例
+        var person1 = new Person("Nick", 21, "Front-end-Engineer");
+        console.log(person1['password']);
+        person1.changePassword(654321);
+        var person2 = new Person("admin", 18, "IT");
+        person2.changePassword(123);
+
+        Date.prototype.aa = function () { };
+        var d = new Date();
+        d.getFullYear
+        d.aa();
+        Array.prototype.aa = function () { }
+        var a = new Array();
+        a.aa();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

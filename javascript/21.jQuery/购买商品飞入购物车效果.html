@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>复制到购物车</title>
+    <style>
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .cart-list {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+        width: 200px;
+        /*height: 400px;*/
+        border: 1px solid #ddd;
+        /*overflow-y:auto;*/
+    }
+    
+    .cart-list h4 {
+        margin: 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .cart-list img {
+        width: 60px;
+    }
+
+    .cart-list li{position:relative;font-size:12px;}
+    .cart-list .btn-close{position:absolute;top:0;right:0;padding:5px;}
+    .cart-list .btn-close:hover{background-color:#f00;color:#fff;}
+    
+    .goods-list img {
+        width: 200px;
+    }
+    </style>
+   <script src="lib/jquery-3.2.1.js"></script>
+   <script>
+        $(function(){
+            var $goodslist = $('.goods-list');
+            var $carlist = $('.cart-list');
+            $goodslist.on('click','button',function(){
+                var $currentLi = $(this).closest('li');
+                var $img = $currentLi.children('img');
+                var $copyImg = $img.clone();
+                $copyImg.css({
+                    position:'absolute',
+                    left:$img.offset().left,
+                    top:$img.offset().top,
+                    width:$img.width()
+                });
+                $copyImg.appendTo('body');
+                $copyImg.animate({
+                    width:50,
+                    left:$carlist.offset().left,
+                    top:$carlist.offset().top+$carlist.height()
+                },function(){
+                    $copyImg.remove();
+                    var $copyLi = $currentLi.clone();
+                    $copyLi.find('button').parent().remove();
+                    $('<span/>').addClass('btn-close').html('&times;').appendTo($copyLi);
+                    $carlist.append($copyLi);
+                });
+            });
+            $carlist.on('click','.btn-close',function(){
+                $(this).closest('li').remove();
+            });
+        });
+   </script>
+</head>
+
+<body>
+    <div class="goods-list">
+        <h4>产品列表</h4>
+        <ul>
+            <li data-id=""><img src="images/g1.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS跑步鞋2015春夏新款运动鞋男款避震跑鞋KAYANO T4H2N-9001</p>
+                <p class="color">颜色：橙色/白色</p>
+                <p class="size">码数：42</p>
+            </li>
+            <li><img src="images/g2.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS运动鞋2015春夏新款跑步鞋女鞋稳定跑鞋KAYANO T4H7N-0701</p>
+                 <p class="color">颜色：黄色/白色</p>
+                 <p class="size">码数：37.5</p>
+            </li>
+            <li><img src="images/g3.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS跑步鞋春夏透气稳定女款跑鞋 KAYANO T4N5N-3591 37.5</p>
+                 <p class="color">颜色：玫红色/黑色</p>
+                 <p class="size">码数：37.5</p>
+            </li>
+            <li><img src="images/g4.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS高帮运动休闲鞋男鞋运动鞋DOUBLEH54XJ-5050 </p>
+                 <p class="color">颜色：黑色/黑色</p>
+                 <p class="size">码数：40.5</p>
+            </li>
+            <li><img src="images/g5.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>Onitsuka Tiger运动休闲鞋女COLORADO D4S6N-1850 </p>
+                 <p class="color">颜色：珊瑚色/淡灰色</p>
+                 <p class="size">码数：37.5</p>
+            </li>
+        </ul>
+    </div>
+    <div class="cart-list">
+        <h4>购物车列表</h4>
+        <ul>
+        </ul>
+    </div>
+</body>
+
+</html>

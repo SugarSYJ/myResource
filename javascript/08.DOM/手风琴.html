@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            ul,li{list-style:none;margin: 0;padding: 0;}
+            h2{margin: 0 auto;width: 100px;padding: 0;}
+            h3{margin: 0;padding: 0;}
+            #box{margin: 100px auto;border:1px solid #ddd;width: 250px;text-align:center;}
+            ul{display:none;}
+            li{height: 30px;line-height: 30px;color:blue;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                var h3 = box.getElementsByTagName('h3');
+                var ul = box.getElementsByTagName('ul');
+                for(var i in h3){
+                    h3[i].id = i;
+                    h3[i].onclick = function(){
+                        var u = ul[this.id];
+                        if(u.style.display==='none'){
+                            u.style.display='block';
+                        }else{
+                            u.style.display='none';
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h2>手风琴</h2>
+        <div id="box">
+            <div>
+                <h3>是多少卡死了拉什福德</h3>
+                <ul>
+                    <li>代收款</li>
+                    <li>大骚乱考虑离开吗</li>
+                    <li>打开什么</li>
+                    <li>收到昆明</li>
+                    <li>吕蒙</li>
+                </ul>
+            </div>
+            <div>
+                <h3>是多少卡死了拉什福德</h3>
+                <ul>
+                    <li>代收款</li>
+                    <li>大骚乱考虑离开吗</li>
+                    <li>打开什么</li>
+                    <li>收到昆明</li>
+                    <li>吕蒙</li>
+                </ul>
+            </div>
+            <div>
+                <h3>是多少卡死了拉什福德</h3>
+                <ul>
+                    <li>代收款</li>
+                    <li>大骚乱考虑离开吗</li>
+                    <li>打开什么</li>
+                    <li>收到昆明</li>
+                    <li>吕蒙</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

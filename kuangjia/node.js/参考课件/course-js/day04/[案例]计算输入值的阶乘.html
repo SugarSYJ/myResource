@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算输入值的阶乘</title>
+	<script>
+		/*
+			计算输入值的阶乘
+			思路：
+				1)获取页面元素
+				2)给按钮添加一个点击事件
+				3)根据输入的值计算阶乘
+		 */
+		window.onload = function(){
+			// 1)获取页面元素
+			var num = document.getElementById('num');
+			var btnCalc = document.getElementById('btnCalc');
+			var output = document.getElementById('output');
+
+			btnCalc.onclick = jiecheng;
+
+			function jiecheng(){
+				// 获取输入的值
+				var _num = num.value;
+
+				// 计算阶乘
+				var res = 1;
+				for(var i=1;i<=_num;i++){
+					res *= i;
+				}
+
+				// 把结果写入页面
+				output.innerHTML = _num + '的阶乘为：' + res;
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<input type="text" id="num"><button id="btnCalc">计算阶乘</button>
+	<div id="output"></div>
+</body>
+</html>

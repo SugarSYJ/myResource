@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab标签切换</title>
+	<style>
+	#tab span{display:inline-block;padding:5px 15px;background-color:#ddd;margin:0 3px;border:1px solid #ddd;border-bottom:none;}
+	.content{padding:15px;border:1px solid #ddd;font-size:24px;background-color:#efefef;}
+	</style>
+	<script>
+	window.onload = function(){
+		/*
+			tab标签切换
+		 */
+		var tab = document.getElementById('tab');
+		var spans = tab.getElementsByTagName('span');
+		var content = document.getElementsByClassName('content');
+
+		// 先隐藏除第一个以外的.content
+		for(var i=1;i<content.length;i++){
+			content[i].style.display = 'none';
+		}
+
+		// 给span标签绑定点击事件
+		// 点击时，显示对应的.content
+		for(var i=0;i<spans.length;i++){
+			// 把i值赋值给每个按钮的属性
+			spans[i].index = i;
+			spans[i].onclick = function(){
+				// for循环隐藏所有.content
+				for(var i=0;i<content.length;i++){
+					content[i].style.display = 'none';
+
+					// 把所有span背景颜色改成灰色
+					spans[i].style.backgroundColor = '#ddd';
+				}
+
+				// 显示相应.content
+				content[this.index].style.display = 'block';
+
+				// 高亮显示当前tab标签
+				spans[this.index].style.backgroundColor = '#f60';
+
+
+			}
+		}
+		
+		
+	}
+		
+	</script>
+</head>
+<body>
+	<div id="tab"><span>辣条</span><span>豆腐</span><span>方便面</span><span>桂林米粉</span></div>
+	<div class="content">我喜欢吃辣条</div>
+	<div class="content">吃完豆腐吃辣条</div>
+	<div class="content">喜欢去超市捏方便面</div>
+	<div class="content">桂林米粉哪里最正宗</div>
+</body>
+</html>

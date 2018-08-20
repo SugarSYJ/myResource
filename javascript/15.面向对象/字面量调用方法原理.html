@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>05字面量调用方法原理</title>
+	<script>
+		/*
+			为什么字符串能够像对象一样使用
+		 */
+		var str = '我们不一样....';//对象一个字符串
+		// var str = new String('我们不一样...');//得到一个对象
+
+		str.slice(2);//不一样....
+		// 当str调用slice方法时，经历了以下步骤
+		// 1）以字符串创建一个对象：var obj = new String(str);
+		// 2）调用对象的方法：obj.slice(2)
+		// 3）返回结果：不一样....
+		// 4）清除创建的对象obj
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

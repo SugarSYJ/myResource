@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            ul li{
+               list-style:none;
+               float: left;
+            }
+            a{
+                text-decoration:none;
+                display:block;
+                height:22px;
+                border:5px solid red;
+                padding-left:26px;
+                background:url("../images/sprites_bg.fw.png") no-repeat;
+            }
+            a span{
+                display:block;
+                height:22px;
+                padding-right:26px;
+                background:url("../images/jietu_right.gif") no-repeat right top;
+            }
+            .t2 a{
+                background-position:-26px 0;
+            }
+            .t3 a{
+                background-position:-52px 0;
+            }
+            .t4 a{
+                background-position:-78px 0;
+            }
+            .t1:hover a{
+                background-position:0 -22px;
+            }
+            .t2:hover a{
+                background-position:-26px -22px;
+            }
+            .t3:hover a{
+                background-position:-52px -22px;
+            }
+            .t4:hover a{
+                background-position:-78px -22px;
+            }
+            .tab li:hover a span{
+                background-position:0 -22px;
+            }
+        </style>
+    </head>
+    <body>
+        <ul class="tab">
+            <li class="t1"><a href="#"><span>飞机风机</span></a></li>
+            <li class="t2"><a href="#"><span>飞机风机</span></a></li>
+            <li class="t3"><a href="#"><span>飞机风机</span></a></li>
+            <li class="t4"><a href="#"><span>飞机风机</span></a></li>
+        </ul>
+    </body>
+</html>

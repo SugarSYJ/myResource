@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01取代window.onload的页面加载事件</title>
+    <script>
+        /*
+            取代window.onload的页面加载事件
+                * onreadystatechange
+                * DOMContentLoaded（推荐）
+                    * 必须使用事件监听器绑定
+         */
+        //页面所有文件加载完成后触发
+        window.onload = function(){
+            var box = document.getElementsByClassName('box');
+            console.log('window.onload:',box);
+        }
+
+        // 在document的readyState属性改变的时候触发
+        // interactive：dom树构建完成触发一次
+        // complete：页面所有文件加载完成后再触发一次
+        document.onreadystatechange = function(){
+            console.log(document.readyState);
+            if(document.readyState === 'interactive'){
+                var box = document.getElementsByClassName('box');
+                console.log('interactive:',box);
+            }
+        }
+
+        // 事件监听器
+        document.addEventListener('DOMContentLoaded',function(){
+            var box = document.getElementsByClassName('box');
+            console.log('DOMContentLoaded:',box);
+        });
+    </script>
+</head>
+<body>
+    <h1>取代window.onload的页面加载事件</h1>
+    <div class="box"></div>
+</body>
+</html>

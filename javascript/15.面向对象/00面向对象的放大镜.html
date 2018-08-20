@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>放大镜</title>
+    <style type="text/css">
+        *{padding: 0;margin: 0;font-size: 20px;}
+        .container{position: relative;width: 50rem;height: 16rem;display: flex;margin: 4rem;}
+        .small-box{position: relative;width: 50%;height: 100%;}
+        .small-box img{width: 100%;height: 100%;}
+        img{display: block;}
+        .big-box{display: none;width: 50%;height: 100%;overflow: hidden;}
+        .move{display: none;position: absolute;background: #fff;cursor: crosshair;opacity:0.5;z-index: 10;width: 150px;height: 150px;}
+    </style>
+    <script type="text/javascript">
+        // console.log(document.querySelector('#a').offsetTop);//相对于已有定位的父容器（父容器都没有定位就是相对body的）
+        // 注意图片的大小一定要比显示框大才行
+        function Enlarge(smallBox , bigBox , move , img){
+            this.init(smallBox , bigBox , move , img);
+        }
+        Enlarge.prototype =  {
+            init: function(smallBox , bigBox , move , img) {
+                
+                this.smallBox = smallBox ;
+                this.bigBox  = bigBox ; 
+                this.move = move ;
+                this.img = img ;
+                this.scale1 = parseInt(this.img.width / this.smallBox.offsetWidth);
+                this.scale2 = parseInt(this.img.height / this.smallBox.offsetHeight);
+                // this.move.style.width  = this.smallBox.offsetWidth / this.scale1 + 'px';
+                // this.move.style.height = this.smallBox.offsetHeight / this.scale2 + 'px';
+                this.smallBox.onmousemove = (event)=>{
+                    this.goMove(event);
+                };
+                this.smallBox.onmouseout = ()=>{
+                    this.move.style.display = 'none';
+                    this.bigBox.style.display = 'none';
+                };
+            },
+            goMove : function(event) {
+                var event = window.event || event;
+                var x = event.clientX;
+                var y = event.clientY;
+                this.move.style.display = 'block';
+                this.bigBox.style.display = 'block';
+                x = x - this.smallBox.offsetLeft - this.move.offsetWidth;
+                y =  y - this.smallBox.offsetTop -  this.move.offsetHeight;
+                console.log(x,y);
+                if( x < 0) {
+                    x = 0;
+                } else if ( x > this.smallBox.offsetWidth - this.move.offsetWidth) {
+                    x =  this.smallBox.offsetWidth - this.move.offsetWidth;
+                }
+                if ( y < 0 ) {
+                    y = 0;
+                } else if ( y > this.smallBox.offsetHeight - this.move.offsetHeight) {
+                    y = this.smallBox.offsetHeight - this.move.offsetHeight;
+                }
+                this.move.style.left = x + 'px';
+                this.move.style.top = y + 'px';
+                this.bigBox.scrollLeft = this.scale1 * x;
+                this.bigBox.scrollTop = this.scale2 * y;
+            } 
+        };
+        // 调用
+        window.onload = function() {
+            var smallBox = document.querySelector('.small-box');
+            var bigBox = document.querySelector('.big-box');
+            var move = document.querySelector('.move');
+            var img = document.querySelector('.img');
+            new Enlarge(smallBox,bigBox,move,img);
+            
+        };
+    </script>
+</head>
+<body>
+    <section class="container">
+        <div class="small-box">
+            <span class="move"></span>
+            <img src="img/car.jpg" />
+        </div>
+        <div class="big-box">
+            <img src="img/car.jpg" class="img" />
+        </div>
+    </section>
+    
+</body>
+</html>

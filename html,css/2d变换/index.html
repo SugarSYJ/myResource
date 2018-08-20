@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{margin: 0;padding: 0;}
+            ul,li{list-style:none;}
+            a{text-decoration:none;}
+            .box{width: 100%;}
+            .box ul li{float: left;}
+            .box ul li a{display:block;width: 265px;height: 176px;margin: 30px;overflow:hidden;}
+            .box ul li a img{width: 265px;height: 176px;transition:transform 2s;}
+            .box ul li a span{display:block;width: 265px;height: 176px;font-size:20px;color:pink;line-height: 176px;text-align:center;background:blue;transition:transform 2s;}
+            .box ul li:hover:nth-child(-n+4) img{transform:translate(0px,-180px) rotate(90deg);}
+            .box ul li:hover:nth-child(2n) img{transform:scale(2) rotate(720deg);}
+            .box ul li:hover:nth-child(3) img{transform:skew(30deg,30deg);}
+            .box ul li:hover:nth-child(-n+4) span{transform:translate(0px,-180px) rotate(720deg);}
+            .box ul li:hover:nth-child(2n) span{transform:translate(0px,-180px) scale(2);}
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <ul>
+                <li><a href="#"><img src="images/main6.png" /><span>花衬衫</span></a></li>
+                <li><a href="#"><img src="images/main7.png" /><span>花衬衫</span></a></li>
+                <li><a href="#"><img src="images/main8.png" /><span>花衬衫</span></a></li>
+                <li><a href="#"><img src="images/main9.png" /><span>花衬衫</span></a></li>
+                <li><a href="#"><img src="images/main10.png" /><span>花衬衫</span></a></li>
+                <li><a href="#"><img src="images/main11.png" /><span>花衬衫</span></a></li>
+                <li><a href="#"><img src="images/main12.png" /><span>花衬衫</span></a></li>
+                <li><a href="#"><img src="images/main13.png" /><span>花衬衫</span></a></li>
+            </ul>
+        </div>
+    </body>
+</html>

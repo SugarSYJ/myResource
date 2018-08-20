@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节点复制</title>
+	<style>
+	table{margin-top:20px;width:100%;border:1px solid #ddd;border-collapse: collapse;}
+		td{padding:5px 15px;border:1px solid #ddd;}
+
+	</style>
+	<script>
+		/*
+			表格行复制
+			思路：
+				1）获取所有按钮
+				2）给每个按钮绑定点击事件
+					复制当前行所在的tr
+				3）把复制的tr写入table
+		 */
+		window.onload = function(){
+			// 1）获取所有按钮
+			var btns = document.getElementsByTagName('button');
+			var table = document.getElementsByTagName('table')[0];
+
+			// 2）给每个按钮绑定点击事件
+			for(var i=0;i<btns.length;i++){
+				btns[i].onclick = function(){
+					// 获取当前tr
+					var currentTr = this.parentNode.parentNode;
+
+					// 复制当前行所在的tr
+					var newTr = currentTr.cloneNode(true);
+
+					// 获取newTr里的button
+					var newBtn = newTr.lastElementChild.firstElementChild;
+
+					// arguments.callee是对函数本身的引用
+					newBtn.onclick = arguments.callee;
+
+					// 3）把复制的tr写入table
+					table.appendChild(newTr);
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>单元格11</td>
+			<td>单元格12</td>
+			<td>单元格13</td>
+			<td>单元格14</td>
+			<td>单元格15</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格21</td>
+			<td>单元格22</td>
+			<td>单元格23</td>
+			<td>单元格24</td>
+			<td>单元格25</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格31</td>
+			<td>单元格32</td>
+			<td>单元格33</td>
+			<td>单元格34</td>
+			<td>单元格35</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格41</td>
+			<td>单元格42</td>
+			<td>单元格43</td>
+			<td>单元格44</td>
+			<td>单元格45</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格51</td>
+			<td>单元格52</td>
+			<td>单元格53</td>
+			<td>单元格54</td>
+			<td>单元格55</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格61</td>
+			<td>单元格62</td>
+			<td>单元格63</td>
+			<td>单元格64</td>
+			<td>单元格65</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格71</td>
+			<td>单元格72</td>
+			<td>单元格73</td>
+			<td>单元格74</td>
+			<td>单元格75</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格81</td>
+			<td>单元格82</td>
+			<td>单元格83</td>
+			<td>单元格84</td>
+			<td>单元格85</td>
+			<td><button>复制</button></td>
+		</tr>
+		<tr>
+			<td>单元格91</td>
+			<td>单元格92</td>
+			<td>单元格93</td>
+			<td>单元格94</td>
+			<td>单元格95</td>
+			<td><button>复制</button></td>
+		</tr>
+	</table>
+</body>
+</html>

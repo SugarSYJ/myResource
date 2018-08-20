@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数表达式</title>
+	<script>
+		// 函数的声明会提前，所以在这个位置能调用
+		// test1();
+
+		// 函数声明
+		// 有名字的函数叫具名函数
+		function test1(){
+			alert(1);
+		}
+		
+
+		//匿名函数：没有名字的函数
+		//函数表达式：将一个匿名函数赋值给一个变量
+		var sum = function(){alert(2)};
+		sum();
+
+		// 页面加载事件
+		window.onload = function(){
+			var button = document.getElementById('btn');
+			button.onclick = test1;
+			// button.onclick = function(){
+			// 	alert('点击了按钮');
+			// };
+		}
+
+		var a = 10;
+		function test2(){
+			alert(a);
+			var a=20;
+		}
+		test2();//10+3,20+4,undefined+3
+		
+	</script>
+</head>
+<body>
+	<button id="btn">按钮</button>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>5秒后自动关闭广告</h3>
+        <img src="img/g3.jpg" id="meinv" />
+        <script type="text/javascript">
+            window.onload = function(){
+                var timer = setInterval(show,5000);
+                function show(){
+                    meinv.style.display = 'none';
+                    clearInterval(timer);
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>删除页面元素</title>
+	<style>
+		body{padding:50px;}
+		.datalist{width:100%;border:1px solid #ddd;border-collapse:collapse;}
+		.datalist td{padding:3px 5px;border:1px solid #ddd;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+
+</head>
+<body>
+	<button id="btnClear">清空表格</button>
+	<button id="btnDelete">删除表格</button>
+	<button id="btnBack">回到从前</button>
+	<button id="btnAdd">新增行</button>
+	<table class="datalist">
+		<tbody>
+			<tr>
+				<td width="10">1</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td width="60"><button>删除</button></td>
+			</tr>
+		</tbody>
+	</table>
+
+    <script type="text/javascript">
+        //重新计算行号
+        function calcId() {
+            //$.each(array, function(){})
+            //用于元素集合
+            $('tbody tr').each(function (index, tr) {
+                $('td:first', this).text(index + 1);
+            })
+        }
+
+        //删除行
+        $('tbody button').click(function () {
+            $(this).closest('tr').remove();
+            calcId();
+        })
+
+        //新增行
+        $('#btnAdd').click(function () {
+            $('tbody tr:first').clone(true).appendTo('tbody');
+            calcId();
+        })
+
+        //清空表格
+        $('#btnClear').click(function () {
+            $('table').empty();
+        })
+
+        //删除表格
+        var $table;
+        $('#btnDelete').click(function () {
+            //detach 保留 table button 的点击事件
+            $table = $('table').detach();
+        })
+
+        //回到从前
+        $('#btnBack').click(function () {
+            if ($table) {
+                $table.appendTo('body');
+            }
+        })
+    </script>
+</body>
+</html>

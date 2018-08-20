@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #btn{display:block;}
+            #pic{display:inline-block;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var btn = document.getElementById('btn');
+                var pic = document.getElementById('pic');
+                document.body.onclick = function(e){
+                    if(e.target.nodeName==='IMG'){
+                        alert('杨幂');
+                    }
+                }
+                btn.onclick = function(){
+                    document.body.appendChild(pic.cloneNode(true));
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h3>利用事件委托实现新添加的按钮响应点击事件</h3>
+        <button id="btn">复制</button>
+        <div id="pic">
+            <img src="img/small_1.jpg"/>
+        </div>
+    </body>
+</html>

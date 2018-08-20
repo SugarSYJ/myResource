@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>04构造函数实例原型对象的关系</title>
+	<script>
+		/*
+			推荐做法
+				* 把属性放到构造函数
+				* 把方法放到原型对象
+		 */
+		// 构造函数Student
+		function Student(name,age,gender){
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+
+			// this.toString = function(){
+			// 	console.log(666)
+			// }
+
+			this.tuodi = function(){
+				console.log(`我叫${this.name}，我最爱拖地啊啊啊啊啊`);
+			}
+		}
+
+		// 给原型对象添加方法
+		Student.prototype.tuodi = function(){
+			// 原型对象方法的this指向
+			// 指向实例
+			console.log(`我叫${this.name}，我最爱拖地`);
+		}
+
+		Student.prototype.job = '程序猿';
+
+		// 实例
+		var s = new Student('小明',16,'男');
+		console.log(s);
+
+		var S = new Student('大S',30,'女');
+		console.log(S);
+		S.tuodi();
+
+
+
+		// 原型对象
+		// 属性/方法的访问规则
+		// 实例->原型...->Object的原型对象
+		s.toString();
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

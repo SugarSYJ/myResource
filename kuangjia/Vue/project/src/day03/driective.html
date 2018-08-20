@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-focus />
+            <p v-highlight ref="p" id="p">aaaa</p>
+        </div>
+        <script>
+            Vue.directive('focus',{
+                inserted:function(element,bind,vnode){
+                    element.focus();
+                    console.log(element);
+                }
+            });
+            var vm = new Vue({
+                el:'#app',
+                directives:{
+                    'highlight':{
+                        inserted:function(element){
+                            console.log('inserted');
+                            console.log(document.getElementById('p'))
+                            element.style.background = 'red';
+                        },
+                        bind:function(){
+                            console.log('bind');
+                        },
+                        update:function(){
+                            console.log('update');
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

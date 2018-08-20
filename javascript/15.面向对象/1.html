@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{padding: 0; list-style: none; margin: auto;}
+        #slide{width: 820px; height: 320px; overflow: hidden; position: relative;}
+        #slide ul{position: absolute; height: 100%; width: 100%;}
+        #slide li{float: left; width: 820px; height: 320px;}
+        li:nth-child(1){background-color: red;}
+        li:nth-child(2){background-color: green;}
+        li:nth-child(3){background-color: yellow;}
+        li:nth-child(4){background-color: pink;}
+        li:nth-child(5){background-color: #ccc;}        
+    </style>
+</head>
+<body>
+    <div id="slide">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+        </ul>
+        <p></p>
+    </div>
+
+    <input type="button" value="next" id="btnNext">
+    <input type="button" value="prev" id="btnPrev">  
+    <input type="button" value="play" id="btnPlay">
+    <input type="button" value="stop" id="btnStop">   
+        
+    <script>
+
+        var _slide = new Slide();
+        _slide.init(document.getElementById('slide'));
+
+        document.getElementById('btnNext').onclick = function(){
+            _slide.next();
+        }
+
+        document.getElementById('btnPrev').onclick = function(){
+            _slide.prev();
+        }  
+
+        document.getElementById('btnPlay').onclick = function(){
+            _slide.play();
+        } 
+
+        document.getElementById('btnStop').onclick = function(){
+            _slide.stop();
+        }
+
+                //面向对象
+        //设计模式 => 构造函数、工厂函数
+        /*
+            轮播图功能：
+            1、(自动)播放
+            2、停止
+            3、切换 => 上一张、下一张、指定某张
+        */
+
+        //构造函数
+        //首字母大写
+        //调用的时候实例化(new) => 实例
+        //构造函数里面的 this 就是构造函数本身的实例 => var _slide = new Slide(); => this == _slide
+
+        function Slide(){
+            // return 1;
+            this.init = function(_ele){
+                this.ele = _ele;
+                this.ul = _ele.querySelector('ul');
+                this.lis = this.ul.querySelectorAll('li');
+                this.baseWidth = this.lis[0].offsetWidth;
+                this.ul.style.width = this.baseWidth * this.lis.length + 'px';
+                // this.play();
+                // console.log(this);
+            };
+            this.play = function(){
+                var index = 0;
+                this.ulTimer = window.setInterval(function(){
+                    // console.log(this);
+                    //只是改变下标;
+                    //调用 li 移动
+                    index++;
+                    if(index > this.lis.length - 1){
+                        index = 0;
+                    }
+                    liMove();
+
+                }.bind(this), 2000);
+                
+                //li 的切换
+                var liMove = function(){
+                    // console.log(this)
+                    var speedx = 10;
+                    //当前 li 的下标对应的移动距离
+                    //1 => 820
+                    //2 => 1640
+                    var _moveTarget = index * this.baseWidth;
+
+                    this.liTimer = window.setInterval(function(){
+                        //0 -10 -20... -820
+                        var _left = this.ul.offsetLeft;
+                        //-10 -20 -30....-820
+                        _left -= speedx;
+                        if(_left * -1 >= _moveTarget){
+                            window.clearInterval(this.liTimer);
+                            _left = _moveTarget * -1;
+                        }
+                        this.ul.style.left = _left + 'px';
+                    }.bind(this), 5);
+                }.bind(this);
+            };
+            this.stop = function(){
+                window.clearInterval(this.ulTimer);
+            };
+            this.next = function(){};
+            this.prev = function(){};
+        }
+
+        // function Slide2(){
+        // }
+
+        // Slide2.prototype.init = function(){};
+
+        // Slide2.prototype = {
+        //     init: function(){},
+        // }
+
+        // var slide2 = new Slide2();
+        // slide2.init()
+
+        // var _slide = new Slide();//实例化 => _slide：实例
+
+        // _slide.play = function(){}
+
+
+        // var slide = {
+        //     play: function(){},
+        //     stop: function(){},
+        //     next: function(){},
+        //     prev: function(){}
+        // }
+
+        //工厂模式（函数）
+        function funA(){
+            var obj = {};
+            obj.name = "Sam";
+            obj.age = 18;
+            // obj.timer = window.setInterval(function(){
+            //     console.log(this);
+            // })
+            return obj;
+        }
+
+        var _obj = funA();
+        _obj.name;
+
+        //工厂函数 vs 构造函数
+        //工厂 => 不能明确对象原型(类型) 
+        //构造 => 能明确对象原型 new String new Date
+
+        //面向对象 => 特性 => 封装、继承、多态
+    </script>
+</body>
+</html>

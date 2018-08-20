@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加密解密</title>
+	<script>
+		/*
+			加密解密
+			思路：
+				1）获取界面元素
+				2）加密
+					给按钮#btnAdd绑定点击事件，把输入的文字转成ascii码
+				3）解密
+					给按钮#jiemi绑定点击事件，获取的ascii码转回相应的字符
+		 */
+		window.onload = function(){
+			var secret = document.getElementById('secret');//获取到id对应的单个元素
+			var btnAdd = document.getElementById('btnAdd');
+			var btnjiemi = document.getElementById('jiemi');
+			var list = document.getElementById('list');
+
+			// 给按钮#btnAdd绑定点击事件
+			// 把每个字符都加密
+			btnAdd.onclick = function(){
+				// 获取输入的内容
+				var value = secret.value;
+
+				var arr_val = value.split('');
+
+				// 遍历数组，然后逐个转换ascii码
+				// (ascii + 10)*5
+				var ascii = arr_val.map(function(val){
+					return (val.charCodeAt(0) + 10)*5;
+				})
+				
+				// 把转换后的内容写入页面
+				list.innerHTML += '<li>' + ascii.join() + '</li>';
+			}
+
+			// 解密
+			btnjiemi.onclick = function(){
+				var lis = document.getElementsByTagName('li');//获取到页面所有的li元素,得到一个伪数组
+
+				// 遍历所有li，获取每个li的内容
+				for(var i=0;i<lis.length;i++){
+					// 获取li里的内容，并转换成数组
+					var con = lis[i].innerHTML.split(',');
+
+					// 把ascii码转回相应字符
+					var letters = con.map(function(val){
+						return String.fromCharCode(val/5-10);
+					});
+
+					// 把解密后的文字写入原来的页面位置
+					lis[i].innerHTML = letters.join().replace(/,/g,'');
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>告诉你一个秘密：</h1>
+	<input type="text" id="secret"><button id="btnAdd">提交</button><button id="jiemi">解密</button>
+	<ul id="list"></ul>
+</body>
+</html>

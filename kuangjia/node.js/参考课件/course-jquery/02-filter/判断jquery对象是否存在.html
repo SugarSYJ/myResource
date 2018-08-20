@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>判断jquery对象是否存在</title>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			/* 
+				判断jquery对象是否存在
+					1)length
+					2)转换成原型对象
+			 */
+			var $box = $('#boxs');
+			console.log($box);
+
+			// jquery对象转原生对象：$box[0]
+			// 
+			if($box[0]){
+				console.log('#box元素存在');
+			}
+		});
+	</script>
+</head>
+<body>
+	<div id="box">#box</div>
+</body>
+</html>

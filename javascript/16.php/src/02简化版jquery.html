@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>02简化版jquery</title>
+	<style>
+		.box{width:200px;height:100px;background-color: #f00;margin:10px;}
+	</style>
+	<script src="lib/jq.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			// var box = document.querySelector('#box');
+
+			// // 显示
+			// box.style.display = 'block';
+
+			// 隐藏
+			// box.style.display = 'none';
+
+			// 绑定
+			// box.onclick = function(){}
+
+
+			// 简化
+			// 实例 => 原型对象中的方法
+			var box = new Element('#box');console.log(box)
+			// box.hide();
+			//.show().hide();
+			// $('#box').show().hide().on('clilck',function(){
+
+			// })
+
+
+			// 隐藏.box
+			// new Element('.box').hide();
+			$('.box').show().on('click',function(){
+				console.log(this.innerHTML);
+			}).animate({height:300,width:400},function(){
+				console.log('end');
+			});
+
+
+			// console.log($('#box').css('font-size'));//得到字体大小
+			$('#box').css('fontSize',30);//设置字体大小
+		})
+	</script>
+</head>
+<body>
+	<div id="box">#box</div>
+	<div>
+		<div class="box">.box1</div>
+		<div class="box">.box2</div>
+		<div class="box">.box3</div>
+	</div>
+</body>
+</html>

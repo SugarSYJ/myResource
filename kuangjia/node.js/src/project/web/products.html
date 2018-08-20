@@ -1,0 +1,34 @@
+<input type="button" value="New" id="btn_new"/>
+<div id="datagrid"></div>
+<script>
+    $(function(){
+        common.http.get('products',null,function(res){
+            var $table = $("<table><thead></thead><tbody></tbody></table>");
+            var $tr = $('<tr></tr>');
+            for(var key in res.data[0]){
+                $('<th></th>').text(key).appendTo($tr);
+            }
+            $tr.appendTo($('thead',$table));
+
+            for(var i=0;i<res.data.length;i++){
+                var $tbodyTr = $('<tr></tr>');
+                for(var key in res.data[i]){
+                    $('<td></td>').text(res.data[i][key]).appendTo($tbodyTr);
+                }
+                $('<td><input type="button" value="delete" data-id="' + res.data[i]['_id'] + '"/></td>').appendTo($tbodyTr);
+                $tbodyTr.appendTo($('tbody',$table));
+            }
+            $table.appendTo('#datagrid');
+            $(':button','#datagrid').click(function(){
+                common.http.post('delproduct',{id:$(this).data('id')},function(res){
+                    if(res.status){
+                        $(this).closest('tr').remove();
+                    }
+                }.bind(this));
+            });
+        });
+        $('#btn_new').click(function(){
+            $('.container').html('内容加载中...').load('product.html');
+        });
+    });
+</script>

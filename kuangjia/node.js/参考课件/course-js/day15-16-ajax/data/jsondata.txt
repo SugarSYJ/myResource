@@ -1,0 +1,17 @@
+﻿{
+	"displayNum": 10,
+	"total": 100,
+	"page": 1,
+	"data":[
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120},
+		{"name": "张三", "age": 18, "sex": "男", "height": 210, "weight": 120}
+	]
+}

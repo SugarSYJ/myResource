@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>用以上数据生成一个商品列表</title>
+	<style>
+	ul{list-style: none;}
+		img{width:180px;}
+		.price span{color:#f00;}
+		.price span::before{
+			content:'￥';
+		}
+	</style>
+
+</head>
+<body>
+	<h1>用以上数据生成一个商品列表</h1>
+	<ul id="datalist">
+		
+	</ul>
+	<script>
+		/*
+			用以上数据生成一个商品列表
+
+			思路：
+				1）遍历goodslist，根据数据生成每个li
+				2）组合每个li，拼接ul
+				3）把最终拼接的字符串（html结构），写入#datalist
+
+
+			符合W3C标准的自定义属性
+				* data-*
+				* data-*-*
+			 */
+		
+		var goodslist =  [{
+	        id:'001',
+	        name:'iphone7 plugs',
+	        imgurl:'img/ip7.jpg',
+	        price:5899.00,
+	        sale:5888.00,
+	        color:'土豪金'
+	    },{
+	        id:'002',
+	        name:'Note7',
+	        imgurl:'img/note7.jpg',
+	        price:3899.00,
+	        sale:998.00,
+	        color:'黑色'
+	    },{
+	        id:'003',
+	        name:'荣耀7',
+	        imgurl:'img/honor7.jpg',
+	        price:1999.00,
+	        sale:1899.00,
+	        color:'白色'
+	    }];
+
+	    // ES5的map方法
+	    var res = goodslist.map(function(goods){
+	    	return '<li data-myid="'+ goods.id + '"><img src="'+ goods.imgurl +'"><h4>商品名称：'+ goods.name +'</h4><p class="price">价格：<span>'+ goods.price +'</span></p><p class="color">颜色：'+ goods.color +'</p></li>'
+	    });
+	    console.log(res);
+
+	    // 写入#datalist
+	    var datalist = document.getElementById('datalist');
+	    datalist.innerHTML = res.join('');
+
+	</script>
+</body>
+</html>

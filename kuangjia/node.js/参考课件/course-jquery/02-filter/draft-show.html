@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        div {
+            background: #def3ca;
+            margin: 3px;
+            width: 80px;
+            display: none;
+            float: left;
+            text-align: center;
+        }
+    </style>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body>
+
+    <button id="showr">Show</button>
+    <button id="hidr">Hide</button>
+    <div>Hello 3,</div>
+
+    <div>how</div>
+    <div>are</div>
+    <div>you?</div>
+
+    <form method="post" action="">
+        <fieldset>
+            <div>
+                <label for="two">2</label>
+                <input type="checkbox" value="2" id="two" name="number[]">
+            </div>
+            <div>
+                <label for="four">4</label>
+                <input type="checkbox" value="4" id="four" name="number[]">
+            </div>
+            <div>
+                <label for="six">6</label>
+                <input type="checkbox" value="6" id="six" name="number[]">
+            </div>
+            <div>
+                <label for="eight">8</label>
+                <input type="checkbox" value="8" id="eight" name="number[]">
+            </div>
+        </fieldset>
+    </form>
+    <script>
+        $("#showr").click(function () {
+            $("div").first().show(1000, function showNext() {
+                $(this).next("div").show(1000, showNext);
+            });
+        });
+
+        $("#hidr").click(function () {
+            $("div").hide(1000);
+        });
+
+        $(function () {
+            var id = $(':checkbox').map(function () {
+                return this.id;
+            });
+            console.log(id);
+        })
+    </script>
+
+</body>
+</html>

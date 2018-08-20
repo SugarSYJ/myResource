@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动定位</title>
+    <script>
+        /*
+            Promise
+                * 状态
+                    * Pending（未完成）可以理解为Promise对象实例创建时候的初始状态
+                    * Resolved（成功） 可以理解为成功的状态
+                    * Rejected（失败） 可以理解为失败的状态
+
+                PS：只要promise对象的状态改成Resolve或者Rejected其中之一，它的状态就无法再改变
+
+
+            Promise.prototype.then(successFn[,failFn])
+                * 当promise的状态为Resolved时，执行successFn
+                * 当primise的状态为Rejected，执行failFn
+
+            Promise的应用
+                * ajax嵌套过多的问题
+                * 数据依赖
+                * 
+         */
+
+         var p = new Promise(function(resolve,reject){//Pending
+            resolve(100);//把promise的状态从Pending改成Resolved
+            // reject();//把promise的状态从Pending改成Rejected
+         });
+
+         p.then(function(n){
+            console.log(n);
+         },function(){
+            console.log(999);
+         });
+
+        var status = [200,304];
+        var p_ip = new Promise(function(resolve,reject){
+            var xhr_ip = new XMLHttpRequest();
+            xhr_ip.onload = function(){
+                if(status.includes(xhr_ip.status)){
+                    // console.log(xhr_ip.responseText);
+                    var ip = xhr_ip.responseText;
+                    resolve(ip);
+                }else{
+                    reject('ip请求失败');
+                }
+            }
+            xhr_ip.open('get','http://localhost:18/api/get_ip.php',true);
+            xhr_ip.send();
+        });
+        
+        p_ip.then(ip=>{
+            // 获取p_ip的数据
+            var p_city = new Promise((resolve,reject)=>{
+                var xhr_city = new XMLHttpRequest();
+                xhr_city.onload = function(){
+                    if(status.includes(xhr_city.status)){
+                        var city = xhr_city.responseText;
+                        // console.log(city);
+                        resolve(city);
+                    }
+                }
+                xhr_city.open('get','http://localhost:18/api/get_city.php?ip='+ip);
+                xhr_city.send();
+            })
+            // 返回Promise对象，以便链式调用
+            return p_city;
+        }).catch(function(msg){
+            console.log(msg);
+        }).then(function(city){
+            // 获取p_city的数据
+            // console.log(n);
+            // 天气
+            var xhr_weather = new XMLHttpRequest();
+            xhr_weather.onload = function(){
+                if(status.includes(xhr_weather.status)){
+                    console.log(xhr_weather.responseText);
+                }
+            }
+            xhr_weather.open('get','http://wthrcdn.etouch.cn/weather_mini?city='+city,true);
+            xhr_weather.send();
+        })
+
+        /*var xhr_ip = new XMLHttpRequest();
+        var status = [200,304];
+        xhr_ip.onload = function(){
+            if(status.includes(xhr_ip.status)){
+                console.log(xhr_ip.responseText);
+                var ip = xhr_ip.responseText;
+
+                // 根据ip获取城市
+                var xhr_city = new XMLHttpRequest();
+                xhr_city.onload = function(){
+                    if(status.includes(xhr_city.status)){
+                        var city = xhr_city.responseText;
+
+                        // 天气
+                        var xhr_weather = new XMLHttpRequest();
+                        xhr_weather.onload = function(){
+                            //这里得到天气
+                        }
+                        xhr_weather.open('get','http://wthrcdn.etouch.cn/weather_mini?city='+city,true);
+                        xhr_weather.send();
+                    }
+                }
+                xhr_city.open('get','http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip='+ip);
+                xhr_city.send();
+            }
+        }
+        xhr_ip.open('get','http://localhost:1707/api/get_ip.php',true);
+        xhr_ip.send();*/
+    </script>
+</head>
+<body>
+    <h1>Promise</h1>
+</body>
+</html>

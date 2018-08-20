@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById('replace').onclick = function () {
+                var txt = document.getElementById('div1').innerHTML;
+                var reg = /java/ig;
+                //console.log(txt.match(reg));
+                txt = txt.replace(reg, 'html5');
+                document.getElementById('div1').innerHTML = txt;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">javascript Java Script JAVA</div>
+    <button id="replace">替换</button>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生成指定格式日期</title>
+	<script>
+	window.onload = function(){
+		/*
+			[案例]将当前日期格式化输出为 “2015年08月24日 星期五”格式
+			思路：
+				1）获取当前时间
+				2）从当前时间里获取
+					年：2016
+					月：3
+					日：13
+					星期：3
+				3）字符串拼接成指定格式
+		 */
+		// 获取页面元素#time
+		var time = document.getElementById('time');
+
+		function showTime(){
+			// 1）获取当前时间
+			var now = new Date();
+
+			// 2）从当前时间里获取
+			var year = now.getFullYear();
+			var month = now.getMonth();
+			var date = now.getDate();
+			var day = now.getDay();
+
+			// 时分秒
+			var hour = now.getHours();
+			var min = now.getMinutes();
+			var sec = now.getSeconds();
+
+			var ms = now.getMilliseconds();
+
+			// 3）字符串拼接成指定格式
+			var dateStr = '';
+
+			// 拼接年份
+			dateStr += year + '年';
+
+			// 拼接月份
+			var _month = (month + 1);
+			dateStr += (_month < 10 ? '0' : '') + _month + '月';
+
+			// 拼接日期
+			dateStr += (date<10 ? '0' : '') + date + '日';
+
+
+			// 拼接时分秒
+			dateStr += (hour>=10?'':'0') + hour + '时' + (min>=10?'':'0') + min + '分' + (sec>=10?'':'0') + sec + '秒' + ms + '毫秒';
+
+			// 拼接星期
+			var arrDay = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+			dateStr += ' ' + arrDay[day];
+
+			// 把时间写入页面
+			time.innerHTML = dateStr;
+		}
+
+		// 定时器
+		setInterval(showTime,10);
+	}
+	</script>
+</head>
+<body>
+	<div id="time"></div>
+</body>
+</html>

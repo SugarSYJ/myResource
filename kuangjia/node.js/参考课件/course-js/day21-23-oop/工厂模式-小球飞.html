@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        //工厂模式-(封装)
+        function createBall(x, y) {
+            var ball = new Object();
+            ball.width = parseInt(Math.random() * 50) + 'px';
+            var r = parseInt(Math.random() * 255);
+            var g = parseInt(Math.random() * 255);
+            var b = parseInt(Math.random() * 255);
+            ball.height = ball.width;
+            ball.background = 'rgb(' + r + ', ' + g + ', ' + b + ')';
+            ball.borderRadius = '50%';
+            ball.position = 'absolute';
+            ball.left = x;
+            ball.top = y;
+            ball.element = {};
+            //实现的功能
+            ball.generate = function () {
+                ball.element = document.createElement('div');
+                ball.element.style.width = ball.width;
+                ball.element.style.height = ball.height;
+                ball.element.style.left = ball.left + 'px';
+                ball.element.style.top = ball.top + 'px';
+                ball.element.style.background = ball.background;
+                ball.element.style.position = ball.position;
+                ball.element.style.borderRadius = ball.borderRadius;
+                document.body.appendChild(ball.element);
+            }
+            //实现小球自由移动
+            ball.move = function () {
+                var speedX = 10;
+                var speedY = 5;
+                ball.element.timer = window.setInterval(function () {
+                    var left = ball.element.offsetLeft;
+                    var top = ball.element.offsetTop;
+                    left += speedX;
+                    top += speedY;
+                    if (left >= window.innerWidth - ball.element.clientWidth || left <= 0) {
+                        left = left > 0 ? window.innerWidth - ball.element.clientWidth : 0;
+                        speedX *= -1;
+                    }
+
+                    if (top >= window.innerHeight - ball.element.clientHeight || top <= 0) {
+                        top = top > 0 ? window.innerHeight - ball.element.clientHeight : 0;
+                        speedY *= -1;
+                    }
+                    ball.element.style.left = left + 'px';
+                    ball.element.style.top = top + 'px';
+                }, 30);
+            }
+            return ball;
+        }
+
+        var box = [];
+
+        //自动产生小球
+        var timer = window.setInterval(function () {
+            var x = Math.random() * window.innerWidth;
+            var y = Math.random() * window.innerHeight;
+            var ball = createBall(x, y);
+            ball.generate();
+            ball.move();
+            box.push(ball);
+            if (box.length >= 10) {
+                window.clearInterval(timer);
+            }
+        }, 100);
+
+        window.onclick = function (_event) {
+            //自动产生小球
+            //点击产生
+            //双击产生
+            //右击产生
+            //隔5秒
+
+            //var ball = createBall(_event.clientX, _event.clientY);
+            //ball.generate();
+            //ball.move();
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

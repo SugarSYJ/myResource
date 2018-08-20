@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>异步请求ajax</title>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		/*// 1）创建xhr对象
+		var xhr = new XMLHttpRequest();
+
+		// 4）处理返回的数据
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4 && xhr.status == 200){
+				// console.log(xhr.responseText)
+				var p = document.createElement('p');
+				p.innerHTML = xhr.responseText;
+				document.body.appendChild(p);
+			}
+		}
+
+		// 2）建立与服务器的连接（配置）
+		// url:数据请求地址（API）
+		// 数据请求地址和页面访问地址一定要同域
+		// 同域：两个地址的协议、域名、端口三者一致
+		xhr.open('get','http://localhost:3000/ajax/ajaxtest',true);
+
+		// 3）发送请求
+		xhr.send(null);*/
+		$(function(){
+			$.ajax({
+				url:'http://localhost:3000/ajax/ajaxtest',
+				success:function(data){
+					$('<p/>').html(data).appendTo('body');
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

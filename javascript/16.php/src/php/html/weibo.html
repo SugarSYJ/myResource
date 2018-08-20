@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>微博点赞</title>
+    <style>
+        .datalist{margin:0 auto;line-height:2;}
+        .datalist li{position:relative;border-bottom:1px dotted #ddd;padding-right:100px;}
+        .datalist li span{position:absolute;right:0;top:0;margin:0 5px;padding:2px 5px 2px 20px;background:skyblue url(icon/com.svg) no-repeat 5px center;background-size:20px;border-radius: 5px;width:30px;text-align:center;color:#fff;}
+        .datalist li span.like{right:70px;background-image:url(icon/zan.svg);background-color:orange;}
+
+    </style>
+</head>
+<body>
+    <h1>xx明星微博信息</h1>
+    <div class="datalist">
+        
+    </div>
+</body>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded',()=>{
+        var datalist=document.querySelector('.datalist');
+        // 发送ajax请求
+        var xhr=new XMLHttpRequest();
+        // 处理服务器返回数据
+        xhr.onreadystatechange=function(){
+            if(xhr.readyState==4&& (xhr.status === 200 || xhr.status === 304)){
+                // 根据数据生成界面
+                
+                console.log(xhr.responseText);
+                var data=JSON.parse(xhr.responseText);
+                var ul=document.createElement('ul');
+                ul.innerHTML=data.map(item=>{
+                    return `
+                        <li data-id="${item.id}">
+                            <h4>${item.username}</h4>
+                            <div class="content">${item.content}</div>
+                            <span class="like">${item.likecnt}</span>
+                            <span class="com">${item.comtcnt}</span>
+                        </li>
+                    `
+                })
+                datalist.appendChild(ul);
+            }
+        }
+        // 设置请求参数，建立与服务器链接
+        xhr.open('get',"http://localhost:1218/api/data/weibo.json");
+        // 向服务器发送请求
+        xhr.send();
+        // 点赞事件
+        datalist.onclick=function(e){
+            if(e.target.className=='like'){
+                // 获取自定义属性
+                var id=e.target.parentNode.dataset.id;
+                var xhr_zan=new XMLHttpRequest();
+                xhr_zan.onreadystatechange=function(){
+                    if(xhr_zan.readyState==4&&(xhr_zan.status === 200 || xhr_zan.status === 304)){
+                        var data = JSON.parse(xhr_zan.responseText);
+                            e.target.innerHTML = data.likecnt;
+                    }
+                }
+                xhr_zan.open("get",'http://localhost:1707/api/weibo.php?id='+id);
+                xhr_zan.send();
+            }
+        }
+    })
+</script>
+</html>

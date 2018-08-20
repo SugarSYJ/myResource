@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>01左右轮播图</title>
+    <style type="text/css">
+        #focus{width:810px; height:320px; position:relative; margin: auto; overflow:hidden;}
+        ul{list-style:none; margin:0; padding:0;}
+        ul:first-child{width:100%; height:100%;        ul:first-child>li{width:810px; height:320px; float:left;}
+        ul:nth-child(2){width:150px; height:30px; position:absolute; z-index:100; text-align:center; bottom:0; left: 40%;}
+        ul:nth-child(2)>li{width:10px; height:10px; border-radius:50%; border:solid 2px #fff; float:left; margin: 0 10px; cursor:pointer;}
+        ul:nth-child(2) > li.active{background-color:#fff;}
+        #focus>a{position:absolute; text-decoration:none; height:60px; width:30px; background-color:#ff6a00; color:#fff; text-align:center; line-height:60px; top:40%;}
+        #focus>a:first-child{left:0;}
+        #focus>a:last-child{right:0;}
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var slide_ul = document.getElementsByTagName('ul')[0];
+            var slide_li = slide_ul.getElementsByTagName('li');
+            var slide_li_width = slide_li[0].clientWidth;
+            slide_ul.style.width = slide_li_width * slide_li.length + 'px';
+
+            var slide_bar_li = document.getElementsByTagName('ul')[1].getElementsByTagName('li');
+
+            var slide_timer, sub_slide_timer;
+
+            ulTimer(0);
+
+            //0
+            function ulTimer(index) {
+                slide_timer = window.setInterval(function () {
+                    //1
+                    index++;
+                    if (index >= slide_li.length) {
+                        index = 0;
+                    }
+                    liTimer(index);
+                }, 3000);
+            }
+
+            function liTimer(index) {
+                //1 * 810 = 810;
+                sub_slide_timer = window.setInterval(function () {
+                    if (index <= 0) {
+                        var left = slide_ul.offsetLeft;
+                        left += 50;
+                        if (left >= 0) {
+                            left = 0;
+                            window.clearInterval(sub_slide_timer);
+                        }
+                        slide_ul.style.left = left + 'px';
+                    } else {
+                        var left = slide_ul.offsetLeft;
+                        left -= 50;
+                        if (Math.abs(left) >= index * slide_li_width) {
+                            left = index * slide_li_width * -1;
+                            window.clearInterval(sub_slide_timer);
+                        }
+                        slide_ul.style.left = left + 'px';
+                    }
+                }, 30);
+            }
+
+            //for (var i = 0; i < slide_bar_li.length; i++) {
+            //    slide_bar_li[i].index = i;
+            //    slide_bar_li[i].onclick = function () {
+            //        window.clearInterval(slide_timer);
+            //        slide(this.index);
+            //        start(this.index);
+            //    }
+            //}
+
+            //function start(_index) {
+            //    window.clearInterval(slide_timer);
+            //    slide_timer = window.setInterval(function () {
+            //        _index++;
+            //        if (_index >= slide_li.length) {
+            //            _index = 0;
+            //        }
+            //        slide(_index);
+            //    }, 3000);
+            //}
+
+            //function slide(_index) {
+            //    window.clearInterval(sub_slide_timer);
+            //    sub_slide_timer = window.setInterval(function () {
+            //        var ulLeft = slide_ul.offsetLeft;
+            //        ulLeft = _index <= 0 ? ulLeft + 50 : ulLeft - 10;
+            //        if (_index <= 0 && ulLeft >= 0) {
+            //            window.clearInterval(sub_slide_timer);
+            //            ulLeft = 0;
+            //        } else if (_index > 0 && Math.abs(ulLeft) >= slide_li_width * _index) {
+            //            window.clearInterval(sub_slide_timer);
+            //            ulLeft = slide_li_width * _index * -1;
+            //        }
+            //        slide_ul.style.left = ulLeft + 'px';
+
+            //        for (var _i = 0; _i < slide_bar_li.length; _i++) {
+            //            slide_bar_li[_i].className = '';
+            //        }
+            //        slide_bar_li[_index].className = 'active';
+            //    }, 10);
+            //};
+
+            //start(0);
+        }
+    </script>
+</head>
+<body>
+    <div id="focus">
+        <ul>
+            <li><img src="../images/001.jpg"></li>
+            <li><img src="../images/002.jpg"></li>
+            <li><img src="../images/003.jpg"></li>
+            <li><img src="../images/004.jpg"></li>
+        </ul>
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <a href="#" class="prev">&lt;</a>
+        <a href="#" class="next">&gt;</a>
+    </div>
+</body>
+</html>

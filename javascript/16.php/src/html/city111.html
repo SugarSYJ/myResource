@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript"> 
+            document.addEventListener('DOMContentLoaded',()=>{
+                var div = document.getElementById('div');
+                var province = document.createElement('select');
+                var city = document.createElement('select');
+                var county = document.createElement('select');
+
+                div.appendChild(province);
+                div.appendChild(city);
+                div.appendChild(county);
+
+                province.options[0] = new Option('请选择省','-1');
+                city.options[0] = new Option('请选择市','-1');
+                county.options[0] = new Option('请选择区','-1');
+
+                var status = [200,304];
+                var xhr = new XMLHttpRequest();
+                xhr.onload = function(){
+                    if(status.includes(xhr.status)){
+                        var data = JSON.parse(xhr.responseText);
+                        // console.log(data);
+                        //省
+                        for(var i=0;i<data.regions.length;i++){
+                            province.options[province.length] = new Option(data.regions[i].name,i);
+                            province.onchange = function(){
+                                city.options.length = 0;
+                                city.options[city.length] = new Option('请选择市','-1');
+                                county.options.length = 0;
+                                county.options[county.length] = new Option('请选择市','-1');
+                                // 市
+                                for(var j=0;j<data.regions[province.selectedIndex - 1].regions.length;j++){
+                                    city.options[city.length] = new Option(data.regions[province.selectedIndex - 1].regions[j].name,j);
+                                    city.onchange = function(){
+                                        county.options.length = 0;
+                                        county.options[county.length] = new Option('请选择市','-1');
+                                        // 区
+                                        for(var k=0;k<data.regions[province.selectedIndex - 1].regions[city.selectedIndex - 1].regions.length;k++){
+                                            county.options[county.length] = new Option(data.regions[province.selectedIndex - 1].regions[city.selectedIndex - 1].regions[k].name,j);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                xhr.open('get','http://localhost:18/api/data/region.json',true);
+                xhr.send();
+            })
+        </script>
+    </head>
+    <body>
+        <div id="div"></div>
+    </body>
+</html>

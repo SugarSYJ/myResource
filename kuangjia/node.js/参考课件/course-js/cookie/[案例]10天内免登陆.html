@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>10天免登录</title>
+	<style type="text/css">
+		    body{
+			    background-color:rgb(177, 208,224); font: normal 12px Trebuchet MS; color:#000;
+		    }
+		    form{ 
+			    width:220px; padding:10px;
+			    background-color:#DDEEF6; 
+			    box-shadow: 0px 0px 10px 0px #888888;
+			    border:1px solid #DDEEF6;
+			    border-radius:6px;
+			    margin: auto;
+		    }
+		    .roundedCorners-textbox{ 
+				border:1px solid #999; width:160px;
+		    }
+			.checkbox {
+				margin-left: 30px;
+				border:1px solid #999; width:20px;
+			}
+			
+	</style>
+</head>
+<script>
+	window.onload = function(){
+		/*
+			10天免登录
+			思路：
+				1）获取页面元素
+				2）点击登陆按钮时，判断是否勾选“10天内免登录”
+					<1>如果勾选了，生成免登录的cookie,有效时间为10天
+					<2>如果未勾选，则清空原来的cookie
+				3）当页面刷新或者从新打开时，判断是否存在免登录的cookie
+					如果存在，自动跳转到提交登录表单
+
+		 */
+		
+		// 1）获取页面元素
+		var username = document.getElementById('username');
+		var psw = document.getElementById('password');
+		var checkbox = document.getElementsByClassName('checkbox')[0];
+		var btnSubmit = document.getElementById('btnSubmit');
+		var form = document.getElementsByTagName('form')[0];
+
+		// 2）点击登陆按钮时，判断是否勾选“10天内免登录”
+		btnSubmit.onclick = function(e){
+			if(username.value != 'xie' || psw.value != '123'){
+				e.preventDefault();
+				return;
+			}console.log('submit')
+			if(checkbox.checked){
+				// 如果勾选了，生成免登录的cookie,有效时间为10天
+				var now = new Date();
+				now.setDate(now.getDate() + 10);
+				document.cookie = 'username=' + username.value + ';expires=' + now;
+				document.cookie = 'password=' + psw.value + ';expires=' + now;
+			}
+			form.submit();
+		}
+
+		// 3）当页面刷新或者从新打开时，判断是否存在免登录的cookie
+		var cookie = document.cookie;
+		console.log(cookie);
+		if(cookie){
+			var arr_cookie = cookie.split('; ');
+			arr_cookie.forEach(function(co){
+				var _temp = co.split('=');
+
+				// 把用户名和密码写入表单
+				if(_temp[0] == 'username'){
+					username.value = _temp[1];
+				}else if(_temp[0] == 'password'){
+					psw.value = _temp[1];
+				}
+			});
+
+			// 表单手动提交
+			btnSubmit.onclick();
+		}
+
+	}
+</script>
+<body>
+	<form action="登录后台页面.html" method="get">	
+		<label>账号</label>
+		<input id="username" type="text" /><br /><br />	
+		<label>密码</label>
+		<input id="password" type="password" /><br /><br />	
+    	<label><input type="checkbox" class="checkbox" />
+		10天内免登陆</label>
+    	<br/><br/>
+		<input type="submit" value="确定" id="btnSubmit" />
+		<input type="reset" value="清空" />
+	</form>	
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h2>小王入职薪水10K，每年涨幅5%，10年后工资多少？这10年小王赚了多少钱</h2>
+        <script type="text/javascript">
+           var salary = 10000;
+           var total = salary*12;
+           for(var year = 2;year<=10;year++){
+                salary = salary + salary*0.05;
+                total = total + salary*12;
+           }
+           document.write('10年后工资是：' + salary.toFixed(2) + '元；这10年小王赚了：' + total.toFixed(2) + '元');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="./libs/index.css" />
+        <link rel="stylesheet" href="./libs/common.css">
+        <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="libs/common.js"></script>
+    </head>
+    <body>
+        <div class="header"></div>
+        <div class="body">
+            <ul class="nav">
+                <li><a href="javascript:" data-url="products.html">产品管理</a></li>
+                <li><a href="javascript:" data-url="products.html">订单管理</a></li>
+                <li><a href="javascript:" data-url="products.html">用户管理</a></li>
+            </ul>
+            <div class="container"></div>
+        </div>
+        <!-- <div class="loading"></div> -->
+        <!-- <i class="fa fa-spinner fa-spin"></i> -->
+        <script type="text/javascript">
+            $(function(){
+                $('.nav').click(function(event){
+                    var currTag = $(event.target);
+                    if(currTag.is('a')){
+                        $('.container').html('内容加载中...').load(currTag.data('url'));
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

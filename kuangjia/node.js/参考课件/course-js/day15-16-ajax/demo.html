@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var btnSend = document.getElementById('btnSend');
+            var content = document.getElementById('content');
+            var keyword = document.getElementById('keyword');
+
+            //{onabort: null}
+            //创建 ajax 的对像
+            var xhr = new XMLHttpRequest();
+            
+            //监听（回调）方法
+            xhr.onreadystatechange = function () {
+                //readyState 请求的状态
+                //status 返回结果的状态
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    //响应数据
+                    //格式化响应数据为对像
+                    //var jsonObj = xhr.responseXML.getElementsByTagName('hello')[0];
+                    console.log(xhr.responseText);
+                    //content.innerHTML = jsonObj.name;
+                }
+            }
+
+            btnSend.onclick = function () {
+                //发起一个不同域的 api 请求
+                xhr.open('get', "ajaxdata/test.txt?_=" + Math.random(), true);
+                xhr.send();
+            }
+
+            //返回值 {} "" int
+            function funA() {
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="keyword"/>
+    <button id="btnSend">获取</button>
+    <div id="content"></div>
+</body>
+</html>

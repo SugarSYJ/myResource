@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单获得焦点时显示输入列表</title>
+	<style>
+		ul{padding:10px;margin:0;list-style: none;}
+		#dataList{display:none;width:200px;border:1px solid #ddd;}
+		#dataList li{padding-left:10;border-bottom:1px dashed #ddd;line-height:1.5;}
+		#dataList li:last-child{border:none;}
+	</style>
+	<script>
+		window.onload = function(){
+			var data = document.getElementById('data');
+			var dataList = document.getElementById('dataList');
+
+			// 获得焦点时显示列表
+			data.onfocus = function(){
+				dataList.style.display = 'block';
+			}
+
+			// 失去焦点是隐藏
+			data.onblur = function(){
+
+				// 延迟隐藏，目的是可以点击到li
+				setTimeout(function(){
+					dataList.style.display = 'none';
+				},200);
+				
+			}
+
+			// 利用冒泡来实现
+			dataList.onclick = function(e){
+				// e.target:返回触发此事件的元素
+				// 确保点击到li
+				if(e.target.tagName.toLowerCase() == 'li'){
+					data.value = e.target.innerHTML;
+				}
+				// console.log(e.target)
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>选择同学名字</h1>
+	<input type="text" id="data">
+	<ul id="dataList">
+		<li>李旭宏爱上王铁锤</li>
+		<li>罗晓威爱上李彦宏</li>
+		<li>罗晓威爱上李彦宏</li>
+		<li>李旭宏爱上王铁锤</li>
+	</ul>
+</body>
+</html>

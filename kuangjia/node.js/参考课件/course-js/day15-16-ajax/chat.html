@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        .container{width:100%; height: 500px; border:solid 1px;}
+            .container .messageBox {
+                float: left;
+                width: 70%;
+                border-right: solid 1px;
+                height:500px;
+                
+            }
+
+            .container .userList {
+                float: left;
+                width: 29%;
+                height: 500px;
+                overflow:auto;
+            }
+        .messList {
+            width: 100%;
+            height: 450px;
+            border-bottom: solid 1px;
+            overflow: auto;
+        }
+    </style>
+    <script src="common.js"></script>
+    <script type="text/javascript">
+        //获取在线用户 http://localhost/course/api/api/ajax/GetUser
+        //用户上线 http://localhost/course/api/api/ajax/AddUser
+        //用户下线 http://localhost/course/api/api/ajax/OutLine
+        //发送消息 http://localhost/course/api/api/ajax/SendMessage
+        //获取消息 http://localhost/course/api/api/ajax/GetMessage
+        
+        window.onload = function () {
+            var join = document.getElementById('join');
+            var txt_user = document.getElementById('txt_user');
+            var txt_mess = document.getElementById('txt_mess');
+            var send = document.getElementById('send');
+            var messList = document.getElementById('messList');
+            var userList = document.getElementById('userList');
+
+            //获取在线用户
+            var getOnLineUser = function () {
+                //var xhr = new XMLHttpRequest();
+                ////参数 nickname
+                //xhr.open('post', 'http://10.2.166.77/course/api/api/ajax/GetUser');
+                ////http 的请求头
+                
+                //xhr.send();
+                //xhr.onreadystatechange = function () {
+                //    if (xhr.status == 200 && xhr.readyState == 4) {
+                //        var _data = xhr.responseText;
+                //        showUser(JSON.parse(_data));
+                //    }
+                //}
+                //参数
+                /*
+                {
+                    "url": "api",
+                    "method": "get|post"，
+                    "async": bool,
+                    "params": "name=admin&pwd=123456"
+                    "success": function(json object){},
+                    "fail": function(){}
+                }
+                */
+                var obj = {
+                    "url": "http://10.2.166.77/course/api/api/ajax/GetUser",
+                    "method": "post",
+                    "async": true,
+                    "success": function (json) { showUser(JSON.parse(json)); },
+                    "fail": function (status) { console.log(status);}
+                }
+
+                ajax(obj)
+            }
+
+            //用户上线
+            var addUser = function () {
+                if (txt_user.value.trim() == '') {
+                    alert('昵称不能为空！');
+                    return false;
+                }
+                var xhr = new XMLHttpRequest();
+                //参数 nickname
+                xhr.open('post', 'http://10.2.166.77/course/api/api/ajax/AddUser');
+                //http 的请求头
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.send("nickname=" + txt_user.value.trim());
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        var _data = xhr.responseText;
+                        showUser(JSON.parse(_data));
+                    }
+                }
+            }
+
+            //显示用户
+            var showUser = function (_data) {
+                console.log(_data);
+                if (!_data.status) {
+                    return false;
+                }
+                var ul = document.createElement('ul');
+                var _html = '';
+                for (var i = 0; i < _data.data.length; i++) {
+                    _html += '<li>' + _data.data[i] + '</li>';
+                }
+                ul.innerHTML = _html;
+                userList.innerHTML = '';
+                userList.appendChild(ul);
+            }
+
+            //用户下线
+            var outLine = function () {
+                var xhr = new XMLHttpRequest();
+                xhr.open('post', 'http://10.2.166.77/course/api/api/ajax/OutLine');
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                //参数 nickname
+                xhr.send("nickname=" + txt_user.value.trim());
+            }
+
+            //发送消息
+            var sendMess = function () {
+                if (txt_mess.value.trim() == '') {
+                    alert('消息不能为空！');
+                    return false;
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('post', 'http://10.2.166.77/course/api/api/ajax/SendMessage');
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                //参数 nickname
+                //参数 message
+                xhr.send("nickname=" + txt_user.value.trim() + "&message=" + txt_mess.value.trim());
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 & xhr.readyState == 4) {
+                        var _data = xhr.responseText;
+                        showMess(JSON.parse(_data));
+                    }
+                }
+            }
+
+            //接收消息
+            var receiveMess = function () {
+                var xhr = new XMLHttpRequest();
+                xhr.open('post', 'http://10.2.166.77/course/api/api/ajax/GetMessage');
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                //参数 nickname
+                //参数 message
+                xhr.send("nickname=" + txt_user.value.trim());
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.status == 200 && xhr.readyState == 4) {
+                        showMess(JSON.parse(xhr.responseText));
+                    }
+                }
+            }
+
+            //显示消息
+            var showMess = function (_data) {
+                console.log(_data);
+                
+                var ul = document.createElement('ul');
+                var _html = '';
+                if (!_data.data) {
+                    _html += '<li>' + _data.SendNickName + ":" + _data.Content + ' ' + _data.SendTime + '</li>';
+                } else {
+                    for (var i = 0; i < _data.data.length; i++) {
+                        var _data2 = _data.data[i];
+                        _html += '<li>' + _data2.SendNickName + ":" + _data2.Content + ' ' + _data2.SendTime + '</li>';
+                    }
+                }
+                
+                ul.innerHTML = _html;
+                messList.appendChild(ul);
+            }
+
+            //用户上线按钮事件
+            join.onclick = function () {
+                addUser();
+                setInterval(function () {
+                    getOnLineUser();
+                }, 5000);
+            }
+
+            //发送消息按钮事件
+            send.onclick = function () {
+                sendMess();
+                setInterval(function () {
+                    receiveMess();
+                }, 5000);
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="messageBox">
+            <div class="messList" id="messList"></div>
+            <div class="messControl">
+                <input type="text" id="txt_user" />
+                <button id="join">加入</button>
+                <input type="text" id="txt_mess" />
+                <button id="send">发送</button>
+            </div>
+        </div>
+        <div class="userList" id="userList"></div>
+    </div>
+   
+</body>
+</html>

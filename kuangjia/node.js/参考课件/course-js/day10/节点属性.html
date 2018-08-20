@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节点的属性</title>
+	<script>
+		window.onload = function(){
+			var box = document.getElementById('box');
+
+			// 获取（返回）
+			var html = box.innerHTML;//字符串
+			console.log(html);
+
+			// html = 'DOM节点';
+			box.innerHTML = 'abc';
+
+			console.log(box.nodeName.toLowerCase());
+
+			console.log(box.attributes);
+
+
+			// 获取页面元素的属性
+			// console.log(box.title)
+			console.log(box.getAttribute('data-index'));
+
+			box.setAttribute('data-index',2);
+			box.removeAttribute('title')
+		}
+	</script>
+</head>
+<body>
+<!-- 
+data-name: 自定义属性
+
+-->
+	<div id="box" title="DOM" data-index="0">
+		<h1>javascript第10天</h1>
+		元素节点与属性操作
+	</div>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06箭头函数</title>
+    <script>
+        /*
+            函数扩展
+                * 箭头函数：函数的简写
+                    * 格式：标识符=>表达式
+         */
+
+
+        //传统写法
+        // var sum = function(){
+        //     return 10 + 10;
+        // }
+
+        // 简写（无参数）
+        // 省略：function、花括号、return
+        var sum = ()=>10+10;
+
+
+        //传统函数写法
+        // var test1 = function(x){
+        //     return x+2;
+        // }
+
+        // 简写（有1个参数）
+        // 省略：function、圆括号、花括号、return
+        var test1 = x=>x+2;
+
+
+        //传统函数写法
+        // var test2 = function(x,y){
+        //     return x+y;
+        // }
+
+        // 简写（有多个参数）
+        // 省略：function、花括号、return
+        var test2 = (x,y)=>x+y
+
+        // var arr = [10,20,30];
+        // arr.map(item=>item*1.2)
+
+
+
+        // 函数中包含多行代码时用代码块括起来
+        // btn.onclick = function (e) {
+        //   e = e || window.event;
+        //   var keyCode = e.which || e.keyCode;
+        //   console.log(keyCode);
+        // };
+
+        // 简写
+        document.onclick = e=>{
+            e = e || window.event;
+            var keyCode = e.which || e.keyCode;
+            // console.log(keyCode);
+
+            return false;
+        }
+
+
+        // 函数中返回一个对象
+        var person = function(){
+            return {
+                name:'laoxie',
+                age:18,
+                gender:'男'
+            }
+        }
+
+        // 简写
+        var person = ()=>({
+                name:'laoxie',
+                age:18,
+                gender:'男'
+            });
+
+
+        // 配合默认值的箭头函数
+        var show = (a=0,b=0)=>{
+            var res = a + b;
+            return res;
+        }
+
+        show(10,20);//30
+
+
+        // 剩余值/剩余参数
+        var sum = (a,...b)=>{
+            return b;
+        }
+
+        sum(10,20,30,40);//20
+
+        document.addEventListener('DOMContentLoaded',function(){
+            var btn = document.querySelector('button');
+
+            // 箭头函数中的this（重点）
+            // 箭头函数没有它自己的this值
+            // btn.onclick = ()=>{
+            //  console.log(this);
+            // }
+
+            // 格两妙后输出按钮内容
+            btn.onclick = function(){
+                // 这里的this指向btn
+                setTimeout(()=>{
+                    //这里的this为window
+                    console.log(this.innerText);
+                },2000)
+            }
+            
+        });
+    </script>
+</head>
+<body>
+    <button>按钮</button>
+</body>
+</html>

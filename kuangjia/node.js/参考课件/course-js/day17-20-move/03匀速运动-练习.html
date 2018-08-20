@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>03匀速运动-练习</title>
+    <style type="text/css">
+        .ball {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #b6ff00;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var ball = document.getElementsByClassName('ball')[0];
+            var left = 0;
+            var top = 0;
+
+            var dir = true;//水平方向
+            var vdir = true;//垂直方向
+
+            var timer = window.setInterval(function () {
+                if (dir) {
+                    left += 10;
+                } else {
+                    left -= 5;
+                }
+
+                if (vdir) {
+                    top += 10;
+                } else {
+                    top -= 5;
+                }
+
+                ball.style.left = left + 'px';
+                ball.style.top = top + 'px';
+
+                if (left >= window.innerWidth - ball.clientWidth) {
+                    dir = false;
+                } else if (left <= 0) {
+                    dir = true;
+                }
+
+                if (top >= window.innerHeight - ball.clientHeight) {
+                    vdir = false;
+                } else if (top <= 0) {
+                    vdir = true;
+                }
+            }, 30);
+        }
+    </script>
+</head>
+<body>
+    <div class="ball" id="ball"></div>
+</body>
+</html>

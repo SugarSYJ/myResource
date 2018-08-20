@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>封装一个得到1-100随机整数的函数</h3>
+        <script type="text/javascript">
+            function randomInt(){
+                var num = parseInt(Math.random()*100)+1;
+                console.log(num);
+            }
+            randomInt();
+
+
+            // --------------
+            function randomNumber(min,max){
+                var num = parseInt(Math.random()*(max-min+1))+min;
+                console.log(num);
+            }
+            randomNumber(100,200);
+        </script>
+    </body>
+</html>

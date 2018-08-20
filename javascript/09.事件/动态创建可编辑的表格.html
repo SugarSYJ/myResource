@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            table{border:1px solid #ddd;border-collapse: collapse;}
+            td{border:1px solid #ddd;padding:5px 3px;}
+        </style>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                var row = document.getElementsByName('row')[0];
+                var col = document.getElementsByName('col')[0];
+                var btn = col.nextElementSibling;
+                var datalist = document.getElementsByClassName('datalist')[0];
+                btn.onclick = function(){
+                    var _row = row.value;
+                    var _col = col.value;
+                    var table = document.createElement('table');
+                    var tbody = document.createElement('tbody');
+                    for(var i=1;i<=_row;i++){
+                        var tr = document.createElement('tr');
+                        for(var j=1;j<=_col;j++){
+                            var td = document.createElement('td');
+                            td.innerHTML = '单元格' + i + j;
+                            tr.appendChild(td);
+                        }
+                        tbody.appendChild(tr);
+                    }
+                    table.appendChild(tbody);
+                    datalist.innerHTML = '';
+                    datalist.appendChild(table);
+                }
+                datalist.onclick = function(e){
+                    e = e || window.event;
+                    var target = e.target || e.srcElement;
+                    if(target.nodeName.toLowerCase()==='td'){
+                        var input = document.createElement('input');
+                        input.style.color = getColor();
+                        input.type = 'text';
+                        input.value = target.innerText;
+                        target.innerHTML = '';
+                        target.appendChild(input);
+                        input.focus();
+                        input.blur = function(){
+                            target.innerHTML = input.value;
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h3>动态创建可编辑的表格</h3>
+        <label for="row">行：</label>
+        <input type="text" name="row"/>
+        <label for="col">列：</label>
+        <input type="text" name="col"/>
+        <button>生成表格</button>
+        <div class="datalist"></div>
+    </body>
+</html>

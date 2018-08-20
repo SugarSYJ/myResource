@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画实现渐现效果</title>
+	<style>
+	#box{width:100px;height:100px;background-color: #f00;opacity:0.5;}
+	</style>
+	<script src="../common.js"></script>
+	<script>
+		/*
+			思路：
+				1）绑定onmouseover
+					把透明度改成1（动画效果，定时器）
+				2)绑定onmouseout
+					把透明度改成0.5（动画效果，定时器）
+		 */
+		window.onload = function(){
+			var box = document.getElementById('box');
+
+			box.onmouseover = function(){
+
+				animate(this,{opacity:1})
+
+			}
+
+			// 鼠标移开时，透明度改为0.5
+			box.onmouseout = function(){
+				animate(this,{opacity:0.5});
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐现轮播图</title>
+    <style>
+        ul{padding:0;margin:0;list-style: none;}
+        a{text-decoration:none;}
+        #focus{position:relative;width:810px;}
+        #bigpic{position:relative;width:810px;height:320px;}
+        #bigpic li{position:absolute;top:0;left:0;width:810px;height:320px;overflow:hidden;}
+        #smallpic{position:relative;left:0;margin-top:10px;overflow:hidden;width:10000px;}
+        #smallpic li{float:left;padding-right:10px;}
+        #smallpic img{width:160px;}
+        .prev,.next{position:absolute;top:130px;height:60px;width:30px;line-height:60px;text-align:center;background-color:#f60;color:#fff;}
+        .prev{left:0;}
+        .next{right:0;}
+
+        .small-wrap{width:810px;overflow:hidden;}
+    </style>
+    <script src="../common.js"></script>
+    <script>
+        window.onload = function(){
+            var focus = document.getElementById('focus');
+            var bigPic = document.getElementById('bigpic');
+            var smallPic = document.getElementById('smallpic');
+            var btnPrev = focus.getElementsByClassName('prev')[0];
+            var btnNext = focus.getElementsByClassName('next')[0];
+
+            var bigPicList = bigPic.children;//得到所有#bigPic下的li
+            var len = bigPicList.length;//图片数量
+
+            // 默认显示第一张图
+            var index = 0;
+            
+
+            // 给小图添加点击事件
+            var smallPicList = smallPic.getElementsByTagName('img');
+            for(var i=0,len=smallPicList.length;i<len;i++){
+                smallPicList[i].index = i;
+                smallPicList[i].onclick = function(){
+                    index = this.index;
+                    show();
+                }
+            }
+
+            // 页面打开时立即执行
+            show();
+
+            // 自动轮播
+            var timer = setInterval(animation,3000);
+
+            // 鼠标移入清除自动轮播效果
+            focus.onmouseover = function(){
+                clearInterval(timer);
+            }
+
+            // 鼠标离开时重启自动轮播效果
+            focus.onmouseout = function(){
+                timer = setInterval(animation,3000);
+            }
+
+            // 上一张下一张按钮
+            btnPrev.onclick = function(){
+                index--;
+                show();
+            }
+            btnNext.onclick = animation;
+
+            function animation(){
+                index++;
+                show();
+            }
+
+            // 封装显示函数
+            function show(){
+                // 当到达最后一张时接着回到第一张
+                // 当到达第一张时接着到最后一张
+                if(index >= len){
+                    index = 0;
+                }else if(index<0){
+                    index = len - 1;
+                }
+                for(var i=0;i<len;i++){
+                    // bigPicList[i].style.opacity = 0;
+                    
+                    // 大图透明度
+                    animate(bigPicList[i],{opacity:0});
+
+                    // 小图透明度
+                    animate(smallPicList[i],{opacity:0.5});
+                }
+                animate(bigPicList[index],{opacity:1});
+                animate(smallPicList[index],{opacity:1});
+                // smallPic.style.left = -smallPic.children[0].offsetWidth*index + 'px';
+                if(index>2){
+                    animate(smallPic,{left:-smallPic.children[0].offsetWidth*(index-2)});
+                }else{
+                    animate(smallPic,{left:0});
+                }
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="focus">
+        <ul id="bigpic">
+            <li><img src="img/001.jpg"></li>
+            <li><img src="img/002.jpg"></li>
+            <li><img src="img/003.jpg"></li>
+
+            <li><img src="img/001.jpg"></li>
+            <li><img src="img/002.jpg"></li>
+            <li><img src="img/003.jpg"></li>
+
+            <li><img src="img/001.jpg"></li>
+            <li><img src="img/002.jpg"></li>
+            <li><img src="img/003.jpg"></li>
+        </ul>
+        <div class="small-wrap">
+            <ul id="smallpic">
+                <li><img src="img/001.jpg"></li>
+                <li><img src="img/002.jpg"></li>
+                <li><img src="img/003.jpg"></li>
+
+                <li><img src="img/001.jpg"></li>
+                <li><img src="img/002.jpg"></li>
+                <li><img src="img/003.jpg"></li>
+
+                <li><img src="img/001.jpg"></li>
+                <li><img src="img/002.jpg"></li>
+                <li><img src="img/003.jpg"></li>
+            </ul>
+        </div>
+        <a href="#" class="prev">&lt;</a>
+        <a href="#" class="next">&gt;</a>
+    </div>
+</body>
+</html>

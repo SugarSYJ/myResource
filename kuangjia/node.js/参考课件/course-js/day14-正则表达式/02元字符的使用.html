@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>02元字符的使用</title>
+    <style type="text/css">
+        div {
+            width: auto;
+            height: 38px;
+            line-height: 38px;
+            text-align: center;
+            border: solid 1px #ccc;
+            margin: 10px 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onclick = function (_event) {
+            var self = _event.target;
+            var txt = self.innerHTML;
+            if (self.id == 'div1') {
+                var reg = /s...y/;
+                console.log(txt.match(reg));
+            } else if (self.id == 'div2') {;
+                var reg = /\d\d/i;
+                console.log(reg.exec(txt))
+            } else if (self.id == 'div3') {
+                var reg = /\w\w\w\w/i;
+                console.log(reg.exec(txt))
+            } else if (self.id == 'div4') {
+                var reg = /\sgood\s/i;
+                reg = /Study\b/;
+                //reg = /Stu\B/;
+                console.log(reg.exec(txt))
+            } else if (self.id == 'div5') {
+                //var reg = /^s\w/i;
+                var reg = /^s\w\wdy$/i;
+                console.log(reg.exec(txt))
+            } else if (self.id == 'div6') {
+                //var reg = /^s\w/i;
+                var reg = /good|study/;
+                console.log(reg.exec(txt))
+            } else if (self.id == 'div7') {
+                //var reg = /^s\w/i;
+                var reg = /g\D/;
+                console.log(reg.exec(txt))
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">study</div>
+    <div id="div2">study99study</div>
+    <div id="div3">s88S</div>
+    <div id="div4">good good Study day day Study</div>
+    <div id="div5">study</div>
+    <div id="div6">go0d s8udy+s7udygood</div>
+    <div id="div7">go0d</div>
+</body>
+</html>

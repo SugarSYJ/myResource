@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>替换</title>
+	<script>
+		var str = 'Billy tried really hard, Sally tried really really hard, Timmy tried really really really hard, Johnny tried really really  really   really hard';
+		//'Billy tried really hard, Sally tried really hard, Timmy tried really hard, Johnny tried really hard';
+		//*:{0,}
+		//+,{1,}
+		//?,{0,1}
+		//{}
+		var reg = /(really\s+){2,}/g
+		str = str.replace(reg, 'really ');
+		console.log(str.match(reg));
+		console.log(str);
+
+		// 难度+3
+		var str = 'Billy tried tried really hard, Sally tried tried really really hard, Timmy tried really really really hard hard, Johnny Johnny tried really really really really hard hard hard';
+		var reg = /(\w+)\s+(\1\s*)+/gi;
+		console.log(str.match(reg));
+		str = str.replace(reg,'$1 ');
+		console.log(str);
+		// 共性
+		// 1）都是英文字母
+		// \w:每一个英文字母
+		// \w+:代表一个单词
+		// (\w+\s+):一个单词和空格
+		
+		// Billy Billy 
+		// tried tried 
+		// really \1 really really 
+	</script>
+</head>
+<body>
+</body>
+</html>

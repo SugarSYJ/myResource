@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style type="text/css">
+			ul,
+			ol {
+				list-style: none;
+				margin: 0;
+				padding: 0;
+			}
+			ul {
+				width: 500px;
+				height: 30px;
+			}
+			ul li {
+				float: left;
+				height: 30px;
+				padding: 0 20px;
+			}
+			ul li.normal {
+				color: #000;
+				background: #abcdef;
+				border: 1px solid #abcdef;
+				border-bottom: 0;
+			}
+			ul li.hover {
+				color: #fff;
+				background: red;
+				border: 1px solid #abcdef;
+				border-bottom: 0;
+			}
+			ol li {
+				width: 500px;
+				background: #abcdef;
+			}
+			ol li.show {
+				display: block;
+			}
+			ol li.hide {
+				display: none;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="tab">
+			<ul>
+				<li>tab1</li>
+				<li>tab2</li>
+				<li>tab3</li>
+			</ul>
+			<ol>
+				<li><img src="img/1.jpg" /></li>
+				<li><img src="img/5.jpg" /></li>
+				<li><img src="img/3.jpg" /></li>
+			</ol>
+
+		</div>
+
+        <script src="../../jquery/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript">
+		
+		var $uli = $("ul li");
+		var $oli = $("ol li");
+		$oli.addClass("hide");
+		$oli.eq(0).removeClass().addClass("show");
+		$uli.addClass("normal");
+		$uli.eq(0).removeClass().addClass("hover");
+		
+		$uli.mouseover(function(){
+			
+			var $index = $(this).index();
+			
+			$(this).removeClass().addClass("hover").siblings().removeClass().addClass("normal");
+			
+			$oli.eq($index).removeClass().addClass("show").siblings().removeClass().addClass("hide");
+			
+			
+		});
+				
+		</script>
+
+	</body>
+
+</html>

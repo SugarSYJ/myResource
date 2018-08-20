@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no">
+		<title>多人聊天系统</title>
+	</head>
+	<link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+	<style>
+		body{font-family:'微软雅黑';}
+		.loginBar{position:relative;margin-top:15px;}
+		.loginBar .logout{position:absolute;right:35px;top:50%;margin-top:-10px;}
+		.loginBar h1{margin-top:0;}
+		.media{padding-bottom:15px;border-bottom:1px dotted #ccc;}
+		.media h4{margin:0;font-size:14px;overflow:hidden;text-overflow:ellipsis;}
+		.media .alert{margin-bottom:5px;}
+		#chatWindow{padding-right:10px;padding-bottom:20px;height:330px;overflow-y:auto;}
+		.chat-area{display:none;}
+		.current{color:#5cb85c;}
+		.current .media-body{text-align:right;}
+	</style>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script type="text/javascript">
+		/*
+			多人聊天系统
+			1）点击登录时
+				验证用户名不能为空
+			2）登录成功后
+				1>显示聊天窗口
+				2>隐藏登录窗口，并显示登陆信息
+					名字，性别，ip
+			3）每隔3s获取一次数据
+				利用定时器每隔3s发送一次ajax请求
+				API：/ajax/chat?type=query
+			4）发送数据
+				API：/ajax/chat?type=send
+				数据：sender, gerder, msg
+			5）获取本机ip
+				API：/ajax/getIP	返回一个ip地址
+		 */
+		 $(function(){
+		 	// 获取页面元素
+		 	$chatWindow = $('#chatWindow');
+		 	$msg = $('#msg');
+
+		 	// API地址：
+		 	var host = 'http://10.16.155.12:3000';
+		 	var ipURL = host + '/ajax/getIP';
+		 	var getURL = host + '/ajax/chat?type=query';
+		 	var sendURL = host + '/ajax/chat?type=send';
+
+		 	var myip,username,gender;
+		 	var timer;
+		 	// 获取ip地址：
+		 	// 同步与异步的区别（阻塞/非阻塞）
+	 		$.ajax({
+	 			url:ipURL,
+	 			success:function(data){
+	 				myip = data;
+	 			}
+	 		});
+
+	 		// 初始化
+	 		init();
+
+		 	// 2）登录成功后
+		 	$('#btnLogin').on('click',function(){
+		 		username = $('#username').val();
+		 		gender = $('[name=gender]:checked').val();
+
+		 		// 验证用户名不能为空
+		 		if(/^\s*$/.test(username)){
+		 			alert('好汉~留下你的大名');
+		 			return;
+		 		}else if(/<\w+[^>]*>/.test(username)){
+		 			// 判断用户名是否包含html标签
+		 			alert('能好好输入么？');
+		 			return;
+		 		}
+
+		 		if(!gender){
+		 			alert('天哪！你连性别都有不可告人的秘密');
+		 			return;
+		 		}
+
+		 		// 登录成功后写入cookie
+		 		// 把对象转换json字符串：JSON.stringify();
+		 		var userinfo = {user:username,gender:gender,myip:myip};
+		 		document.cookie = 'userInfo=' + JSON.stringify(userinfo);
+
+		 		// 设置头部信息
+		 		setInfo(username,gender);
+
+				// 马上向服务器请求数据
+				getMsg();
+
+				
+
+				// 3）每隔3s获取一次数据
+				timer = setInterval(getMsg,3000);
+		 	});
+
+		 	// 4）发送数据
+			// 数据：username, gerder, msg
+			$('#btnSend').on('click',function(){
+				var msg = $msg.val();
+
+				// 过滤html标签
+				msg = msg.replace(/<\/?\w+[^>]*>/g,'');
+
+				// 过滤敏感字符
+				var mingan ='SB,我日,fuck,我操';
+				var arr = mingan.split(/\s*\,\s*/);
+				$.each(arr,function(idx,str){
+					var reg = new RegExp(str,'gi');//=>/SB/gi
+					msg = msg.replace(reg,'**');
+				});
+				
+
+				//清除定时器
+				clearInterval(timer);
+
+				$.ajax({
+					url:sendURL,
+					data:{sender:username,gender:gender,msg:msg},
+					success:function(){
+						console.log('发送成功');
+
+						// 发送成功后，立即获取一次数据
+						getMsg();
+
+						// 发送成功后清空输入框,并获得焦点
+						$msg.val('').focus();
+
+
+						// 重启定时器
+						timer = setInterval(getMsg,3000);
+					}
+				})
+			});
+
+			// 点击退出
+			$('.loginBar').on('click','.logout',function(){
+
+				// 设置cookie过期时间
+				var now = new Date();
+				now.setDate(now.getDate()-1);
+				document.cookie = 'userInfo=null;expires=' + now;
+
+				location.reload();
+			});
+
+
+		 	// 页面初始化
+		 	function init(){
+		 		var cookie = document.cookie;
+		 		if(cookie){
+		 			//userInfo={user:'xx',gender:'女',myip:'xxx'}
+		 			//正则里面圆括号表示分组==>$1,$2....$9
+		 			if(/userInfo\=(\{.+\})/.test(cookie)){
+		 				var userInfo = JSON.parse(RegExp.$1);
+
+		 				username = userInfo.user;
+		 				gender = userInfo.gender;
+		 				myip = userInfo.myip;
+
+		 				setInfo(username,gender);
+
+						getMsg();
+
+						timer = setInterval(getMsg,3000);
+		 			}
+		 		}
+		 	}
+		 	
+
+		 	function setInfo(username,gender){
+		 		// 1>显示聊天窗口
+		 		$('.chat-area').show();
+
+		 		var m = {'男':'帅锅','女':'靓女','保密':''}
+
+				// 2>隐藏登录窗口，并显示登陆信息
+				$('.loginBar').html('<strong>' + username + ' ' + m[gender] +'</strong>, 欢迎登陆在线实时聊天系统，您当前的IP地址为：' + myip +'<a href="#" class="btn btn-success btn-xs logout">退出</a>');
+		 	}
+
+
+		 	function getMsg(){
+				$.ajax({
+					url:getURL,
+					dataType:'json',
+					success:function(res){
+						console.log(res);
+						// 处理数据
+						// 先清空页面数据
+						$chatWindow.empty();
+
+						// 遍历数据，把json数据变成html结构，并写入页面
+						/*<div class="media">
+							<div class="media-left">
+								<span class="glyphicon glyphicon-user alert alert-warning"></span>
+								<h4>名字</h4>
+							</div>
+							<div class="media-body">
+								内容
+							</div>
+						</div>*/
+						$.each(res.data,function(idx,item){
+							var $media = $('<div/>').addClass('media');
+							var $mediaLeft = $('<div/>').addClass('media-left');
+							var $icon = $('<span/>').addClass('glyphicon glyphicon-user alert alert-warning');
+							var $user = $('<h4/>').html(item.name);
+							var $content = $('<div/>').addClass('media-body').html(item.content);
+
+							// 组合
+							$mediaLeft.append([$icon,$user]);
+
+							// 判断消息是不是本人所发
+							if(myip == item.ipfrom){
+								$media.addClass('current');
+								$mediaLeft.attr('class','media-right');
+								$media.append([$content,$mediaLeft]);
+							}else{
+								$media.append([$mediaLeft,$content]);
+							}
+
+							// 写入页面
+							$chatWindow.prepend($media);
+						});
+
+						// scrollIntoView
+						// 把当前元素滚动到可视区域
+						$chatWindow.find('.media').last()[0].scrollIntoView();
+					}
+				});
+			}
+		 });
+	</script>
+	<body>
+		<div class="container">
+			<div class="loginBar jumbotron">
+				<h1>多人聊天系统</h1>
+				<div class="form-group">
+					<label for="username">用户名：</label>
+					<input type="text" id="username" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="gender">性别：</label>
+					<label class="checkbox-inline"><input type="radio" name="gender" value="男"> 男</label>
+					<label class="checkbox-inline"><input type="radio" name="gender" value="女"> 女</label>
+					<label class="checkbox-inline"><input type="radio" name="gender" value="保密"> 保密</label>
+				</div>
+				<button id="btnLogin" class="btn btn-success">登录</button>
+			</div>
+			<div class="chat-area">
+				<div id="chatWindow">
+					<!-- <div class="media">
+						<div class="media-left">
+							<span class="glyphicon glyphicon-user alert alert-warning"></span>
+							<h4>yintao</h4>
+						</div>
+						<div class="media-body">
+							
+							哈哈哈哈
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-body">
+							aaaaaaaaaaaaaaaaa
+						</div>
+						<div class="media-right">
+							<span class="glyphicon glyphicon-user alert alert-success"></span>
+							<h4>xiaoming</h4>
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-left">
+							<span class="glyphicon glyphicon-user alert alert-success"></span>
+							<h4>xiaomingxiaoming</h4>
+						</div>
+						<div class="media-body">bbbbbbbbbb</div>
+					</div>
+					<div class="media">
+						<div class="media-left">
+							<span class="glyphicon glyphicon-user alert alert-success"></span>
+							<h4>xiaoming</h4>
+						</div>
+						<div class="media-body">ccccccccccccc</div>
+					</div> -->
+				</div>
+				<div class="form-group">
+					<textarea id="msg" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" id="btnSend">发送</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

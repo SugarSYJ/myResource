@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>day06作业讲解</title>
+	<script>
+		/*
+			1、记录用户浏览页面多长时间
+				显示格式：1时2分23秒
+
+			2、滚动字幕
+				每个一段时间把数组的第一项移动到最后
+				var arr = [1,2,3,4,5];
+				setInterval(function(){
+					arr.push(arr.shift())
+				},2000);
+		 */
+		
+		
+	window.onload = function(){
+		/*1、记录用户浏览页面多长时间
+				显示格式：1时2分23秒
+			思路：
+				1）进入页面时先记录当前时间startTime
+				2）设置一个定时器，每秒获取当前时间并计算与startTime差值
+					根据差值换算出相应时间格式
+				3）往页面输出
+
+			思路2：
+				利用定时器每秒递增，然后换算出指定格式
+
+		*/
+		var header = document.getElementById('header');
+		// 1）进入页面时先记录当前时间startTime
+		var startTime = new Date();
+
+		// 2）设置一个定时器，每秒获取当前时间并计算与startTime差值
+		setInterval(calcTime,1000);
+
+		function calcTime(){
+			var currentTime = new Date();
+
+			// 转换成毫秒并计算差值(ms)
+			var offsetTime = Date.parse(currentTime) - Date.parse(startTime);
+
+			// 根据差值换算出相应时间格式：1时2分23秒
+			// 50 ==> 0时0分50秒；
+			// 80 ==> 0时1分20秒；
+			// 3200 ==> 
+			var sec = parseInt(offsetTime/1000);
+
+			// 剩余的秒数
+			var secLeft = sec%60;
+
+			// 得到总分钟数
+			// 50分 ==> 0时50分0秒；
+			// 90分 ==> 1时30分0秒
+			var min = parseInt(sec/60);
+
+			// 剩余分钟数
+			minLeft = min%60;
+
+
+			//得到总小时数
+			hour = parseInt(min/60);
+
+
+			header.innerHTML = '浏览页面的时间：' + hour + '时' + minLeft + '分' + secLeft + '秒';
+		}
+
+		var now = new Date();
+		console.log(now)
+
+		// 当时间超出了正常值，则js内部会自动进行换算
+		// now.setHours(30);
+		// now.setDate(29)
+		// console.log(now);
+
+		// 在原来的基础上加上2小时
+		var currentHour = now.getHours();
+		now.setHours(currentHour + 2);
+
+	}
+		
+	</script>
+</head>
+<body>
+<div id="header"></div>
+</body>
+</html>

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        table{width:100%; text-align:center;}
+        table,td,th{border: solid 1px; border-collapse:collapse;}
+        td{padding: 5px 15px;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            //创建 ajax 对像
+            var xhr = new XMLHttpRequest();
+
+            //ajax 监听
+            xhr.onreadystatechange = function () {
+                //1
+                //2
+                //3
+                //4
+                if (!document.getElementById('loading')) {
+                    var img = "<img id='loading' src='loading.jpg'>";
+                    document.body.innerHTML = img;
+                }
+
+                if (xhr.status == 200 && xhr.readyState == 4) {
+                    var jsonStr = xhr.responseText;
+                    var jsonObj = JSON.parse(jsonStr);
+                    //调用初始化表格的方法 initGrid
+                    initGrid(jsonObj);
+                }
+            }
+
+            //初始化表格
+            var initGrid = function (jsonObj) {
+                var _html = "<table>";
+                //创建了thead
+                _html += "<thead>";
+                //{"name": "张三", "age": 18, "sex": "男"}
+                var _tr = jsonObj.data[0];
+                _html += "<tr>";
+                var _colTotal = 0;
+                for (var key in _tr) {
+                    _html += "<th>" + key + "</th>";
+                    _colTotal++;
+                }
+                _html += "</tr>";
+                _html += "</thead>";
+
+                //创建了 tbody
+                _html += "<tbody>";
+                //jsonObj
+                /*每行包含三个单元格
+                （<tr>
+                    <td>name</td>
+                    <td>age</td>
+                    <td>sex</td>
+                   </tr>）
+                */
+                for (var i = 0; i < jsonObj.data.length; i++) {
+                    //{"name": "张三", "age": 18, "sex": "男"}
+                    var _tr = jsonObj.data[i];
+                    _html += "<tr>";
+                    for (var n in _tr) {
+                        _html += "<td>" + (_tr[n] + parseInt(Math.random() * 100)) + "</td>";
+                    }
+                    _html += "</tr>";
+                }
+                _html += "</tbody>";
+                //创建 tfoot
+                _html += "<tfoot>";
+                //{"name": "张三", "age": 18, "sex": "男"}
+                var _tr = jsonObj.data[0];
+                /*
+	            "displayNum": 10,
+	            "total": 101,
+	            "page": 1,                
+                */
+                var pageTotal = jsonObj.total % jsonObj.displayNum > 0 ? jsonObj.total / jsonObj.displayNum + 1 : jsonObj.total / jsonObj.displayNum;
+                _html += "<tr>";
+                _html += "<th colspan=" + _colTotal + ">";
+                for (var x = 1; x <= pageTotal; x++) {
+                    _html += "<button>" + x + "</button>";
+                }
+                _html += "</th>";
+                _html += "</tr>";
+                _html += "</tfoot>";
+                _html += "</table>"
+                document.body.innerHTML = _html;
+                var table = document.getElementsByTagName('table')[0];
+                table.onclick = function (_event) {
+                    var self = _event.target;
+                    if (self.tagName.toLowerCase() == 'button') {
+                        //页码
+                        var page = self.innerHTML;
+                        xhr.open('get', 'data/jsondata.txt?page=' + page + '&_=' + Math.random());
+                        xhr.send();
+                    }
+                }
+            }
+
+            //open api 地址
+            
+            xhr.open('get', 'http://10.16.151.33/ctapi/api/storeorder/order/FetchDispatchByCarnum?carnum=%E9%84%82ANA508');
+                xhr.send();
+           
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>

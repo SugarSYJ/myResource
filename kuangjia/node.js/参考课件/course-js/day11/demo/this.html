@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>draft</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var div_content = document.getElementById('div_content');
+            var sub_div = document.getElementById('sub_div');
+
+            //容器的滚动事件
+            div_content.onscroll = function () {
+                var r = parseInt(Math.random() * 255);
+                var g = parseInt(Math.random() * 255);
+                var b = parseInt(Math.random() * 255);
+                //给容器的边框色改变成随机色
+                this.style.borderColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+                console.log(this);
+            }
+
+            var div_content2 = document.getElementById('div_content2');
+            var sub_input = div_content2.getElementsByTagName('input');
+            //var sub_input = div_content2.childNodes;
+            //document.getElementsByTagName('input');
+            for (var i = 0; i < sub_input.length; i++) {
+                var _input = sub_input[i];
+                _input.onfocus = function () {
+                    console.log(this);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="width:200px;height:100px; border:solid 5px red; overflow: auto;" id="div_content">
+        <div style="width:200px; height:1500px; background-color:yellow;" id="sub_div"></div>
+    </div>
+    <div style="width:500px;height:100px; background-color:#ccc;" id="div_content2">
+        <input type="text" value="1" />
+        <input type="text" value="2" />
+        <input type="text" value="3" />
+    </div>
+</body>
+</html>

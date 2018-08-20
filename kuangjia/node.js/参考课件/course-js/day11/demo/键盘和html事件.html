@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>draft</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var txt = document.getElementById('txt');
+            var txt_content = document.getElementById('txt_content');
+            //键盘按下事件
+            txt.onkeydown = function () {
+                //console.log("onkeydown！");
+            }
+
+            //键盘按住事件
+            txt.onkeypress = function () {
+                //console.log("onkeypress！");
+            }
+
+            //键盘松开
+            var _txt1 = '';
+            txt.onkeyup = function () {
+                //console.log('onkeyup');
+                txt_content.innerHTML = txt.value;
+                txt_content.style.fontSize = '20px';
+                console.log('编辑中...');
+
+                if (_txt1.length >= 5) {
+                    txt.value = _txt1;
+                    return false;
+                }
+                _txt1 = txt.value;
+            }
+
+            //文本选择（选中）时触发
+            txt.onselect = function () {
+                //console.log('onselect');
+            }
+
+
+            //文本改变后并失去焦点-触发
+            txt.onchange = function () {
+                console.log('onchange');
+            }
+
+            //获得焦点
+            txt.onfocus = function () {
+                console.log('开启编辑...');
+            }
+
+            //失去焦点
+            txt.onblur = function () {
+                console.log('结束编辑！');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="width:200px; height:200px;">
+        <input type="text" id="txt" />
+        <div id="txt_content"></div>
+    </div>
+</body>
+</html>

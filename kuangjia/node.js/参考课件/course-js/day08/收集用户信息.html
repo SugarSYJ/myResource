@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>收集用户信息</title>
+	<script>
+		window.onload = function(){
+			var userList = document.getElementById('userList');
+			var username = prompt('好汉，留下你的大名');
+
+			if(username){
+				userList.innerHTML = '<li>' + username + '</li>';
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul id="userList">
+		
+	</ul>
+</body>
+</html>

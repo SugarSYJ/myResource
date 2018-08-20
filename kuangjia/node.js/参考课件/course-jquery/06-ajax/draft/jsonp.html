@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加载html文档</title>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		/*// 原生jsonp的实现,利用script标签来实现的数据获取
+		// API: http://wthrcdn.etouch.cn/weather_mini?city=广州'
+
+		// <script src="http://wthrcdn.etouch.cn/weather_mini?city=广州'"><\/script>
+		var script = document.createElement('script');
+		script.src = 'http://wthrcdn.etouch.cn/weather_mini?city=广州&callback=getWeather';
+
+		document.head.appendChild(script);
+
+		function getWeather(data){
+			console.log(data);
+		}
+*/
+
+		// jquery实现jsonp
+		$(function(){
+			$.ajax({
+				url:'http://wthrcdn.etouch.cn/weather_mini?city=广州',
+				dataType:'jsonp',
+				success:function(data){
+					console.log(data)
+					// 数据处理
+					
+				}
+			})
+		});
+
+		/* 
+		jQuery内部自动声明了这样的《全局函数》
+		function jQuery112006940763947521587_1468813419824(dat){
+
+		}*/
+	</script>
+</head>
+<body>
+	<h1>获取天气</h1>
+</body>
+</html>

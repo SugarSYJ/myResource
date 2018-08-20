@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+        <script src="../js/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/floor1">floor1</router-link>
+            <router-view></router-view>
+        </div>
+        <script >
+            const Floor1 = {template:'<div><h1>一楼</h1><router-link to="/floor1/floor2">floor2</router-link><router-view></router-view></div>'}
+            const Floor2 = {template:'<div><h1>二楼</h1></div>'}
+            var router = new VueRouter({
+                routes:[
+                    {path:'/floor1',name:"sam",component:Floor1,children:[
+                        {path:'floor2',name:"tom",component:Floor2}
+                    ]}
+                ]
+            })
+            var vm = new Vue({
+                el:"#app",
+                router:router,
+                methods:{
+                    goto:function(){
+                        router.push({name:"tom"});
+                        router.push({path:"floor2"})
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

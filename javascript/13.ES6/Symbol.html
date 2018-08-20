@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            /*
+                ES引入的新的数据类型
+                    Symbol
+                        * 独一无二
+                        * 创建后就不可更改
+                    常用方法
+                        * Symbol.for()
+                        * Symbol.keyFor()
+             */
+            var num1 = 10;
+            var num2 = 10;
+            // 第一种创建方式无参数
+            var s11 = Symbol();
+            var s12 = Symbol();
+            console.log(s11==s12);
+            console.log(s11,s12);
+            // 第二种创建方式：参数
+            // 参数主要作用于：标识和区分
+            var s21 = Symbol('xiaowang');
+            var s22 = Symbol('xiaowang');
+            console.log(s21==s22);
+            // 用途：对象私有属性
+            // 私有属性：私有
+            // 把Symbol值作为对象的属性
+            var sAttr = Symbol('xiaowang aha');
+            var obj = {
+                name:'xiaowang',
+                // 年龄
+                [sAttr]:18
+            }
+            console.log(obj);
+            // Symbol常用方法
+            // Symbol.for()：先查找，再登记
+            var s31 = Symbol.for('xiaowang');
+            var s32 = Symbol.for('xiaowang');
+            console.log(s31===s32);
+            // Symbol.keyFor(s31)：获取被登记的Symbol值
+            // 直接使用Symbo()创建的Symbol值的键不会被登记，所以也就获取不到
+            console.log(Symbol.keyFor(s31));
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

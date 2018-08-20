@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+
+        </style>
+    </head>
+    <body>
+        <div id="good">
+            <img src="img/g5.jpg" id="meinv"/>
+            <h3>震惊！只要￥9999，妹子就可以带回家</h3>
+            <p class="price">价格：<span>￥9999</span></p>
+            <div id="btn">
+                <div id="buy"></div>
+                <img src="img/btn_buy0.jpg" id="btnBuy"/>
+            </div>
+        </div>
+        <script type="text/javascript">
+            window.onload = function(){
+                var meinv = document.getElementById('meinv');
+                var buy = document.getElementById('buy');
+                var btnBuy = document.getElementById('btnBuy');
+                var end = '2017-11-23 21:07:00';
+                groupBuy();
+                var timer = setInterval(groupBuy,1000);
+                function groupBuy(){
+                    var offset = Math.floor((Date.parse(end) - Date.now())/1000);
+                    if(offset<=0){
+                        clearInterval(timer);
+                        btnBuy.src = 'img/btn_buy.jpg';
+                        buy.style.display = 'none';
+                        btnBuy.onclick = xixi;
+                        function xixi(){
+                            meinv.src = 'img/g1.jpg';
+                            alert('恭喜！你已成功购买黑美人');
+                        }
+                    }
+                    var sec = offset%60;
+                    var min = Math.floor(offset/60)%60;
+                    var hour = Math.floor(offset/60/60)%24;
+                    var day = Math.floor(offset/60/60/24);
+                    sec = (sec<10 ? '0' : '') + sec;
+                    min = (min<10 ? '0' : '') + min;
+                    hour = (hour<10? '0' : '') + hour;
+                    buy.innerHTML = day + '天' + hour + '时' + min + '分' + sec + '秒';
+                }
+
+            }
+        </script>
+
+    </body>
+</html>

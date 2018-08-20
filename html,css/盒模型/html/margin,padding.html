@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style >
+            .box{
+                width:300px;
+                height:300px;
+                border:3px dotted green;
+                /*背景是从padding开始摆放的，覆盖区域为padding+content*/
+                /*背景图片的开始定位区域是padding左上角*/
+                background-color:red;
+                /*规律：上右下左，顺势针，若是值不够，找反义词的值，只有一个值，四个方向都一样*/
+                margin:10px 20px 30px 40px;
+                padding:10px 20px 30px 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            规范度发挥稳定基础合成
+        </div>
+    </body>
+</html>

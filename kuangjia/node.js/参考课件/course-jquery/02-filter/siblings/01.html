@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../../jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+    <ul>
+        <li class="li1">list item 1</li>
+        <li class="li2">list item 2</li>
+        <li class="li3">list item 3</li>
+        <li>list item 4</li>
+        <li>list item 5</li>
+    </ul>
+    <script type="text/javascript">
+        $(function () { 
+            $('li.li1').nextAll('.li3').css('background-color', 'red');
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>99乘法表</title>
+	<style>
+		span{display:inline-block;margin:5px;padding:4px 10px;width:80px;height:30px;line-height:30px;background-color:#fc0;text-align:center;}
+	</style>
+	<script>
+		//window.onload
+		//页面所有内容全部加载完成后，才执行function里面的代码
+		window.onload = function(){
+			/*
+				[案例]打印99乘法表
+				思路：
+					1)外层循环控制行数
+					2)内层循环控制列数
+			 */
+			
+			var box = document.getElementById('box');
+
+			// 1)外层循环控制行数
+			for(var i=1;i<=9;i++){
+
+				// 2)内层循环控制列数
+				for(var j=1;j<=i;j++){
+					// 得到乘法结果
+					var mul = i*j;
+
+					box.innerHTML += '<span>' + j + '&times;' + i + ' = ' + mul + '</span>';
+				}
+				box.innerHTML += '<br>';
+			}
+		}
+		
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+getData({name:'xie',age:18,gender:'男'});

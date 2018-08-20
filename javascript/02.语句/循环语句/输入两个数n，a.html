@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>
+            输入两个数n，a，如果n==3， a == 2；
+            输出 2 + 22 + 222 的值。（不用输出式子）
+            如: n == 4， a == 3；
+            输出 3 + 33 + 333 + 3333的值。
+            提示:
+
+            n = 3,相加三次,每次相加比前一次相加的数,多一位
+            每次多的这个位数的值为a, 3, 3*10+3, 33*10+3
+        </h3>
+        <input type="text" id="num1"/>
+        <input type="text" id="num2"/>
+        <button id="btn">得出</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var num1 = document.getElementById('num1');
+            var num2 = document.getElementById('num2');
+            var btn = document.getElementById('btn');
+            var output = document.getElementById('output');
+            btn.onclick = function(){
+                var _num1 = num1.value;
+                var _num2 = num2.value;
+                var res = '';
+                for(var i=1;i<=_num1;i++){
+                    res = _num2 + '+' + 
+                }
+            }
+        </script>
+    </body>
+</html>

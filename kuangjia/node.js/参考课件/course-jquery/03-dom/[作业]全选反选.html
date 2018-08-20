@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全选与反选</title>
+	<script src="../assets/jquery.js"></script>
+	<script>
+	$(function(){
+		/* 思路：
+			1)全选
+				事件绑定到#all复选框，让所有的复选框的checked属性与#all相同
+			2)单选
+				绑定change事件
+				所有复选的数量与已勾选的复选框数量做对比;
+		*/
+		var $checkbox = $('input[name=hobby]');
+		$('#all').on('change',function(){
+			var _checked = $(this).prop('checked');
+			// if(_checked){
+			// 	$checkbox.prop('checked',true);
+			// }else{
+			// 	$checkbox.prop('checked',false);
+			// }
+			$checkbox.prop('checked',_checked);
+		});
+
+		// 给所有的复选框绑定事件
+		$checkbox.on('change',function(){
+			// 取到勾选上的复选框
+			var $checked = $checkbox.filter(':checked');
+			// if($checkbox.length == $checked.length){
+			// 	$('#all').prop('checked',true);
+			// }else{
+			// 	$('#all').prop('checked',false);
+			// }
+			$('#all').prop('checked',$checkbox.length == $checked.length);
+		});
+	});
+	</script>
+</head>
+<body>
+	<table id="dataList">
+		<thead>
+			<th><input type="checkbox" name="all" id="all"></th>
+			<th>爱好</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>篮球</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>足球</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>羽毛球</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>爬山</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>游泳</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>购物</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>看电影</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>旅游</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>音乐</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby" id=""></td>
+				<td>画画</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

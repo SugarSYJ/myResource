@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{background-color:#000; overflow:hidden;}
+        .ball{width:30px; height:30px; background:#00ff21; border-radius: 50%; position:absolute;}
+    </style>
+    <script type="text/javascript">
+
+        //工厂模式
+        //制造者
+        //可扩展性高
+        function createBall(_width, _height, _x, _y, _background) {
+            //字面量模式
+            var ball = {
+                width: _width,
+                height: _height,
+                background: _background,
+                left: _x,
+                top: _y,
+                element: document.createElement('div')
+            };
+            ball.element.className = 'ball';
+            ball.element.style.width = ball.width + 'px';
+            ball.element.style.height = ball.height + 'px';
+            ball.element.style.left = ball.left + 'px';
+            ball.element.style.top = window.innerHeight + 'px';
+            ball.element.style.background = ball.background;
+
+            ball.startMove = function () {
+                if (ball.element.timer) {
+                    window.clearInterval(ball.element.timer);
+                }
+                ball.element.timer = window.setInterval(function () {
+                    var top = ball.element.offsetTop;
+                    var speed = Math.ceil(top / 30);
+                    top -= speed;
+                    if (top <= ball.top) {
+                        top = ball.top;
+                        window.clearInterval(ball.element.timer);
+                        document.body.removeChild(ball.element);
+                        bomb();
+                    }
+                    ball.element.style.top = top + 'px';
+                }, 30);
+            }
+            function bomb() {
+                var fires = [];
+                for (var i = 0; i < 100; i++) {
+                    var r = parseInt(Math.random() * 255);
+                    var g = parseInt(Math.random() * 255);
+                    var b = parseInt(Math.random() * 255);
+                    var fire = document.createElement('div');
+                    fire.style.position = 'absolute';
+                    fire.style.width = (Math.random() * 10) + 'px';
+                    fire.style.height = fire.style.width;
+                    fire.style.borderRadius = '50%';
+                    fire.style.background = 'red';
+                    fire.style.left = ball.left + 'px';
+                    fire.style.top = ball.top + 'px';
+                    fire.style.background = 'rgb(' + r + ',' + g + ',' + b + ')';
+                    fire.speedX = Math.random() * 40 - 20;
+                    fire.speedY = Math.random() * 40 - 20;
+                    document.body.appendChild(fire);
+                    fires.push(fire);
+                }
+
+                var _timer = window.setInterval(function () {
+                    for (var i = 0; i < fires.length; i++) {
+                        var fire = fires[i];
+                        fire.style.left = fire.offsetLeft + fire.speedX + 'px';
+                        fire.style.top = fire.offsetTop + fire.speedY + 'px';
+                        fire.speedY += 1;
+                        if (fire.offsetLeft >= window.innerWidth || fire.offsetLeft <= 0 || fire.offsetTop <= 0 || fire.offsetTop >= window.innerHeight) {
+                            document.body.removeChild(fire);
+                            fires.splice(i, 1);
+                            if (fires.length <= 0) {
+                                window.clearInterval(_timer);
+                            }
+                        }
+                    }
+                }, 30);
+            }
+            return ball;
+        }
+
+        //使用者
+        var balls = [];
+        document.onclick = function (event) {
+            var ball = createBall(10, 40, event.clientX, event.clientY, 'red');
+            balls.push(ball);
+            var self = event.target;
+            if (self.className == 'ball') {
+                for (var i = 0; i < balls.length; i++) {
+                    //判断 html 元素是否同一个元素（是否相等）
+                    if (balls[i].element == self) {
+                        balls[i].stopMove();
+                    }
+                }
+            } else {
+                document.body.appendChild(ball.element);
+                ball.startMove();
+            }
+        }
+
+        document.oncontextmenu = function () {
+
+        }
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <input type="button" id="btn" value="click">
+</body>
+</html>

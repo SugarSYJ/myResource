@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>loading效果</title>
+    <style>
+    img{width:160px;}
+    .loading{
+        width:50px;height:50px;border-radius:50%;border:5px solid #ddd;border-right-color:#f60;animation:loading .5s infinite;
+    }
+    @keyframes loading{
+        0%{transform:rotate(0deg);}
+        100%{transform:rotate(360deg);}
+    }
+    .loading2{display:none;width:100px;height:100px;margin:auto;position:fixed;top:0;right:0;bottom:0;left:0;background:url(images/loading1.gif) no-repeat;}
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script>
+        $(function(){
+            var imgurl = 'http://www.33lc.com/article/UploadPic/2012-8/201282814124620503.jpg';
+            var imgurl2 = 'http://img15.3lian.com/2015/f2/50/d/73.jpg';
+            var imgurl3 = 'http://img.tuku.cn/file_big/201501/39624d3bec2c460fa3d690e8d99e4e21.jpg';
+            var imgurl4 = 'http://b.hiphotos.baidu.com/zhidao/pic/item/a8014c086e061d95dbd049307ff40ad162d9ca20.jpg';
+            var imgurl5 = 'http://d.hiphotos.baidu.com/zhidao/pic/item/aa64034f78f0f73604df35e10a55b319ebc41328.jpg';
+            $('.loading2').show();
+            $('<img />').attr('src',imgurl).appendTo('body');
+            $('<img />').attr('src',imgurl2).appendTo('body');
+            $('<img />').attr('src',imgurl3).appendTo('body');
+            $('<img />').attr('src',imgurl4).appendTo('body');
+            $('<img />').attr('src',imgurl5).appendTo('body');
+            $(window).load(function(){
+                $('.loading2').hide();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <!-- <div class="loading"></div> -->
+    <div class="loading2"></div>
+</body>
+
+</html>

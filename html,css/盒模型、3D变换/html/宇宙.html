@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{margin: 0;padding: 0;}
+            ul,li{list-style:none;}
+            .box{width: 600px;height: 600px;margin: 100px auto;box-sizing:border-box;position:relative;}
+            .box li{display:block;border:2px solid #ccc;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(0deg);border-radius:50%;}
+            .box li:nth-child(1){width: 60px;height: 60px;background-color:yellow;border:0 none;animation:zhuan 3s linear infinite;}
+            .box li:nth-child(2){width: 120px;height: 120px;animation:zhuan 4s linear infinite;}
+            .box li:nth-child(3){width: 180px;height: 180px;animation:zhuan 6s linear infinite;}
+            .box li:nth-child(4){width: 240px;height: 240px;animation:zhuan 7s linear infinite;}
+            .box li:nth-child(5){width: 300px;height: 300px;animation:zhuan 9s linear infinite;}
+            .box li:nth-child(6){width: 360px;height: 360px;animation:zhuan 11s linear infinite;}
+            .box li:nth-child(7){width: 420px;height: 420px;animation:zhuan 12s linear infinite;}
+            .box li:nth-child(8){width: 480px;height: 480px;animation:zhuan 14s linear infinite;}
+            .box li:nth-child(9){width: 540px;height: 540px;animation:zhuan 16s linear infinite;}
+            .box li:nth-child(10){width: 600px;height: 600px;animation:zhuan 18s linear infinite;}
+            .box li span{display:block;width: 16px;height: 16px;background:blue;border-radius:50%;position:absolute;left:50%;transform:translate(-50%,-50%) ;}
+            @keyframes zhuan{
+                0%{transform:translate(-50%,-50%) rotate(0deg);}
+                100%{transform:translate(-50%,-50%) rotate(360deg);}
+            }
+            .box li:nth-child(7) i{display:block;width: 8px;height: 8px;background: green;border-radius:50%;position:absolute;left:50%;transform:translate(-50%,-10px);}
+            .box li:nth-child(7) span{animation:zhuan 4s linear infinite;}
+        </style>
+    </head>
+    <body>
+        <ul class="box">
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span><i></i></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>    
+        </ul>
+    </body>
+</html>

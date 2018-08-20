@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>星期判断</title>
+	
+</head>
+<body>
+	<div id="day">aaaa</div>
+	<script>
+		// 获取当前时间（这行代码运行时的时间）
+		var now = new Date();
+
+		// 获取星期的值0,1,2,3,4,5,6
+		var day = now.getDay();
+		var day2 = document.getElementById('day');
+
+		switch(day){
+			case 0:
+				day2.innerHTML = '今天是星期天，还可以大睡一觉';
+				break;
+			case 1:
+				day2.innerHTML = '今天是<strong style="color:red">星期一</strong>，快周末了，爽';
+				break;
+			case 2:
+				day2.innerHTML = '今天是<strong style="color:red">星期二</strong>，快周末了，爽';
+				break;
+			case 3:
+				day2.innerHTML = '今天是<strong style="color:red">星期三</strong>，快周末了，爽';
+				break;
+			case 4:
+				day2.innerHTML = '今天是<strong style="color:red">星期四</strong>，快周末了，爽';
+				break;
+			case 5:
+				day2.innerHTML = '今天是<strong style="color:red">星期五</strong>，周末了，可以去嗨皮了';
+				break;
+			case 6:
+				day2.innerHTML = '今天是<strong style="color:red">星期六</strong>，可以大睡一觉了';
+				break;
+		}
+	</script>
+</body>
+</html>

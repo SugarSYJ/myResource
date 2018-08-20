@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dom操作--删除</title>
+    <style>
+       table,td{border:1px solid #ddd;}
+       table{border-collapse:collapse;width:100%;}
+       td{padding:10px;}
+
+       .content{padding:20px;border:1px solid #333;background-color:#ffc;}
+       .bg-red{background-color:#f00;color:#fff;}
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script>
+    $(function() {
+        // toggleClass //如果存在（不存在）就删除（添加）一个类。
+        $('#btnSwitch').click(function(){
+            // $('.content').addClass('bg-red');
+            $('.content').toggleClass('bg-red');
+        });
+
+
+        // attr() //设置或返回被选元素的属性值
+        $('#btnSwitch').attr('id'); //btnSwitch
+        $('#btnSwitch').next().attr('class');//content
+        $('#btnSwitch').next().attr('id','btnShow');
+        $('#btnSwitch').next().attr({
+            'type':'btnShow',
+            'title':'显示页面元素',
+            abc:'测试属性',
+            'data-index':1
+        }).html('显示页面元素');
+
+        // 用attr设置表单属性
+        $('#username').attr({
+            placeholder:'只能输入英文字符...',
+            name:'username'
+        });
+
+        $('form').attr({
+            action:'http://www.qq.com',
+            target:'_blank'
+        });
+
+        // 显性迭代
+        // $('a').each(function(index){
+        //     $(this).attr({
+        //         id:'link' + index
+        //     })
+        // });
+        
+        // attr隐性迭代
+        $('a').attr('id',function(index,attr){
+            return 'link' + (index+1);
+        });
+
+        // prop用来改变布尔类型的属性
+        // 区别：attr用来设置一般属性，prop用来设置布尔类型属性
+        // readonly, checked, disabled => prop('readonly'|'checked'|'disabled', true|false)
+        // prop 不能用来设置或获取 html 标签的自定义属性
+
+        $('#loginForm').find('input[type=checkbox]').prop('checked');
+
+        // removeAttr&removeProp
+        // $('#loginForm').removeProp('action');//不能删除action属性
+        $('#loginForm').find('input[type=checkbox]').removeProp('checked');
+
+        // 方法取值 
+        console.log($('label').html())
+    });
+    </script>
+</head>
+
+<body>
+    <button id="btnSwitch">切换</button><button></button>
+    <div class="content">切换效果</div>
+    <br /><br />
+    <form id="loginForm">
+        <label>用户名：</label><input type="text" id="username" disabled>
+        <label>密码：</label><input type="password" id="password" value="abc" readonly>
+        <label><input type="checkbox" checked f="dk">10天免登录</label>
+        <select>
+            <option>a</option>
+            <option>b</option>
+            <option selected>c</option>
+        </select>
+        <button type="submit">提交</button>
+    </form>
+    <br /><br />
+    <div class="container">
+        <a href="http://www.alibaba.com">链接1</a>
+        <a href="http://www.alibaba.com">链接2</a>
+        <a href="http://www.alibaba.com">链接3</a>
+        <a href="http://www.alibaba.com">链接4</a>
+        <a href="http://www.alibaba.com">链接5</a>
+        <a href="http://www.alibaba.com">链接6</a>
+        <a href="http://www.alibaba.com">链接7</a>
+        <a href="http://www.alibaba.com">链接8</a>
+    </div>
+</body>
+
+</html>

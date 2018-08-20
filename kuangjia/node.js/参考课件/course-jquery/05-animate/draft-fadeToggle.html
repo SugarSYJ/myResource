@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+</head>
+<body>
+
+    <button>fadeToggle p1</button>
+    <button>fadeToggle p2</button>
+    <p>This paragraph has a slow, linear fade.</p>
+
+    <p>This paragraph has a fast animation.</p>
+    <div id="log"></div>
+
+    <script>
+        $("button:first").click(function () {
+            $("p:first").fadeToggle(400);
+        });
+        $("button:last").click(function () {
+            $("p:last").fadeToggle(400);
+        });
+    </script>
+
+</body>
+</html>

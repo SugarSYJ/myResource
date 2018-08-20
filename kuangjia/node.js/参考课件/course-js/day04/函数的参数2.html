@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>函数的参数</title>
+	<script>
+		// 显示用户信息
+		function showMsg(name,age,geyan){
+			// var name = '张山';
+			// var age=16;
+			// var geyan='十六的姑娘一枝花';
+			// var callback;
+			// 未成年，不能显示信息
+			if(age<18){
+				alert('未成年人信息，收法律保护，你死了这条心吧！');
+				return;
+			}
+			alert(name + '今年' + age + '，人生格言：'+geyan);
+			if(typeof arguments[3] === 'function'){
+				arguments[3]();
+			}
+		}
+		// showMsg('张山',16,'十六的姑娘一枝花');
+		// showMsg('小王',18,'你有困难我帮忙，我住隔壁我姓王');
+		showMsg('老王',40,'你有困难我帮忙，我住隔壁我姓王',4);
+
+
+		// 计算矩形面积
+		function square(width,height){
+			return width*height;
+		}
+		console.log(square(10,5));
+
+		// 计算立方
+		function lifang(num){
+			return num*num*num;
+		}
+
+		// 没有return的函数
+		function show(msg){
+			var a=10;
+			var b=10;
+		}
+		var b = show();
+		alert(b);
+
+		//构造函数声明方式(不推荐)
+		var fn = new Function();
+		alert(typeof fn);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

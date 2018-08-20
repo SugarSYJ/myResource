@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示隐藏</title>
+	<style>
+	#box,#box2{padding:15px;border:1px solid #ddd;color:#999;font-size:20px;background-color:#efefef;}
+	</style>
+	<script>
+		// 隐藏页面元素
+		function hide(){
+			var box = document.getElementById('box');
+			box.style.display = 'none';
+		}
+		// 显示页面元素
+		function show(){
+			var box = document.getElementById('box');
+			box.style.display = 'block';
+		}
+
+		// 显示和隐藏
+		// 标识#box是否显示
+		var isShow = true;
+		function showHide(){
+			var box = document.getElementById('box2');
+			
+			// 判断#box如果显示
+			if(isShow){
+				box.style.display = 'none';
+				// isShow = false;
+			}else{
+				box.style.display = 'block';
+				// isShow = true;
+			}
+			isShow = !isShow;
+		}
+	</script>
+</head>
+<body>
+	<button id="btnShow" onclick="show()">显示</button><button id="btnHide" onclick="hide()">隐藏</button>
+	<div id="box">咏春-叶问</div>
+
+	<button onclick="showHide()">显示/隐藏</button>
+	<div id="box2">咏春-叶问</div>
+</body>
+</html>

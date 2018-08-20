@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>圆周运动</title>
+	<style>
+		.circle{position:absolute;width:30px;height:30px;border-radius:50%;background-color: #4cae4c;}
+		.cc{position:absolute;width:50px;height:50px;border-radius: 50%;background-color: #f60;box-shadow:0 0 0 299px #fff, 0 0 0 300px #f90;}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			let circle = document.createElement('div');
+			circle.classList.add('circle');
+			document.body.appendChild(circle);
+
+			// 圆心
+			let cc = document.querySelector('.cc');
+
+			// 圆周运动
+			let r = 325;
+			let deg = 0;
+
+			// 中心
+			let ccx = (window.innerWidth - circle.offsetWidth)/2;
+			let ccy = (window.innerHeight - circle.offsetHeight)/2;
+
+			// 先定位到中点
+			cc.style.left = ccx-cc.offsetWidth/2 + 'px';
+			cc.style.top = ccy-cc.offsetHeight/2 + 'px';
+			circle.style.left = ccx + r + 'px';
+			circle.style.top = ccy + 'px';
+
+			
+			setInterval(()=>{
+				deg +=1;
+				if(deg>=360){
+					deg = 0;
+				}
+
+				let radian = deg*Math.PI/180;
+				let x = r * Math.cos(radian) + ccx - circle.offsetWidth/2;
+				let y = r * Math.sin(radian) + ccy - circle.offsetHeight/2;
+
+				circle.style.left = x + 'px';
+				circle.style.top = y + 'px';
+
+			},20);
+
+		});
+	</script>
+</head>
+<body>
+	<div class="cc"></div>
+</body>
+</html>

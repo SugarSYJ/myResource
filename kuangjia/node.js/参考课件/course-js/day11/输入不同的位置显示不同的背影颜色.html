@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>根据不同的位置显示不同的背景颜色</title>
+	<style>
+	#box{border:1px solid #ddd;margin:0 auto;width:800px;height:100px;}
+	</style>
+	<script>
+        window.onload = function () {
+
+
+			var box = document.getElementById('box');
+
+			// 鼠标移入改变背景颜色
+			box.onmousemove = function (e) {
+			    var r = parseInt(Math.random() * 255);
+			    var g = parseInt(Math.random() * 255);
+			    var b = parseInt(Math.random() * 255);
+			    // e就是时间处理函数中的event对象
+			    var color = "rgb(" + r + "," + g + "," + b + ")";
+			    var str1 = "rgb(";
+			    str1 = str1 + r;
+			    str1 += ",";
+			    str1 += g;
+			    str1 += ",";
+			    str1 += b;
+			    str1 += ')';
+			    console.log(color);
+			    console.log(str1);
+			    box.style.background = str1;
+				
+				// 当鼠标移在前面部分区域时显示红色
+				//if(e.offsetX < 800/3){
+				//	box.style.backgroundColor = '#f00';
+				//}else if(e.offsetX >=800/3 && e.offsetX < 800/3*2){
+				//	box.style.backgroundColor = '#0f0';
+				//}else{
+				//	box.style.backgroundColor = '#00f';
+				//}
+				console.log('我在移动！');
+			}
+			box.ondblclick = function () {
+			    console.log(1);
+			}
+
+			box.onmouseover = function () {
+			    console.log('移进来了！');
+			}
+
+			box.onmouseout = function () {
+			    console.log('移出去了！');
+			    box.style.backgroundColor = '#fff';
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>张三 - 注册页面</title>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+
+    <script src="jquery-validation-1.15.0/dist/jquery.validate.min.js"></script>
+    <script src="jquery-validation-1.15.0/dist/jquery.validate.extend.methods.js"></script>
+    <script src="jquery-validation-1.15.0/dist/jquery.metadata.js"></script>
+    <script src="jquery-validation-1.15.0/dist/localization/messages_zh.min.js"></script>
+</head>
+<body>
+    <form>
+        <input type="text" id="account" name="account" placeholder="account" class="required"/><br />
+        <input type="password" id="password" name="password" placeholder="password" class="required" /><br />
+        <input type="text" id="phone" name="phone" placeholder="phone" class="required isTel" /><br />
+        <input type="text" id="email" name="email" placeholder="email" class="required" /><br />
+        <input type="text" id="username" name="username" placeholder="username" class="required" /><br />
+        <input type="button" id="submit" value="注册" />
+    </form>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#submit').click(function () {
+                if (!$('form').valid()) {
+                    return false;
+                }
+                var data = {
+                    account: $('#account').val(),
+                    password: $('#password').val(),
+                    phone: $('#phone').val(),
+                    mail: $('#email').val(),
+                    username: $('#username').val()
+                }
+                $.post('http://10.3.136.12//course/api/api/student/Register', data, function (response) {
+                    console.log(response);
+                })
+            })
+        })
+    </script>
+</body>
+</html>

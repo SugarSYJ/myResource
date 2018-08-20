@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .box{width: 800px;height: 200px;border:1px solid red;margin: 200px auto;box-sizing:border-box;
+                display:flex;justify-content:space-between;padding:0 25px;align-items:center;
+            }
+            .box>.t1{display:flex;width: 100px;height: 100px;background: #ccc;justify-content:space-between;padding:7px;border-radius:8px;box-shadow:0 -4px 0 0 #bbb inset,0 4px 0 0 #fff inset,4px 0 0 0 #ddd inset,-4px 0 0 0 #ddd inset;}
+            .box .t2{width: 25px;height: 25px;background: #000;border-radius:50%;}
+            .box .box1{justify-content:center;}
+            .box .box11,.box .box32,.box .box5 .box0:nth-child(2){align-self:center;}
+            .box .box22,.box .box33{align-self:flex-end;}
+            .box .box4,.box .box5,.box .box6{flex-direction:column;justify-content:space-between;}
+            .box .t1 .box0{height: 25px;display:flex;justify-content:space-between;}
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="box1 t1">
+                <div class="box11 t2"></div>
+            </div>
+            <div class="box2 t1">
+                <div class="box21 t2"></div>
+                <div class="box22 t2"></div>
+            </div>
+            <div class="box3 t1">
+                <div class="box31 t2"></div>
+                <div class="box32 t2"></div>
+                <div class="box33 t2"></div>
+            </div>
+            <div class="box4 t1">
+                <div class="box0">
+                    <div class="t2"></div>
+                    <div class="t2"></div>
+                </div>
+                <div class="box0">
+                    <div class="t2"></div>
+                    <div class="t2"></div>
+                </div>
+            </div>
+            <div class="box5 t1">
+                <div class="box0">
+                    <div class="t2"></div>
+                    <div class="t2"></div>
+                </div>
+                <div class="box0 t2"></div>
+                <div class="box0">
+                    <div class="t2"></div>
+                    <div class="t2"></div>
+                </div>
+            </div>
+            <div class="box6 t1">
+                <div class="box0">
+                    <div class="t2"></div>
+                    <div class="t2"></div>
+                </div>
+                <div class="box0">
+                    <div class="t2"></div>
+                    <div class="t2"></div>
+                </div>
+                <div class="box0">
+                    <div class="t2"></div>
+                    <div class="t2"></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

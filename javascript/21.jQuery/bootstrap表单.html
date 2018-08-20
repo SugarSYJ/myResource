@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>bootstrap表单</title>
+	<link rel="stylesheet" href="lib/bootstrap-3.3.7-dist/css/bootstrap.css">
+	<style>
+		.box div{height:200px;background-color: #efefef;}
+		.box div:nth-child(2){background-color: #58bc58;}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<h1>bootstrap</h1>
+		<form>
+			<div class="form-group">
+				<label for="username">用户名：</label>
+				<input type="text" class="form-control" id="username" placeholder="用户名">
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" class="form-control" id="password" placeholder="Password">
+			</div>
+			<div class="form-group">
+				<label for="vCode">验证码：</label>
+				<div class="input-group">
+					<input type="text" id="vCode" class="form-control" placeholder="输入验证码">
+					<div class="input-group-addon">4567</div>
+				</div>
+			</div>
+			<div class="checkbox">
+				<label>
+			  		<input type="checkbox"> Check me out
+				</label>
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+	<h2>三列布局</h2>
+	<div class="container box">
+        <div class="col-sm-4 col-xs-6 col-md-2">#1</div>
+        <div class="col-sm-4 col-xs-3 col-md-2">#2</div>
+        <div class="col-sm-4 col-xs-3 col-md-8">#3</div>
+    </div>
+</body>
+</html>

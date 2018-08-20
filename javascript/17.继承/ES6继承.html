@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>04ES6继承</title>
+    <script>
+        /*
+            ES6继承
+                * class
+                * extends
+                * super();
+         */
+
+         // 父类：类型
+        class Person{
+            // 构造函数
+             constructor(name,age,gender) {
+                this.name = name;
+                this.age = age;
+                this.gender = gender;
+            }
+
+            // 这里的方法写到原型对象中
+            say(){
+                console.log(`大家好，我叫${this.name}，我是千锋段子手`);
+            }
+
+            eat(){
+                console.log(`大家好，我叫${this.name}，我是千锋最能吃`);
+            }
+        }   
+
+        var p = new Person('lemon',30,'女');
+        console.log(p);
+
+        // 子类
+        class Man extends Person{
+            constructor(name,age){
+                // 继承属性
+                super(name, age);
+                this.gender = '男';
+            }
+
+            // 静态方法
+            static getName(){
+                return this.name;
+            }
+        }
+
+        // 实例
+        var m = new Man('laoxie',18);
+        console.log(m);
+
+        // 静态方法的调用：直接通过类调用
+        Man.getName();
+
+
+        // Object
+        // Object.create()
+        // 
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

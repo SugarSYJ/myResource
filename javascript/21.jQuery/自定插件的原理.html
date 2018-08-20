@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定插件的原理</title>
+    <link rel="stylesheet" href="lib/jquery-lxCarousel/jquery.lxCarousel.css">
+</head>
+<body>
+    <div class="box">
+    </div>
+    <!-- <div class="box"> -->
+    <!-- </div> -->
+    <script src="lib/jquery-3.2.1.js"></script>
+    <script src="lib/jquery-lxCarousel/jquery.lxCarousel.js"></script>
+    <script>
+        jQuery(function($){
+            $('.box').lxCarousel({
+                imgs:['img/g1.jpg','img/g2.jpg','img/g3.jpg','img/g4.jpg','img/g5.jpg'],
+                buttons:true
+            });
+        })
+    </script>
+</body>
+</html>

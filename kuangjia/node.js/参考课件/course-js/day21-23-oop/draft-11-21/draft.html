@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="../../../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="bs-example"></div>
+
+     <script type="text/javascript">
+         // 所有 jQuery 对象都会继承原生 js 的所有属性和方法
+
+         var $ = function (_str) {
+             if (_str.indexOf('#') == 0) {
+                 return document.getElementById(_str.replace('#', ''));
+             } else if (_str.indexOf('.') == 0) {
+                 return document.getElementsByClassName(_str.replace('.', ''));
+             }
+
+             var funA = function () {
+             }
+         }
+
+         //this 指向操作对象本身（事件源本身）
+         //闭包 => 用于辅助实现想要实现的功能（特性） => 1、函数嵌套函数；2、一个函数能够调用到另一个函数里面的局部变量
+         var datagrid = function () {
+             var obj = this;
+             var xhr = new XMLHttpRequest();
+             var _ob2 = {
+                 name: 'dk.lan', getAge: function (_callback2) {
+                 }
+             };
+             this.init = function (_callback) {
+                 //console.log(arguments[0])
+                 xhr.onreadystatechange = function () {
+                     if (xhr.readyState == 4 && xhr.status == 200) {
+                         var _responseText = xhr.responseText;
+                         var _data = typeof _responseText == 'string' ? JSON.parse(_responseText) : _responseText;
+                         var html = obj.generateHtml(_data);
+                         $('.bs-example')[0].innerHTML = html;
+                         //typeof(输出为字符串，字符串可以为以下值) => string, undefined, function, object, number, boolean
+                         if (typeof _callback == 'function') {
+                             _callback();
+                         }
+                         
+                     }
+                 }
+                 xhr.open('get', 'http://10.16.151.33/course/api/api/student/FetchAllStudent');
+                 xhr.send(null);
+             };
+
+
+             this.generateHtml = function (_data) {
+                 var _html = '<table class="table">';
+                 _html += "<thead>";
+                 _html += '<tr>';
+                 if (_data && _data.data && _data.data.length > 0) {
+                     for (var key in _data.data[0]) {
+                         _html += '<th>' + key + '</th>';
+                     }
+                     _html += '</tr></thead>';
+                     _html += '<tbody>';
+                     for (var i = 0; i < _data.data.length; i++) {
+                         _html += '<tr>';
+                         for (var key in _data.data[0]) {
+                             _html += '<td>' + _data.data[i][key] + '</td>';
+                         }
+                         _html += '</tr>';
+                     }
+                     _html += '</tbody></table>';
+                 }
+                 return _html;
+             }
+         }
+
+         //判断当前点击的对象是什么
+         datagrid.prototype.edit = function (_args) {
+             //解决方案一：回调 => 把函数当作参数传递
+             //回调的使用场景 => ajax 异步的时候，封闭时会使用回调
+             //场景 => 业务/业务逻辑
+             document.getElementsByTagName('table')[0].onclick = function (evt) {
+                 evt = evt || window.event;
+                 document.onclick = function (evt) {
+                     if (evt.target.nodeName.toLowerCase() == 'td') {
+                         //console.log(evt.target.innerHTML);
+                         var input = document.createElement('input');
+                         input.type = "text";
+                         input.value = evt.target.innerHTML;
+                         evt.target.innerHTML = "";
+                         evt.target.appendChild(input);
+
+                         input.focus();
+
+                         input.onblur = function () {
+                             evt.target.innerHTML = input.value;
+                         }
+                     }
+                 }
+             }
+             //解决方案二：在父节点添加事件，利用事件委托（冒泡）的原理对当前点击事件的对象进行监听
+             //document.onclick = function (evt) {
+             //    if (evt.target.nodeName.toLowerCase() == 'td') {
+             //        //console.log(evt.target.innerHTML);
+             //        var input = document.createElement('input');
+             //        input.type = "text";
+             //        input.value = evt.target.innerHTML;
+             //        evt.target.innerHTML = "";
+             //        evt.target.appendChild(input);
+
+             //        input.focus();
+
+             //        input.onblur = function () {
+             //            evt.target.innerHTML = input.value;
+             //        }
+             //    }
+             //}
+             
+
+
+         };
+
+         //先有解决方案（思路），从用户的角度出发，再去考虑代码实现 
+         var _datagrid = new datagrid();
+
+         _datagrid.init(_datagrid.edit);
+         //同步 => 执行 edit 需要等 11ms
+         //异步 => 执行 edit 不需要等 11ms
+
+
+         function add(a, b, c) {
+             var result = 0;
+             for (var i = 0; i < arguments.length; i++) {
+                 result += arguments[i];
+             }
+             console.log(result)
+         }
+
+         //add(1, 2, 3, 4, 3, 3, 4, 4, 4, 5, 'sddsd');
+    </script>
+    
+</body>
+</html>

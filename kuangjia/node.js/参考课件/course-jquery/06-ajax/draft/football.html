@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>足球解说</title>
+	<style>
+	body{padding:50px;}
+		ul{list-style: none;padding:0;margin:0;}/*reset*/
+		#datalist{border:1px solid #ddd;padding:15px;}
+		#datalist li{padding:15px 5px;border-bottom:1px dotted #ccc;}
+		#page span{display:inline-block;margin:5px;width:40px;line-height:1.8;text-align: center;background-color:#dfdfdf;color:#666;}
+		#page span.active{background-color:#fc0;color:#fff;}
+	</style>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			// 全局设置: 设置了默认选项
+			$.ajaxSetup({
+				url:'http://localhost:3000/ajax/football',
+				data:{pageNo:1},
+				dataType:'json',
+				success:function(res){
+					console.log(res);
+					var $ul = $('<ul/>')
+					$.each(res.data,function(idx,item){
+						$('<li/>').html('<strong>' + item.name + ': </strong>'+ item.content).appendTo($ul);
+					});
+					$('#datalist').html($ul);
+
+					// 计算分页数量 
+					var pageLen = Math.ceil(res.total/res.pageCount);
+
+					// 写入分页前先清空内容
+					$('#page').empty();
+					for(var i=1;i<=pageLen;i++){
+						var $span = $('<span/>');
+						if(res.pageNo == i){
+							$span.addClass('active');
+						}
+						$span.text(i).appendTo('#page');
+					}
+				}
+			})
+
+			// 服务根据传参的不同，返回不同的数据
+			$.ajax();
+
+			// 点击分页，请求相应数据
+			$('#page').on('click','span',function(){
+				var _pageNo = $(this).text();
+				$.ajax({
+					data:{pageNo:_pageNo}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>足球解说：如果有一天，央视所有解说员聚在一起</h1>
+	<div id="datalist">
+		
+	</div>
+	<div id="page"></div>
+</body>
+</html>

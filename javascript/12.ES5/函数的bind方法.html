@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',function(){
+                var btn = document.querySelectorAll('botton');
+                for(var i=0,len=btn.length;i<len;i++){
+                    btn[i].onclick = function(){
+                        setTimeout(function(){
+                            console.log(this.innerText);
+                        }.bind(this),2000);
+                    }
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h3>函数的bind方法</h3>
+        <botton>按钮1</botton>
+        <botton>按钮2</botton>
+        <botton>按钮3</botton>
+        <botton>按钮4</botton>
+    </body>
+</html>

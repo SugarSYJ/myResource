@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            body{background: #000;}
+            .ball{width: 70px;height: 70px;margin: 0;padding: 0;position:absolute;border-radius:50%;background: red;}
+            .box{width: 150px;height: 10px;position:absolute;left:0;top:650px;background: pink;}
+        </style>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var ball = document.querySelector('.ball');
+                var box = document.querySelector('.box');
+                var xspeed = 10;
+                var yspeed = 30;
+                var timer = setInterval(()=>{
+                    var currentx = ball.offsetLeft;
+                    var currentx1 = currentx + ball.offsetWidth;
+                    var currenty = ball.offsetTop;
+                    var currenty1 = currenty + ball.offsetHeight;
+                    var left = currentx + xspeed;
+                    var top = currenty + yspeed;
+                    if(left>=window.innerWidth - ball.offsetWidth){
+                        xspeed = -10;
+                        left = window.innerWidth - ball.offsetWidth;
+                    }
+                    if(left<=0){
+                        xspeed = 10;
+                        left = 0;
+                    }
+                    if(top>=window.innerHeight - ball.offsetHeight){
+                        yspeed = -30;
+                        top = window.innerHeight - ball.offsetHeight;
+                    }
+                    if(top<=0){
+                        yspeed = 30;
+                        top = 0;
+                    }
+                    var leftBox = box.offsetLeft;
+                    var topBox = box.offsetTop;
+                    var leftBox1 = leftBox + box.offsetWidth;
+                    var topBox1 = topBox + box.offsetHeight;
+                    document.onkeydown = function(e){
+                        var speed = 60;
+                        if(e.keyCode === 39){
+                            leftBox += speed;
+                            if(leftBox >= window.innerWidth){
+                                leftBox = 0;
+                            }
+                        }
+                        if(e.keyCode === 37){
+                            leftBox -= speed;
+                            if(leftBox <= 0){
+                                leftBox = window.innerWidth;
+                            }
+                        }
+                        box.style.left = leftBox + 'px';
+                    }
+                    if(currenty1>=topBox && currentx1>leftBox && currentx<leftBox1){
+                        yspeed = -30;
+                        ball.style.backgroundColor = randomColor();
+                        box.style.backgroundColor = randomColor();
+                    }
+                    ball.style.left = left + 'px';
+                    ball.style.top = top + 'px';
+                },30);
+            })
+        </script>
+    </head>
+    <body>
+        <div class="ball"></div>
+        <div class="box"></div>
+    </body>
+</html>

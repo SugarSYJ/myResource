@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        
+    </head>
+    <body>
+        <img src="../images/phone.png"/><br/>
+        价格：￥4998<br/>
+        数量：<input type="number" id="num" />
+        总价：<span id="output"></span>
+        <script type="text/javascript">
+            num.oninput = function(){
+                var n = document.getElementById("num");
+                var _num = n.value;
+                var output = document.getElementById("output");
+                output.innerHTML = "￥" + Number(_num) * 4998;
+            }
+        </script>
+    </body>
+</html>

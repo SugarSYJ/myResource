@@ -1,0 +1,30 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+		<meta name="keywords" content="关键词1,关键词2,关键词3" />
+		<meta name="description" content="对网站的描述" />
+		<title>第1题</title>
+		<style type="text/css">
+			/*1000*/
+			#father{
+				color:green !important;
+			}
+			/*0111*/
+			div#father.c1 {  
+				color: yellow;
+			}
+			/*
+			1.0确定选择器有没有直接作用在目标内容上面（排除继承）
+			*/
+		</style>
+	</head>
+	<body>
+		<div id="father" class="c1">
+			<p id="son" class="c2">
+				试问这行字体是什么颜色的？
+			</p>
+		</div>
+		<div id="son"></div>
+	</body>
+</html>

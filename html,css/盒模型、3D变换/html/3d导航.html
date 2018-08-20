@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{margin: 0;padding: 0;}
+            ul,li{list-style:none;}
+            .box{width: 700px;height: 50px;border:1px solid #ccc;margin:100px auto;overflow:hidden;}
+            .box li{width: 100px;height: 50px;line-height: 50px;text-align:center;float: left;transition:all 1s;transform-style:preserve-3d;position:relative;}
+            .box span{display:block;width: 100px;line-height: 50px;text-align:center;position:absolute;left:0;top:0;}
+            .box span:nth-child(1){transform:translateZ(25px);background:pink;}
+            .box span:nth-child(2){transform:rotateX(90deg)translateZ(25px);background:blue;}
+            .box li:hover{transform:rotateX(-90deg);}
+        </style>
+    </head>
+    <body>
+        <ul class="box">
+            <li><span>大劫案</span><span>是假的</span></li>
+            <li><span>大劫案</span><span>是假的</span></li>
+            <li><span>大劫案</span><span>是假的</span></li>
+            <li><span>大劫案</span><span>是假的</span></li>
+            <li><span>大劫案</span><span>是假的</span></li>
+            <li><span>大劫案</span><span>是假的</span></li>
+            <li><span>大劫案</span><span>是假的</span></li>
+        </ul>
+    </body>
+</html>

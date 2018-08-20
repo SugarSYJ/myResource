@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>编写一个has(arr,60)函数，判断arr数组中是否包含60这个数</h3>
+        <script type="text/javascript">
+            var arr = [20,32,34,52,52,1,2,60,64,89];
+            function has(a){
+                for(var i=0;i<arr.length;i++){
+                    if(arr[i]===60){
+                        return '包含60';
+                    }
+                }
+            }
+            document.write(has(arr,60));
+        </script>
+    </body>
+</html>

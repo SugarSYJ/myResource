@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+	window.onload = function(){
+		/*
+			[案例]倒计时
+				1）给出一个结束时间
+				2）设置一个定时器，每次获取当前时间跟结束时间进行对比
+					对比：
+						先把两个事件转换成毫秒,然后相减
+					换算出时分秒
+					70 ==> 1分10秒
+					25 ==> 0分25秒
+		 */
+		// 获取页面元素
+		var timeLeft = document.getElementById('timeLeft');
+		var img = document.getElementsByTagName('img')[0];
+
+		// var endTimeStr = '2016/4/14 10:43:20';
+		endTimeStr = new Date();
+		// endTimeStr.setDate(15);
+		// endTimeStr.setHours(11);
+		// endTimeStr.setMinutes(47);
+		// endTimeStr.setSeconds(50);
+		var endTime = new Date(endTimeStr);//日期对象
+		// console.log(endTime)
+		
+		
+		function showTime(){
+			// 获取当前时间
+			var now = new Date();//日期对象
+
+			// 计算当前时间和结束时间的差值（毫秒）
+			var offsetTime = endTime.getTime() - now.getTime();
+			// console.log(offsetTime,Date.parse(endTime) - Date.parse(now))
+			
+			
+			// 得到秒数&剩余的秒数
+			var seconds = parseInt(offsetTime/1000);
+			var secLeft = seconds%60;
+
+			// 倒计时结束后，显示可购买的按钮
+			if(seconds == 0){
+				img.src = 'images/btn_buy.jpg';
+
+				// 清除定时器
+				clearInterval(timer);
+
+				// 隐藏页面元素
+				timeLeft.style.display = 'none';
+			}
+
+			// 得到分钟数&剩余的分钟数
+			var minuets = parseInt(seconds/60);
+			var minLeft = minuets%60;
+
+			// 得到小时数&剩余的小时数
+			var hours = parseInt(minuets/60);
+			// var hourLeft = hours%24;
+			
+
+			// 写入页面
+			timeLeft.innerHTML = '距离' + endTimeStr + '，还有：' + hours + '时' + minLeft + '分' + secLeft + '秒';
+		}
+
+		// 页面加载时就显示时间
+		showTime();
+
+		// 每隔一秒显示一次倒计时
+		var timer = setInterval(showTime,1000);
+		console.log(timer);
+
+	}
+		
+
+		/*var now = new Date();
+
+		// 获取两个事件的差值
+		console.log(Date.parse(endTime) - Date.parse(now));*/
+	</script>
+</head>
+<body>
+	<div id="timeLeft"></div>
+	<img src="images/btn_buy0.jpg">
+</body>
+</html>

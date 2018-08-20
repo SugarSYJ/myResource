@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹幕</title>
+    <style>
+    .container{width:800px;margin:0 auto;padding-bottom:10px;background-color:#dfdfdf;}
+    #barrage{position:relative;height:600px;margin-bottom:10px;background-color:#000;overflow:hidden;}
+    #barrage .bar-item{position:absolute;left:100%;white-space:nowrap;}
+    #msg{margin-left:10px;width:400px;height:30px;border:1px solid #999;border-right:none;box-sizing:border-box;vertical-align:middle;}
+    #msg+button{padding:0 10px;height:30px;vertical-align:middle;}
+    </style>
+    <script src="../common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            /*
+                弹幕
+                    效果：
+                        1）随机颜色，速度，字体大小，位置
+                        2）从右往左移动
+                    思路：
+                        1）发送
+                            1>绑定点击事件
+                            2>发送消息，把消息当作一个对象
+                        2）生成消息对象
+                            初始化：确定颜色，速度，字体大小，位置
+                        3）运动
+                            从右往左移动
+
+                    完善：
+                        * 发送消息后自动清空并获得焦点
+                        * 回车发送消息
+             */
+            
+            // 获取页面元素
+            let container = document.querySelector('.container');
+            let barrage = container.querySelector('#barrage');
+            let msg = container.querySelector('#msg');
+            let btnSend = msg.nextElementSibling;
+
+            document.onkeydown = function(e){
+                if(e.keyCode===13){
+                    let _msg = msg.value;
+                    new Barrage(_msg);
+                    msg.value = '';
+                }
+            }
+            btnSend.onclick = function(){
+                let _msg = msg.value;
+                // let bar = new Barrage(_msg);
+                // bar.init();
+                // bar.move();
+                // new Barrage(_msg).init().move();
+                new Barrage(_msg);
+                msg.value = '';
+                msg.focus();
+            }
+            function Barrage(msg){
+                this.color = randomColor();
+                this.speed = randomNumber(-2,-10);
+                this.fontSize = randomNumber(12,30);
+                this.top = randomNumber(10,barrage.clientHeight-this.fontSize-10);
+                this.msg = msg;
+                this.init();
+                this.move();
+            }
+            Barrage.prototype = {
+                constructor:Barrage,
+                init(){
+                    let item = document.createElement('span');
+                    item.className = 'bar-item';
+                    item.innerText = this.msg;
+                    item.style.color = this.color;
+                    item.style.fontSize = this.fontSize + 'px';
+                    item.style.top = this.top + 'px';
+                    barrage.appendChild(item);
+                    this.ele = item;
+                    return this;
+                },
+                move(){
+                    let timer = setInterval(function(){
+                        let left = this.ele.offsetLeft;
+                        if(left < -this.ele.offsetWidth){
+                            clearInterval(timer);
+                            this.remove();
+                            return;
+                        }
+                        this.ele.style.left = left + this.speed + 'px';
+                    }.bind(this),30);
+                    return this;
+                },
+                remove(){
+                    this.ele.parentNode.removeChild(this.ele);
+                    return this;
+                }
+            }
+
+        });
+        
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="barrage"></div>
+        <input type="text" id="msg"><button>发送</button>
+    </div>
+</body>
+</html>

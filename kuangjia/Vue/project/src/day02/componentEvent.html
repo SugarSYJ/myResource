@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h3>{{total}}</h3>
+            <incrementtotal name="Sam" v-bind:a="incrementTotal" v-on:event="incrementTotal"></incrementtotal>
+        </div>
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    total:0
+                },
+                methods:{
+                    incrementTotal:function(){
+                        this.total += 1;
+                    }
+                },
+                components:{
+                    'incrementtotal':{
+                        template:'<input type="button" :value="total" @click="incrementTotal" />',
+                        props:['title','a','name'],
+                        data:function(){
+                            return {
+                                total:0
+                            }
+                        },
+                        methods:{
+                            incrementTotal:function(){
+                                this.total += 1;
+                                // vm.incrementTotal();
+                                this.$emit('event');
+                                // this.a();
+                                // console.log(this.a);
+                            }
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

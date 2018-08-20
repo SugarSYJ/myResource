@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>导航菜单</title>
+	<style>
+		ul{list-style: none;padding:0;margin:0;}
+		a{color:#333;text-decoration:none;}
+		.nav{width:800px;margin:0 auto;background-color:#ccc;}
+		.main-nav::after{
+			content:' ';
+			clear:both;
+			display:block;
+		}
+		.main-nav > li{float:left;position:relative;}
+		.main-nav li a{display:block;padding:5px 15px;}
+		.main-nav ul{display:none;position:absolute;top:50px;left:0;width:200px;backgrounc-color:#fff;border:1px solid #ddd;}
+		.arrow-down{position:absolute;right:0;top:12px;display:inline-block;width:0;height:0;border:6px solid #999;border-color:#999 transparent transparent;margin-left:5px;vertical-align:bottom;}
+		.dispb{display:block;}
+		.dispn{display:none;}
+		.content{padding:10px;border:1px solid #ddd;background:#efefef;}
+
+		/* .arrow{display:inline-block;width:0;height:0;border:10px solid #ccc;border-color:#f00 transparent transparent;border-left-width:5px;border-right-width:5px;} */
+	</style>
+    <script src="../../libs/jquery/jquery-1.11.0.js"></script>
+	<script>
+		/*
+			判断当前菜单下是否有二级菜单，如果有，加上向下箭头
+		 */
+		$(function(){
+			/* 
+			原生js:
+			var span = document.createElement('span');
+			span.className = 'arrow-down';
+			$('.main-nav li:first')[0].appendChild(span);*/
+
+			$('.main-nav li').has('ul').append('<span class="arrow-down"></span>');
+		})
+		
+	</script>
+</head>
+<body>
+	<div class="nav">
+		<ul class="main-nav">
+			<li><a href="#">首页</a></li>
+			<li><a href="#">公司简介</a></li>
+			<li><a href="#">产品</a>
+				<ul>
+					<li><a href="#">产品目录1</a>
+						<ul>
+							<li><a href="#">产品目录1</a></li>
+							<li><a href="#">产品目录2</a></li>
+							<li><a href="#">产品目录3</a></li>
+							<li><a href="#">产品目录4</a>
+								<ul>
+									<li><a href="#">产品目录1</a></li>
+									<li><a href="#">产品目录2</a></li>
+									<li><a href="#">产品目录3</a></li>
+									<li><a href="#">产品目录4</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#">产品目录2</a></li>
+					<li><a href="#">产品目录3</a></li>
+					<li><a href="#">产品目录4</a></li>
+				</ul>
+			</li>
+			<li><a href="#">新闻动态</a>
+				<ul>
+					<li><a href="#">新闻动态1</a></li>
+					<li><a href="#">新闻动态2</a></li>
+					<li><a href="#">新闻动态3</a></li>
+					<li><a href="#">新闻动态4</a></li>
+				</ul>
+			</li>
+			<li><a href="#">联系我们</a></li>
+		</ul>
+	</div>
+
+	<div class="sanjiao"></div>
+</body>
+</html>

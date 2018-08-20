@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body>
+    <script type="text/javascript">
+        //function dkLan() {
+
+        //}
+        //为什么使用回调函数 => 用于解决函数之间执行的先后顺序
+        var dkLan = function (_callback) {
+            //1、ajax 实现(主要是为了解决异步的实现)
+            //2、业务逻辑实现
+            var obj = {name: 'dk.lan'};
+            _callback(obj);
+        };
+
+        dkLan(function (_obj) {
+            console.log('this is a function');
+            console.log(_obj);
+        })
+    </script>
+</body>
+</html>

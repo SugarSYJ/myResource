@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{txt}}</h1>
+            <h1>{{newTxt}}</h1>
+        </div>
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    txt:"abc"
+                },
+                computed:{
+                    newTxt:{
+                        get:function(){
+                            console.log('get',arguments);
+                            return this.txt.split('').reverse().join('');
+                        },
+                        set:function(_newTxt){
+                            this.txt = _newTxt;
+                            console.log('set',_newTxt);
+                        }
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

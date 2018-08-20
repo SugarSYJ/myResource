@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作业讲解</title>
+	<style>
+		#share{position:absolute;left:-200px;top:100px;width:200px;height:500px;background-color:#f60;}
+		#share span{position:absolute;top:0;bottom:0;right:-40px;height:60px;width:30px;margin:auto 0;padding:5px;background-color:#fc0;text-align:center;}
+	</style>
+	<script>
+		window.onload = function(){
+			var share = document.getElementById('share');
+			var span = share.getElementsByTagName('span')[0];
+
+			// 绑定onmouserover事件
+			span.onmouseover = function(){console.log('onmouseover')
+				var shareLeft = share.offsetLeft;//-200
+				// 如果此时存在clicktimer，则先清除
+				if(span.clicktimer){
+					clearInterval(span.clicktimer);
+				}
+
+				// 定时器开启前先清除
+				clearInterval(span.overtimer);
+				// span.overtimer = 1
+				// span.overtimer = 2//clearInterval(2)
+				span.overtimer = setInterval(function(){
+					shareLeft += 10;
+					if(shareLeft >= 0){
+						clearInterval(span.overtimer);
+						shareLeft = 0;
+					}
+					share.style.left = shareLeft + 'px';
+				},50);
+			}
+
+			// 绑定点击事件，收缩分享区域
+			span.onclick = function(){
+				var shareLeft = share.offsetLeft;
+
+				// 如果此时存在overtimer，则先清除
+				if(span.overtimer){
+					clearInterval(span.overtimer);
+				}
+
+				// 定时器开启前先清除
+				clearInterval(span.clicktimer);
+				span.clicktimer = setInterval(function(){
+					shareLeft -= 10;
+					if(shareLeft <= -200){
+						clearInterval(span.clicktimer);
+						shareLeft = -200;
+					}
+					console.log(shareLeft);
+					share.style.left = shareLeft + 'px';
+				},50);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="share">
+		<span>分享到</span>
+	</div>
+</body>
+</html>

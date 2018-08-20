@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件捕获</title>
+	<script>
+		window.onload = function(){
+			var box = document.getElementById('box');
+			var btn = box.firstChild;
+
+			function divClick(){
+			    console.log('div');
+			}
+
+			function btnClick() {
+			    console.log('btn');
+			}
+
+			box.addEventListener('click', divClick, true);
+
+			btn.addEventListener('click', btnClick, true);
+			
+
+			//btn.removeEventListener('click', btnClick);
+			//box.removeEventListener('click', divClick);
+
+		}
+	</script>
+</head>
+<body>
+	<div id="box" style="padding:20px 30px; border:solid 2px; text-align:center;"><button>事件捕获</button></div>
+</body>
+</html>

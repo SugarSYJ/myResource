@@ -1,0 +1,17 @@
+html{height: 100%;}
+body{margin: 0;height: 100%;}
+ul,li{list-style:none;margin: 0;padding: 0;}
+a{text-decoration:none;}
+.container{display:flex;flex-direction:column;height: 100%;}
+header{height: 50px;display:flex;justify-content:space-between;align-items:center;padding:0 15px;background:pink;}
+header button{width: 30px;height: 30px;}
+header h1{margin: 0;font-size:26px;color:green;}
+main{flex:1;}
+footer{height: 50px;line-height: 50px;text-align:center;background: pink;}
+footer ul{display:flex;height: 100%;}
+footer ul li{flex:1;}
+footer ul li a{display:block;color:red;}
+footer ul li a:hover{
+    background:blue;
+    color:#fff;
+}

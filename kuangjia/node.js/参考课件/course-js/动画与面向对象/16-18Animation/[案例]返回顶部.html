@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>返回顶部</title>
+	<style>
+    .totop{position:fixed;right:10px;bottom:10px;padding:15px;background-color: #dfdfdf}
+    .totop:hover{background-color: #f60;color:#fff;}
+    </style>
+    <script>
+    	for(var i=1;i<100;i++){
+			document.write('<p>我喊你'+i+'声逗比你敢答应吗?</p>');
+		}
+    	window.onload = function(){
+    		var totop = document.getElementsByClassName('totop')[0];
+
+    		var speed,timer;
+    		var scrollObj = document.body || document.documentElement;
+    		totop.onclick = function(){
+    			timer = setInterval(function(){
+    				var scrollTop = scrollObj.scrollTop;
+	    			speed = parseInt(scrollTop/10);
+	    			console.log(scrollTop);
+	    			if(speed <= 5){
+	    				clearInterval(timer);
+	    				scrollObj.scrollTop = 0;
+	    				return;
+	    			}
+	    			scrollObj.scrollTop = scrollTop - speed;
+    			},20);
+    			
+    		}
+    	}
+    </script>
+</head>
+<body>
+	<div class="totop">Top</div>
+</body>
+</html>

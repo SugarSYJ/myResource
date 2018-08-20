@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <style type="text/css">
+        *{padding: 0; margin: 0;}
+        /*body{overflow:hidden;}*/
+        div{width:100%; height:100%; background-color: #ccc;}
+    </style>
+</head>
+<body>
+    <div></div>
+
+    <script type="text/javascript">
+        $(function () {
+            //var on = function (type, callback) {
+            //    window.addEventListener(type, callback);
+            //}
+
+            //var bind = function (type, callback) {
+            //    on(type, callback);
+            //}
+
+            //var click = function (callback) {
+            //    bind('click', callback);
+            //}
+
+            //click(function () {
+            //    console.log('dk');
+            //})
+
+            //return;
+
+            //window.onclick = function () {
+            //    console.log('dk click');
+            //}
+
+            //window.onclick = function () {
+            //    console.log('dk click 2');
+            //}
+
+            //window.dkclick = function () { }
+
+            //window.addEventListener('click', function () {
+            //    console.log('click1');
+            //})
+
+            //window.addEventListener('click', function () {
+            //    console.log('click2');
+            //})
+
+            //window.addEventListener('click', window.dkclick)
+
+            //return;
+            // 可取/可赋值 => height(), width(), scrollTop()，html(),text(), val()
+            //$('div').css({ height: $(document).height() });
+            $('div').height($(document).height());
+            //window.onresize = function () {
+            //    console.log(123);
+            //}
+            //jQuery 事件没有 on， 用回调的方式实现事件
+            $(window).resize(function (evt) {
+                //$('div').height(0).height($(document).height());
+            }).scroll(function (evt) {
+                //console.log(evt);
+                //scrollTop() => 获取滚动的高度
+                console.log($(this).scrollTop());
+            }).click(function (evt) {
+                console.log('dk click');
+            }).bind('click', function (evt) {
+                console.log('dk bind click');
+            }).click(function () {
+                console.log('dk is a hero');
+            }).bind('click', function () {
+                console.log('dk is not a hero');
+            }).on('click', function () {
+                console.log('dk on click')
+            }).one('click', function () {
+                console.log('one click');
+            })
+        })
+    </script>
+</body>
+</html>

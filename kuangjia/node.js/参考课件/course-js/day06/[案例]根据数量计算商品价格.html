@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>[案例]根据数量计算商品价格</title>
+	<style>
+	.pshow{padding:15px;overflow:hidde;}
+	.pshow h1{font-size:18px;}
+	.pshow img{float:left;margin-right:20px;width:300px;border:1px solid #ddd;}
+	#subPrice{color:#c00;font-weight:bold;}
+	#qty{width:60px;}
+	</style>
+	<script>
+	window.onload = function(){
+		/*
+			[案例]根据数量计算商品价格
+			思路：
+				1）获取页面元素
+				2）截取商品价格
+				3）获取购买数量
+				4）给输入框绑定oninput事件
+					计算总价,并写入#subPrice
+		 */
+		
+		// 1）获取页面元素
+		var price = document.getElementById("price");
+		var qty = document.getElementById("qty");
+		var subPrice = document.getElementById("subPrice");
+
+		// 2）截取商品价格
+		var _price = price.innerHTML.slice(3,-1);
+
+		
+		// 4）给输入框绑定oninput事件
+		qty.oninput = function(){
+		// 3）获取购买数量
+			var _qty = qty.value;
+
+			subPrice.innerHTML = '&yen;' + (_price*_qty).toFixed(2);
+
+		}
+	}
+		
+	</script>
+</head>
+<body>
+<div class="pshow">
+	<h1>Nike 耐克官方 NIKE AIR MAX 90 ESSENTIAL 男子运动鞋 537384</h1>
+	<img src="s1.jpg">
+	<p id="price">价格：599.98元</p>
+	<p>数量：<input type="number" id="qty" min="1" max="100"></p>
+	<p>总价：<span id="subPrice"></span></p>
+</div>
+</body>
+</html>

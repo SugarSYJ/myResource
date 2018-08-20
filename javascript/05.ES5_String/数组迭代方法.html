@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>数组迭代方法</h3>
+        <script type="text/javascript">
+            var arr = ['红','橙','黄','绿','蓝','腚','紫']
+            // for循环语句
+            for(var i=1;i<arr.length;i++){
+                document.write(arr[i] + '<br/>');
+            }
+            // forEach
+            arr.forEach(function(name,idx,a){
+                document.write(name,idx);
+            })
+            // 模拟forEach
+            function forEach(a,fn){
+                for(var i=0;i<a.length;i++){
+                    fn(a[i],i,a);
+                }
+            }
+            forEach(arr,function(name,idx,a){
+                document.write(name,idx);
+            });
+        </script>
+    </body>
+</html>

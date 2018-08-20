@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>[案例]监听密码输入</title>
+	<link rel="stylesheet" href="css/style.css">
+	<style>
+	.input-g{display:inline-block;position:relative;color:#999;}
+	.input-g .glyphicon{position:absolute;right:0;top:0;padding:3px 5px;}
+	</style>
+	<script>
+		window.onload = function(){
+			/*
+				监听密码输入
+				思路：
+					1）获取页面元素
+					3）给输入框绑定onkeypress事件
+						获取输入的字符，然后显示到div
+			 */
+			// 1）获取页面元素
+			var psw = document.getElementById('psw');
+			var btn = document.getElementById('btnClear');
+			var output = document.getElementById('output');
+			var btnShow = document.getElementById('btnShow');
+
+			// 3）给输入框绑定onkeypress事件
+			psw.onkeydown = function (e) {
+				e = e || window.event;
+
+				// 获取输入的字符，然后显示到div
+				output.innerHTML += String.fromCharCode(e.keyCode);
+				console.log(e.shiftKey);
+				console.log(e.which);
+			}
+
+			// 清除输入
+			btn.onclick = function(){
+				psw.value = '';
+				output.innerHTML = '';
+			}
+
+			// 显示密码
+			btnShow.onmousedown = function(){
+				psw.type = 'text';
+				this.className = 'glyphicon glyphicon-eye-close';
+			}
+			btnShow.onmouseup = function(){
+				psw.type = 'password';
+				this.className = 'glyphicon glyphicon-eye-open';
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>请输入你的银行卡密码</h1>
+	<div class="input-g">
+	<span class="glyphicon glyphicon-eye-open" id="btnShow"></span><input type="password" id="psw"></div><button id="btnClear">清除</button>
+	<div id="output"></div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>01变量与常量声明</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+
+			var num = 100;
+
+			// for循环中的i相当于在这里声明一个变量i：
+			// var i=0;
+			for(var i=0;i<10;i++){
+
+			}
+
+			function show(){
+				var num = 200;
+			}
+
+			var btns = document.querySelectorAll('button');
+
+			// var i=0;
+			// for(var i=0;i<btns.length;i++){
+			// 	(function(i){
+			// 		btns[i].onclick = function(){
+			// 			console.log(i);
+			// 		}
+			// 	})(i);
+			// }
+
+
+			// ES6解决方案
+			// let：声明变量
+			for(let i=0;i<btns.length;i++){
+				// var i=0;
+				btns[i].onclick = function(){
+					console.log(i);
+				}
+			}
+
+
+			// console.log(myname);//Uncaught ReferenceError: myname is not defined
+			let myname = 'laoxie';
+
+
+			// const:声明常量
+			// 声明后不能被修改
+			const nickname = '王思聪';
+			// nickname = '小王吧';Uncaught TypeError: Assignment to constant variable.
+
+		})
+
+
+	</script>
+</head>
+<body>
+	<button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+	<button>按钮4</button>
+	<button>按钮5</button>
+</body>
+</html>

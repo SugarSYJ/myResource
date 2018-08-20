@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>列表内容过滤</title>
+	<style>
+		ul{list-style: none;padding:0;margin:0;}
+		.datalist{display:none;padding:10px;width:200px;border:1px solid #ddd;line-height:2;max-height:300px;overflow-y: auto;}
+		.datalist li{border-bottom:1px dotted #ddd;text-indent:10px;}
+	</style>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			/*
+				1) 把内容写入.datalist
+				2) 鼠标获得焦点时显示内容
+					focus
+				3) 鼠标失去焦点时隐藏内容
+					blur
+				4) 根据输入内容过滤显示
+					:contains('+keyword+')
+				5) 点击名字，把内容写入输入框
+			 */
+			var namelist = ['蔡金保','蔡瑜桂','曹凯','曾凡坤','陈科','陈绵山','何雯敏','胡栩宁','黄海涛','黄昕','焦圣文','邝志聪','赖炬波','黎兆彬','李裕恒','梁智威','梁柱键','林泽鑫','林志威','刘裕','罗棋','莫毅聪','潘健','商乐园','覃振沼','唐茂林','王海飞','温志扬','吴启文','徐燕亮','杨陈','杨琼','杨天文','张炳伦','张浩','赵亚晴','郑嘉辉','周辰芳','朱馨溯','徐蔚铭','张龙','李辉'];
+
+			// 1) 把内容写入.datalist
+			// ES5的方法：forEach，用于数组的遍历
+			var ul = document.createElement('ul');
+			namelist.forEach(function(name,idx){
+				var li = document.createElement('li');
+				li.innerHTML = name;
+				ul.appendChild(li);
+			});
+
+			var $keyword = $('#keyword');
+			var $datalist = $keyword.next('.datalist');
+
+			// 把名字列表写入页面
+			$datalist.html(ul);
+
+			// 2) 鼠标获得焦点时显示内容
+			$keyword.focus(function(){
+				$datalist.show();
+			})
+
+			// 3) 鼠标失去焦点时隐藏内容
+			.blur(function(){
+				setTimeout(function(){
+					$datalist.hide();
+				},200);
+				
+			})
+
+			// 4) 根据输入内容过滤显示
+			.keyup(function(){
+				var _keyword = $keyword.val();
+				$datalist.find('li').hide().filter(':contains('+_keyword+')').show();
+			});
+
+			// 5) 点击名字，把内容写入输入框
+			$datalist.find('li').click(function(){
+				var name = $(this).html();//text()
+				$keyword.val(name);
+			});
+		});
+
+	</script>
+</head>
+<body>
+	<input type="text" id="keyword">
+	<div class="datalist"></div>
+</body>
+</html>

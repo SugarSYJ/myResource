@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <script src="../assets/jquery-1.12.0.js"></script>
+    <script>
+    $(function(){
+        // 属性选择器
+        $('[id]').css('color','yellow');
+
+        // 属性选择器
+        $('[href="#sougou"]').css('color','yellow');
+
+        // data-index不等于110时
+        $('li[data-index != "110"]').css('border','2px dashed #f00')
+
+        // data-index以11开头
+        $('li[data-index ^= "11"]').css('background','#efefef');
+
+        // data-index以6结尾
+        $('li[data-index $= "6"]').css('font-size',30);
+
+        // data-index包含10的元素
+        $('li[data-index *= "10"]').css('background','#ff0');
+    })
+        
+    </script>
+</head>
+
+<body>
+    <div class="container red">
+        <div class="content">
+            <h2>新闻列表</h2>
+            <ul id="newsList">
+                <li data-index="10"><a href="#baidu">新闻一</a></li>
+                <li data-index="110"><a href="#google">新闻二</a></li>
+                <li data-index="119"><a href="#yahoo">新闻三</a></li>
+                <li data-index="10086"><a href="#sougou">新闻四</a></li>
+            </ul>
+            <p title="新闻">新闻内容</p>
+            <div title="新闻相关">新闻相关</div>
+        </div>
+    </div>
+    
+</body>
+
+</html>

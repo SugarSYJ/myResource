@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串的方法</title>
+	<script>
+		/*
+			字符串的获取方法
+		 */
+		// var str = '我不是黄蓉，我不会武功';
+		var str = 'abcd';
+
+		str.charAt(0); //==> 'a'
+		str.charCodeAt(0) //==> ''
+		console.log(str.charCodeAt(0),str.charCodeAt(1),str.charCodeAt(2),str.charCodeAt(3))
+
+		console.log(String.fromCharCode(97),String.fromCharCode(98),String.fromCharCode(99),String.fromCharCode(100))
+
+		var str = 'hello hello ya!';
+		// console.log(str.lastIndexOf('h'));//==>0，6
+		console.log(str.lastIndexOf('hello'));//==>0,6
+
+		//2016-4-12
+		//split()
+		var str = '2016-4-12';
+		console.log(str.split('-'));
+
+		var str = 'abcdefghijklmnopqrstuvwxyz';
+		console.log(str.split(''));
+
+		// 
+		window.onload = function(){
+			var text = document.getElementById('text');
+			var btn = document.getElementById('btn');
+
+			btn.onclick = function(){
+				var _val = text.value.trim();
+				if(_val == ''){
+					alert('输入不能为空');
+				}else{
+					console.log(_val);
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="text"><button id="btn">判断是否输入为空字符</button>
+</body>
+</html>

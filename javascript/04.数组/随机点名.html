@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>随机点名</h3>
+        <input type="text" id="ren"/>
+        <button id="btn">随机点名</button>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            var ren = document.getElementById('ren');
+            var btn = document.getElementById('btn');
+            var arr = ["叶嘉宇", "韦职丽", "张小敏", "邱俊宇", "龙飞宇", "卢彦谷", "陈铭思", "巫山峰", "谢智琳", "谢松甫", "魏景宏", "袁泺棋", "焦文杰", "粟建华", "李阳", "赖俊豪", "黄银英", "陈乐诗", "陈超俊", "曹科华", "张廷超", "周会军", "陈东林", "蒋广胜", "李浩瀚", "戴志远", "苏耀坚", "袁道钦", "蒋争兴", "陈莹", "余路", "林金杏", "李志杰", "张金星", "谭志坚", "甄宝谊", "林青璇", "任志升", "叶靖", "杨靖", "黄烨江", "林梓峰", "马家杰", "龙锦涛", "邓达源", "梁嘉健", "万燊铭", "周涛", "陈伟健", "陈淼生", "黄育平"];
+            
+            function getName(){
+                var set = parseInt(Math.random()*arr.length);
+                ren.style.color = randomColor();
+                ren.style.backgroundColor = randomColor();
+                ren.value = arr[set];
+            }
+            btn.onclick = getName;
+            // btn.onclick = function(){
+            //     ren.value = getName();
+            //     getName(ren.style.backgroundColor = randomColor());
+                
+            // }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+{
+    "cols": "name,gender,age,province",
+    "colAttributes": {
+        "gender": {
+            "type": "list",
+            "datasource": [{"a": 1, "b": "男"}, {"a": 0, "b": "女"}],
+            "value": "b",
+            "text": "a"
+        },
+        "province": {
+            "type": "list-ajax",
+            "url": "http://guolin.tech/api/china",
+            "value": "name",
+            "text": "age"
+        }
+    }
+}

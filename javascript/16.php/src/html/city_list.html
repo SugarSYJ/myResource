@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            select{width:100px;}
+        </style>
+        <script type="text/javascript">
+            window.addEventListener('DOMContentLoaded',()=>{
+                var province = document.querySelector('#province');
+                var city = document.querySelector('#city');
+                var county = document.querySelector('#county');
+                var status = [200,304];
+
+                var xhr_province = new XMLHttpRequest();
+                xhr_province.onload = function(){
+                    if(status.includes(xhr_province.status)){
+                        var data = JSON.parse(xhr_province.responseText);
+                        // console.log(data);
+                        province.innerHTML = data.regions.map(item=>{
+                            return `<option value="${item.name}">${item.name}</option>`
+                        }).join('');
+
+                        var citys = [];
+                        showCity();
+                        province.onchange = function(){
+                            showCity();
+                        }
+                        function showCity(){
+                            var index = province.selectedIndex;
+                            var val1 = province.options[index].text;
+                            for(var i=0;i<data.regions.length;i++){
+                                if(val1 === data.regions[i]['name']){
+                                    citys = data.regions[i]['regions'];
+                                    break;
+                                }
+                            }
+                            // console.log(citys);
+                            city.innerHTML = '';
+                            county.innerHTML = '';
+                            city.innerHTML = citys.map(itemCity=>{
+                                return `<option value="${itemCity.name}">${itemCity.name}</option>`
+                            }).join('');
+                            
+                            var counties = [];
+                            showCounty();
+                            city.onchange = function(){
+                                showCounty();
+                            }
+                            function showCounty(){
+                                var idx = city.selectedIndex;
+                                var val2 = city.options[idx].text;
+                                for(var j=0;j<citys.length;j++){
+                                    if(val2 === citys[j]['name']){
+                                        counties = citys[j]['regions'];
+                                        break;
+                                    }
+                                }
+                                // console.log(counties);
+                                county.innerHTML = '';
+                                county.innerHTML = counties.map(itemCounty=>{
+                                    return `<option value="${itemCounty.name}">${itemCounty.name}</option>`
+                                }).join('');
+                            }
+                        }
+                    }
+                }
+                xhr_province.open('get','http://localhost:18/api/data/region.json',true);
+                xhr_province.send();
+            })
+        </script>
+    </head>
+    <body>
+        <select name="province" id="province">
+        </select>
+        <select name="city" id="city">
+        </select>
+        <select name="county" id="county">
+        </select>
+    </body>
+</html>

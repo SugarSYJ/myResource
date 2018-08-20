@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        #container{color:#fff; font-size:12px;}
+        a{text-decoration:none; color:#fff;}
+        ul{list-style:none; margin:0;padding:0;}
+        li{padding:7px 10px; border-bottom:dotted 1px #fff;}
+        #menu-toggle{background:#ff6a00; color:#fff; display:block; width:220px; height:48px; text-align:center; line-height:48px;}
+        #menu-content{width:500px; height:200px;}
+        #menu-content>ul:first-child{width:220px; background-color:#e81212; height:200px; float:left; display:none;}
+        #menu-content>ul:last-child{width:280px; height:200px; float:left; background-color:#ba1717; display:none;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var container = document.getElementById('container');
+            var menuToggle = document.getElementById('menu-toggle');
+            var menuContent = document.getElementById('menu-content');
+            var leftMenu = menuContent.getElementsByTagName('ul')[0];
+            var rightMenu = menuContent.getElementsByTagName('ul')[1];
+
+            container.onmouseover = function (event) {
+                event = event || window.event;
+                var self = event.target;
+                
+                if (self.tagName.toLocaleLowerCase() == 'a' && self.id == 'menu-toggle') {
+                    leftMenu.style.display = 'block';
+                } else if (self == leftMenu || self.parentNode == leftMenu || self.parentNode.parentNode == leftMenu) {
+                    //li a
+                    if (self != leftMenu) {
+                        rightMenu.style.display = 'block';
+                    } else {
+                        rightMenu.style.display = 'none';
+                    }
+                    leftMenu.style.display = 'block';
+                } else if (self == rightMenu || self.parentNode == rightMenu || self.parentNode.parentNode == rightMenu) {
+                    leftMenu.style.display = 'block';
+                    rightMenu.style.display = 'block';
+                }
+            }
+
+            container.onmouseout = function (event) {
+                event = event || window.event;
+                var self = event.target;
+                if (self.tagName.toLocaleLowerCase() == 'a' && self.id == 'menu-toggle') {
+                    leftMenu.style.display = 'none';
+                } else if (self == leftMenu || self.parentNode == leftMenu || self.parentNode.parentNode == leftMenu) {
+                    if (self != leftMenu) {
+                        rightMenu.style.display = 'none';
+                    }
+                    leftMenu.style.display = 'none';
+                } else if (self == rightMenu || self.parentNode == rightMenu || self.parentNode.parentNode == rightMenu) {
+                    leftMenu.style.display = 'none';
+                    rightMenu.style.display = 'none';
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="container">
+        <a href="#" id="menu-toggle">全部分类</a>
+        <div id="menu-content">
+            <ul class="menu">
+                <li id="1"><a href="#">我是分类</a></li>
+                <li id="2"><a href="#">我是分类</a></li>
+                <li id="3"><a href="#">我是分类</a></li>
+                <li id="4"><a href="#">我是分类</a></li>
+                <li id="5"><a href="#">我是分类</a></li>
+            </ul>
+            <ul class="content">
+                <li><a href="#">I'm a sub menu</a></li>
+                <li><a href="#">I'm a sub menu</a></li>
+                <li><a href="#">I'm a sub menu</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

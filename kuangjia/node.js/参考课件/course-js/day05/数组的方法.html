@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组方法</title>
+	<script>
+		var arr = ['王大锤',18 ,'普通青年','广州'];
+
+		// 删除
+		// shift删除数组第一个元素，返回删除的元素
+		var tem = arr.shift();//
+		console.log(tem,arr);
+
+		//pop删除数组最后一个元素，返回删除的元素
+		var tem2 = arr.pop();
+		console.log(tem2,arr);
+
+		/*
+			添加：
+			push： 往数组尾部添加一个或多个元素，返回数组新的长度
+			unshift:往数组开头添加一个或多个元素，返回数组新的长度
+		 */
+		var tem3 = arr.push('文艺青年','逗比青年');
+		console.log(tem3,arr);
+
+		var tem4 = arr.unshift(16,17);
+		console.log(tem4,arr)
+
+		// join()
+		// 把数组内容写入页面
+		var arr = ['王大锤',18 ,'普通青年','广州'];
+		// var html='';
+		// for(var i=0;i<arr.length;i++){
+		// 	html += arr[i] + ','
+		// }
+		html = arr.join();
+		document.write(html);
+
+		var arr2 = ['学习','html','css','js']
+		var arr3 = arr.concat(arr2,'广州','深圳');
+		console.log(arr,arr2,arr3);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>05加速运动</title>
+    <style type="text/css">
+        .ball {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            background-color: #b6ff00;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var ball = document.getElementById('ball');
+            var timer = null;
+            ball.onmouseover = function () {
+                timer = setInterval(function () {
+                    var opacity = 1 * getComputedStyle(ball).opacity;
+                    opacity -= 0.1
+                    if (opacity <= 0.3) {
+                        clearInterval(timer);
+                        return;
+                    }
+                    ball.style.opacity = opacity;
+                }, 30);
+            }
+            ball.onmouseout = function () {
+                timer = setInterval(function () {
+                    var opacity = 1 * getComputedStyle(ball).opacity;
+                    opacity += 0.1
+                    if (opacity >= 1) {
+                        clearInterval(timer);
+                        return;
+                    }
+                    ball.style.opacity = opacity;
+                }, 30);
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div class="ball" id="ball"></div>
+</body>
+</html>

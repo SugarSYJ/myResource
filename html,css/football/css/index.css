@@ -1,0 +1,44 @@
+#f_nav{
+    height: 1.09375rem;
+    box-sizing:border-box;
+}
+#f_nav ul{
+    height: 1.09375rem;
+    display:flex;
+    justify-content:space-between;
+}
+#f_nav ul li{
+    flex:1;
+    font-size:0.40625rem;
+    color:#656565;
+    line-height: 1.09375rem;
+    text-align:center;
+}
+#f_nav ul li.active{
+    border-bottom:5px solid #0DC441;
+}
+#f_main{
+    flex:1;
+    overflow-x:hidden;
+}
+#f_main ul{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-start;
+}
+#f_main ul li{
+    width: 49%;
+    display:flex;
+    flex-direction:column;
+    margin-top:0.15625rem;
+}
+#f_main ul li img{
+    width: 100%;
+}
+#f_main ul li:nth-child(2n-1){
+    margin-right:2%;
+}
+#f_main ul li span{
+    font-size:0.375rem;
+    color:#525252;
+}

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        *{margin:0;}
+        span{display:none;}
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form">
+        <input type="text" id="input" />
+
+        <p><input type="text" /> <span>focusin fire</span></p>
+        <p><input type="password" /> <span>focusin fire</span></p>
+
+        <input type="submit" value="提交"/>
+    </form>
+
+    <script type="text/javascript">
+        $(window).resize(function () {
+            console.log($(this).width());
+        }).scroll(function () {
+            if ($(this).scrollTop() >= $(window).height()) {
+                $('.scroll_top').show().click(function () {
+                    $(window).scrollTop(0);
+                    $('.scroll_top').hide()
+                });
+            }
+        });
+     
+        $(function () {
+            $('#input').blur(function () {
+                console.log('blur');
+            }).focus(function () {
+                console.log('focus');
+            }).change(function () {
+                console.log('change');
+            }).select(function () {
+                console.log('select');
+                $(this).val($(this).val())
+                //$(this).blur().focus();
+            });
+            $('#form').submit(function () {
+                if (!$('#input').val()) {
+                    alert('input can not be empty!!!');
+                    return false;
+                }
+            })
+            
+
+            //可支持事件冒泡
+            $("p").focusin(function () {//focus
+                $(this).find("span").css('display', 'inline');
+            }).focusout(function () {//blur
+                $(this).find("span").hide(); //.css('display', 'none');
+            });
+            return;
+            $('input').on('focus', function () {
+            })
+
+            $('input').focus(function () {
+                //定义事件，省略很多个字
+            })
+
+            $('input').bind('focus', function () {
+            })
+
+            $('input').focus();
+
+            $('input').unbind('foucs');
+            $('input').off('focus');
+
+            //$('#book').error(function () {
+            //    console.log('error');
+            //}).attr("src", "%e5%9b%be%e7%89%87%e7%bf%bb%e8%bd%ac/images/1.jpg");
+        });
+    </script>
+</body>
+</html>

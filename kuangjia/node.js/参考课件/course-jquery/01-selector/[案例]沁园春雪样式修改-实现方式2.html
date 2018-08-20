@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../libs/jquery/jquery-1.11.0.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        //dom 结构加载完毕
+        $(function () {
+            $('body').css('text-align', 'center');
+            $('<h1>沁园春·雪</h1>').appendTo('body');
+            //$('body').html('');
+            //jQuery 链式调用顺序是从左往右，遇到括号先算括号里面的，
+            // 1 + 2 + (3 + 4)
+            //$('<h2>毛泽东</h2>').css({background: '#ccc', color: '#fff', display: 'inline-block'}).appendTo($('body').html('').css('text-align', 'right'));
+            //$('body').html('').css('text-align', 'right')
+            $('<h2>毛泽东</h2>').css({ background: '#ccc', color: '#fff', display: 'inline-block' }).appendTo('body');
+
+            //元素选择器返回 jQuery 数组对象 => 最外层的元素对象([div])
+            $('<div id="dk1"><p>dk1</p><p>dk2</p><p>dk3</p></div>').css('border', 'solid 1px #ccc').appendTo('body');
+            $('<div id="dk2"><p>dk1</p><p>dk2</p><p>dk3</p></div>').css('border', 'solid 1px #ccc').appendTo('body');
+
+            $('#dk1 p').css('color', 'red');
+
+            $('p', $('#dk1').css('background', 'green')).css('font-size', '8px');
+
+            $('#dk1').find('p').css('font-weight', 'bold');
+
+            $('#dk1').children().css('background', '#ccc');
+        })
+    </script>
+</body>
+</html>

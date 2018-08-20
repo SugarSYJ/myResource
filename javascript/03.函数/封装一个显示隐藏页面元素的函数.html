@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>封装一个显示隐藏页面元素的函数</h3>
+        <div id="box"><img src="img/g5.jpg"/></div>
+        <button id="btn">隐藏</button>
+        <script type="text/javascript">
+            var box = document.getElementById('box');
+            var btn = document.getElementById('btn');
+            show = true;
+            btn.onclick = display;
+            function display(){
+                if(show){
+                    box.style.display = 'none';
+                    show = false;
+                }else{
+                    box.style.display = 'block';
+                    show = true;
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>day02作业</title>
+	<script>
+		/*
+			作业1：成绩判定
+				给一个分数，判断它的等级，如果90以上为A  80-90为B 70-80为C 60-70为D 60以下  留级
+			思路：
+				1)获取输入的数据
+				2)用if..else语句判断,并做出相应的提示
+		 */
+		function checkGrade(){
+			// 1)获取输入的数据
+			var grade = document.getElementById('grade').value;
+			if(grade === ''){
+				alert('成绩不能为空');
+			}else if(grade >=0 && grade <=100){
+				if(grade >= 90){
+					alert('成绩为A');
+				}else if(grade>=80){
+					alert('成绩为B');
+				}else if(grade>=70){
+					alert('成绩为C');
+				}else if(grade>=60){
+					alert('成绩为D');
+				}else{
+					alert('恭喜你，又留级了');
+				}
+			}else{
+				alert('请输入有效的成绩');
+			}
+		}
+
+		/*
+			作业2：开发一款软件，让用户输入身高和体重，根据公式（身高-108）*2=体重，可以有10斤左右的浮动。来观察测试者体重是否合适
+			思路：
+				1)获取页面元素
+				2)根据公式和输入的身高计算标准体重
+				3)把输入的体重(weight)和标准体重(sWeight)进行对比，输出相应的信息
+					<1>weight==sWeight: 身材完美
+					<2>weight>sWeight:
+						weight > sWeight + 10
+					<3>weight<sWeight:
+						weight < sWeight - 10
+		 */
+		function checkWeight(){
+			// 1)获取页面元素
+			var height = document.getElementById('height').value;
+			var weight = document.getElementById('weight').value;
+
+			// 根据公式和输入的身高计算标准体重
+			var sWeight = (height - 108)*2;
+
+			// 等于标准体重时
+			if(weight == sWeight){
+				alert('身材非常完美,以后可以随便吃喝了');
+			}
+			//大于标准体重时
+			else if(weight > sWeight){
+				// 超过标准体重10斤时
+				if(weight > sWeight + 10){
+					alert('真的太胖，受不了了');
+				}else{
+					alert('不用担心，微胖而已');
+				}
+			}else{
+				//低于标准体重10以下时
+				if(weight < sWeight - 10){
+					alert('实在是太瘦，多炖汤补补');
+				}else{
+					alert('不用担心，偏瘦而已');
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="grade"/><button onclick="checkGrade()">判定</button>
+	<br/><br/>
+	<label for="height">身高</label><input type="text" id="height">
+	<label for="weight">体重</label><input type="text" id="weight">
+	<button onclick="checkWeight()">测试身材</button>
+</body>
+</html>

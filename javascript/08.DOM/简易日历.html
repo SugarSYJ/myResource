@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            h2{margin: 0;padding: 0;}
+            ul,li{list-style:none;margin: 0;padding: 0;}
+            #box{margin: 100px auto;width: 201px;border:1px solid red;text-align:center;overflow:hidden;}
+            #box header{border-top:2px solid #ddd;overflow:hidden;}
+            #box header div{float:left;width: 25px;padding:5px 12px;border-right:1px solid #ddd;border-bottom:1px solid #ddd;}
+            #box ul{height: 30px;line-height: 30px;overflow:hidden;}
+            #box .active{background-color: #fc0;color:#fff;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                var div = box.getElementsByTagName('div');
+                var li = box.getElementsByTagName('li');
+                var len = div.length;
+                for(var i=0;i<len;i++){
+                    if(i===0){
+                        div[i].className = 'active';
+                    }else{
+                        div[i].className= '';
+                    }
+                    (function(i){
+                        div[i].onmouseover = function(){
+                            for(var j=0;j<len;j++){
+                                if(i===j){
+                                    div[j].className = 'active';
+                                    li[j].style.display = 'block';
+                                }else{
+                                    div[j].className = '';
+                                    li[j].style.display = 'none';
+                                }
+                            }
+                        }
+                    })(i)
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="box">
+            <h2>简易日历</h2>
+            <header>
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+                <div>7</div>
+                <div>8</div>
+                <div>9</div>
+                <div>10</div>
+                <div>11</div>
+                <div>12</div>
+            </header>
+            <ul>
+                <li>1很多事收卡萨丁v</li>
+                <li>2申达股份活佛济公</li>
+                <li>3覆盖达到规定</li>
+                <li>4苦于梦幻</li>
+                <li>5物权法第三次</li>
+                <li>6广告费</li>
+                <li>7急急地说</li>
+                <li>8得很突然</li>
+                <li>9烤鱼炉频道</li>
+                <li>10撒大声地</li>
+                <li>11表面上</li>
+                <li>12收到的粉丝</li>
+            </ul>
+            
+        </div>
+    </body>
+</html>

@@ -1,0 +1,302 @@
+@charset "UTF-8";
+/*css 初始化 */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img,input{ margin:0; padding:0; }
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none; }   /*去掉input等聚焦时的蓝色边框*/
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0; font-family: "SimSun","宋体";}
+select, input { vertical-align:middle;}
+select, input, textarea { font-size:12px; margin:0; }
+textarea { resize:none; } /*防止拖动*/
+img {border:0; vertical-align:middle; }  
+/*  去掉图片低测默认的3像素空白缝隙，或者用display：block也可以*/
+table { border-collapse:collapse; }
+
+
+/*添加公共样式*/
+body {
+    font:12px/150% Arial,Verdana,"\5b8b\4f53";
+    color:#666;
+    background:#fff;
+}
+.clearfix:after{
+    content:"";
+    display:block;
+    height: 0;
+    clear:both;
+    overflow:hidden;
+    visibility:hidden;
+    zoom:1;
+}
+a {color:#666; text-decoration:none; }
+a:hover{color:#C81623;}
+h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:1em;}  /*设置h标签的大小，设置跟父亲一样大的字体font-size:100%;*/
+s,i,em{font-style:normal;text-decoration:none;}
+
+
+/*公共类*/
+.container {  /*版心 提取 */
+    width: 1190px;
+    margin:0 auto;
+}
+.fl {
+    float:left;
+}
+.fr {
+    float:right;
+}
+.al {
+    text-align:left;
+}
+.ac {
+    text-align:center;
+}
+.ar {
+    text-align:right;
+}
+.hide {
+    display:none;
+}
+.font12{ font-size: 12px;}
+.font14{ font-size: 14px;}
+.font16{ font-size: 16px;}
+
+/*公共部分*/
+.shoes{
+    width: 100%;
+}
+#head{
+    width:100%;
+    height: 25px;
+    background: #EEEEEE;
+    border-bottom:1px solid #E5E5E5;
+}
+#head .container{
+    height:25px;
+}
+#head ul{
+    height:25px;
+}
+#head li{
+    float:left;
+    position:relative;
+}
+#head li a{
+    display:block;
+    height: 25px;
+    line-height:25px;
+    font-size:12px;
+    float: left;
+}
+#head .deng a{
+    color:#FA6708;
+}
+#head .dianhua a{
+    color:#BB0F1D;
+}
+#head li a span{
+    padding:0 16px 0 15px;
+    border-right:1px solid #D5D5D5;
+}
+#head .icon_l span{
+    padding-left:35px;
+}
+#head .icon_r span{
+    padding-right:26px;
+}
+#head .icon_san{
+    display:block;
+    width: 8px;
+    height: 6px;
+    background:url("../images/tubiao.fw.png") no-repeat;
+    position:absolute;
+    right:8px;
+    top:9px;
+}
+#head .t{
+    display:block;
+    width: 20px;
+    height: 18px;
+    background:url("../images/tubiao.fw.png") no-repeat;
+    position:absolute;
+    left:13px;
+    top:3px;
+}
+#head .icon_phone{
+    background-position:-15px 0;
+}
+#head .icon_qq{
+    background-position:-40px 0;
+}
+#head .icon_tel{
+    background-position:-70px 0;
+}
+#logo{
+    width: 100%;
+    height: 77px;
+}
+#logo .container{
+    height: 77px;
+}
+#logo h1{
+    width: 144px;
+    height: 77px;
+    padding-left:262px;
+    background:url("../images/tubiao.fw.png") no-repeat 0 -25px;
+}
+#logo h1 span{
+    display:block;
+    width: 144px;
+    height: 18px;
+    color:#7F7F7F;
+    padding-top:39px;
+    padding-left:16px;
+    padding-bottom:20px;
+    background: #fff;
+}
+#logo .logo_c{
+    width: 340px;
+    height: 60px;
+    padding-left:118px;
+    padding-top:17px;
+}
+#logo .logo_ct{
+    width: 340px;
+    height: 30px;
+}
+#logo .logo_ct1{
+    width: 264px;
+    height: 28px;
+    font-size:13px;
+    line-height:28px;
+    color:#656565;
+    padding-left:9px;
+    border:1px solid #D5D5D5;
+    border-right:none;
+    float: left;
+}
+#logo .logo_ct2{
+    width: 66px;
+    height: 30px;
+    line-height:30px;
+    float: left;
+    font-size:18px;
+    font-weight:bold;
+    color:#FDFFFA;
+    background: #444444;
+}
+#logo .logo_cb{
+    width: 340px;
+    line-height: 30px;
+    font-size:14px;
+    color:#CECECE;
+}
+#logo .logo_cb a{
+    color:#898989;
+}
+#logo .logo_r{
+    width: 126px;
+    height: 57px;
+    padding-top:20px;
+}
+#logo .logo_r1{
+    width: 126px;
+    height: 32px;
+    border:1px solid #D8D8D8;
+    background-color: #F5F5F5;
+}
+#logo .logo_r11{
+    width: 70px;
+    line-height:32px;
+    font-size:14px;
+    color:#666666;
+    padding-left:45px;
+    position:relative;
+}
+#logo .logo_r11 i{
+    display:block;
+    width: 25px;
+    height: 19px;
+    background:url("../images/tubiao.fw.png") no-repeat -100px 0;
+    position:absolute;
+    left:10px;
+    top:6px;
+}
+#logo .logo_r11 span{
+    color:#CF0505;
+    padding:0 2px;
+}
+#foot{
+    background: #F5F5F5;
+}
+#foot .foot_l{
+    width: 230px;
+    height: 216px;
+    padding-top:25px;
+    padding-left:16px;
+}
+#foot .foot_l .f1{
+    font-size:14px;
+    line-height: 14px;
+    color:#9C9C9C;
+    padding-left:28px;
+    font-weight:bold;
+    background:url("../images/foot1.jpg") no-repeat;
+}
+#foot .foot_l .f1 span{
+    font-weight:normal;
+}
+#foot .foot_l .f2{
+    font-size:18px;
+    line-height: 30px;
+    color:#C00F21;
+}
+#foot .foot_l .f3{
+    font-size:12px;
+    line-height: 16px;
+    color:#9A9A9A;
+}
+#foot .foot_l .f4{
+    padding-top:10px;
+}
+#foot .foot_l .f4 div{
+    width: 80px;
+    height: 96px;
+    margin-right:16px;
+    background:url("../images/tubiao.fw.png") no-repeat 0 -293px;
+    float: left;
+}
+#foot .foot_r .box{
+    width: 890px;
+    height: 195px;
+    margin-top:25px;
+    padding-left:50px;
+    border-left:1px solid #DEDEDE;
+}
+#foot .foot_r .box dl{
+    width: 163px;
+    height: 214px;
+    padding-top:67px;
+    padding-right:62px;
+    float: left;
+    position:relative;
+}
+#foot .foot_r .box dl dt{
+    font-size:14px;
+    line-height: 32px;
+    color:#686868;
+    font-weight:bold;
+}
+#foot .foot_r .box dl dd{
+    font-size:12px;
+    line-height: 20px;
+    color:#9A9A9A;
+}
+#foot .foot_r .box dl i{
+    display:block;
+    width: 162px;
+    height: 36px;
+    background:url("../images/tubiao.fw.png") no-repeat -95px -295px;
+    position:absolute;
+    left:0;
+    top:0;
+}

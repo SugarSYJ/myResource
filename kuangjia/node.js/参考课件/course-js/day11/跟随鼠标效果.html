@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跟随鼠标效果</title>
+	<style>
+	#bird{position:absolute;top:0;left:0;width:120px;}
+	</style>
+	<script>
+		window.onload = function(){
+			/*
+				跟随鼠标效果
+				思路：
+					1）获取小鸟
+					2）给document绑定onmousemove事件
+						把鼠标相对于浏览器可视区域所在的坐标(clientX,clientY)赋值给小鸟
+						**让小鸟在页面上随意移动的前提是：《设置定位》
+			 */
+			
+			// 1）获取小鸟
+			var bird = document.getElementById('bird');
+
+			// 2）给document绑定onmousemove事件
+			document.onmousemove = function (e) {
+			    //return;
+				e = e || window.event;
+
+				// 把鼠标相对于浏览器可视区域所在的坐标(clientX,clientY)赋值给小鸟
+				bird.style.top = e.clientY + 'px';
+				bird.style.left = e.clientX + 'px';
+			}
+
+			document.onclick = function (e) {
+			    e = e || window.event;
+
+			    // 把鼠标相对于浏览器可视区域所在的坐标(clientX,clientY)赋值给小鸟
+			    console.log(e.screenY);
+			    console.log(e.clientY);
+			    document.onmousemove = null;
+			}
+		}
+	</script>
+</head>
+<body>
+    <img style="border:solid 3px;" src="images/bird.jpg" id="bird">
+</body>
+</html>

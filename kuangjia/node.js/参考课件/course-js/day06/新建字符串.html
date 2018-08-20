@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新建字符串</title>
+	<script>
+	window.onload = function(){
+		/*
+			null:空对象
+			'':空字符串
+			undefined:未定义（未赋值）
+			not defined:未声明
+		 */
+		var str = '我是一个兵，爱着老百姓';
+
+		var str2 = str;
+
+		str = '我是一个新兵蛋，爱着老百姓';
+		console.log(str2,str);
+
+		var string = document.getElementById('string');
+		var output = document.getElementById('output');//字符串
+		var btn = document.getElementById('btn');
+
+		btn.onclick = function(){
+			var value = string.value;
+			output.innerHTML = value;
+			// output = value;
+		}
+
+		// 新建字符串
+		var str = '我是一个兵，爱着老百姓';
+		var str2 = new String('我是一个兵，爱着老百姓');//new Number(),new Boolean(),new Date(),new Function(),new Array(),new Object() ==> (通过new关键字得到的都是对象，但不推荐用法)
+		console.log(str.length)
+
+		// 通过下标获取字符串中的字符
+		str[0]; //我, ES5的读取方法
+		str.charAt(0);//我
+	}
+		
+
+	</script>
+</head>
+<body>
+	<input type="text" id="string"><button id="btn">查看输入的字符</button>
+	<div id="output"></div>
+</body>
+</html>

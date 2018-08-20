@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>draft</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var sumbit = document.getElementById('submit');
+            var username = document.getElementById('username');
+            var form = document.getElementById('form');
+            var div_content = document.getElementById('div_content');
+            var sub_div = document.getElementById('sub_div');
+            //表单提交
+            form.onsubmit = function () {
+                if (username.value.length == 0) {
+                    console.log('用户名不能为空');
+                    return false;
+                }
+                alert('提交form表单');
+            }
+
+            //表单重置
+            form.onreset = function () {
+                return false;
+                console.log("表单被重置了！");
+            }
+
+            //容器滚动
+            div_content.onscroll = function () {
+                console.log('sub_div被滚动了！');
+            }
+        }
+
+        window.onscroll = function () {
+            console.log('我被滚动了！');
+        }
+    </script>
+</head>
+<body style="height: 5000px;">
+    <form id="form">
+        <input type="text" id="username" />
+        <input type="submit" value="submit" id="submit" />
+        <input type="reset" value="reset" id="reset" />
+    </form>
+    <div style="width:200px;height:500px; border:solid 5px red; overflow: auto;" id="div_content">
+        <div style="width:200px; height:1500px; background-color:yellow;" id="sub_div"></div>
+    </div>
+</body>
+</html>

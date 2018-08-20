@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dom操作--属性</title>
+    <style>
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .cart-list {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 10px;
+        width: 200px;
+
+        border: 1px solid #ddd;
+    }
+    
+    .cart-list h4 {
+        margin: 0;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .cart-list img {
+        width: 60px;
+    }
+
+    .cart-list li{position:relative;}
+    .cart-list .btn-close{position:absolute;top:0;right:0;padding:5px;}
+    .cart-list .btn-close:hover{background-color:#f00;color:#fff;}
+    
+    .goods-list img {
+        width: 200px;
+    }
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script>
+    $(function() {
+        // 点击复制到购物车
+        // clone()
+        // clone(true,true) 
+        // 1.第一个参数：保存克隆元素的事件
+        // 2.第二个参数：保存克隆元素后代元素的事件
+        // 3.只有第一个参数为true时，第二个参数才起作用
+        $('.goods-list button').click(function(){
+            var $li = $(this).parents('li').clone(true);
+            $li.css('position', 'absolute');
+            var left = $('.cart-list').offset().left;
+            var top = $('.cart-list').offset().top;
+            $li.appendTo('body').animate({
+                left: left,
+                top: top + $('.cart-list').outerHeight(),
+            }, function () {
+                $li.appendTo('.cart-list ul').css('left', 0);
+            });
+            // $li.find('button').remove();
+            //$li.append('<span class="btn-close">x</span>');
+            // $li.find('.btn-close').click(function(){
+            //     $li.remove();
+            // })
+            //$('.cart-list').find('ul').append($li);
+            //$li.find('button').remove().end().appendTo('.cart-list ul');
+
+        });
+        $('.goods-list li').click(function(){
+            // alert('li点击事件...')
+        });
+
+        //事件绑定方式
+        //与addEventListener类似
+        //$('.cart-list').on('click', function () { });
+        //$('.cart-list').bind('click', function () { })
+        //$('.cart-list').click(function () {
+        //})
+        $('.cart-list').on('click', '.btn-close', function (e) {
+            console.log(this);
+            //离当前元素最近的一个父级元素
+            $(this).closest('li').remove();
+
+            // 阻止事件冒泡
+            // jquery不用考虑兼容性
+            e.stopPropagation();
+
+            //阻止浏览器默认行为
+            // jquery不用考虑兼容性
+            e.preventDefault();
+
+            return false;
+        });
+
+        
+    });
+    </script>
+</head>
+
+<body>
+    <div class="goods-list">
+        <h4>产品列表</h4>
+        <ul>
+            <li><img src="images/g1.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS跑步鞋2015春夏新款运动鞋男款避震跑鞋KAYANO T4H2N-9001 橙色/白色 42</p>
+            </li>
+            <li><img src="images/g2.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS运动鞋2015春夏新款跑步鞋女鞋稳定跑鞋KAYANO T4H7N-0701 黄色/白色 37.5</p>
+            </li>
+            <li><img src="images/g3.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS跑步鞋春夏透气稳定女款跑鞋 KAYANO T4N5N-3591 玫红色/黑色 37.5</p>
+            </li>
+            <li><img src="images/g4.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>亚瑟士ASICS高帮运动休闲鞋男鞋运动鞋DOUBLEH54XJ-5050 黑色/黑色 40.5</p>
+            </li>
+            <li><img src="images/g5.jpg">
+                <p>
+                    <button>添加到购物车</button>
+                </p>
+                <p>Onitsuka Tiger运动休闲鞋女COLORADO D4S6N-1850 珊瑚色/淡灰色 37.5</p>
+            </li>
+        </ul>
+    </div>
+    <div class="cart-list">
+        <h4>购物车列表</h4>
+        <ul>
+        </ul>
+    </div>
+</body>
+
+</html>

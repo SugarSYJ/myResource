@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script type="text/javascript">
+        //构造函数 => 获取天气
+        var Weather = function () {
+            //ajax 对象
+            this.xhr = new window.XMLHttpRequest();
+            //发起请求
+            this.send = function (cityName) {
+                this.xhr.open('get', 'http://wthrcdn.etouch.cn/weather_mini?city=' + cityName);
+                this.xhr.send();
+            }
+
+            //监听
+            this.xhr.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    //转换成 json 对象
+                    var response = JSON.parse(this.responseText);
+                    var ul = document.createElement("ul");
+                    for (var i = 0; i < response.data.forecast.length; i++) {
+                        var currDate = response.data.forecast[i];
+                        var imgIndex = 1;
+                        switch (currDate.type) {
+                            case '多云':
+                                imgIndex = 5;
+                                break;
+                            case '雷阵雨':
+                                imgIndex = 16;
+                                break;
+                            case '阵雨':
+                                imgIndex = 8;
+                                break;
+                        }
+                        var li = document.createElement('li');
+                        li.innerHTML += "<h4>" + currDate.date + "</h4>";
+                        li.innerHTML += "<img src='img/" + imgIndex + ".png' />";
+                        li.innerHTML += "<p>" + currDate.type + "</p>";
+                        li.innerHTML += "<p>" + currDate.high.replace('高温', '') + " - " + currDate.low.replace('低温', '') + "</p>";
+                        li.innerHTML += "<p>" + currDate.fengli + "</p>";
+                        li.innerHTML += "<p>" + currDate.fengxiang + "</p>";
+                        ul.appendChild(li);
+                    }
+                    document.getElementById('container').innerHTML = "";
+                    document.getElementById('container').appendChild(ul);
+                }
+            }
+        }
+
+        var _weather = new Weather();
+        window.onload = function () {
+            document.getElementById('search').onclick = function () {
+                //调用发起请求
+                //string.trim() => var str = '    ddd  '; str.trim()
+                _weather.send(document.getElementById('city').value.trim());
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="city" value="深圳" />
+    <input type="button" value="查询" id="search" />
+    <div id="container"></div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标移动改变图片路径</title>
+    <style>
+	ul{padding:0;margin:0;list-style: none;}
+	.container{width:180px;}
+	.big-pic{background-color:#efefef;}
+	.big-pic img{width:154px;height: 154px;}
+	.big-pic{padding:10px;border:1px solid #ddd;}
+	#smallPic li{display:inline-block;border:1px solid transparent;margin-top:5px;}
+    #smallPic li.active{border-color:#f60;}
+    </style>
+    <script>
+        /*
+            鼠标移动改变图片路径 
+            思路：
+                1）获取页面元素
+                2）给li绑定onmouseover事件
+                    把变大图的src属性该成当前小图的src属性
+         */
+        window.onload = function(){
+            // 1）获取页面元素
+            var bigPic = document.getElementById('bigPic');
+            var smallPics = document.getElementById('smallPic').getElementsByTagName('img');
+
+            // 2）给li绑定onmouseover事件
+            for(var i=0;i<smallPics.length;i++){
+                smallPics[i].onmouseover = function(){
+                    // 把变大图的src属性该成当前小图的src属性
+                    bigPic.src = this.src;
+
+          
+                    for(var i=0;i<smallPics.length;i++){
+                        smallPics[i].parentNode.className = '';
+                    }
+
+                    // 给当前li添加高亮样式
+                    this.parentNode.className = 'active';
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="big-pic"><img src="images/big_4.jpg" id="bigPic"></div>
+        <ul id="smallPic">
+            <li><img src="images/small_1.jpg"></li>
+            <li><img src="images/small_2.jpg"></li>
+            <li><img src="images/small_3.jpg"></li>
+            <li><img src="images/small_4.jpg"></li>
+            <li><img src="images/small_5.jpg"></li>
+            <li><img src="images/small_6.jpg"></li>
+            <li><img src="images/small_7.jpg"></li>
+            <li><img src="images/small_8.jpg"></li>
+            <li><img src="images/small_9.jpg"></li>
+            <li><img src="images/small_10.jpg"></li>
+            <li><img src="images/small_11.jpg"></li>
+        </ul>
+        </div>
+</body>
+
+</html>

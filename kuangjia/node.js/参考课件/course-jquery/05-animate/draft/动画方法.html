@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery动画队列</title>
+	<style>
+		ul{list-style: none;padding:0;margin:0;}
+		.imglist li{display:inline-block;margin:10px;padding:15px;border:1px solid #ddd;}
+		.imglist li img{width:120px;}
+
+		.bigpic{display:none;position:absolute;padding:10px;border:1px solid #ddd;}
+		.arrow-up{position:absolute;top:-20px;left:50px;border:10px solid #ddd;border-color:transparent transparent #ddd;}
+		.arrow-up.inner{border-bottom-color:#fff;top:-19px;}
+	</style>
+    <script src="../../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			// 生成一个容器，用来放置大图
+			var $bigpic = $('<div/>').addClass('bigpic').appendTo('body');
+			var $arrowUp = $('<span/>').addClass('arrow-up')
+			var $inner = $('<span/>').addClass('arrow-up inner');
+
+			// 绑定鼠标移入移出事件
+			$('.imglist li').hover(function(){
+				var $img = $(this).find('img');
+				$bigpic.css({
+					top:$(this).offset().top + $(this).outerHeight() + 10,
+					left:$(this).offset().left
+				}).html($img.clone()).stop(true,true).fadeIn('slow').append([$arrowUp,$inner]);
+			},function(){
+				$bigpic.fadeOut('fast');
+			});
+		});
+	</script>
+</head>
+<body>
+	<ul class="imglist">
+		<li><img src="img/mv1.jpg" alt=""></li>
+		<li><img src="img/ob1.jpg" alt=""></li>
+		<li><img src="img/mv2.jpg" alt=""></li>
+		<li><img src="img/ob2.jpg" alt=""></li>
+		<li><img src="img/mv3.jpg" alt=""></li>
+		<li><img src="img/ob3.jpg" alt=""></li>
+		<li><img src="img/mv4.jpg" alt=""></li>
+		<li><img src="img/mv5.jpg" alt=""></li>
+	</ul>
+</body>
+</html>

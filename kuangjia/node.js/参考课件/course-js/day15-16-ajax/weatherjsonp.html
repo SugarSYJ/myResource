@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        body {
+            background-color: #0094ff;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            width: 120px;
+            height: 200px;
+            float: left;
+        }
+    </style>
+    <script type="text/javascript">
+        //创建 ajax 对像
+        //给对像 api
+        //send（请求）
+        //分析响应
+        //xhr.open('get', 'http://wthrcdn.etouch.cn/weather_mini?city=' + city.value.trim());
+        window.onload = function () {
+            var city = document.getElementById('city');
+            var search = document.getElementById('search');
+            var container = document.getElementById('container');
+
+            //jsonp 请求天气
+            search.onclick = function () {
+                //<script type='text/javascript' src='http...'>
+                var jsonp = document.createElement('script');
+                jsonp.type = "text/javascript";
+                jsonp.src = "http://wthrcdn.etouch.cn/weather_mini?callback=jsonpcallback&city=" + city.value.trim();
+                document.head.appendChild(jsonp);
+            }
+        }
+
+        //回调方法 => onreadystatechange
+        function jsonpcallback(jsonObj) {
+            if (jsonObj.status == 1000) {
+                var jsonArray = jsonObj.data.forecast;
+                var ul = document.createElement('ul');
+                for (var i = 0; i < jsonArray.length; i++) {
+                    var _data = jsonArray[i];
+                    console.log(_data);
+                    var li = document.createElement('li');
+                    li.innerHTML = "<h4>" + _data.date + '</h4>';
+                    var imgIndex;
+                    switch (_data.type) {
+                        case "多云":
+                            imgIndex = 5;
+                            break;
+                        case "小雨":
+                            imgIndex = 8;
+                            break;
+                        case "阵雨":
+                            imgIndex = 11;
+                            break;
+                        default:
+                            imgIndex = 1;
+                            break;
+                    }
+                    li.innerHTML += "<img src='img/" + imgIndex + ".png' />";
+                    li.innerHTML += "<p>" + _data.type + "</p>";
+                    li.innerHTML += "<p>" + _data.high.replace('高温', '') + " - " + _data.low.replace('低温', '') + "</p>";
+                    li.innerHTML += "<p>" + _data.fengli + "</p>";
+                    li.innerHTML += "<p>" + _data.fengxiang + "</p>";
+                    ul.appendChild(li);
+                }
+                container.innerHTML = "";
+                container.appendChild(ul);
+            } else {
+                container.innerHTML = "你输入的城市不存在，请确认后重新输入！";
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="city" value="深圳" />
+    <input type="button" value="查询" id="search" />
+    <div id="container"></div>
+</body>
+</html>

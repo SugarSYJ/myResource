@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <style>
+        ul{list-style: none;padding:0;margin:0;}
+        #carList li{position:relative;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid #ddd;}
+        #carList img{display:block;width:100px;}
+        #carList li .btn-close{position:absolute;top:0;right:0;padding:0 5px;cursor:default;}
+        #carList li .btn-close:hover{background-color:#f00;color:#fff;}
+        .subPrice{padding:5px 20px;color:#f00;font-weight:bold;text-align:right;}
+        #carList .price span{color:#f00;}
+        .price span::before{
+            content:'￥';
+            font-size:11px;
+        }
+        #carList .price span{font-size:11px;}
+    </style>
+    <script>
+        window.onload = function(){
+            var oCarList = document.getElementById('carList');
+            var oSubPrice = document.getElementsByClassName('subPrice')[0];
+            var btnClear = document.getElementById('btnClear');
+            var carlist = [];
+            var cookies = document.cookie;
+            if(cookies.length){
+                cookies = cookies.split('; ');
+                cookies.forEach(function(item){
+                    var arr = item.split('=');
+                    if(arr[0]==='carlist'){
+                        carlist = JSON.parse(arr[1]);
+                    }
+                    
+                });
+            }
+            var total = 0;
+            var ul = document.createElement('ul');
+            ul.innerHTML = carlist.map(function(goods){
+                total += goods.price * goods.qty;
+                return '<li data-guid="' + goods.guid + '">'
+                    + '<img src="' + goods.imgurl + '">'
+                    + '<h4>' + goods.name + '</h4>'
+                    + '<p class="price">价格：<span>' + goods.price + ' &times; ' + goods.qty + '</span></p>' 
+                    + '<span class="btn-close">&times;</span>'
+                + '</li>'
+            }).join('');
+            oSubPrice.innerHTML = total;
+            oCarList.appendChild(ul);
+            oCarList.onclick = function(e){
+                e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(target.className.toLowerCase()==='btn-close'){
+                    var currentLi = target.parentNode;
+                    var guid = currentLi.getAttribute('data-guid');
+                    for(var i=0;i<carlist.length;i++){
+                        if(carlist[i].guid===guid){
+                            carlist.splice(i,1);
+                            break;
+                        }
+                    }
+                    document.cookie = 'carlist=' + JSON.stringify(carlist);
+                    currentLi.parentNode.removeChild(currentLi);
+                }
+            }
+            btnClear.onclick = function(){
+                var now = new Date();
+                now.setDate(now.getDate()-10);
+                document.cookie = 'carlist=x;expires=' + now.toUTCString();
+                oSubPrice.innerText = '';
+                oCarList.innerText = '';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>购物车</h1>
+    <div id="carList">
+        
+    </div>
+    <div class="subPrice"></div>
+    <a href="#" id="btnClear">清空购物车</a>
+</body>
+</html>

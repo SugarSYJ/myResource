@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>输入月份，显示当月的天数</h3>
+        <input type="text" id="num" />
+        <button onclick="day()">显示</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var num = document.getElementById('num');
+            var output = document.getElementById('output');
+            function day(){
+                var _num = num.value*1;
+                switch(_num){
+                    case 1:
+                    case 3:
+                    case 5:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                        output.innerHTML = _num + '月份，31天';
+                        break;
+                    case 2:
+                        output.innerHTML = _num + '月份，28天';
+                        break;
+                    case 4:
+                    case 6:
+                    case 9:
+                    case 11:
+                        output.innerHTML = _num + '月份，30天';
+                        break;
+                    default:
+                        output.innerHTML = '<p style="color:red;">你是不是傻</p>';
+                }
+            }
+        </script>
+    </body>
+</html>

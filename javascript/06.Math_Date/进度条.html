@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            body{margin: 0;}
+            #box{position:relative;height: 5px;background:blue;}
+            #percent{position:absolute;left:50%;top:100%;transform:translate(-50%,0);padding:5px;font-size:10px;}
+        </style>
+    </head>
+    <body>
+        <h3>进度条</h3>
+        <div id="box"><span id="percent"></span></div>
+        <script type="text/javascript">
+            var box = document.getElementById('box');
+            var percent = document.getElementById('percent');
+            window.onload = function(){
+                var width = 0;
+                var timer = setInterval(function(){
+                    width += 5;
+                    if(width>=window.innerWidth){
+                        clearInterval(timer);
+                        width = window.innerWidth;
+                    }
+                    percent.innerHTML = (width/window.innerWidth*100).toFixed(1) + '%';
+                    box.style.width = width + 'px';
+                },30);
+            }
+        </script>
+    </body>
+</html>

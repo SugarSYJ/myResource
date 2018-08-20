@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>归并方法</h3>
+        <script type="text/javascript">
+            var arr = [10,8,20,66,2,6,12];
+            document.write(arr + '<br/>');
+            // 求和
+            var res = arr.reduce(function(prev,cur,idx,array){
+                document.write(prev + ',' +cur + ',' + idx + '<br/>');
+                return prev+cur;
+            },0);
+            document.write('求和:' + res);
+        </script>
+    </body>
+</html>

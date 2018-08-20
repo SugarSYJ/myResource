@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>02借用构造函数法</title>
+    <script>
+        /*
+            原型式继承
+                * 核心：先创建了一个临时性的构造函数，然后将传入的对象作为这个构造函数的原型，最后返回了这个临时类型的一个新实例
+                * 封装inherit函数
+                * ES：Object.create()
+                
+         */
+        function inherit(o){
+            function F(){}
+            F.prototype = o;
+            return new F();
+        }
+        
+        // 父类
+        function Person(name,age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+
+        // 公共的属性/方法写入原型对象
+        Person.prototype.say = function(){
+            console.log(`大家好，我是${this.name}，我是千锋段子手`)
+        }
+
+        Person.prototype.eat = function(){
+            console.log(`大家好，我是${this.name}，我是千锋最能吃`)
+        }
+
+
+        var lemon = new Person('lemon',30,'女');
+        var laoxie = new Person('laoxie',18,'男');
+
+        // 子类
+        function Man(name,age){
+            Person.call(this,name,age);//把Person中的代码执行一遍，并把this指向这里的this（Man的实例）
+            // this.name=name;
+            // this.age = age;
+            // this.gender = undefined
+            // Person.bind();//改变this执行
+            this.gender = '男';
+        }
+
+        // Man.prototype = new Person();//生成多余的属性
+        // Man.prototype = inherit(Person.prototype);
+
+        // ES
+        Man.prototype = Object.create(Person.prototype);
+        Man.prototype.constructor = Man;
+
+        var tiantian = new Man('小甜甜',16);
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

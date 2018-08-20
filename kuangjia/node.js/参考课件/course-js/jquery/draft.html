@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <style type="text/css">
+        body>input{border: solid 1px #ff0000;}
+        h3.dk1{color: red;}
+    </style>
+</head>
+<body>
+    <input type="text" />
+    <input type="password" />
+    <h1 id="dk1">DK.Lan-ID</h1>
+    <h3 class="dk1">DK.Lan-Class</h3>
+    <div dk="aa">
+        <p class="dk_lan1">DK.Lan-1</p>
+        <p class="dk_lan2">DK.Lan-2</p>
+        <p class="dk_lan3">DK.Lan-3</p>
+        <p class="dk_lan4">DK.Lan-4</p>
+        <p class="dk_lan5">DK.Lan-5</p>
+    </div>
+    <!--<img src="http://img10.360buyimg.com/n7/jfs/t3229/98/2390200739/283552/68065295/57e0cca7N24e9d6f7.jpg" />-->
+    <script type="text/javascript">
+        // 所有 jQuery 对象都会继承原生 js 的所有属性和方法
+        
+        //html 页面的生命周期
+        //dom 结构加载完毕 => 1
+        //外部资源加载完毕 => 2
+        window.onload = function (evt) {
+            console.log('onload');
+            evt.preventDefault();
+        }
+
+        //dom 结构加载完毕 => 1
+        document.onready = function () {
+            console.log('onready');
+        }
+
+        document.addEventListener('DOMContentLoaded', window.onready);
+
+        document.addEventListener('load', window.onload);
+
+        //dom 结构加载完毕 => 1
+        $(document).ready(function () {
+
+        })
+
+        //dom 结构加载完毕 => 1
+        $(function () {
+        })
+
+        var dk = dk || {};
+
+        dk.name = "dk.lan";
+
+        var dk = dk || {};
+        console.log(dk.name);
+
+        $('.logo_tit_lk').remove()
+
+        $('<h1>dk.lan1</h1>').insertBefore('[dk=aa] h1:last')
+
+        $('<h1>dk.lan2</h1>').insertAfter('[dk=aa] h1:eq(2)')
+
+        $('[dk=aa]').html('<h3>1609</h3>')
+
+        $('[dk=aa]').css({ 'border': 'solid 2px red', 'background-color': '#ccc' });
+
+        $('[dk=aa]').clone().appendTo('body')
+
+        //clone(true) => 把对象及其事件一起克隆
+        $('[dk=aa]').clone(true).appendTo('body')
+    </script>
+</body>
+</html>

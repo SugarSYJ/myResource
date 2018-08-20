@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>导航菜单</title>
+	<style>
+		ul{list-style: none;padding:0;margin:0;}
+		a{color:#333;text-decoration:none;}
+		.nav{width:800px;margin:0 auto;background-color:#ccc;}
+		.main-nav::after{
+			content:' ';
+			clear:both;
+			display:block;
+		}
+		.main-nav > li{float:left;position:relative;}
+		.main-nav li a{display:block;padding:5px 15px;}
+		.main-nav ul{display:none;position:absolute;top:50px;left:0;width:200px;backgrounc-color:#fff;border:1px solid #ddd;}
+		.arrow-down{position:absolute;right:0;top:12px;display:inline-block;width:0;height:0;border:6px solid #999;border-color:#999 transparent transparent;margin-left:5px;vertical-align:bottom;}
+		.dispb{display:block;}
+		.dispn{display:none;}
+		.content{padding:10px;border:1px solid #ddd;background:#efefef;}
+
+		/* .arrow{display:inline-block;width:0;height:0;border:10px solid #ccc;border-color:#f00 transparent transparent;border-left-width:5px;border-right-width:5px;} */
+	</style>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			var arr_city = ['广州','深圳','香港','北京','台北','东莞','铁岭'];
+			var $city = $('.city');
+			
+			// jQuery实例（对象）的方法
+			// jQuery的全局方法
+			$.each(arr_city,function(idx,city){
+				$city.append('<li>' + city + '</li>');
+			});
+
+			$city.append('<li>上海</li>');//appendTo
+			$city.prepend('<li>杭州</li>');//prependTo
+
+			$city.after('<li>丽江</li>');//insertAfter
+			$city.before('<li>天津</li>');//insertBefore
+
+			// 生成一张图片
+			/*var img = document.createElement('img');
+			img.src = 'images/100rmb.jpg';
+			document.body.appendChild(img);*/
+
+			// $('body').append($('<img src="images/100rmb.jpg"/>'));
+			$('<img src="images/100rmb.jpg"/>').appendTo('body');
+
+		});
+	</script>
+</head>
+<body>
+	<ul class="city">
+	</ul>
+</body>
+</html>

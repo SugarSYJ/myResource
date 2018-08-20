@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            h3{text-align:center;}
+            .news-list{width: 600px;padding:10px;border:2px solid #ddd;border-radius:10px;margin: 0 auto;}
+            .news-list h4{margin: 0 0 10px;padding-bottom:10px;border-bottom:1px solid #ddd;}
+            .news-list ul{padding: 0;margin: 0;list-style:none;line-height: 35px;height: 280px;overflow:hidden;}
+            .form{margin: 100px auto 0 ;width: 600px;text-align:center;overflow:hidden;}
+            .form input{float: left;width: 480px;height: 50px;box-sizing:border-box;padding: 10px;}
+            .form button{float: left;width: 120px;height: 50px;}
+        </style>
+    </head>
+    <body>
+        <h3>显示最新新闻信息</h3>
+        <div class="news-list">
+            <h4>最新信息</h4>
+            <ul id="newslist"></ul>
+        </div>
+        <div class="form">
+            <input type="text" id="news"/>
+            <button id="btn">添加</button>
+        </div>
+        <script type="text/javascript">
+            var allNews = ['小明由于调戏女老师再次被滚粗教室','iPhone10发布,屏幕高度亮瞎了所有小伙伴','为了弘扬乐于助人的精神，中国人大开会决定授予老王“中国好邻居”称号'];
+            var news = document.getElementById('news');
+            var newslist = document.getElementById('newslist');
+            var btn = document.getElementById('btn');
+            render();
+            function render(){
+                var html = '';
+                for(var i=0;i<allNews.length;i++){
+                    html += '<li><a href="#">' + allNews[i] + '</a></li>';
+                }
+                newslist.innerHTML = html;
+            }
+            btn.onclick = function(){
+                var _news = news.value;
+                allNews.unshift(_news);
+                render();
+                news.value = '';
+                news.focus();
+            }
+        </script>
+
+    </body>
+</html>

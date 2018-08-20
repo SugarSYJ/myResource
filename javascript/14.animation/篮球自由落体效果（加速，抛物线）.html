@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            body{background: #000;}
+            #ball{width: 100px;position:absolute;}
+        </style>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var ball = document.querySelector('#ball');
+                var xspeed = 12;
+                var yspeed = 0;
+                var timer = setInterval(()=>{
+                    yspeed += 10;
+                    var currentx = ball.offsetLeft;
+                    var currenty = ball.offsetTop;
+                    var top = currenty + yspeed;
+                    var left = currentx + xspeed;
+                    
+                    if(top>=window.innerHeight-ball.offsetHeight){
+                        xspeed--;
+                        yspeed = -yspeed;
+                        top = window.innerHeight-ball.offsetHeight;
+                    }
+                    if(top>=window.innerHeight-ball.offsetHeight && yspeed===0){
+                        xspeed = 0;
+                        clearInterval(timer);
+                    }
+                    ball.style.top = top + 'px';
+                    ball.style.left = left + 'px';
+                },30);
+            })
+        </script>
+    </head>
+    <body>
+        <img src="img/basketball.jpg" id="ball"/>
+    </body>
+</html>

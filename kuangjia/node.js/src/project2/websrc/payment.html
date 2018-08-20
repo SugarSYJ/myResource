@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/socket.io/2.0.4/socket.io.js"></script>
+    <title>payment</title>
+</head>
+<body>
+    <div>
+        <label id="total"></label>
+        <input type="button" value="微信付款" id="btn_payment">
+    </div>
+    <script>
+        /*
+            1、获取参数 orderno
+            2、通过获取订单的 api 获取当前订单信息
+            3、判断当前订单是否未付款
+            4、如果未付款 $('#btn_payment').show();
+            5、付款事件 => $.post('updateorder') 更改订单信息为已付款
+            6、同时通过 socket 向收银端推送付款成功的信息
+            7、收银端接收到客户端的收银成功信息，打印小票
+            8、完成收银
+        */    
+        var orderno = location.search.replace('?','').split('=')[1];
+        // console.log(orderno)
+        $.get('getorder',{orderno:orderno},function(res){
+            console.log(res);
+            // console.log(res[0].status);
+            // console.log(res);
+            if(res[0].status){
+                $('#total').closest('div').html('该订单已付款');
+            }else{
+                $('#total').text(res[0].total + '元');
+            }
+        });
+        $(function(){
+            var socket = io.connect('ws://10.3.131.232:8080');
+            socket.emit('scan');
+            $('#btn_payment').on('click',function(res){
+                $.post('editorder',{orderno:orderno},function(res){
+                    // console.log(res);
+                    // $.post('http:10.3.131.232:81/print',{text:$('#total').text()});
+                    $('#total').closest('div').html('该订单已付款');
+                    socket.emit('payment');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

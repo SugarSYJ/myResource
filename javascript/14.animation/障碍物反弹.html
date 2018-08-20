@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            body{background: #000;}
+            .box div{width: 70px;height: 70px;margin: 0;padding: 0;position:absolute;border-radius:50%;background: red;}
+            .box{width: 100%;height: 100%;}
+        </style>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var box = document.querySelector('.box');
+                var ball = box.querySelectorAll('.box div');
+                var xspeed = 0;
+                var yspeed = 0;
+                for(var i=0;i<ball.length;i++){
+                    (function(i){
+                        var timer = setInterval(()=>{
+                            xspeed += 5;
+                            yspeed += 5;
+                            var currentx = ball[i].offsetLeft;
+                            var currenty = ball[i].offsetTop;
+                            var left = currentx + xspeed;
+                            var top = currenty + yspeed;
+                            if(left>=window.innerWidth - ball[i].offsetWidth){
+                                xspeed = -xspeed;
+                                left = window.innerWidth - ball[i].offsetWidth;
+                                ball[i].style.backgroundColor = getColor();
+                            }
+                            if(left<=0){
+                                xspeed = xspeed;
+                                left = 0;
+                                ball[i].style.backgroundColor = getColor();
+                            }
+                            if(top>=window.innerHeight - ball[i].offsetHeight){
+                                yspeed = -yspeed;
+                                top = window.innerHeight - ball[i].offsetHeight;
+                                // ball[i].style.backgroundColor = getColor();
+                            }
+                            if(top<=0){
+                                yspeed = yspeed;
+                                top = 0;
+                                // ball[i].style.backgroundColor = getColor();
+                            }
+                            ball[i].style.left = left + 'px';
+                            ball[i].style.top = top + 'px';
+                        },30);
+                    })(i)
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动事件</title>
+	<style>
+	#top{display:none;position:fixed;right:0;bottom:0;padding:10px;background-color:#f00;color:#fff;}
+	</style>
+	<script>
+		//网页面添加1000行文字，出现滚动条
+		for(var i=0;i<100;i++){
+			document.write('<p>我是一个p标签' + i +'</p>');
+		}
+		document.write('<span id="top">返回顶部</span>');
+
+		/*window.onscroll = function(){
+			// 滚动距离兼容性写法
+			var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+			// var scrollTop = e1 || e2
+			// 当e1为true时，scrollTop=e1;
+			// 当e1为false时，scrolTop=e2;
+			console.log('scroll')
+		}*/
+
+		window.onload = function(){
+			var pos = document.getElementById('pos');
+			var btnTop = document.getElementById('toTop');
+
+			// 绑定点击事件，滚动到指定位置
+			btnTop.onclick = function(){
+				var top = pos.value;
+
+				document.body.scrollTop = top;
+				document.documentElement.scrollTop = top;
+			}
+
+
+			// 返回顶部
+			btnToTop = document.getElementById('top');
+			btnToTop.onclick = function(){
+				// document.body.scrollTop = 0;
+				// document.documentElement.scrollTop = 0;
+				
+				// 先获取滚动过的距离
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+				var speed = 1.2;
+
+				var timer = setInterval(function(){
+					scrollTop = parseInt(scrollTop/speed);console.log(scrollTop);
+					if(scrollTop < 10){
+						clearInterval(timer);
+						btnToTop.style.display = 'none';
+						scrollTop = 0;
+					}
+					document.body.scrollTop = document.documentElement.scrollTop = scrollTop;
+				},30)
+			}
+
+			window.onscroll = function(){
+				// 先获取滚动过的距离
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+
+				// 滚动一定距离后显示，否则隐藏返回顶部的按钮
+				if(scrollTop > 200){
+					btnToTop.style.display = 'block';
+				}else{
+					btnToTop.style.display = 'none';
+				}
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<input type="text" id="pos">
+	<button id="toTop">返回指定滚动条位置</button>
+</body>
+</html>

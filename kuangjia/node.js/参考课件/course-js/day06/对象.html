@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>对象</title>
+	<script>
+		// 创建一个对象
+		// 格式：{属性:属性值,属性2:属性值2}
+		var obj = {name:'王铁锤',age:40,married:false,gender:'男'};
+
+		// 对象属性的读取
+		// 如果读取一个不存在的属性，返回undefined
+		obj.name; //==> '王铁锤'
+		obj.age;
+
+		// obj['name'] //==> '王铁锤'
+
+		// 写入新属性(赋值)
+		obj.song = '小鸡哔哔';
+		obj['school'] = '千锋音乐';
+		console.log(obj)
+		// alert(obj.school);
+		// 
+		
+		// 对象的遍历
+		// for..in
+		// attr为循环过程中每一个属性
+		for(var attr in obj){
+			document.write(attr + ':' + obj[attr] + '<br>');
+		}
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

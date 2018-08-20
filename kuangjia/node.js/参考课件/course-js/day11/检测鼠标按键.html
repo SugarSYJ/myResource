@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标按键检测</title>
+	<style>
+	#box{border:1px solid #ddd;margin:0 auto;width:800px;height:100px;font-size:30px;line-height:100px;color:#ccc;background-color:#efefef;text-align:center;}
+	</style>
+	<script>
+		window.onload = function(){
+			var box = document.getElementById('box');
+
+			//绑定点击事件
+			box.onmousedown = function(e){
+				// 判断是否为ie低版本浏览器
+				var isIE;
+				if(!e){
+					isIE = true;
+				}
+				
+				// 获取event对象的兼容写法
+				e = e || window.event;
+				// ie8-: e=undefined
+				// arguments,this,event
+				// e.button
+				console.log(window.event);
+				if(e.button == 0 || isIE && e.button == 1){
+					box.innerHTML = '你点击了鼠标左键';
+				}else if(e.button == 1 || isIE && e.button == 4){
+					box.innerHTML = '你滚了';
+				}else if(e.button == 2){
+					box.innerHTML = '你点击了右键';
+				}
+			}
+
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <img src="img/g5.jpg" id="goods"/>
+        <script type="text/javascript">
+            window.onload = function(){
+                var goods = document.getElementById('goods');
+                var data = {
+                    id:'001',
+                    title:'土豪金版iphone7 plus',
+                    price:999,
+                    imgurl:'img/g5.jpg'
+                }
+                goods.onclick = function(){
+                    var params = '?';
+                    for(var attr in data){
+                        params += attr + '=' + encodeURI(data[attr]) + '&';
+                    }
+                    alert(params);
+                    location.href = 'location_details.html' + params;
+                }
+            }
+        </script>
+    </body>
+</html>

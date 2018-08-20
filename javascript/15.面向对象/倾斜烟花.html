@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>倾斜烟花</title>
+    <style type="text/css">
+    html,body{overflow:hidden;height:100%;}
+    body{background:#000;}
+    a{text-decoration:none;outline:none;}
+    #tips,#copyright{position:absolute;width:100%;height:50px;text-align:center;background:#171717;border:2px solid #484848;}
+    #tips{top:0;border-width:0 0 2px;}
+    #tips a{font:14px/30px arial;color:#FFF;background:#F06;display:inline-block;margin:10px 5px 0;padding:0 15px;border-radius:15px;}
+    #tips a.active{background:#FE0000;}
+    p{position:absolute;top:55px;width:100%;text-align:center;}
+    .fire {
+        width: 3px;
+        height: 30px;
+        background: white;
+        position: absolute;top:100%;
+    } 
+    .spark,.show {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+</style>
+<script src="../common.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        let page = {
+            btn:'#auto',
+            container:'body',
+            init(){
+                this.btn = document.querySelector(this.btn);
+                this.container = document.querySelector(this.container);
+                document.onclick = haha;
+                function haha(e){
+                    let x = e.clientX;
+                    let y = e.clientY;
+                    new Firework(x,y);
+                }
+                var goFire = setInterval(show,2000);
+                function show(){
+                    let x = randomNumber(0,window.innerWidth);
+                    let y = randomNumber(0,window.innerHeight);
+                    new Firework(x,y);
+                };
+                clearInterval(goFire);
+                this.btn.onclick = ()=>{
+                    if(this.btn.innerHTML==='自动放烟花'){
+                        document.onclick = '';
+                        this.btn.innerHTML = '自动放烟花(激活)';
+                        this.btn.className = 'active';
+                        goFire = setInterval(show,2000);
+                    }else{
+                        clearInterval(goFire);
+                        this.btn.innerHTML = '自动放烟花';
+                        this.btn.className = '';
+                        document.onclick = haha;
+                    }
+                }
+            }
+        }
+        page.init();
+        function Firework(x,y){
+            this.left = x;
+            this.top = y;
+            this.speed = randomNumber(-200,200);
+            this.leftSpeed = this.left + this.speed;
+            this.init();
+            this.move();
+        }
+        Firework.prototype = {
+            constructor:Firework,
+            init(){
+                let fire = document.createElement('span');
+                fire.className = 'fire';
+                fire.style.left = this.left + 'px';
+                page.container.appendChild(fire);
+                this.ele = fire;
+            },
+            move(){
+                if(this.leftSpeed>=window.innerWidth){
+                    this.leftSpeed = window.innerWidth;
+                }
+                if(this.leftSpeed<=0){
+                    this.leftSpeed = 0;
+                }
+                animate(this.ele,{left:this.leftSpeed,top:this.top,height:3},function(){
+                    this.boom();
+                    this.remove();
+                }.bind(this));
+            },
+            remove(){
+                this.ele.parentNode.removeChild(this.ele);
+            },
+            boom(){
+                let qty = randomNumber(30,50);
+                for(var i=0;i<qty;i++){
+                    let deg = 360/qty*i;
+                    new Spark(this.left+this.speed,this.top,deg);
+                }
+            }
+        }
+        function Spark(x,y,deg){
+            this.center = {x:x,y:y};
+            this.r = randomNumber(20,300);
+            this.color = randomColor();
+            this.rad = deg*Math.PI/180;
+            this.init();
+            this.move();
+        }
+        Spark.prototype={
+            constructor:Spark,
+            init(){
+                let spark = document.createElement('span');
+                spark.className = 'spark';
+                spark.style.backgroundColor = this.color;
+                spark.style.left = this.center.x + 'px';
+                spark.style.top = this.center.y + 'px';
+                page.container.appendChild(spark);
+                this.ele = spark;
+            },
+            move(){
+                let a = this.r*Math.cos(this.rad);
+                let b = this.r*Math.sin(this.rad);
+                animate(this.ele,{left:parseInt(this.center.x+a),top:parseInt(this.center.y+b)},function(){
+                    this.remove();
+                }.bind(this));
+            },
+            remove(){
+                this.ele.parentNode.removeChild(this.ele);
+            }
+        }
+    });
+</script>
+</head>
+<body>
+    <div id="tips"><a id="auto" href="#">自动放烟花</a></div>
+</body>
+</html>

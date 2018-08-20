@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>编写一个函数，计算三个数字的大小，按从小到大顺序输出</h3>
+        <input type="text" id="num1"/>
+        <input type="text" id="num2"/>
+        <input type="text" id="num3"/>
+        <button id="btn">计算</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var num1 = document.getElementById('num1');
+            var num2 = document.getElementById('num2');
+            var num3 = document.getElementById('num3');
+            var btn = document.getElementById('btn');
+            var output = document.getElementById('output');
+            function bijiao(){
+                var _num1 = num1.value*1;
+                var _num2 = num2.value*1;
+                var _num3 = num3.value*1;
+                var arguments= [_num1,_num2,_num3];
+                for(var i =0;i<arguments.length-1;i++){
+                    for(var j=0;j<arguments.length-i-1;j++){
+                        if(arguments[j]>arguments[j+1]){
+                            var a = arguments[j];
+                            arguments[j]=arguments[j+1];
+                            arguments[j+1]=a;
+                        }
+                    }
+                    
+                }
+                output.innerHTML = arguments;
+            }
+            btn.onclick = bijiao;
+        </script>
+    </body>
+</html>

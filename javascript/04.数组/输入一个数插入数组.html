@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>有一个从小到大排序的数组[3,5,6,20,22,33,88]。现输入一个数，要求按原来的规律将它插入数组中，并打印出新的数组</h3>
+        <input type="text" id="num"/>
+        <button id="btn">插入</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var num = document.getElementById('num');
+            var btn = document.getElementById('btn');
+            var output = document.getElementById('output');
+            var arr = [3,5,6,20,22,33,88];
+            output.innerHTML = arr;
+            btn.onclick = function(){
+                var _num = num.value*1;
+                arr.push(_num);
+                var trm = [];
+                for(var i=0;i<arr.length;i++){
+                    for(var j=i+1;j<arr.length;j++){
+                        if(arr[i]>arr[j]){
+                            trm = arr[i];
+                            arr[i] = arr[j];
+                            arr[j] = trm;
+                        }
+                    }
+                }
+                output.innerHTML = arr;
+            }
+        </script>
+    </body>
+</html>

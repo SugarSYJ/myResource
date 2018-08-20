@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01原型链继承法</title>
+    <script>
+        /*
+            原型链继承法
+                核心：拿父类实例来充当子类原型对象
+                缺点：
+                    * 不能继承构造函数中的属性（只能继承原型中的方法）
+         */
+        function Person(name.age,gender){
+            this.name = name;
+            this.age = age;
+            this.gender = gender;
+        }
+        // 公共的属性/方法写入原型对象
+        Person.prototype.say = function(){
+            console.log(`大家好，我是${this.name}，我是千锋段子手`);
+        }
+        Person.prototype.eat = function(){
+            console.log(`大家好，我是${this.name}，我是千锋最能吃`);
+        }
+
+        var lemon = new Person('lemon',30,'女');
+        var laoxie = new Person('laoxie',18,'男');
+
+        function Man(name,age){
+            this.gender = '男';
+        }
+
+        Man.prototype = new Person();
+        Man.prototype.constructor = Man;
+
+        var tiantian = new Man();
+
+
+        function Girl(){
+            this.gender = '女';
+        }
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

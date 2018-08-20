@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    
+    <script type="text/javascript">
+        //global function
+        function aa(data) {
+            console.log(data);
+        }
+        window.onload = function () {
+            //ajax
+            var xhr = new XMLHttpRequest();
+            xhr.open('get', 'http://www.baidu.com');
+            xhr.send();
+        }
+    </script>
+    <!--jsonp 引入资源的方式 跨域-->
+    <script type='text/javascript' src='http://www.baidu.com'></script>
+</head>
+<body>
+
+</body>
+</html>

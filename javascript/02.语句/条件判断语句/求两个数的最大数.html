@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>求两个数的最大数</h3>
+        <input type="text" id="num1" />
+        <input type="text" id="num2" />
+        <button onclick="max()">比较</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var num1 = document.getElementById('num1');
+            var num2 = document.getElementById('num2');
+            var output = document.getElementById('output');
+            function max(){
+                var _num1 = num1.value*1;
+                var _num2 = num2.value*1;
+                if(_num1 > _num2){
+                    output.innerHTML = "最大数：" + _num1;
+                }else{
+                    output.innerHTML = "最大数：" + _num2;
+                }
+            }
+        </script>
+    </body>
+</html>

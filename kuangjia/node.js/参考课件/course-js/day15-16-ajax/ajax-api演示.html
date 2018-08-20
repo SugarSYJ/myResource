@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+    <title>ajax-api-show-demo</title>
+    <link href="../../libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+
+    <style type="text/css">
+        *{padding:0; margin:0; font-size:12px;}
+        .header{position:fixed; width:100%; height:42px; background-color:#0094ff; text-align:center; top:0;}
+        .contianer{position:absolute; top: 42px; right:0; bottom:42px; left:0; overflow:auto;}
+        .footer {
+            position: fixed;
+            width: 100%;
+            height: 42px;
+            background-color: #0094ff;
+            text-align: center;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"></div>
+    <div class="contianer">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="ajax-api-information.html?id=0">dk.lan</a></li>
+        </ul>
+    </div>
+    <div class="footer"></div>
+
+    <script type="text/javascript">
+        $(function () {
+            $.get('http://localhost/course/api/api/student/FetchAllStudent', function (data) {
+                $.each(data.data, function (i, obj) {
+                    $('ul.list-group>li:first').clone().find('a').text(obj.account).attr('href', 'ajax-api-information.html?id=' + obj.indexid).end().appendTo($('ul.list-group'));
+                })
+            })
+
+            $('.contianer').scroll(function (evt) {
+                var $this = $(this);
+                var viewH = $(this).height();//可见高度
+                var contentH = $(this).get(0).scrollHeight;//内容高度
+                var scrollTop = $(this).scrollTop();//滚动高度  
+                if (scrollTop >= contentH - viewH) {
+                    $.get('http://localhost/course/api/api/student/FetchAllStudent', function (data) {
+                        $.each(data.data, function (i, obj) {
+                            $('ul.list-group>li:first').clone().find('a').text(obj.account).attr('href', 'ajax-api-information.html?id=' + obj.indexid).end().appendTo($('ul.list-group'));
+                        })
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>

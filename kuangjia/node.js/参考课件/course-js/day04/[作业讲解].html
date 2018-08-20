@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>作业讲解</title>
+	<script src="../common.js"></script>
+	<script>
+		/*
+			作业1：写出一个函数，判断输入年份是否为闰年，并返回结果
+			作业2：写一个获取某个范围内随机整数的函数
+			扩展作业：利用递归实现斐波那契数列
+		 */
+		
+		/*
+			作业1：写出一个函数，判断输入年份是否为闰年，并返回结果
+			思路：
+				1)声明一个函数isRunNian
+					传入一个参数year
+				2)判断闰年的条件
+					如果是润年，返回一个true;
+					如果是平年，返回一个false;
+		 */
+		function isRunNian(year){
+			if(year%4 == 0 && year%100 != 0 || year%400 == 0){
+				return true;
+			}else{
+				return false;
+			}
+		}
+		window.onload = function(){
+			var year = document.getElementById('year');//取到的是元素
+			var btn = document.getElementById('btnCheckYear');
+
+			// 绑定点击事件
+			btn.onclick = function(){
+				var _year = year.value;//得到输入的年份
+				if(isRunNian(_year)){
+					alert('是闰年')
+				}else{
+					alert('是平年');
+				}
+			}
+
+			/*
+				作业2：写一个获取某个范围内随机整数的函数
+				思路：
+					1)声明一个函数randomNumber
+						形参：最小值,最大值
+					2)获取一个范围内的随机数
+						Math.random();//返回一个0-1(不包括1的值)
+			 */
+			function randomNumber(min,max){
+				// 得到一个范围内的随机数
+				return parseInt(Math.random()*(max-min + 1)) + min;
+			}
+
+			for(var i=0;i<1000;i++){
+				console.log(randomNumber(1,10));//5,3,2,1
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="year"><button id="btnCheckYear">判断是否是润年</button>
+</body>
+</html>

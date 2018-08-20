@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>创建正则表达式</title>
+	<script>
+		/*
+			创建正则表达式
+				1）构造函数
+
+				支持正则的字符串方法：
+					replace,search,match,split
+		 */
+		// 构造函数
+		var str = 'good good study, day day up!';
+		var reg = new RegExp('da');
+
+		console.log(str.search(reg));//17
+
+		var str = 'javascript Java Script';
+		var reg = new RegExp('Java','i');
+		str.indexOf('Java');//11
+		str.search(reg)//0
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

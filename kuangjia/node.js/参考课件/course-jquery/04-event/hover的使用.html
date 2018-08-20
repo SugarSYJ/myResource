@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件绑定方法</title>
+	<style>
+		#box{display:none;padding:15px;border:1px solid #ddd;height:200px;background-color: #1332eb;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			/*$('#btn').on('mouseenter',function(){
+				$('#box').show();
+			}).on('mouseleave',function(){
+				$('#box').hide();
+			});*/
+
+		    //$('#btn').mouseover(function () {
+		    //    $('#box').slideDown(1000, function () {
+		    //        console.log('slideDown');
+		    //    });
+		    //}).mouseout(function () {
+		    //    $('#box').slideUp(1000, function () {
+		    //        console.log('slideUp');
+		    //    });
+		    //})
+
+		    $('#btn').hover(function () {
+                //鼠标移进去时触发
+		        $('#box').slideDown(1000);
+		    }, function () {
+		        //鼠标移出去时触发
+		        $('#box').slideUp(1000);
+		    });
+		    //$('#bth').hover(function () { }, function () { });
+		    //$('#btn').mouseover(function () { }).mouseout(function () { })
+		});
+	</script>
+</head>
+<body>
+	<button id="btn">显示/隐藏</button>
+	<div id="box">#box</div>
+</body>
+</html>

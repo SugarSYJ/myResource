@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节点操作方法</title>
+	<script>
+	window.onload = function(){
+		/*
+			1.添加内容
+			2.删除内容
+			3.改变内容
+		 */
+		
+		/*新建元素节点的方法
+			1.新建一个元素节点
+			2.往元素添加内容
+			3.把这个元素添加到页面
+		*/
+		
+		var h4 = document.createElement('h4');
+		h4.innerHTML = '新建元素节点的方法';
+
+		var box = document.getElementById('box');
+
+		// 添加到元素最后
+		// box.appendChild(h4);
+		
+		//添加到最前面
+		// box.insertBefore(h4,box.firstElementChild);
+
+		// 把h1替换成p
+		var h1 = box.firstElementChild;
+		var p = document.createElement('p');
+		p.innerHTML = h1.innerHTML;
+
+		box.replaceChild(p,h1);
+	}
+		
+	</script>
+</head>
+<body>
+
+	<div id="box">
+		<h1>day10: Dom节点</h1>
+	</div>
+</body>
+</html>

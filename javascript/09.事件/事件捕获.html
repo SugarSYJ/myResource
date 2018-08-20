@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                box.onclick = function(){
+                    console.log('box');
+                }
+                document.body.onclick = function(){
+                    console.log('body');
+                }
+                document.onclick = function(){
+                    console.log('document');
+                }
+                window.onclick = function(){
+                    console.log('window');
+                }
+                box.onclick = function(){
+                    console.log('mybox');
+                }
+                // 事件监听器
+                box.addEventListener('click',function(){
+                    console.log('yourbox');
+                });
+                // 事件捕获：把在冒泡阶段执行的函数提前到捕获节点
+                document.addEventListener('click',function(){
+                    console.log('your document');
+                },true);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="box">事件捕获</div>
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>延迟执行</title>
+	<style>
+	#box{display:none;margin:10px 0;padding:10px;border:1px solid #ddd;font-size:30px;}
+	</style>
+	<script>
+		/*
+			setTimeout(fn,200);
+		 */
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+			var box = document.getElementById('box');
+
+			/*btn.onclick = function(){
+				setTimeout(function(){
+					box.style.display = 'none';
+				},2000);
+			}*/
+
+			// 鼠标滑过显示
+			// onmouseover:鼠标滑过时触发
+			// onmouseout:鼠标移开时触发
+			btn.onmouseover = function(){
+				box.style.display = 'block';
+			}
+			var timer;
+			btn.onmouseout = function(){
+				timer = setTimeout(function(){
+					box.style.display = 'none';
+				},5000);
+				console.log(1234);
+			}
+
+			// 在延迟的时间内清除这个延迟代码
+			// 给#box元素添加onmouseover事件，然后清除延迟代码
+			box.onmouseover = function(){
+				clearTimeout(timer);
+			}
+			box.onmouseout = function(){
+				box.style.display = 'none';
+			}
+			console.log('abc')
+		}
+	</script>
+</head>
+<body>
+	<button id="btn">显示</button>
+	<div id="box">#box</div>
+</body>
+</html>

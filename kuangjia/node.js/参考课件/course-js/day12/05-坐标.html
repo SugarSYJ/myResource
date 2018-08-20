@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>坐标</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var div1 = document.getElementById('div1');
+
+            //验证 clientX,clientY 坐标
+            document.onclick = function (event) {
+                event = event || window.event;
+                console.log('clientX：' + event.clientX);
+                console.log('clientY：' + event.clientY);
+                div1.style.left = event.clientX + 'px';
+                div1.style.top = event.clientY + 'px';
+            }
+
+            //验证 (clientX,clientY) ('screenX','screenY') 坐标
+            document.onclick = function (event) {
+                event = event || window.event;
+                console.log('clientX：' + event.clientX);
+                console.log('clientY：' + event.clientY);
+                console.log('screenX：' + event.screenX);
+                console.log('screenY：' + event.screenY);
+                div1.style.left = event.screenX + 'px';
+                div1.style.top = event.screenY + 'px';
+            }
+            
+            //验证 (clientX,clientY) ('pageX','pageY') 坐标
+            document.onclick = function (event) {
+                event = event || window.event;
+                console.log('clientX：' + event.clientX);
+                console.log('clientY：' + event.clientY);
+                console.log('pageX：' + event.pageX);
+                console.log('pageY：' + event.pageY);
+                div1.style.left = event.pageX + 'px';
+                div1.style.top = event.pageY + 'px';
+            }
+
+            //验证 (clientX,clientY) ('offsetX','offsetY') ('pageX','pageY') 坐标
+            document.onclick = function (event) {
+                event = event || window.event;
+                console.log('clientX：' + event.clientX);
+                console.log('clientY：' + event.clientY);
+                console.log('pageX：' + event.pageX);
+                console.log('pageY：' + event.pageY);
+                console.log('offsetX：' + event.offsetX);
+                console.log('offsetY：' + event.offsetY);
+                div1.style.left = event.offsetX + 'px';
+                div1.style.top = event.offsetY + 'px';
+            }
+        }
+    </script>
+</head>
+<body style="padding:0; margin:0; height:1500px;">
+    <div id="div1" style="width:100px;height:100px; background:#ccc; position:absolute;"></div>
+</body>
+</html>

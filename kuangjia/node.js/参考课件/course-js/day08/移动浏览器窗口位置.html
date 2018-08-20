@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动浏览器窗口位置</title>
+	<script>
+		window.onload = function(){
+			var x = document.getElementById('x');
+			var y = document.getElementById('y');
+			var btn = document.getElementById('btn');
+			var btn2 = document.getElementById('btn2');
+
+			// 绑定点击事件，移动浏览器窗口位置
+			btn.onclick = function(){
+				var left = x.value;
+				var top = y.value;
+
+				// moveTo(left,top);
+				moveBy(left,top);
+			}
+
+			// 绑定点击事件，改变窗口大小
+			btn2.onclick = function(){
+				var width = x.value;
+				var height = y.value;
+
+				// resizeTo(width,height);
+				resizeBy(width,height);
+			}
+
+			// 随机改变窗口的位置
+			setInterval(function(){
+				var left = parseInt(Math.random()*600);
+				var top = parseInt(Math.random()*600);
+
+				moveTo(left,top);
+			},50)
+
+			// 随机改变窗口大小
+			setInterval(function(){
+				var width = parseInt(Math.random()*1000);
+				var height = parseInt(Math.random()*1000);
+
+				resizeTo(width,height);
+			},100)
+		}
+	</script>
+</head>
+<body>
+	<input type="text" name="x" id="x">,<input type="text" id="y"></input>
+	<button id="btn">移动窗口</button><button id="btn2">窗口大小</button>
+</body>
+</html>

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        *{font-size:12px;}
+        .message-content{width: 300px; height: 150px; border: solid 1px #ccc;}
+        .title{border-bottom: solid 1px #ccc; padding:10px;}
+        .content{height:72px; border-bottom: solid 1px #ccc; padding:3px 10px;}
+        .tools{text-align: right; padding:5px 10px;}
+    </style>
+    <script type="text/javascript">
+        //parseInt(Math.random() * 37) + 1
+        function MessageBox(opts) {
+            this.show = function () {
+                var _html = '<div class="message-content">';
+                _html += '<div class="title">' + opts.title + '</div>';
+                _html += '<div class="content">' + opts.content + '</div>';
+                _html += '<div class="tools">';
+
+                for (var key in opts.buttons) {
+                    _html += '<button id="' + opts.buttons[key]['id'] + '">' + opts.buttons[key]['titleCN'] + '</button>';
+                }
+                _html += '</div></div>';
+                document.body.innerHTML = _html;
+
+                for (var key in opts.buttons) {
+                    document.getElementById(opts.buttons[key].id).key = key;
+                    document.getElementById(opts.buttons[key].id).onclick = function () {
+                        opts.buttons[this.key].event();
+                        //console.log(this);
+                    } 
+                }
+            };
+        }
+
+        var mess = new MessageBox({
+            title: '我是标题',
+            content: '我是内容',
+            width: 0,
+            height: 0,
+            x: 0,
+            y: 0,
+            buttons: {
+                cancel: {
+                    titleCN: '取消',
+                    id: 'cancel',
+                    event: function () {
+                        console.log('cancel');
+                    }
+                },
+                confirm: {
+                    titleCN: '确认',
+                    id: 'confirm',
+                    event: function () {
+                        console.log('confirm');
+                    }
+                }
+            }
+        });
+
+        window.onclick = function () {
+            mess.show();
+        }
+    </script>
+</head>
+<body>
+    <!--<div class="message-content">
+        <div class="title">确认</div>
+        <div class="content">我是对话框</div>
+        <div class="tools">
+            <button>确认</button>
+        </div>
+    </div>-->
+</body>
+</html>

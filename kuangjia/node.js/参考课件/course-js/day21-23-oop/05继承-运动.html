@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>05继承-运动</title>
+    <style type="text/css">
+        .ball {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #b6ff00;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+
+        //父类
+        function Div(x, y) {
+            this.element = document.createElement('div');
+            this.init = function () {
+                this.element.className = 'ball';
+                this.element.style.left = this.left + 'px';
+                this.element.style.top = this.top + 'px';
+                document.body.appendChild(this.element);
+            };
+            this.startMove = function () {
+                var self = this;
+                var speed = 10;
+                this.timer = window.setInterval(function () {
+                    var left = self.element.offsetLeft;
+                    left += speed;
+                    if (left >= window.innerWidth - self.element.clientWidth || left <= 0) {
+                        speed *= -1;
+                    }
+                    self.element.style.left = left + 'px';
+                }, 30);
+            }
+        }
+
+        //子类
+        function Ball(x, y) {
+            this.left = x;
+            this.top = y;
+            //Div.call(this, x, y);
+            Div.apply(this, [x, y]);
+        }
+
+        //Ball.prototype = new Div();
+
+        document.onclick = function (event) {
+            var ball = new Ball(event.clientX, event.clientY);
+            ball.init();
+            ball.startMove();
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>

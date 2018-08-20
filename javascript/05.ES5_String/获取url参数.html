@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>获取url参数</h3>
+        <script type="text/javascript">
+            var url = 'https://www.baidu.com/s?name=laoxie&age=18&sex=male';
+            var idx = url.indexOf('?');
+            url = url.substring(idx+1);
+            var params = url.split('&');
+            var person = {};
+            params.forEach(function(item){
+                var arr = item.split('=');
+                person[arr[0]] = arr[1];
+            });
+            console.log(person);
+        </script>
+    </body>
+</html>

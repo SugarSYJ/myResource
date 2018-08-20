@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="../common.js"></script>
+	<script>
+	/*
+		思路：
+			1)获取页面元素
+			2)绑定点击事件
+				随机获取下标（索引）
+				通过下标得到名字
+			3)帮得到的名字写入输入框
+
+	 */
+		window.onload = function(){
+			var namelist = ['杨鸟','黎文博','王红丽','何雯敏','胡栩宁','付光学','李俊','王可佳','张凯','王雯滔','赖金荣','杨乐','熊江林','杨冰','彭涛','欧莉玲','罗晓威','罗志明','李旭宏','杨洁','余涛','黄振业','饶家麒','吕英华','夏粤琳','邓建','吴群','张琳','许隋立','吴边','张世意','姜浩','夏龙旭','梁湛炯','杨天文','刘治洪','吴镇阳','陈昭文','廖志勇','黄萍','伍玉成','黄晓','肖锋','徐赟','林煌','陈其帆','招伟炽','王素芳','陈绵山','胡亚东','魏超','陈越','钟志伟','郑凯华','陈锦','程小权','谢雪锋','钟广华','陈华轩','姜明','黄海涛','郑卓卉','黄梅','张宇飞','杨小明','张进','张文伟','蒋露','张桂梅','余威龙','何文豪'];
+			
+			// console.log(namelist[index]);
+
+			// 1)获取页面元素
+			var name = document.getElementById('name');
+			var btnSelect = document.getElementById('btnSelect');
+
+			// 2)绑定点击事件
+			btnSelect.onclick = function(){
+				// 随机获取下标（索引）
+				var index = randomNumber(0,namelist.length-1);
+
+				// 通过下标得到名字
+				var _name = namelist[index];
+
+				// 3)帮得到的名字写入输入框
+				name.value = _name;
+			}
+		}
+		
+	</script>
+</head>
+<body>
+	<input type="text" id="name"><button id="btnSelect">随机点名</button>
+</body>
+</html>

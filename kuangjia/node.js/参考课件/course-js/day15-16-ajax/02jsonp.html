@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>02jsonp</title>
+    <script type="text/javascript">
+        var getUrlParams = function () {
+            var result = {};
+
+            //param1=1&param2=2
+            var paramsStr = document.location.search.substr(1);
+            //["param1=1", "param2=2"]
+            var paramsArray = paramsStr.split("&");
+            paramsArray.forEach(function (val) {
+                //"param1=1"
+                // ["param1", 1]
+                var subArray = val.split('=');
+                //result[subArray[0]] = subArray[1];
+                //subArray[0] = "username"
+                result[subArray[0]] = subArray[1];
+                //result.username = subArray[1];
+            })
+            return result;
+        }
+
+        var getData = function (result) {
+            console.log(result);
+            container.innerHTML = result;
+        }
+
+        //onreadystatechange
+        //监听（回调）
+        //result => xhr.responseText
+        var aa = function (result) {
+            console.log(result);
+            //
+            container.innerHTML = result.abstract;
+        }
+
+        window.onload = function () {
+            var btnSend = document.getElementById('btnSend');
+            var container = document.getElementById('container');
+            var keyword = document.getElementById('keyword');
+
+            btnSend.onclick = function () {
+                //创建一个 script 标签
+                // 创建一个 ajax 请求
+                var jsonp = document.createElement("script");
+                jsonp.type = "text/javascript";
+                //指定 script 标签的 url（路径 | api 地址）
+                // xhr.open
+                jsonp.src = "http://baike.baidu.com/api/openapi/BaikeLemmaCardApi?scope=103&format=json&appid=379020&bk_key=" + keyword.value + "&bk_length=600&callback=aa";
+                //xhr.send
+                document.head.appendChild(jsonp);
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="keyword" />
+    <button id="btnSend">山寨百科</button>
+    <div id="container"></div>
+    <span id="keleyivisitorip"></span>
+    <a href="demo.html?username=admin"></a>
+</body>
+</html>

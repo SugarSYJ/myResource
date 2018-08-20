@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            ul;li{
+                list-style:none;
+            }
+            a{
+                text-decoration:none;
+            }
+            .yuyi{
+                width: 900px;
+                height: 660px;
+                border:5px solid #FFFFFF;
+            }
+            .yuyi #header,.yuyi #footer{
+                height: 80px;
+                font-size:52px;
+                line-height: 80px;
+                color:#FFFFFF;
+                text-align:center;
+                background: #F47D31;
+            }
+            .yuyi #main{
+                overflow:hidden;
+                background: #888888;
+                padding-left:11px;
+            }
+            .yuyi #main .nav{
+                width: 205px;
+                height: 440px;
+                float: left;
+            }
+            .yuyi #main .nav .header{
+                line-height: 26px;
+                font-size:14px;
+                color:#fff;
+                text-align:center;
+                padding-top:12px;
+                background: #888888;
+            }
+
+            .yuyi #main .nav li{
+                border-bottom:3px solid #fff;
+            }
+            .yuyi #main .nav li a{
+                display:block;
+                line-height: 50px;
+                font-size:14px;
+                color:#F07F49;
+                padding-left:11px;
+            }
+            .yuyi #main .article{
+                width: 450px;
+                height: 430px;
+                float: left;
+                padding-top:10px;
+                padding-left:10px;
+            }
+            .yuyi #main .article_t{
+                height: 256px;
+                padding:10px;
+                background: #EEEEEE;
+            }
+            .yuyi #main .header,.yuyi #main .footer{
+                height: 30px;
+                font-size:18px;
+                color:#FFFFFF;
+                line-height: 30px;
+                text-align:center;
+                background: #F47D31;
+            }
+            .yuyi #main .article_t .section{
+                height: 169px;
+                padding:14px 0;
+            }
+            .yuyi #main .article_t .section section{
+                font-size:16px;
+                line-height: 20px;
+                color:#333333;
+            }
+            .yuyi #main .article_t .section .t1{
+                padding-top:13px;
+            }
+            .yuyi #main .article_b{
+                height: 110px;
+                background: #EEEEEE;
+                margin-top:10px;
+                padding:10px;
+            }
+            .yuyi #main .article_b .section{
+                height: 49px;
+                line-height: 49px;
+                font-size:18px;
+                color:#333333;
+            }
+            .yuyi #main .aside{
+                width: 204px;
+                height: 440px;
+                float: right;
+            }
+            .yuyi #main .aside_t{
+                height: 46px;
+                line-height: 46px;
+                font-size:18px;
+                color:#fff;
+                text-align:center;
+                padding-bottom:9px;
+            }
+            .yuyi #main .aside_b{
+                font-size:16px;
+                line-height: 20px;
+                color:#fff;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="yuyi">
+            <header id="header">Header</header>
+            <main id="main">
+                <nav class="nav">
+                    <article class="header">nav</article>
+                    <ul>
+                        <li><a href="#">link1</a></li>
+                        <li><a href="#">link2</a></li>
+                        <li><a href="#">link3</a></li>
+                    </ul>
+                </nav>
+                <article class="article">
+                    <article class="article_t">
+                        <article class="header">Article Header</article>
+                        <section class="section">
+                            <section>他给我拣定了靠车门的一张椅子；我将他给我做的紫毛大衣铺好座位。他嘱我路上小心，夜里要警醒些，不要受凉。又嘱托茶房好好照应我。</section>
+                            <section class="t1">我看见他戴着黑布小帽，穿着黑布大马褂，深青布棉袍，蹒跚地走到铁道边，慢慢探身下去，尚不大难。可是他穿过铁道，要爬上那边月台，就不容易了。他用两手攀着上面，两脚再向上缩；他肥胖的身子向左微倾，显出努力的样子。这时我看见他的背影，我的泪很快地流下来了。</section>
+                        </section>
+                        <article class="footer">Article Footer</article>
+                    </article>
+                    <article class="article_b">
+                        <article class="header">Article Header</article>
+                        <section class="section">文章内容</section>
+                        <article class="footer">Article Footer</article>
+                    </article>
+                </article>
+                <aside class="aside">
+                    <section class="aside_t">Aside</section>
+                    <section class="aside_b">《背影》是现代作家朱自清于1925年所写的一篇回忆性散文。这篇散文叙述的是作者离开南京到北京大学，父亲送他到浦口火车站，照料他上车，并替他买橘子的情形。在作者脑海里印象最深刻的，是他父亲替他买橘子时在月台爬上攀下时的背影。作者用朴素的文字，把父亲对儿女的爱，表达得深刻细腻，真挚感动，从平凡的事件中，呈现出父亲的关怀和爱护。</section>
+                </aside>
+            </main>
+            <footer id="footer">
+                Footer
+            </footer>
+        </div>
+    </body>
+</html>

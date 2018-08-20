@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>练习如何描述一个对象</title>
+	<script>
+		/*
+			练习如何描述一个对象
+				* 描述一个人
+				* 描述购物车
+		 */
+		
+		var zhaoliying = {
+			// 属性：赵丽颖有什么
+			name:'赵丽颖',
+			age:30,
+
+			// 方法：赵丽颖能做什么
+			cooking(){},
+
+			// 演戏
+			yanxi(){},
+
+			sing(){}
+		}
+
+
+		zhaoliying.yanxi();
+		zhaoliying.sing();
+
+
+		/* 
+			描述购物车
+				* 把购物城当作对象
+					* 
+		 */
+		var shoppingcar = {
+			name:'shopping car',
+			goods:[{guid:'g001',name:'xxx',price:998},{}],
+			step:'my shopping car',
+
+			init(){
+				// shoppingcar.render();
+				this.render();
+			},
+			remove(id){},
+			check(){},
+			changeQty(id){},
+			sum(){},
+			render(){}
+
+
+		}
+
+		shoppingcar.init();
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

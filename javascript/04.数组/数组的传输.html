@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <script type="text/javascript">
+            var arr = [10,20,30];
+            var num = 10;
+            function show(a){
+                // var a = 10;
+                // a++;
+                // document.write(a + ',' + num);
+                
+                a = a.slice(0);
+                a.push(40);
+                document.write(a + '; ' + arr);
+            }
+            show(arr);
+        </script>
+    </body>
+</html>

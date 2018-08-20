@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>02解构</title>
+	<script>
+		/*var a=10;
+		var b=20;
+		var c=30;
+
+		var a=10,b=20,c=30;
+
+		var a,b,c;
+		a=10;
+		b=20;
+		c=30;*/
+
+		/*
+			解构
+				* 数组：[10,20,30]
+				* 对象：{name:'laoxie',age:18,gender:'男'}
+				* 默认值
+					* 解构成功时使用对象/数组的值，否则使用默认值
+				* 剩余值: ...a
+		 */
+		
+		// 解构：相当声明了多个变量a,b,c
+		var [a,b,c,d] = [10,20,30];
+		console.log(a,b,c,d);
+
+		// 相当于声明三个变量：myname,age,gender
+		// 在全局作用域下尽量避免使用name(因为window有个属性叫name)
+		var {myname,age,gender,hobby='coding'} = {myname:'laoxie',age:18,gender:'男',hobby:'xmoving'};
+		console.log(myname,age,gender,hobby);
+
+		// 如果变量名与属性名不相同，则必须写成以下格式才能取到值
+		// var {对象属性名:变量名}
+		var {myname:xname,age:xage,gender:xgender} = {myname:'laoxie',age:18,gender:'男'};
+		console.log(xname,xage,xgender)
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

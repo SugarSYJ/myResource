@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>跳转页面</title>
+	<script>
+	
+	window.onload = function(){
+		var res = prompt('你想购物吗？,输入你要去的网站');
+		var title = document.getElementsByTagName('h1')[0];
+		title.innerHTML += '<span style="color:red">' + res + '</span>';
+		setTimeout(function(){
+			if(res == '京东'){
+				location.href = 'http://www.jd.com';
+			}else if(res == '淘宝'){
+				location.href = 'http://www.taobao.com';
+			}else if(res == '天猫'){
+				location.href = 'http://www.tmall.com';
+			}else{
+				location.href = 'https://www.baidu.com/s?wd=' + res
+			}
+			
+		},1000);
+
+		// 刷新页面
+		document.getElementById('btnRefresh').onclick = function(){
+			location.reload(true);
+		}
+	}
+	
+		
+	</script>
+</head>
+<body>
+	<h1>一秒到</h1>
+	<h2>好快。。</h2>
+	<button id="btnRefresh">刷新</button>
+</body>
+</html>

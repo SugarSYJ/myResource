@@ -1,0 +1,63 @@
+*{
+    margin:0;
+    padding:0;
+}
+ul li{
+    list-style:none;
+}
+a{
+    text-decoration:none;
+}
+.elec_t {
+    width:1211px;
+    height:35px;
+    border-bottom:1px solid #C81622;
+    margin:100px auto;
+    background:url("../images/jd1.jpg") no-repeat;
+}
+.elec_t h3{
+    width:100px;
+    height:35px;
+    font-size:20px;
+    line-height:28px;
+    font-weight:normal;
+    padding-left:40px;
+    float: left;
+}
+.elec_t .elec_tr{
+    width:704px;
+    height:34px;
+    border:1px solid #EDEDED;
+    border-bottom:0 none;
+    float: right;
+}
+.elec_t .elec_tr li{
+    float: left;
+}
+.elec_t .elec_tr li a{
+    display:block;
+    height:34px;
+    font-size:12px;
+    line-height:34px;
+    color:#656565;
+    text-align:center;
+}
+.elec_t .elec_tr li span{
+    border-right:1px solid #CCCCCC;
+    padding:0 17px;
+}
+.elec_t .elec_tr li:hover a{
+    height:32px;
+    color:#CA1524;
+    border:1px solid #C81624;
+    border-top-width:3px;
+    border-bottom:1px solid #fff;
+    margin-top:-1px;
+    margin-left:-1px;
+}
+.elec_t .elec_tr li:hover span{
+    border-right:0 none;
+}
+.elec_t .elec_tr .last:hover a{
+    margin-right:-1px;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            table{border:1px solid #ddd;border-collapse: collapse;}
+            td{border:1px solid #ddd;padding:5px 3px;}
+        </style>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                var row = document.getElementsByName('row')[0];
+                var col = document.getElementsByName('col')[0];
+                var btnCreate = col.nextElementSibling;
+                var datalist = document.getElementsByClassName('datalist')[0];
+                btnCreate.onclick = function(){
+                    var _row = row.value;
+                    var _col = col.value;
+                    var table = document.createElement('table');
+                    var tbody = document.createElement('tbody');
+                    for(var i=0;i<_row;i++){
+                        var tr = document.createElement('tr');
+                        tr.style.backgroundColor = randomColor();
+                        for(var j=0;j<_col;j++){
+                            var td = document.createElement('td');
+                            td.innerHTML = '单元格' +(i+1) + (j+1);
+                            td.style.color = getColor();
+                            tr.appendChild(td);
+                        }
+                        tbody.appendChild(tr);
+                    }
+                    table.appendChild(tbody);
+                    datalist.innerHTML = '';
+                    datalist.appendChild(table);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h3>动态生成表格并实现隔行变色</h3>
+        <label for="row">行：</label>
+        <input type="text" name="row"/>
+        <label for="col">列：</label>
+        <input type="text" name="col"/>
+        <button>生成表格</button>
+        <div class="datalist"></div>
+    </body>
+</html>

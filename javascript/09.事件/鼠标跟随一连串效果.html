@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            .box{width: 30px;height: 30px;left:0;top:0;position:absolute;}
+        </style>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                document.onmousemove = function(e){
+                    var xi = document.createElement('div');
+                    xi.style.left = e.clientX - 15 + 'px';
+                    xi.style.top = e.clientY - 15 +'px';
+                    xi.style.backgroundColor = randomColor();
+                    xi.className = 'box';
+                    box.appendChild(xi);
+                    var firstbox = box.children[0];
+                    var lastbox = box.children[box.children.length-1];
+                    if(box.children.length>20){
+                        firstbox.parentElement.removeChild(firstbox);
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="box" id="box"></div>
+    </body>
+</html>

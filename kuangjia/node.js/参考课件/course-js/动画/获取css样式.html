@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取CSS样式</title>
+	<style>
+	#box{width:100px;height:100px;background-color: #f00;}
+	</style>
+	<script src="../common.js"></script>
+	<script>
+		/*
+			getComputedStyle(node,b): 获取css（伪类）样式;
+				node:元素节点;
+				b:是否获取伪类样式,默认false;
+
+			node.currentStyle: IE低版本浏览器（ie8-）获取css样式
+				使用：node.currentStyle.width/node.currentStyle['width']
+		 */
+		window.onload = function(){
+			var box = document.getElementById('box');
+			// 通过style属性获取内联样式，如果没有相应的内联样式，则返回空字符串
+			console.log(box.style.width);
+
+			// 获取非内联样式（写在css文件或者style标签里面的样式）
+			// getComputedStyle
+			var style = getComputedStyle(box);
+			// 1)style.width
+			// 2)style['width']
+			console.log(style.width);
+			// 得到带单位的字符串，截取方式：
+			// 1)parseInt,parseFloat
+			// 2)slice,substring,substr
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

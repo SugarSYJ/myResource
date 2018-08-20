@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>06自定义属性操作</title>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            /*
+                dataset
+                    * 获取
+                    * 设置
+             */
+            var box = document.querySelector('#box');
+
+            // 原来的获取方式
+            box.getAttribute('data-myname');
+            box.getAttribute('data-age');
+
+
+            // ES5的获取方式
+            // dataset：保存所有自定义属性的集合
+            box.dataset.myname
+
+
+        });
+    </script>
+</head>
+<body>
+    <h1>06自定义属性操作</h1>
+    <div id="box" data-myname="laoxie" data-myage="18">.box</div>
+    
+</body>
+</html>

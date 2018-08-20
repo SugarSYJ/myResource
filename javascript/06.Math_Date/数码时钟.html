@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>数码时钟</h3>
+        <div id="times">
+        </div>
+        <script type="text/javascript">
+            var times = document.getElementById('times');
+            show();
+            setInterval(show,1000);
+            function show(){
+                var date = new Date();
+                var sec = date.getSeconds();
+                var sec1 = sec%10;
+                var sec2 = parseInt(sec/10);
+                var min = date.getMinutes();
+                var min1 = min%10;
+                var min2 = parseInt(min/10);
+                var hour = date.getHours();
+                var hour1 = hour%10;
+                var hour2 = parseInt(hour/10);
+                times.innerHTML = '<img src="img/'+hour2+'.png"/><img src="img/'+hour1+'.png"/>时<img src="img/'+min2+'.png"/><img src="img/'+min1+'.png"/>分<img src="img/'+sec2+'.png"/><img src="img/'+sec1+'.png"/>秒';
+            }
+        </script>
+    </body>
+</html>

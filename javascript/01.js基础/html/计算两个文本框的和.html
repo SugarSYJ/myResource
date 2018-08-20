@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            function sum(){
+                var n1 = document.getElementById("num1");
+                var n2 = document.getElementById("num2");
+                var _num1 = n1.value;
+                var _num2 = n2.value;
+                var res = Number(_num1) + Number(_num2);
+                var output = document.getElementById("output");
+                output.innerHTML = res; 
+            }
+        </script>
+    </head>
+    <body>
+        <h1>计算两个文本框的和</h1>
+        <input type="text" id="num1"/>
+        <input type="text" id="num2"/>
+        <button onclick="sum()">提交</button>
+        <div id="output"></div>
+    </body>
+</html>

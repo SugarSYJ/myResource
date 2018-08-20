@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>微博消息获取</title>
+	<style>
+	body{font-family:'微软雅黑';}
+	#infoList{font-size:14px;line-height:2;}
+	#infoList li{position:relative;border-bottom:1px dotted #ccc;}
+	#infoList li span{position:absolute;right:0;top:5px;padding:0 5px;width:30px;background-color: #fc0;border-radius:5px;color:#fff;font-size:10px;}
+	</style>
+	<script>
+		/*
+			点击按钮，获取微博信息
+		 */
+		window.onload = function(){
+			var infoList = document.getElementById('infoList');
+			var btnMsg = document.getElementById('btnMsg');
+
+			var req = new XMLHttpRequest();
+
+			// 对服务器得到的数据进行处理
+			req.onreadystatechange = function(){console.log(req.readyState,req.status)
+				if(req.readyState == 4 && req.status == 200){
+					// 字符串转换成json对象
+					// var data = eval('('+req.responseText + ')');
+
+					// JSON.parse
+					var data = JSON.parse(req.responseText);
+					// console.log(data);
+					data.forEach(function(obj){
+						// 创建li,并写入#infoList
+						var li = document.createElement('li');
+						li.innerHTML = obj.content;
+
+						// 创建span标签，写入评论数量
+						var span = document.createElement('span');
+						span.innerHTML = obj.comtcnt;
+
+						// 把span写入li
+						li.appendChild(span);
+
+						// 写入#infoList
+						infoList.appendChild(li);
+					});
+				}
+			}
+
+			// 绑定点击事件
+			btnMsg.onclick = function(){
+				// 建立与服务器的连接
+				req.open('get','http://localhost:8080/ajax/weibo',true);
+
+				// 发送请求
+				req.send(null);
+
+				console.log('点击按钮后');
+			}
+		}
+	</script>
+</head>
+<body>
+	<button id="btnMsg">获取信息</button>
+	<ul id="infoList"></ul>
+</body>
+</html>

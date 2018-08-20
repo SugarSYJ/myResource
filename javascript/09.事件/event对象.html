@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01事件类型</title>
+    <style>
+        .box{width:200px;height:100px;background-color:#f60;text-align:center;font-size:50px;color:#fff;line-height:100px;}
+    </style>
+    
+</head>
+<body>
+    <div class="box" id="box"></div>
+    <script>
+        (function(){
+            var box = document.getElementById('box');
+            box.onmousedown = function(){
+                if(event.button===0){
+                    box.innerHTML = '左键';
+                }else if(event.button===1){
+                    box.innerHTML = '滚轮';
+                }else if(event.button===2){
+                    box.innerHTML = '右键';
+                }
+            }
+        })()
+    </script>
+</body>
+</html>

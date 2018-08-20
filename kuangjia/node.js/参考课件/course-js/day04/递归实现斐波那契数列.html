@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>递归实现斐波那契数列</title>
+	<script>
+		/*
+			递归实现斐波那契数列
+			1,1,2,3,5,8,13,21,34,55,89,144...
+			f(n) = f(n-1) + f(n-2);
+		 */
+		function fbnq(month){
+			// 递归的退出条件
+			if(month<3){
+				return 1;
+			}
+			return fbnq(month-1) + fbnq(month-2);
+		}
+		console.log(fbnq(10));
+		var str = '';
+		for(var i=1;i<=40;i++){
+			str += fbnq(i) + ',';
+		}
+		console.log(str);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html >
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>竖排导航</title>
+		<style>
+			li {
+				margin-bottom: 2px;
+				list-style: none;
+				background: url(bg.gif) repeat-x 0 1px;
+				float: left;
+				clear: left;
+				cursor: pointer;
+			}
+			a {
+				display: block;
+				width: 120px;
+				height: 25px;
+				line-height: 25px;
+				position: relative;
+				padding: 0 6px;
+				border: 1px solid #d6d6d6;
+				text-decoration: none;
+				font-size: 12px;
+				color: #555;
+			}
+			a:hover {
+				font-weight: bold;
+				border: 1px solid #b5b5b5;
+			}
+			span {
+				display: block;
+				width: 9px;
+				height: 8px;
+				overflow: hidden;
+				background: url(ico.gif) no-repeat;
+				position: absolute;
+				top: 8px;
+				right: 10px;
+			}
+		</style>
+		<script type="text/javascript">
+			/*
+				竖排导航动画效果
+				思路：
+					1）给li绑定onmouseover事件
+						动画改变当前li的宽度直到300（setInterval）
+					2）给li绑定onmouseout事件
+						动画恢复li的宽度（setInterval）
+						getComputedStyle
+			 */
+			window.onload = function(){
+				var menu = document.getElementById('menu');
+				var links = menu.getElementsByTagName('a');
+
+				// 初始宽度
+				var initWidth = links[0].clientWidth - 12//132
+				
+				// 1）给li绑定onmouseover事件
+				for(var i=0;i<links.length;i++){
+					links[i].onmouseover = function(){
+						var self = this;
+						var startWidth = this.clientWidth;
+
+						// 如果当前li存在timer，则先清除
+						if(self.timer){
+							clearInterval(self.timer);
+							self.timer = undefined;
+						}
+
+						// 改变当前li的宽度直到300
+						self.timer = setInterval(function(){
+							startWidth += 5;
+							if(startWidth >= 300){
+								clearInterval(self.timer);
+								startWidth = 300;//298=>303
+
+								// 动画结束后，把animating改为false
+								self.animating = false;
+							}
+							self.style.width = startWidth + 'px';
+						},50);
+					}
+
+					// 2）给li绑定onmouseout事件
+					links[i].onmouseout = function(){
+						var self = this;
+
+
+						// 如果当前li存在timer，则先清除
+						if(self.timer){
+							clearInterval(self.timer);
+							self.timer = undefined;
+						}
+
+						// 恢复li的宽度
+						var startWidth = this.clientWidth;
+						self.timer = setInterval(function(){
+							startWidth -= 5;
+							if(startWidth <= initWidth){
+								clearInterval(self.timer);
+								startWidth = initWidth;
+							}
+							self.style.width = startWidth + 'px';
+						},50)
+					}
+				}
+			}
+		</script>
+	</head>
+
+	<body>
+		<ul id="menu">
+			<li><a href="http://www.mobiletrain.org" target="_blank">首页<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">千锋精品课程<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">CSS相关知识<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">关于我们<span></span></a></li>
+			<li><a href="http://www.mobiletrain.org" target="_blank">联系我们<span></span></a></li>
+		</ul>
+
+	</body>
+
+</html>

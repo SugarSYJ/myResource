@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>{{count}}</h3>
+        <input type="button" value="counter" @click="a(20,$event)"/>
+        <h1>{{fullname}}</h1>
+        <p>{{age}}</p>
+    </div>
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                name:'Tom',
+                count:0,
+                firstname:'name1',
+                lastname:'name2',
+                age:12
+            },
+            methods:{
+                a:function(n,event){
+                    console.log(n,event);
+                    this.count += n || 1;
+                }
+            },
+            computed:{
+                fullname:{
+                    get:function(){
+                        console.log('getter');
+                        return this.firstname + '-' + this.lastname;
+                    },
+                    set:function(val){
+                        console.log('setter');
+                        this.firstname = 'name3';
+                    }
+                }
+            },
+            watch:{
+                count:function(_new,_old){
+                    console.log(_new,_old);
+                }
+            }
+        })
+        var obj = {name:"Sam",age:33};
+        Object.defineProperty(obj,'name',{
+            get:function(){
+                console.log('获取了属性 name 的值');
+            },
+            set:function(){
+                console.log('设置了属性 name 的值');
+            }
+        })
+    </script>
+</body>
+</html>

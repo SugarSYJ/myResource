@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/react.js"></script>
+        <script src="../js/react-dom.js"></script>
+        <script src="../js/browser.min.js"></script>
+    </head>
+    <body>
+        <div id="div1"></div>
+
+        <script type="text/babel">
+            // var h1 = <h1>React</h1>;
+            // ReactDOM.render(h1,document.getElementById('div1'));
+
+            // var h2s = (
+            //     <div>
+            //         <h2>Tom</h2>
+            //         <h2>Sam</h2>
+            //     </div>
+            // )
+
+            // ReactDOM.render(h2s,document.getElementById('div1'));
+
+            // var h3s = [<h3>Sam</h3>,<h3>Tom</h3>];
+            // ReactDOM.render(<div>{h3s}</div>,document.getElementById('div1'));
+            
+            // var Component1 = function(props){
+            //     console.log(props);
+            //     var names = ['Sam','Tom','Lucy'];
+            //     var h4s = [];
+            //     for(var i=0;i<names.length;i++){
+            //         h4s.push(<h4>{names[i]}</h4>);
+            //     }
+            //     return <div>{h4s}</div>
+            // }
+            // ReactDOM.render(<Component1 name="Sam" age="20" />,document.getElementById('div1'));
+
+            var Component2 = React.createClass({
+                propTypes:{
+                    name:React.PropTypes.string.isRequired
+                },
+                getDefaultProps:function(){
+                    return {
+                        data:['Sam','Tom','Lucy']
+                    }
+                },
+                render:function(){
+                    console.log(this.props);
+                    var h4s = [];
+                    for(var i=0;i<this.props.data.length;i++){
+                        h4s.push(<h4>{this.props.data[i]}</h4>);
+                    }
+                    return <div>{h4s}</div>
+                }
+            });
+            ReactDOM.render(<Component2 data={[1,2]} name="Tom" />,document.getElementById('div1'))
+        </script>
+    </body>
+</html>

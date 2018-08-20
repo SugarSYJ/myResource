@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>节点关系</title>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			// 后代元素
+			$('#box').find('ul');
+			$('#box').children('.list');
+
+			// 父级元素
+			$('#data').parent();//ul
+			$('#data').parents('ul');//ul,ul.list
+			$('#data').parents('.list');
+			$('#data').closest('.list');
+
+			// 兄弟元素
+
+		});
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul class="list">
+			<li>数据1</li>
+			<li>数据2</li>
+			<li class="data3">数据3</li>
+			<li>数据4</li>
+			<li>数据5
+				<div class="sub list">
+					<ul>
+						<li class="list" id="data">数据1</li>
+						<li>数据2</li>
+						<li>数据3</li>
+						<li>数据4</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+		<div class="msg">输出信息</div>
+		<div class="content">.content</div>
+	</div>
+</body>
+</html>

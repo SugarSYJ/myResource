@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            a{
+                text-decoration:none;
+            }
+            .box{
+                width: 492px;
+                height: 535px;
+                font-size:12px;
+            }
+            .box legend{
+                padding:0 20px;
+                line-height: 20px;
+                border:1px solid #C5C7C6;
+            }
+            .box h3{
+                font-size:14px;
+                color:#080808;
+            }
+            .box .c1{
+                width: 449px;
+                height: 131px;
+            }
+            .box .c2{
+                width: 449px;
+                height: 263px;
+            }
+            .box p{
+                line-height: 10px;
+                padding-left:15px;
+                margin:0;
+            }
+
+            .box label{
+                display:block;
+                width: 136px;
+                line-height: 20px;
+                text-align:right;
+                float: left;
+            }
+            .box input{
+                margin-bottom:8px;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="#">
+            <fieldset class="box">
+                <h3>已注册用户登录</h3>
+                <fieldset class="c1">
+                    <legend>用户登录</legend>
+                    <label for="huming">用户名</label><input type="text" id="huming"/><br/>
+                    <label for="mima">密码</label><input type="password" id="mima"/><br/>
+                    <input type="checkbox" id="jizhu" /><label for="jizhu">记住我</label>
+                    <input type="submit" value="登录" /><br/>
+                    <a href="#">你忘记密码？</a>
+                </fieldset>
+                <h3>未注册创建账户</h3>
+                <fieldset class="c2">
+                    <legend>用户注册</legend>
+                    <p>你的电子邮箱不会被公布出去，但是必须填写。在你注册之前请认真阅读服务条款</p><br/>
+                    <label for="yonghu">用户名</label><input type="text" id="yonghu"/>*（最多30个字符）<br/>
+                    <label for="dianzi">电子邮箱</label><input type="text" id="dianzi"/>*<br/>
+                    <label for="mi">密码</label><input type="password" id="mi"/>*(最多15个字符)<br/>
+                    <label for="chong">重复密码</label><input type="password" id="chong"/>*<br/>
+                    <label for="tong">同意服务条款</label><input type="checkbox" id="tong"/>先看看条款*<br/>
+                    <label >&nbsp;<input type="submit" /></label>&nbsp;
+                    <input type="reset" /><br/>
+                    <p>*在提交你的注册信息时，我们认为你已经同意我们的服务条款。</p><br/>
+                    <p>*这些条款可能未经您同意的时候进行修稿。</p>
+                </fieldset>
+            </fieldset>
+        </form>
+    </body>
+</html>

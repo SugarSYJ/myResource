@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',function(){
+                /*
+                    能够获取其他服务器资源的标签
+                        * img
+                        * link
+                        * iframe
+                        * script（jsonp利用script）
+
+                    jsonp原理
+                        1）预定义全局函数getData
+                        2）生成script标签，请求服务器地址,并附带函数名
+                        3）服务器返回js文件（js文件里面包含我们预先定义的函数执行）
+                        4）请求成功后清除script标签
+
+                    JSONP请求需要服务器的支持
+                 */
+                window.getData = function(data){
+                    console.log(data);
+                    document.body.removeChild(script);
+                }
+                var script = document.createElement('script');
+                script.src = "http://localhost:1001/jsonp.php?callback=getData";
+                document.body.appendChild(script);
+                // getData(100);
+            })
+        </script>
+        <!-- <script src="http://localhost:1001/jsonp.php?callback=getData"></script> -->
+    </head>
+    <body>
+        <h1>JSONP跨域解决方案</h1>
+    </body>
+</html>

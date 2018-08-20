@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>显示当前时间/停留时间</h3>
+        <div id="times"></div>
+        <script type="text/javascript">
+            window.onload = function(){
+                var times = document.getElementById('times');
+                var start = new Date();
+                show();
+                setInterval(show,1000);
+                function show(){
+                    var date = new Date();
+                    var sec = date.getSeconds();
+                    var min = date.getMinutes();
+                    var hour = date.getHours();
+                    var offset = parseInt((Date.parse(date)-Date.parse(start))/1000);
+                    var secleft = offset%60;
+                    var minleft = Math.floor((offset/60)%60);
+                    var hourleft = Math.floor(offset/60/60);
+                    times.innerHTML = '当前时间：'+hour+'时'+min+'分'+sec+'秒<br/>停留时间：'+hourleft+'时'+minleft+'分'+secleft+'秒';
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示隐藏</title>
+	<style>
+		.hide{display:none;}
+
+		#sfq{border:1px solid #ddd;padding:1px;}
+		#sfq h4{margin:1px;background-color:#ddd;padding:15px;}
+		#sfq .content{display:none;height:120px;padding:15px;}
+	</style>
+	<script src="../common.js"></script>
+	<script>
+		window.onload = function(){
+			var btn = document.getElementsByTagName('button')[0];
+			var content = getNextElement(btn);
+
+			// 点击显示隐藏
+			btn.onclick = function(){
+				if(content.className == 'hide'){
+					content.className = '';
+				}else{
+					content.className = 'hide';
+				}
+			}
+
+			/*手风琴
+
+			思路：
+				1）获取页面元素
+				2）给标题添加点击事件
+					点击事件触发时，显示底下对应内容，并因此其他内容
+			*/
+		
+			// 1）获取页面元素
+			var sfq = document.getElementById('sfq');console.log(sfq.childNodes,sfq.children)
+			var titles = sfq.getElementsByTagName('h4');
+			var contents = sfq.getElementsByTagName('div');
+
+			// 2）给标题添加点击事件
+			for(var i=0;i<titles.length;i++){
+				titles[i].onclick = function(){
+					for(var i=0;i<contents.length;i++){
+						contents[i].style.display = 'none';
+					}
+					this.nextElementSibling.style.display = 'block';
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<button>显示隐藏</button>
+	<div>#content</div>
+
+	<div id="sfq">
+		<h4>标题1</h4>
+		<div class="content">#内容1</div>
+		<h4>标题2</h4>
+		<div class="content">#内容2</div>
+		<h4>标题3</h4>
+		<div class="content">#内容3</div>
+		<h4>标题4</h4>
+		<div class="content">#内容4</div>
+		<h4>标题5</h4>
+		<div class="content">#内容5</div>
+	</div>
+</body>
+</html>

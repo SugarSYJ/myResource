@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉菜单</title>
+	<style>
+		ul{list-style: none;padding:0;margin:0;}
+		a{text-decoration: none;color:#333;}
+		a:hover{color:#f00;}
+		#nav{width:800px;margin:0 auto;height:60px;background-color:#efefef;}
+		#nav >ul > li{display:inline-block;padding:0 15px;}
+		#nav >ul > li > a{line-height: 60px;}
+		#nav li a{display: inline-block;}
+		#nav > ul > li{position:relative;}
+		/*#nav > ul > li:hover .subnav{display:block;}*/
+		.subnav{display:none;position:absolute;top:100px;width:200px;padding:5px;line-height:2;background-color:#ddd;}
+		.subnav li{border-bottom:1px dotted #fff;}
+		.subnav .arrow{position:absolute;top:-30px;left:10px;width:0;height:0;border:20px solid #f00;border-color:transparent transparent #ddd transparent;}
+	</style>
+	<script>
+	window.onload = function(){
+		var nav=document.getElementById("nav");
+		var subnav=nav.getElementsByClassName("subnav")[0];
+		var li=subnav.parentElement;
+		console.log(li,subnav)
+		li.onmouseover=function(){console.log('li over')
+			subnav.style.display="block"
+		}
+		var timer;
+		li.onmouseout=function(e){console.log('li out')
+		if(e.target != li) return;
+			timer=setTimeout(function(){			
+				subnav.style.display="none"			
+			},2000);
+		}
+		subnav.onmouseover=function(e){console.log('sub over')
+			clearTimeout(timer);console.log(timer)
+		}
+		subnav.onmouseout=function(e){console.log('sub out')
+			if(e.target != subnav) return;
+			subnav.style.display="none"	;		
+		}	
+	}
+			
+
+	</script>
+</head>
+<body>
+	<div id="nav">
+		<ul>
+			<li><a href="#">首页</a></li>
+			<li><a href="#">产品分类</a>
+				<div class="subnav">
+					<span class="arrow"></span>
+					<ul>
+						<li><a href="#">分类1</a></li>
+						<li><a href="#">分类2</a></li>
+						<li><a href="#">分类3</a></li>
+						<li><a href="#">分类4</a></li>
+						<li><a href="#">分类5</a></li>
+						<li><a href="#">分类6</a></li>
+					</ul>
+				</div>
+			</li>
+			<li><a href="#">联系我们</a></li>
+		</ul>
+	</div>
+</body>
+</html>

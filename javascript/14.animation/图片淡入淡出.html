@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            .tu{opacity:0.5;}
+        </style>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var tu = document.querySelector('.tu');
+                var timer;
+                tu.onmouseover = ()=>{
+                    clearInterval(timer);
+                    var target = 1;
+                    timer = setInterval(()=>{
+                        var current = getComputedStyle(tu).opacity*1;
+                        var speed = (target-current)/10;
+                        if(speed<=0.01){
+                            speed = 0.01;
+                        }
+                        var opacity = current + speed;
+                        if(opacity>=target){
+                            clearInterval(timer);
+                            opacity = target;
+                        }
+                        tu.style.opacity = opacity;
+                        
+                    },30);
+                }
+                tu.onmouseout = ()=>{
+                    clearInterval(timer);
+                    var target = 0.5;
+                    timer = setInterval(()=>{
+                        var current = getComputedStyle(tu).opacity*1;
+                        var speed = (target-current)/10;
+                        var opacity = current + speed;
+                        if(opacity<=target){
+                            clearInterval(timer);
+                            opacity = target;
+                        }
+                        tu.style.opacity = opacity;
+                    },30);
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h3>图片淡入淡出</h3>
+        <img src="img/g5.jpg" class="tu"/>
+    </body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; }
+        ol, ul ,li{ list-style: none; } 
+        .fl{ float: left; }
+        .fr{ float: right; }
+        .wrap img{ display: block; border:0; margin-left: 6px; width: 20px; height: 20px; }
+        .wrap h3 span{ font-size:12px; font-weight: normal; color: #666; line-height: 30px; }
+        .wrap{ height:800px; width:1000px; margin:50px auto; }
+        .wrap input{ border:1px solid #ccc; }
+        .wrap .title{ border-bottom:1px solid #ccc; height:100px; }
+        .wrap .tContent{ height: 50px; }
+        .wrap .tContent p{ padding: 0; }
+        .wrap .tCRight span{ padding-top: 5px; width:30px; height:40px; display:block; background: #58bc58; border:1px solid #ccc; text-align: center; color:#fff; }
+        .wrap .mianList{ margin-top: 10px; height:26px; }
+        .wrap .pingcont{ width: 100%; height: 0px;display: block; border:none; }
+        .wrap .btn{ display: none; }
+               
+    </style>
+</head>
+<body>
+    <div class="wrap"></div>
+
+<script type="text/javascript" src ="js/common.js"></script>
+     
+<script type="text/javascript">
+
+
+    //ajax请求获取数据
+    Ajax();
+
+    var wrap = document.querySelector('.wrap');
+    //获取cookie
+    var datalist = Cookie.get('datalist');
+    //判断是否存在cookie
+    if(!datalist){
+      datalist = [];
+    }else{
+      datalist = JSON.parse(datalist);
+    }
+
+    //请求数据
+    function Ajax(){
+        //创建一个伊异步对象
+        let xhr = new XMLHttpRequest();
+        let that = this;
+        xhr.onreadystatechange = function(e){
+            if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+               let data = JSON.parse(xhr.responseText);
+               //生成html
+               render(data);
+               //绑定事件
+               blindEvent(e);
+            }
+        }
+        xhr.open('get', 'api/data/weibodata.json',true);
+        xhr.send();
+    }
+
+    //生成html
+    function render(data){
+          var arr =[];
+          //把对象放入数组中
+          arr.push(data);
+          // console.log(arr);
+          var arr2 = arr[0].comment;
+          // console.log(arr2);
+          var content2 = arr2.map(function(item){
+              // console.log(item.name)
+              return `
+                  <div class="mianList">
+                      <p class="fl"> <span class="fl">${item.name}：</span><span class="fr">${item.con}</span></p>
+                      <p class="fr">${item.time}</p>
+                  </div>
+              `;
+          }).join('');
+
+          //遍历数组写入页面
+          var content = arr.map(function(item){
+              // console.log(item);
+              return `
+                 <div class="title">
+                      <div class="tContent">
+                          <h3 class ="fl tCLeft">${data.name}：<span class="fr">${data.time}</span></h3><p class="tCRight fr"><span class="fl zan"><img src="img/icon/zan.svg" alt="" /><i class="zan_in">${data.zan}</i></span><span class="fr ping"><img src="img/icon/com.svg" alt="" /><i class=" ping_num">3</i></span></p>
+                      </div>
+                     <p>${data.content}</p>
+                 </div>
+                 <div class="mainContent">
+                      ${content2}
+                 </div>
+             
+                 <input type="text"  class = "pingcont"/>
+                 <button class="btn">提交</button>
+                     
+              `;
+          }).join('');
+          
+          wrap.innerHTML = content;
+    }
+   
+    //绑定事件
+    function blindEvent(e){
+        var zan = document.querySelector('.zan');
+        var zan_in = document.querySelector('.zan_in');
+        var ping_num = document.querySelector('.ping_num');
+        var mianList = document.querySelector('.btn');
+        var btn = document.querySelector('.btn');
+        var msg = document.querySelector('.pingcont');
+        var pingcont = document.querySelector('.pingcont');
+        var mainContent = document.querySelector('.mainContent');
+        var ping = document.querySelector('.ping');
+
+        //点赞
+        zan.onclick = function(){
+            // 点击+1
+            this.children[1].innerHTML = zan.innerText*1+1;
+        }
+  
+        //点击出现
+        pingcont.idx = 0;
+        ping.onclick = function(){
+            btn.style.display='block';
+          if(pingcont.idx===0){
+            pingcont.style.border='1px solid #ccc';
+            animate(pingcont,{height:100});
+            pingcont.idx = 1;
+          }else if(pingcont.idx===1){
+            animate(pingcont,{height:0},function(){
+                pingcont.style.border='';
+            });
+            pingcont.idx = 0;
+          }
+        }
+
+        // 给按钮添加点击事件
+        btn.onclick = EnterPress;
+        function EnterPress(){
+
+            var _msg = msg.value;
+                // 创建li，并写入msglist
+            var div = document.createElement('div');
+            var i = document.createElement('i');
+            var a = document.createElement('a');
+            var span = document.createElement('span');
+
+            //把a标签、i标签放在相应的位置
+            div.appendChild(span);
+            div.appendChild(a);
+            div.insertBefore(i,a.childNodes[0]);
+            span.innerHTML = '小米: &nbsp';
+            a.innerHTML = _msg;
+            span.className='fl';
+            a.className='fl con';
+            i.className='fr tim';
+            div.className='mianList';
+            mainContent.appendChild(div);
+
+            // 格式化时间
+            var tody = new Date();
+            var nian = tody.getFullYear();
+            var youe = tody.getMonth() + 1;
+            var day = tody.getDate();
+            var hour = tody.getHours();
+            var min = tody.getMinutes();
+            var miao = tody.getSeconds();
+
+            // 补0操作
+            hour = (hour<10 ? '0' : '') + hour;
+            min = (min<10 ? '0' : '') + min;
+            miao  = (miao <10 ? '0' : '') + miao ;
+            i.innerHTML = nian + '-' + youe + '-' + day  + '   ' +hour  + ':' +  min + ':' +  miao;
+            //清空
+            msg.value="";
+            var ping_nu =  ping_num.innerText*1;
+            var idx = ping_nu+1;
+            ping.children[1].innerHTML = idx;
+
+            //七天存放
+            var date = new Date();
+            date.setDate(date.getDate() + 7);
+            var now = date;
+            //时间
+            var a = i.innerHTML;
+            //内容
+            var b = i.previousSibling.innerHTML;
+            //评论
+            var c = ping.children[1].innerHTML;
+            //点赞
+            var d = zan.children[1].innerHTML;
+
+            
+            var goods = {
+              a:a,
+              b:b,
+              c:c,
+              d:d
+              }
+              console.log(goods)
+            // 把当前商品添加到数组中
+             datalist.push(goods);
+             Cookie.set('datalist',JSON.stringify(datalist),now);
+             var tCRight = document.querySelector('.tCRight');
+
+            }
+
+        //ctrl 回车发送                   
+        msg.onkeydown=function(e){
+            var key = e.keyCode;
+            var ctr = e.ctrlKey;
+            if (ctr&&key===13){
+              // console.log(666)
+              EnterPress();
+              // 清除默认样式
+              e.preventDefault();
+
+            };
+        }
+
+        setCookie(mainContent,zan_in,ping_num);
+    }
+
+    //设置cookie (7天保存)
+    function setCookie(mainContent,zan_in,ping_num){
+            //存放七天
+            
+            var datalist1 = Cookie.get('datalist');
+            if(datalist1){
+              datalist1 = JSON.parse(datalist1);
+           
+            // 把商品信息写入页面
+            var sendCotent1 = document.createElement('div');
+            var commentNum1 = document.createElement('div');
+            var zanNum1 = document.createElement('div');
+
+            sendCotent1.innerHTML = datalist1.map(function(goods){
+              return `<div class="mianList"><span class="fl">小米：&nbsp;</span><a class="fl con">${goods.b}  </a><i class="fr tim">${goods.a}</i></div>`
+            }).join(''); 
+
+            
+            //复制数据
+            var clonedatalist1 = datalist1;
+
+            //删除数据除了最后一项外的所有
+            datalist1.splice(0,datalist1.length-1);
+
+            //评论
+            commentNum1 = clonedatalist1.map(function(goods){
+              return `${goods.c} `
+            }).join('');
+
+            //赞
+            zanNum1 = clonedatalist1.map(function(goods){
+                return `${goods.d}`
+            }).join('');
+          
+         
+            // 把商品信息写入页面
+            mainContent.appendChild(sendCotent1);
+            //赞
+            zan_in.innerHTML=zanNum1;
+            //评论
+            ping_num.innerHTML=commentNum1;
+
+            }
+
+    }
+
+    
+
+</script>
+</body>
+</html>

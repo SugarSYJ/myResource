@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{margin:0; background-color:#000; overflow:hidden;}
+        body *{position:absolute;}
+        .boss{width:100px; height:100px; background:url(game/boss.png); bottom:-100px; left:40%; z-index:100;}
+        .bomb{width:10px; height:30px; background:url(game/bomb.png);}
+        .enemy{width:12px; height:36px; background:url(game/enemy2.png); background-position: 111px; top: -12px;}
+    </style>
+    <script type="text/javascript">
+        /*
+            思路：
+            1、战机（我方）
+               移动、发射炮弹
+            2、敌军（敌方）
+               自动产生、随机位置、向战机方向移动
+            3、炮弹交集
+            4、游戏调用（行为操作）
+                
+        */
+
+        var Game = function () {
+            this.init = function () {
+                //战机
+                this.boss = document.createElement('div');
+                this.boss.className = 'boss';
+                document.body.appendChild(this.boss);
+                var self = this;
+                this.boss.initTimer = window.setInterval(function () {
+                    var top = self.boss.offsetTop;
+                    top -= 5;
+                    if (top <= window.innerHeight - self.boss.clientHeight) {
+                        top = window.innerHeight - self.boss.clientHeight;
+                        window.clearInterval(self.boss.initTimer);
+                    }
+                    self.boss.style.top = top + 'px';
+                }, 50);
+            }
+
+            //战机移动
+            this.bossMove = function (speed, direction) {
+                var left = this.boss.offsetLeft;
+                if (direction == 'left') {
+                    left -= speed;
+                    if (left <= 0) {
+                        left = 0;
+                    }
+                } else if (direction == 'right') {
+                    left += speed;
+                    if (left >= window.innerWidth - this.boss.clientWidth) {
+                        left = window.innerWidth - this.boss.clientWidth;
+                    }
+                }
+                this.boss.style.left = left + 'px';
+            }
+
+            //战机开火
+            this.bossFire = function () {
+                event = event || window.event;
+                var bomb = document.createElement('div');
+                bomb.className = 'bomb';
+                bomb.style.left = (this.boss.offsetLeft + this.boss.clientWidth / 2) + 'px';
+                bomb.style.top = this.boss.offsetTop + 'px';
+                document.body.appendChild(bomb);
+                bomb.timer = window.setInterval(function () {
+                    var top = bomb.offsetTop;
+                    top -= 10;
+                    //?
+                    var enemys = document.getElementsByClassName('enemy');
+                    for (var i = 0; i < enemys.length; i++) {
+                        var enemy = enemys[i];
+                        if (enemy.offsetTop >= bomb.offsetTop - 10 && enemy.offsetTop <= bomb.offsetTop + 10) {
+                            if (enemy.offsetLeft >= bomb.offsetLeft - 10 && enemy.offsetLeft <= bomb.offsetLeft + 10) {
+                                document.body.removeChild(enemy);
+                                document.body.removeChild(bomb);
+                                window.clearInterval(bomb.timer);
+                                window.clearInterval(enemy.timer);
+                            }
+                        }
+                    }
+                    if (top <= 0) {
+                        document.body.removeChild(bomb);
+                        window.clearInterval(bomb.timer);
+                    }
+                    bomb.style.top = top + 'px';
+                }, 30);           
+            };
+
+            //敌方
+            this.genEnemy = function () {
+                var bomb = document.createElement('div');
+                bomb.className = 'enemy';
+                bomb.style.left = (Math.random() * window.innerWidth) + 'px';
+                bomb.style.top = '-10px';
+                document.body.appendChild(bomb);
+                bomb.timer = window.setInterval(function () {
+                    var top = bomb.offsetTop;
+                    top += 1;
+                    if (top >= window.innerHeight) {
+                        document.body.removeChild(bomb);
+                        window.clearInterval(bomb.timer);
+                    }
+                    bomb.style.top = top + 'px';
+                }, 50);
+            }
+        }
+
+        var game = new Game();
+        window.onload = function () {
+            game.init();
+            game.genEnemy()
+            window.setInterval(function () {
+                game.genEnemy();
+            }, 3000);
+        }
+
+        var speed = 10;
+        window.onkeydown = function (_event) {
+            _event = _event || window.event;
+            var keyCode = _event.keyCode;
+
+            window.autoKeycode = window.autoKeycode || [];
+            for (var i = 0; i < window.autoKeycode.length; i++) {
+                if (window.autoKeycode[i] == keyCode) {
+                    window.autoKeycode.splice(i, 1);
+                }
+            }
+            window.autoKeycode.push(keyCode);
+            speed += 1;
+            if (speed >= 50) {
+                speed = 50;
+            }
+            keyGroup(speed);
+        }
+
+        function keyGroup(speed) {
+            for (var i = 0; i < window.autoKeycode.length; i++) {
+                if (window.autoKeycode[i] == 37) {
+                    game.bossMove(speed, 'left');
+                }
+                if (window.autoKeycode[i] == 39) {
+                    game.bossMove(speed, 'right');
+                }
+                if (window.autoKeycode[i] == 32) {
+                    game.bossFire();
+                }
+            }
+        }
+
+        window.onkeyup = function (_event) {
+            _event = _event || window.event;
+            var keyCode = _event.keyCode;
+
+            window.autoKeycode = window.autoKeycode || [];
+            for (var i = 0; i < window.autoKeycode.length; i++) {
+                if (window.autoKeycode[i] == keyCode) {
+                    window.autoKeycode.splice(i, 1);
+                }
+            }
+
+            speed = 10;
+        }
+    </script>
+</head>
+<body>
+    <!--<div class="boss"></div>
+    <div class="bomb"></div>
+    <div class="enemy"></div>-->
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>创建对象的方式</h3>
+        <script type="text/javascript">
+            var obj = {name:'刘亦菲',gender:'女'};
+            var attr = 'gender';
+            document.write(obj.name);
+            document.write(obj['name']);
+            document.write(obj[attr]);
+
+            // 构造函数创建空对象
+            var girl = new Object();
+            girl.name = 'asdf';
+            girl.age = 20;
+            girl.height = true;
+            girl['gender'] = '女';
+            console.log(girl);
+        </script>
+    </body>
+</html>

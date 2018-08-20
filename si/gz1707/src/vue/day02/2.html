@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css" />
+    <script src="../js/vue.js"></script>
+    <script src="../js/jquery-2.1.1.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3>{{count}}</h3>
+        <input type="button" :value="'increment-' + count" @click="increment" />
+        <gz1111 f="100">
+            <h1>Sam</h1>
+            <h1 slot="a">Tom</h1>
+        </gz1111>
+        <select name="" id="">
+            <option value="" is="option1111"></option>
+            <option value="" :is="a"></option>
+        </select>
+    </div>
+    <script type="text/javascript">
+        // Vue.component('gz1111',{
+        //     template:'<h1>gz1111</h1>'
+        // });
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                count:0,
+                a:'option1111'
+            },
+            methods:{
+                increment:function(){
+                    this.count += 1;
+                }
+            },
+            components:{
+                'gz1111':{
+                    template:`
+                        <div>
+                            <slot></slot>
+                            <input type="button" :value="'sub-increment-' + count" @click="increment" />
+                            <slot name="a"></slot>
+                        </div>`,
+                    props:['f'],
+                    data:function(){
+                        return {
+                            count:0
+                        }
+                    },
+                    methods:{
+                        increment:function(){
+                            this.count += parseInt(this.f);
+                        }
+                    }
+                },
+                'option1111':{
+                    template:`<option>男</option>`
+                }
+            }
+        })
+    </script>
+</body>
+</html>

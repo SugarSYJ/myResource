@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		html,body,div,span,h1,h2,h3,h4,h5,h6,p,pre,a,code,em,img,small,strong,sub,sup,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label{margin:auto;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}
+		h2{ text-align:center; padding:10px; font-size:20px;}
+		a{color:#007bc4/*#424242*/; text-decoration:none;}
+		a:hover{text-decoration:underline}
+		ol,ul{list-style:none}
+		table{border-collapse:collapse;border-spacing:0}
+		body{padding:20px;height:100%; font:12px; sans-serif; color:#51555C; background:#2C2C2C }
+		#chatWindow{width:910px; min-height:600px; margin:30px auto 0 auto; background:#fff; -moz-border-radius:12px;-khtml-border-radius: 12px;-webkit-border-radius: 12px; border-radius:12px;}
+		#results{
+			font: 12px Arial, Helvetica, sans-serif;
+			width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#results .loading-indication{
+			background:#FFFFFF;
+			padding:10px;
+			position: absolute;
+		}
+		.paginate {
+			padding: 0px;
+			margin: 0px;
+			height: 30px;
+			display: block;
+			text-align: center;
+		}
+		.paginate li {
+			display: inline-block;
+			list-style: none;
+			padding: 0px;
+			margin-right: 1px;
+			width: 30px;
+			text-align: center;
+			background: #4CC2AF;
+			line-height: 25px;
+		}
+		.page_result{
+			padding: 0px;
+		}
+		.page_result li{
+			background: #E4E4E4;
+			margin-bottom: 5px;
+			padding: 5px;
+			height: 15px;
+			font-size: 12px;
+			list-style: none;
+		}
+		.page_result .page_name {
+			font-size: 14px;
+			font-weight: bold;
+			margin-right: 5px;
+		}
+		.message_right {
+			float: right;
+			margin-left: 5px;
+		}
+		.message_left {
+			float: left;
+			margin-right: 5px;
+		}
+		li.current{background:lightgreen}
+		#chatWindow{display:none;}
+		.loginBar{color:#fff;}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var loginBar = document.getElementsByClassName('loginBar')[0];
+			var chatWindow = document.getElementById('chatWindow');
+			var page_result = document.getElementById('page_result');
+			var btnSend = document.getElementById('send_msg');
+			var msg = document.getElementById('postmsg');
+			var username = document.getElementById('username');
+			var ip = document.getElementById('ip');
+			var btnLogin = document.getElementById('btnLogin');
+
+			// 默认显示服务器IP
+			ip.value = location.hostname;
+
+			// 进入页面时，先登录
+			btnLogin.onclick = function(){
+				var _username = username.value;
+				var _ip = ip.value;
+
+				if(_username == ''){
+					alert('好汉，留下你的大名');
+					return;
+				}
+
+				showChat(_username,_ip);
+			}
+
+			function showChat(username,IP){
+				// var username = prompt('好汉，留下你的大名');
+				// var IP = prompt('请输入你本机的IP地址');
+
+				// 获取数据
+				// ip地址/ajax/chat?type=query
+				
+				// 显示聊天窗口
+				chatWindow.style.display = 'block';
+				loginBar.innerHTML = '<strong>' + username + '</strong>, 欢迎登陆《html5 1601》聊天系统, 您的登录ip为:' + IP
+				
+				var getUrl = 'http://10.3.131.3:8080/ajax/chat?type=query';
+				var postUrl = 'http://10.3.131.3:8080/ajax/chat?type=send&sender='+username;
+				
+				// 创建xhr请求
+				var req = new XMLHttpRequest();
+				var pReq = new XMLHttpRequest();
+
+				// 对数据进行处理
+				req.onreadystatechange = function(){
+					if(req.readyState == 4){
+						var data = JSON.parse(req.responseText);
+
+						// 遍历数据，并写入页面
+						page_result.innerHTML = '';
+						data.forEach(function(obj,idx){
+							var li = document.createElement('li');
+							var _class = 'message_left';
+							if(obj.ipfrom == IP){
+								li.className = 'current'
+								_class = 'message_right'
+							}
+							li.innerHTML = '<span class="'+_class+'">【'+obj.name+'】</span><span class="'+_class+'">'+obj.content+'</span>';
+							page_result.appendChild(li);
+
+							// 遍历到最后一条数据时，把它显示到可视区域
+							if(idx == data.length-1){
+								li.scrollIntoView();
+							}
+						});
+
+					}
+				}
+
+				pReq.onreadystatechange = function(){
+					if(pReq.readyState == 4){
+						// 获取数据前，先停止定时器
+						clearInterval(getTimer);
+
+						// 发送数据成功后，清空输入框
+						msg.value = '';
+
+						// 保持获得焦点状态
+						msg.focus();
+
+						// 立即获取数据
+						getMsg();
+
+						// 重启定时器
+						getTimer = setInterval(getMsg,3000);
+					}
+				}
+
+				// 进入页面时，先获取一次数据
+				getMsg();
+
+				// 每个3秒获取一次数据
+				var getTimer = setInterval(getMsg,3000);
+
+				// ctrl+enter发送消息
+				msg.onkeyup = function(e){
+					e = e || window.event;
+					console.log(e.ctrlKey,e.keyCode)
+					if(e.ctrlKey && e.keyCode == 13){
+						var _msg = msg.value;
+						postMsg(_msg);
+					}
+
+				}
+				
+
+				// 发送消息
+				btnSend.onclick = function(){
+					var _msg = msg.value;
+
+					postMsg(_msg);
+				}
+
+				// 从服务器获取数据
+				function getMsg(){
+					// 建立连接
+					req.open('get',getUrl,true);
+
+					// 发送请求
+					req.send(null);
+				}
+
+				// 向服务器提交数据
+				function postMsg(_msg){
+					pReq.open('get',postUrl+'&msg='+_msg,true);
+
+					pReq.send(null);
+				}
+			}
+
+			
+		}
+	</script>
+	<body>
+		<div class="loginBar">
+			<label for="username">用户名：</label><input type="text" id="username">
+			<label for="ip">IP地址：</label><input type="text" id="ip">
+			<button id="btnLogin">登录</button>
+		</div>
+		
+		<div id="chatWindow">
+			<div id="results">
+				<ul class="page_result" id="page_result" style="height:380px; overflow-y:scroll; vertical-align:text-bottom;text-align:bottom">
+					<li id="item_147">
+						<span class="message_right">【yintao】</span>
+						<span class="message_right">哈哈哈哈</span>
+					</li>
+					<li id="item_146">
+						<span class="message_left">【xiaoming】</span>
+						<span class="message_left">aaaaaaaaaaaaaaaaa</span>
+					</li>
+					<li id="item_145">
+						<span class="message_left">【xiaoming】</span>
+						<span class="message_left">bbbbbbbbbb</span>
+					</li>
+					<li >
+						<span class="message_left">【xiaoming】</span>
+						<span class="message_left">ccccccccccccc</span>
+					</li>
+				</ul>
+				<div align="center">
+					<textarea id="postmsg" style="width:390px;"></textarea>
+					<button class="load_more" id="send_msg" style="display: inline-block;">发送</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

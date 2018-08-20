@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>提示信息</title>
+    <style>
+    .tips {
+        position: absolute;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+    }
+    .tips p{margin:0;}
+    
+    .tips .arrow {
+        position: absolute;
+        top: -10px;
+        left: 10px;
+        border: 10px solid #ddd;
+        border-left-color: transparent;
+        border-right-color: transparent;
+        border-top: none;
+    }
+    
+    .tips .arrow.inner {
+        border-bottom-color: #fff;
+        top: -8px;
+    }
+    </style>
+    <script src="../../jquery/jquery-2.1.1.min.js"></script>
+    <script>
+        /*即时提示信息
+            有title属性的a标签才有提示效果
+        */
+       $(function(){
+            $('a[title]').hover(function(e){
+                var _title = $(this).attr('title');
+
+                // 清除title属性，防止默认显示
+                $(this).removeAttr('title');
+                // $(this).attr('data-title',_title);
+                $(this).data('dataTitle',_title);
+
+                // 生成.tips，并设置样式
+                var $tips = $('<div/>').addClass('tips').css({
+                    left:e.clientX - 20,
+                    top:e.clientY + 40
+                });
+                $('<p/>').html(_title).appendTo($tips);
+                $('<span/>').addClass('arrow').appendTo($tips);
+                $('<span/>').addClass('arrow inner').appendTo($tips);
+                // '<div class="tips"><span class="arrow"></span><span class="arrow inner"></span><p>xxx</p></div>';
+                $tips.appendTo('body');
+           },function(){
+                // 鼠标移开后恢复title属性
+                // $(this).attr('title',$(this).attr('data-title'));
+                $(this).attr('title',$(this).data('dataTitle'));
+                $('.tips').remove();
+
+           }).on('mousemove',function(e){
+                $('.tips').css({
+                    left:e.clientX - 20,
+                    top:e.clientY + 40
+                });
+           });
+       })
+       
+    </script>
+</head>
+
+<body>
+    <a href="#">搜狗</a>
+    <a href="#" title="百度是一家广告公司">百度</a>
+    <a href="#" title="谷歌是一家搜索引擎公司">谷歌</a>
+</body>
+
+</html>

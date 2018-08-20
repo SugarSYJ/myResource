@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>拖拽效果</title>
+    <style>
+        #box {
+            width: 160px;
+            height: 160px;
+            background-color: #f00;
+            position: absolute;
+        }
+
+        img {
+            width: 160px;
+        }
+    </style>
+    <script>
+        // 绑定方式
+        /*window.onload = function(){
+
+		}*/
+        window.addEventListener('load', function () {
+
+            /*
+				拖拽效果
+					1）前提是定位
+					2）给#box添加onmousedown事件
+						给document绑定onmousemove事件,在这个事件里不断改变#box的top,left值
+						left = e.clientX - e.offsetX
+						top = e.clientY - e.offsetY
+
+			 */
+            /*
+                1、获取要拖动的对像
+
+                2、给对像定义事件
+                   2-1、按住要拖动的对像
+	                （获取当前的鼠标位置）
+                   2-2、按住不放移动鼠标
+                      （移动过程中不断跟据鼠标位置改变对像的位置）
+                   2-3、移动到位之后松开按键
+
+                3、移除移动事件
+            */
+
+            function Box() {
+                this.element = document.getElementById('box');
+
+                this.init = function (x, y) {
+                    this.offsetX = x;
+                    this.offsetY = y;
+                }
+
+                this.move = function (x, y) {
+                    this.element.style.left = x - this.offsetX + 'px';
+                    this.element.style.top = y - this.offsetY + 'px';
+                }
+            }
+
+            //实例化
+            //b => 实例
+            var b = new Box();
+
+            b.element.onmousedown = function (e) {
+                e = e || window.event;
+                b.init(e.offsetX, e.offsetY);
+
+                document.onmousemove = function (evt) {
+                    evt = evt || window.event;
+                    b.move(evt.clientX, evt.clientY);
+                }
+                e.preventDefault();
+            }
+
+            box.onmouseup = function () {
+                document.onmousemove = null;
+            }
+
+        }, false);
+    </script>
+</head>
+<body>
+    <div id="box"><img src="hg.jpg"></div>
+</body>
+</html>

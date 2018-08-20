@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #box{border:2px solid #ddd;width:220px;}
+            #box header img{width: 220px;height: 220px;}
+            #box div{width: 220px;}
+            #box div img{width: 40px;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                var tu = document.getElementsByClassName('tu')[0];
+                var div = box.children[1].children;
+                for(var i=0;i<div.length;i++){
+                    (function(i){
+                        div[i].onmouseover = function(){   
+                            tu.src = 'img/small_' + (i+1) + '.jpg';
+                        }
+                    })(i)
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h3>鼠标移入替换图片</h3>
+        <div id="box">
+            <header>
+                <img src="img/small_1.jpg" class="tu" />
+            </header>
+            <div>
+                <img src="img/small_1.jpg" />
+                <img src="img/small_2.jpg" />
+                <img src="img/small_3.jpg" />
+                <img src="img/small_4.jpg" />
+                <img src="img/small_5.jpg" />
+            </div>
+        </div>
+    </body>
+</html>

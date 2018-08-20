@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>自动移动</title>
+    <style type="text/css">
+        #box{width:300px; height:500px; border:dotted 1px; position:relative;}
+        #bird{width:15px; height:15px; background-color:red; position:absolute; top: 240px;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            /*
+                一、获取父容器
+                二、获取子容器（小红块）
+                三、改变子容器位置
+                四、在改变位置的同时判断子容器的位置是否到达边界
+	                1、往右：到达右边界自动往左边移动
+	                2、往左：到达左边界自动往右边移动
+
+                加入定时器去控制子容器的移动
+            */
+
+
+            //定义定时器对像
+            var timer;
+            //获取 box 对像
+            var box = document.getElementById('box');
+            var bird = document.getElementById('bird');
+            //方向（是否向左）非左即右
+            var goLeft = false;
+            document.getElementById('start').onclick = function () {
+                clearInterval(timer);
+                timer = setInterval(function () {
+                    //小红块的相对位置
+                    var left = bird.offsetLeft;
+                    if (left >= 285) {
+                        goLeft = true;
+                    } else if (left <= 0) {
+                        goLeft = false;
+                    }
+                    if (!goLeft) {
+                        left += 5;
+                    } else {
+                        left -= 5;
+                    }
+                    bird.style.left = left + 'px';
+                }, 30);
+            };
+
+            document.getElementById('stop').onclick = function () {
+                clearInterval(timer);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <div id="bird"></div>
+    </div>
+    <button id="start">开始</button>
+    <button id="stop">停止</button>
+</body>
+</html>

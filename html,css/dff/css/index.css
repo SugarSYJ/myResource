@@ -1,0 +1,39 @@
+*{
+    margin:0;
+    padding:0;
+}
+.box{
+    width:1000px;
+    height:830px;
+    padding-top:24px;
+    margin-left:auto;
+    margin-right:auto;
+    background-color:#ccc;
+}
+.box p{
+    text-indent:2em;
+}
+.box .c1{
+    line-height:29px;
+    font-size:14px;
+}
+.box.C2,.box .C3,.box .C4{
+    line-height:28px;
+    font-size:14px;
+}
+.box .c2{
+    padding-top:28px;
+}
+.box .c3{
+    text-indent:0;
+    padding-top:30px;
+    padding-left:2em;
+}
+.box .c4{
+    padding-top:26px;
+}
+.box .c5{
+    line-height:80px;
+    font-size:19px;
+    color:#F35A23;
+}

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            *{margin: 0;padding: 0;}
+            body{font-family:'微软雅黑';}
+            ul{list-style: none;padding:0;margin:0;}
+            #weather{border:1px solid #ddd;padding:10px;font-size:12px;}
+            #weather h1 small{display: block;font-size:16px;margin:5px 0;font-weight:normal;color:#c00;}
+            #weather ul{padding:5px;overflow:hidden;}
+            #weather li{float:left;padding:5px;width:143px;height:200px;border-right:1px dotted #ddd;}
+            #weather li.last{border-right:none;float:right;}
+            #weather .date{padding-bottom:10px;margin-bottom:10px;text-align:center;font-weight:bold;border-bottom:1px dotted #ddd;}
+            .type{height:70px;}
+            .qt{background:url(tianqi/1.png) no-repeat center;}
+            .yt{background: url(tianqi/4.png) no-repeat center;}
+            .zhenyu{background:url(tianqi/10.png) no-repeat center;}
+            .duoyun{background:url(tianqi/3.png) no-repeat center;}
+            .by{background:url(tianqi/12.png) no-repeat center;}
+            .zy{background:url(tianqi/10.png) no-repeat center;}
+            .xy{background:url(tianqi/9.png) no-repeat center;}
+            .leiyu{background: url(tianqi/16.png) no-repeat center;}
+            .dayu{background: url(tianqi/11.png) no-repeat center;}
+            
+            .hot_city ul{overflow:hidden;padding-top: 10px;}
+            .dingWei,.hot_city{width: 100%;background: #bbb;}
+            h2{padding: 10px;}
+            .dingWei .suoYin{overflow:hidden;padding-top: 20px;background: #ddd;}
+            .dingWei .suoYin li,.hot_city ul li{float: left;width: 60px;height: 30px;line-height: 30px;font-size:16px;text-align:center;border-right:1px solid green;margin: 10px 0;color:blue;}
+            .city_list .uls{border-bottom:1px solid #ccc;overflow:hidden;}
+            .city_list .uls span{display:block;color:green;padding: 0 20px;float: left;}
+            .city_list .uls li{float: left;}
+        </style>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var h1 = document.querySelector('h1');
+                var weather = document.querySelector('#weather');
+                var hot_city = document.querySelector('.hot_city');
+                var h2 = document.querySelector('h2');
+                var suoYin = document.querySelector('.suoYin');
+                var city_list = document.querySelector('.city_list');
+                var uls = city_list.children;
+
+                var status = [200,304];
+                var xhr_weather = new XMLHttpRequest();
+                xhr_weather.onload = function(){
+                    if(status.includes(xhr_weather.status)){
+                        var res = JSON.parse(xhr_weather.responseText);
+                        // console.log(res);
+                        if(!status===1000){
+                            alert('没有此城市天气');
+                            return;
+                        }
+                        var data = res.data;
+                        h1.innerHTML = `${data.city}天气预报`;
+                        var h4 = document.createElement('h4');
+                        h4.className = 'data';
+                        h4.innerHTML = '';
+                        var ul = document.createElement('ul');
+                        ul.innerHTML = data.forecast.map(item=>{
+                            var type = '';
+                            if(item.type == '多云'){
+                                type = 'duoyun';
+                            }else if(item.type == '晴'){
+                                type = 'qt';
+                            }else if(item.type == '小雨'){
+                                type = 'xy';
+                            }else if(item.type == '阴'){
+                                type = 'yt';
+                            }
+                            return `<li>
+                                <h4 class="date">${item.date}</h4>
+                                <div class="type ${type}">${item.type}</div>
+                                <div class="tem">${item.low} / ${item.high}</div>
+                            </li>`
+                        }).join('');
+                        weather.innerHTML = '';
+                        weather.appendChild(ul);
+                    }
+                }
+                xhr_weather.open('get','http://wthrcdn.etouch.cn/weather_mini?city=广州',true);
+                xhr_weather.send();
+
+                hot_city.onclick = function(e){
+                    if(e.target.tagName.toLowerCase()==='li'){
+                        var city = e.target.innerText;
+                    }
+                    xhr_weather.open('get','http://wthrcdn.etouch.cn/weather_mini?city='+city,true);
+                    xhr_weather.send();
+                }
+                city_list.onclick = function(e){
+                    if(e.target.tagName.toLowerCase()==='li'){
+                        var city = e.target.innerText;
+                    }
+                    xhr_weather.open('get','http://wthrcdn.etouch.cn/weather_mini?city='+city,true);
+                    xhr_weather.send();
+                }
+
+                var ziMu = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                suoYin.innerHTML = ziMu.map(items=>{
+                    return `<li>${items}</li>`
+                }).join('');
+
+                var xhr_city = new XMLHttpRequest();
+                xhr_city.onload = function(){
+                    if(status.includes(xhr_weather.status)){
+                        var res = JSON.parse(xhr_city.responseText);
+                        console.log(res);
+                        var data = res.regions;
+                        var ul = document.createElement('ul');
+                        data.forEach(item=>{
+                            if(item['hot']==true){
+                                var li=document.createElement('li');
+                                li.innerText=item['name'];
+                                ul.appendChild(li);
+                            }
+                            if(item['regions']){
+                                item['regions'].forEach(items=>{
+                                    if(items['hot']){
+                                       var li=document.createElement('li');
+                                        li.innerText=items['name'];
+                                        ul.appendChild(li); 
+                                    }
+                                })
+                            }
+                        })
+                        hot_city.appendChild(ul);
+
+                        data.forEach(item=>{
+                            var ziMu = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+                            city_list.innerHTML = ziMu.map(items=>{
+                                return `<ul class="uls"><span class="span">${items}</span></ul>`
+                            }).join('');
+
+                            var shouZiMu1 = item['pinyin'].substring(0,1);
+                            var li = document.createElement('li');
+                            input(shouZiMu1,li,item);
+                            // console.log(shouZiMu1);
+                            if(item['regions']){
+                                item['regions'].forEach(items=>{
+                                    if(items['pinyin']){
+                                        var shouZiMu2 = items['pinyin'].substring(0,1);
+                                       var li=document.createElement('li');
+                                        input(shouZiMu2,li,items);
+                                        // console.log(shouZiMu2);
+                                    }
+                                })
+                            }
+                            function input(shouZiMu,li,item){
+                                // console.log(shouZiMu);
+                                switch(shouZiMu){
+                                    case "A":{
+                                        li.innerText=item.name;
+                                        uls[0].appendChild(li);
+                                        console.log(uls[0]);
+                                        break;
+                                    }
+                                    case "B":{
+                                        li.innerText=item.name;
+                                        uls[1].appendChild(li);
+                                        // console.log(uls[1]);
+                                        break;
+                                    }
+                                    case "C":{
+                                        li.innerText=item.name;
+                                        uls[2].appendChild(li);
+                                        break;
+                                    }
+                                    case "D":{
+                                        li.innerText=item.name;
+                                        uls[3].appendChild(li);
+                                        break;
+                                    }
+                                    case "E":{
+                                        li.innerText=item.name;
+                                        uls[4].appendChild(li);
+                                        break;
+                                    }
+                                    case "F":{
+                                        li.innerText=item.name;
+                                        uls[5].appendChild(li);
+                                        break;
+                                    }
+                                    case "G":{
+                                        li.innerText=item.name;
+                                        uls[6].appendChild(li);
+                                        break;
+                                    }
+                                    case "H":{
+                                        li.innerText=item.name;
+                                        uls[7].appendChild(li);
+                                        break;
+                                    }
+                                    case "I":{
+                                        li.innerText=item.name;
+                                        uls[8].appendChild(li);
+                                        break;
+                                    }
+                                    case "J":{
+                                        li.innerText=item.name;
+                                        uls[9].appendChild(li);
+                                        break;
+                                    }
+                                    case "K":{
+                                        li.innerText=item.name;
+                                        uls[10].appendChild(li);
+                                        break;
+                                    }
+                                    case "L":{
+                                        li.innerText=item.name;
+                                        uls[11].appendChild(li);
+                                        break;
+                                    }
+                                    case "M":{
+                                        li.innerText=item.name;
+                                        uls[12].appendChild(li);
+                                        break;
+                                    }
+                                    case "N":{
+                                        li.innerText=item.name;
+                                        uls[13].appendChild(li);
+                                        break;
+                                    }
+                                    case "O":{
+                                        li.innerText=item.name;
+                                        uls[14].appendChild(li);
+                                        break;
+                                    }
+                                    case "P":{
+                                        li.innerText=item.name;
+                                        uls[15].appendChild(li);
+                                        break;
+                                    }
+                                    case "Q":{
+                                        li.innerText=item.name;
+                                        uls[16].appendChild(li);
+                                        break;
+                                    }
+                                    case "R":{
+                                        li.innerText=item.name;
+                                        uls[17].appendChild(li);
+                                        break;
+                                    }
+                                    case "S":{
+                                        li.innerText=item.name;
+                                        uls[18].appendChild(li);
+                                        break;
+                                    }
+                                    case "T":{
+                                        li.innerText=item.name;
+                                        uls[19].appendChild(li);
+                                        break;
+                                    }
+                                    case "U":{
+                                        li.innerText=item.name;
+                                        uls[20].appendChild(li);
+                                        break;
+                                    }
+                                    case "V":{
+                                        li.innerText=item.name;
+                                        uls[21].appendChild(li);
+                                        break;
+                                    }
+                                    case "W":{
+                                        li.innerText=item.name;
+                                        uls[22].appendChild(li);
+                                        break;
+                                    }
+                                    case "X":{
+                                        li.innerText=item.name;
+                                        uls[23].appendChild(li);
+                                        break;
+                                    }
+                                    case "Y":{
+                                        li.innerText=item.name;
+                                        uls[24].appendChild(li);
+                                        break;
+                                    }
+                                    case "Z":{
+                                        li.innerText=item.name;
+                                        uls[25].appendChild(li);
+                                        break;
+                                    }
+                                }
+                            }
+                        })
+
+                    }
+                }
+                xhr_city.open('get','http://localhost:18/api/data/region.json',true);
+                xhr_city.send();
+
+                var lis = suoYin.children;
+                for(let i=0;i<lis.length;i++){
+                    lis[i].onclick = function(){
+                        window.scrollTo(0,uls[i].offsetTop);
+                        console.log(uls[i].offsetTop);
+                    }
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h1>天气预报</h1>
+        <div id="weather"></div>
+        <h2 class="hot_city">热门城市</h2>
+        <div class="dingWei">
+            <h2>按拼音字母查询</h2>
+            <ul class="suoYin"></ul>
+        </div>
+        <div class="city_list"></div>
+    </body>
+</html>

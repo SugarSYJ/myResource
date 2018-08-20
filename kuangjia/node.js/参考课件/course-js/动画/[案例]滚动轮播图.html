@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动轮播图</title>
+	<style>
+		body{margin:50px;}
+		ul{padding:0;margin:0;list-style:none;}
+		#focus{position:relative;margin:0 auto;width:810px;height:320px;overflow:hidden;}
+		#focus ul{position:relative;}
+		li{height:320px;overflow:hidden;}
+	</style>
+	<script>
+		/*
+			滚动轮播图
+			思路：
+				1）设置ul相对定位
+				2）设置定时器，实现轮播效果
+					每次改变index索引值
+				3）不断改变ul的top值，实现向上滚动的效果
+					<1>定时器改变top值，改变的值为图片的高度
+		 */
+		window.onload = function(){
+			var focus = document.getElementById('focus');
+			var ul = focus.firstElementChild;
+			var lis = focus.getElementsByTagName('li');
+
+			// 当前索引值，用于确定显示哪一张图片
+			var index = 0;
+
+			// 图片高度
+			var imgHeight = lis[0].offsetHeight;//320
+
+			// 复制第一张到最后
+			ul.appendChild(lis[0].cloneNode(true));
+
+			// 2）设置定时器，实现轮播效果
+			var timer = setInterval(function(){
+				index++;
+
+				// 当滚动到最后一张时，直接回到第一张
+				if(index >= lis.length){
+					index = 0;
+				}
+
+				// 直接跳转
+				// ul.style.top = -imgHeight * index + 'px'; //1==>0,2==>320,3==>640,4==>960
+				
+				// 动画实现
+				var currentTop = ul.offsetTop;
+				var timer2 = setInterval(function(){
+					currentTop -= 10;
+					console.log(currentTop,imgHeight * index);
+					if(Math.abs(currentTop) >= imgHeight * index){
+						clearInterval(timer2);
+						currentTop = -imgHeight * index;
+					}
+
+					// imgHeight * index
+					 ul.style.top = currentTop + 'px';
+				},50)
+			},3000);
+		}
+	</script>
+</head>
+<body>
+	<div id="focus">
+		<ul>
+			<li><img src="images/001.jpg"></li>
+			<li><img src="images/002.jpg"></li>
+			<li><img src="images/003.jpg"></li>
+			<li><img src="images/004.jpg"></li>
+		</ul>
+	</div>
+</body>
+</html>

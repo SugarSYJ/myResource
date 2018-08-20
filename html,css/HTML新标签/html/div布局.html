@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            .head{
+                height: 50px;
+                background:red;
+            }
+            .nav{
+                height: 50px;
+                margin-top:10px;
+                background: #ccc;
+            }
+            .main{
+                margin-top:10px;
+                
+                overflow:hidden;
+            }
+            .main .main_article{
+                width: 60%;
+                height: 200px;
+                background: pink;
+                float: left;
+            }
+            .main .main_article .aside{
+                height: 100px;
+                width: 96%;
+                background: green;
+            }
+            .main .main_section{
+                width: 40%;
+                height: 200px;
+                background: orange;
+                float: left;
+            }
+            .footer{
+                height: 50px;
+                margin-top:10px;
+                background: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="head">head</div>
+        <div class="nav">nav</div>
+        <div class="main">
+            <div class="main_article">
+                main_article
+                <div class="aside">aside</div>
+            </div>
+            <div class="main_section">main_section</div>
+        </div>
+        <div class="footer">footer</div>
+    </body>
+</html>

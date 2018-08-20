@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>匀速运动</title>
+	<style>
+		html,body{height:100%;}
+		#ball{position:absolute;top:0;left:0;width:50px;height:50px;border:1px solid #aaa;border-radius:50%;background:#f00 radial-gradient(at 20px 20px, #fff 2%,#ccc 40%, #999);box-shadow:0 5px 30px rgba(255,255,255,.8),0 5px 10px rgba(0,0,0,.6);}
+	</style>
+	<script>
+		window.onload = function(){
+			var ball = document.getElementById('ball');
+
+			var left =0, top = 0;
+			setInterval(function(){
+				top += 10;
+				left += 5;
+				ball.style.left = left + 'px';
+				ball.style.top = top + 'px';
+			},50);
+			
+
+		}
+	</script>
+</head>
+<body>
+	<div id="ball"></div>
+</body>
+</html>

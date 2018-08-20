@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽效果</title>
+	<style>
+	#box{position:absolute;width:160px;height:160px;background-color:#f00;}
+	img{width:180px;}
+
+	</style>
+	<script>
+
+
+		window.addEventListener('load',function(){
+			/*
+				保存图片位置
+				思路：
+					1）在拖拽过程中保存图片的位置到cookie
+					2）页面刷新时读取cookie,并把cookie中的left,top赋值给图片
+			 */
+			var box = document.getElementById('box');
+
+			// 2）页面刷新时读取cookie,并把cookie中的left,top赋值给图片
+			var cookie = document.cookie;
+			if(cookie){
+				console.log(cookie);
+				var arr = cookie.split('; ');
+				console.log(arr);
+				arr.forEach(function(val){
+					var _temp = val.split('=');
+					box.style[_temp[0]] = _temp[1] + 'px';
+				})
+			}
+
+			box.onmousedown = function(e){
+				e = e || window.event;
+				var offsetLeft = e.offsetX;
+				var offsetTop = e.offsetY;
+				
+				document.onmousemove = function(evt){
+					evt = evt || window.event;
+
+					box.style.left = evt.clientX - offsetLeft + 'px';
+					box.style.top = evt.clientY - offsetTop + 'px';
+
+					// 图片的位置保存到cookie（添加cookie）
+					// 重复的设置document.cookie不会覆盖原来的值
+					document.cookie = 'left=' + (evt.clientX - offsetLeft);
+					document.cookie = 'top=' + (evt.clientY - offsetTop);
+
+					// 阻止浏览器的默认行为
+					evt.preventDefault ? evt.preventDefault() : evt.retrunValue = false;
+				}
+				e.preventDefault();
+
+			}
+
+			box.onmouseup = function(){
+				document.onmousemove = null;
+			}
+
+		},false);
+	</script>
+</head>
+<body>
+	<div id="box"><img src="hg.jpg"></div>
+</body>
+</html>

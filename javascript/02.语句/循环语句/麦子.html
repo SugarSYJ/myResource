@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>宰相的麦子：相传古印度宰相达依尔，是国际象棋的发明者。有一次，国王因为他的贡献要奖励他，问他想要什么。达依尔说：“只要在国际象棋棋盘上（共64格）摆上这么些麦子就行了：第一格一粒，第二格两粒，……，后面一格的麦子总是前一格麦子数的两倍，摆满整个棋盘，我就感恩不尽了。”国王一想，这还不容易，刚想答应，如果你这时在国王旁边站着，你会不会劝国王别答应，为什么？
+        计算小麦的重量（我国小麦千粒生一般为25-40克）</h3>
+        <script type="text/javascript">
+            var maiZi = 1;
+            var total = maiZi;
+            for(var i=2;i<=64;i++){
+                maiZi *=2;
+                total += maiZi;
+            }
+            total = total*30/1000;
+            document.write(total + 'g');
+        </script>
+    </body>
+</html>

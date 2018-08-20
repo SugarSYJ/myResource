@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>过滤敏感字符</title>
+	<script>
+		window.onload = function(){
+			/*
+				过滤敏感字符
+				思路：
+					1）获取页面元素
+					2）收集敏感字符
+					3）给按钮绑定点击事件
+						提交时，检查输入内容，并过滤其中的敏感字符
+					4）把过滤后的敏感字符写入#list
+			 */
+			// 1）获取页面元素
+			var str = document.getElementById('str');
+			var btnCheck = document.getElementById('check');
+			var list = document.getElementById('list');
+
+			// 2）收集敏感字符
+			var mingan = 'shit,fuck,你妹,你大爷,妈的';
+			mingan = mingan.split(',');
+
+			// 3）给按钮绑定点击事件
+			btnCheck.onclick = function(){
+				// 获取输入的内容
+				var val = str.value;
+
+				for(var i=0;i<mingan.length;i++){
+					// 新建一个以敏感字符相匹配的正则表达式
+					var reg = new RegExp(mingan[i],'gi');
+					val = val.replace(reg,'**');
+				}	
+				// val.indexOf('你大爷');//-1
+				// val.indexOf('shit');//-1
+				
+				// 4）把过滤后的敏感字符写入#list
+				list.innerHTML += '<li>' + val + '</li>';
+			}
+		}
+		
+
+
+	</script>
+</head>
+<body>
+	<h1>过滤敏感字符</h1>
+	<input type="text" id="str"><button id="check">提交</button>
+	<ul id="list"></ul>
+</body>
+</html>

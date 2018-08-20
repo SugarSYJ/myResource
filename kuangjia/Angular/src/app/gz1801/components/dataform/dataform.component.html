@@ -1,0 +1,19 @@
+<div *ngFor="let key of columns">
+  <label for="exampleInputEmail1">{{common.getDictionary(key)}}</label>
+
+  <div *ngIf="configObj.colAttributes && configObj.colAttributes[key]" [ngSwitch]="configObj.colAttributes[key].type">
+    <select *ngSwitchCase="'list'">
+      <option *ngFor="let opt of configObj.colAttributes[key].datasource" [value]="opt[configObj.colAttributes[key].value]">{{opt[configObj.colAttributes[key].text]}}</option>
+    </select>
+    <p  *ngSwitchCase="'list-ajax'">
+      {{fetchData(key, configObj.colAttributes[key].url)}}
+  
+    </p>
+    <input type="text" class="form-control" *ngSwitchDefault>
+  </div>
+
+
+  <div *ngIf="!configObj.colAttributes || !configObj.colAttributes[key]">
+    <input type="text" class="form-control">
+  </div>
+</div>

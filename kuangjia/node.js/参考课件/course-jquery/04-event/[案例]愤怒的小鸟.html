@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>[案例]愤怒的小鸟</title>
+	<style>
+		#bird{position:absolute;width:100px;top:0;left:10px;}
+		.d-right{transform:rotateY(180deg);}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		window.onload = function(){
+			/*
+				愤怒的小鸟
+				思路：
+					1）定位
+					2）获取小鸟
+					3）给document绑定onkeydown
+						不断改变小鸟的top,left
+							// 如果按下的是左方向键：keyCode==37
+							// 如果按下的是右方向键：keyCode==39
+							// 如果按下的是上方向键：keyCode==38
+							// 如果按下的是下方向键：keyCode==40
+			 */
+			// 2）获取小鸟
+			var bird = $('#bird');
+
+			// 3）给document绑定onkeydown
+			$(window).keydown(function(e){
+				// 如果按下的是左方向键：keyCode==37
+				// 如果按下的是右方向键：keyCode==39
+				// 如果按下的是上方向键：keyCode==38
+				// 如果按下的是下方向键：keyCode==40
+				// **通过style属性获取的值为html元素中style属性的值
+				
+			    // 移动前先获取当前top,left值
+			    // offset() => 获取相对 document 的位置
+                // position() => 获取相对与父元素的位置
+				var startLeft = bird.offset().left;
+				var startTop = bird.offset().top;
+				if(e.keyCode == '37'){
+				    bird.removeClass();
+				    bird.css({ left: (startLeft - 5) });
+					//bird.style.left = startLeft - 10 + 'px';
+				} else if (e.keyCode == '39') {
+				    bird.addClass('d-right');
+				    bird.css({ left: (startLeft + 5) });
+					//bird.className = 'd-right';
+					//bird.style.left = startLeft + 10 + 'px';
+				}else if(e.keyCode == '38'){
+					bird.css('top', startTop - 10 + 'px');
+				}else if(e.keyCode == '40'){
+				    bird.css('top', startTop + 10 + 'px');
+				}
+			})
+		}
+	</script>
+</head>
+<body>
+	<img src="images/bird.jpg" id="bird" style="left:10px;top:10px;">
+</body>
+</html>

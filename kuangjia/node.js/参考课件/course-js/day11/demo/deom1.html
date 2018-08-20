@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>draft</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            //1、获取对像
+            var girl = document.getElementById('girl');
+            var boy = document.getElementById('boy');
+            //2、给对像添加点击事件
+            girl.onclick = function () {
+                //3、执行
+                girl.onclick = null;
+                console.log("我是女生，别碰我！");
+                fun1();
+            }
+
+            boy.onclick = function () {
+                boy.onclick = null;
+                console.log("闭嘴！");
+            }
+
+            function fun1() {
+                console.log(1);
+                console.log(2);
+                console.log(3);
+            }
+
+            function fun1() {
+                console.log(3);
+                console.log(2);
+                console.log(1);
+            }
+            //A、123
+            //B、321
+            //C、报错
+
+        }
+    </script>
+</head>
+<body>
+    <div style="width:200px; height:200px; border:solid 2px;">
+        <button id="girl">我是女生</button>
+        <button id="boy">我是男生</button>
+    </div>
+</body>
+</html>

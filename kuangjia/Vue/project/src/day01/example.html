@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input type="text" v-model="person.name"/>
+            <input type="text" v-model="person.age"/>
+            <select v-model="person.gender">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+            <input type="button" value="create" @click="create"/>
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="(value,key) in dataset[0]">{{key}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(obj,index) in dataset" :key="index">
+                        <td v-for="(value,key) in obj">{{value}}</td>
+                        <td><input type="button" value="delete" @click="deler(index,$event)"/></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    name:"",
+                    age:"",
+                    gender:"男",
+                    person:{
+                        name:"",
+                        age:"",
+                        gender:"女"
+                    },
+                    dataset:[{name:"Sam",age:"22",gender:"女"},{name:"Tom",age:"20",gender:"男"}]
+                },
+                methods:{
+                    create:function(){
+                        // this.dataset.push({name:this.name,age:this.age,gender:this.gender});
+                        var _person = JSON.parse(JSON.stringify(this.person));
+                        this.dataset.push(_person);
+                    },
+                    deler:function(_n,_event){
+                        this.dataset.splice(_n,1);
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>
+            封装一个函数factorial，实现任意数字阶乘的计算
+            要求：页面输入任意数字，点击按钮后计算阶乘
+        </h3>
+        <input type="text" id="num"/>
+        <button id="btn">计算</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var num = document.getElementById('num');
+            var btn = document.getElementById('btn');
+            var output = document.getElementById('output');
+            btn.onclick = function(){
+                var _num = num.value;
+                output.innerHTML = jie(_num);
+            }
+            function jie(n){
+                var res = 1;
+                for(var i=2;i<=n;i++){
+                    res *= i;
+                }
+                return res;
+            }
+        </script>
+    </body>
+</html>

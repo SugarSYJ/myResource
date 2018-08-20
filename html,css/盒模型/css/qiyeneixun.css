@@ -1,0 +1,274 @@
+*{
+    margin:0;
+    padding:0;
+}
+ul li{
+    list-style:none;
+}
+a{
+    text-decoration:none;
+}
+.shouye{
+    width:100%;
+    height:2000px;
+    /*background-color:yellow;*/
+}
+/*------第一部分-------*/
+.header{
+    width:100%;
+    height:62px;
+    background-color:#232323;
+}
+.header .container{
+    width:1000px;
+    height:62px;
+    /*background-color:red;*/
+    margin:0 auto;
+}
+.header h1{
+    width:200px;
+    height:62px;
+    background:url("../images/logo.png") no-repeat;
+    line-height:62px;
+    float:left;
+}
+.header ul{
+    width:754px;
+    height:62px;
+    float:right;
+}
+.header ul li{
+    float:left;
+}
+.header ul li a{
+    display:block;
+    height:62px;
+    line-height:62px;
+    font-size:14px;
+    color:#fff;
+    padding:0 13px 0 15px;
+}
+.header ul li:hover a{
+    background-color:#F15A23;
+}
+/*------第二部分----------*/
+.banner{
+    width:100%;
+    height:267px;
+    background-color:#EDEDED;
+}
+.banner img{
+    width:100%;
+    height:267px;
+}
+/*--------第三部分--------*/
+.mainshang{
+    width:100%;
+    height:44px;
+    background:#FFFFFF;
+    border-bottom:1px solid #E0E0E0;
+}
+.mainshang .container{
+    width:1000px;
+    height:44px;
+    margin:0 auto;
+}
+.mainshang h5{
+    width:25px;
+    height:44px;
+    float:left;
+
+}
+.mainshang .h5 img{
+    width:25px;
+    height:44px;
+    float:left;
+    /*margin-top:2px;*/
+}
+.mainshang p{
+    width:220px;
+    height:44px;
+    font-size:14px;
+    line-height:44px;
+    color:#666666;
+    float:left;
+}
+/*------第四部分------*/
+.main{
+    width:100%;
+    height:1432px;
+    background-color:#fff;
+}
+.main .container{
+    width:1000px;
+    height:1432px;
+    margin:0 auto;
+}
+.main .shou{
+    width:223px;
+    height:1393px;
+    background:#E3E3E3;
+    text-align:center;
+    float:left;
+}
+.main .shou .box1{
+    width:223px;
+    height:79px;
+    border-bottom:1px solid #D4D4D4;
+}
+#p1{
+    width:223px;
+    height:37px;
+    font-size:27px;
+    padding-top:10px;
+}
+#p2{
+    width:223px;
+    height:32px;
+    font-size:9px;
+    vertical-align:top;
+}
+.main .shou ul{
+    width:223px;
+    height:180px;
+    
+}
+.main .shou ul li{
+    width:223px;
+    height:55px;
+    border-bottom:1px solid #D4D4D4;
+}
+.main .shou ul li a{
+    display:block;
+    color:#444444;
+    font-size:16px;
+    line-height:55px;
+}
+.main .shou ul li:hover a{
+    background: #F15A23;
+}
+.main .wenzi{
+    width:738px;
+    height:1393px;
+    float:right;
+}
+.main .wenzi .biaoti{
+    width:738px;
+    height:28px;
+    border-bottom:1px dotted #C9CACA;
+    margin-top:17px;
+}
+.main .wenzi .biaoti img{
+    float:left;
+}
+.main .wenzi h4{
+    width:110px;
+    height:28px;
+    border-bottom:2px solid #F15A23;
+    font-size:20px;
+}
+.main .wenzi .tupian{
+    width:738px;
+    height:121px;
+    margin-top:22px;
+}
+.main .wenzi .tupian div{
+    width:147px;
+    height:121px;
+    float:left;
+    font-size:14px;
+    text-align:center;
+    vertical-align:bottom;
+}
+.main .wenzi .tiao{
+    width:738px;
+    height:466px;
+    margin-top:25px;
+}
+.main .wenzi .tiao div{
+    width:738px;
+    height:38px;
+    text-align:left;
+    border-bottom:1px dotted #D4D4D4;
+}
+.main .wenzi .tiao div a{
+    font-size:14px;
+    color:#F47E60;
+    line-height:39px;
+}
+.main .wenzi .tiao div p{
+    float:right;
+    line-height:39px;
+}
+.main .wenzi .xiaobai{
+    width:738px;
+    height:520px;
+    border-top:1px solid #D4D4D4;
+}
+.main .wenzi .xiaobao img{
+    width:738px;
+    height:520px;
+}
+.main .wenzi .shangbiao{
+    width:738px;
+    height:187px;
+}
+.main .wenzi .shangbiao img{
+    width:738px;
+    height:187px;
+    margin-bottom:0;
+}
+/*-------第四部分---------*/
+.lianjie{
+    width:100%;
+    height:214px;
+    background:#222222;
+}
+.lianjie .container{
+    height:214px;
+    width:1000px;
+    margin:0 auto;
+}
+.lianjie .box1{
+    width:490px;
+    height:214px;
+    float:left;
+}
+.lianjie .box1 div{
+    width:98px;
+    height:214px;
+    float:left;
+}
+.lianjie .box1 .p1{
+    color:#fff;
+    font-size:14px;
+    padding-top:51px;
+    padding-left:10px;
+}
+.lianjie .box1 .p2{
+    color:#999999;
+    font-size:14px;
+    line-height:23px;
+    padding-top:13px;
+    padding-left:10px;
+}
+.lianjie .box2{
+    width:510px;
+    height:214px;
+    float:right;
+}
+/*----------第五部分--------*/
+.wei{
+    width:100%;
+    height:45px;
+    background:#101010;
+}
+.wei .container{
+    height:45px;
+}
+.wei .container p{
+    text-align:center;
+    color:#999999;
+    font-size:14px;
+    padding-top:15px;
+}

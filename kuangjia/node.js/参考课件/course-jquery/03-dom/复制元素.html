@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>复制元素</title>
+	<style>
+		img{width:300px;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			var $btnCopy = $('#btnCopy');
+			var $rmb = $btnCopy.nextAll('.rmb');
+
+			$rmb.click(function(){
+				// alert('100人民币');
+				$(this).attr('src','images/50rmb.jpeg');
+			});
+
+			$btnCopy.click(function(){
+				$rmb.clone(true).appendTo('body');
+			});
+
+			$('#btn').on('click', function () {
+			    console.log('button');
+			})
+
+			
+
+		});
+	</script>
+</head>
+<body>
+	<button id="btnCopy">印钞机</button><br>
+	<img src="images/100rmb.jpg" class="rmb">
+    <div id="div1">
+        <div id="div2">
+            <div id="div3">
+                <button id="btn">button</button>
+            </div>
+        </div>
+    </div>
+    <select>
+        <option value="0"></option>
+        <option value="1">广州</option>
+        <option value="2">上海</option>
+        <option value="3">北京</option>
+    </select>
+</body>
+</html>

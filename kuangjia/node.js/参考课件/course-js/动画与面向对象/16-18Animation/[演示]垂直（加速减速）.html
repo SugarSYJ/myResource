@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加减速运动</title>
+	<style>
+		html{height:100%;}
+		input[type=number]{width:60px;}
+		.container{position:relative;border:2px dashed #ddd;margin:50px auto;width:800px;height:300px;line-height:300px;text-align:center;font-size:40px;color:#ddd;}
+		#ball{position:absolute;top:0;left:200px;width:50px;height:50px;border:1px solid #aaa;border-radius:50%;background:#f00 radial-gradient(at 20px 20px, #fff 2%,#ccc 40%, #999);box-shadow:0 5px 30px rgba(255,255,255,.8),0 5px 10px rgba(0,0,0,.6);}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ball = document.getElementById('ball');
+			var btnAc = document.getElementById('btnAc');
+			var btnDe = document.getElementById('btnDe');
+			var speed = 5;
+			var timer;
+			btnAc.onclick = function(){
+				timer = setInterval(function(){
+					if(document.documentElement.offsetHeight - ball.offsetTop <= ball.offsetHeight){
+						ball.style.top = document.documentElement.offsetHeight - ball.offsetHeight + 'px';
+						clearInterval(timer);
+						return;
+					}
+					ball.style.top = ball.offsetTop + speed++ + 'px';
+				},50);
+				
+			}
+
+			var speedDe = 50;
+			btnDe.onclick = function(){
+				timer = setInterval(function(){
+					var _offsetTop = document.documentElement.offsetHeight - ball.offsetTop;
+					var speed = _offsetTop/10
+					if( _offsetTop <= ball.offsetHeight){
+						ball.style.top = document.documentElement.offsetHeight - ball.offsetHeight + 'px';
+						clearInterval(timer);
+						return;
+					}
+					ball.style.top = ball.offsetTop + speed + 'px';
+				},50);
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>加减速运动</h1>
+	<button id="btnAc">加速运动</button><button id="btnDe">减速运动</button>
+		<div id="ball"></div>
+</body>
+</html>

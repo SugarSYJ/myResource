@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>01Ajax定义</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var btnSend = document.getElementById('btnSend');
+            var container = document.getElementById('container');
+
+            var ajaxRequest = new XMLHttpRequest();
+            ajaxRequest.onreadystatechange = function () {
+                if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200) {
+                    var result = ajaxRequest.response;
+                    console.log(result.getElementsByTagName('hello'));
+                    container.innerHTML = result;
+                }
+            }
+
+            btnSend.onclick = function () {
+                ajaxRequest.open('get', 'http://localhost/course/coursejs/2th/day15-ajax-01/ajaxdata/test.xml', true);
+                ajaxRequest.send();
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="btnSend">发送请求</button>
+    <div id="container"></div>
+</body>
+</html>

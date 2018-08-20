@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            ul{list-style: none;padding:0;margin:0;}
+            .msg-list{width:600px;margin:0 auto;}
+            .msg-list ul{padding:10px;min-height:200px;overflow:hidden;border:1px solid #ddd;}
+            .msg-list li{float:left;clear:both;margin:10px 0;padding:5px;line-height:2;border-radius:5px;background-color:#efefef;}
+            .msg-list .t1{font-size:12px;color:blue;}
+            .msg-list li.active{float:right;background-color:#fc0;color:#fff;}
+            .msg-list textarea{display:block;min-height:50px;margin:10px 0;width:100%;box-sizing: border-box;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var autoApply = document.getElementById('autoApply');
+                var msglist = autoApply.children[0];
+                var msg = autoApply.children[1];
+                var btn = autoApply.children[2];
+                var q = '你好,退货,约么,滚'.split(',');
+                var a = '他好，我也好,门都没有,在哪约？,傻逼'.split(',');
+                btn.onclick = function(){
+                    var _msg = msg.value.trim();
+                    var li = document.createElement('li');
+                    li.innerHTML = _msg;
+                    li.className = 'active';
+                    var time = document.createElement('time');
+                    var timer = new Date();
+                    var sec = timer.getSeconds();
+                    var min = timer.getMinutes();
+                    var hour = timer.getHours();
+                    time.innerHTML = '(' + hour + ':' + min + ':' + sec + ')';
+                    time.className = 't1';
+                    li.appendChild(time);
+                    msglist.appendChild(li);
+                    var idx = q.indexOf(_msg);
+                    var lis = document.createElement('li');
+                    setTimeout(function(){
+                        if(idx>=0){
+                            lis.innerHTML = a[idx];
+                            var time = document.createElement('time');
+                            var timer = new Date();
+                            var sec = timer.getSeconds();
+                            var min = timer.getMinutes();
+                            var hour = timer.getHours();
+                            time.innerHTML = '(' + hour + ':' + min + ':' + sec + ')';
+                            time.className = 't1';
+                            lis.appendChild(time);
+                        }else{
+                            lis.innerHTML = '你说什么？风太大我听不见';
+                            var time = document.createElement('time');
+                            var timer = new Date();
+                            var sec = timer.getSeconds();
+                            var min = timer.getMinutes();
+                            var hour = timer.getHours();
+                            time.innerHTML = '(' + hour + ':' + min + ':' + sec + ')';
+                            time.className = 't1';
+                            lis.appendChild(time);
+                        }
+                    },2000)
+                    msglist.appendChild(lis);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>自动应答机器人</h1>
+        <div id="autoApply" class="msg-list">
+            <ul>
+            </ul>
+            <textarea></textarea>
+            <button>提交</button>
+        </div>
+    </body>
+</html>

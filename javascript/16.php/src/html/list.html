@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            // 从后端获取数据
+            // 1、创建异步请求对象
+            var xhr = new XMLHttpRequest();
+            // 处理数据
+            xhr.onreadystatechange = function(){
+                console.log(xhr.readyState);
+                if(xhr.readyState === 4){
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                }
+            }
+            // 2、建立与服务器链接
+            xhr.open('get','http://localhost:18/api/goodslist.php');
+            // 3、发送请求
+            xhr.send();
+
+        </script>
+    </head>
+    <body>
+        <h1>
+            商品列表
+        </h1>
+        <div class="goodslist">
+            
+        </div>
+    </body>
+</html>

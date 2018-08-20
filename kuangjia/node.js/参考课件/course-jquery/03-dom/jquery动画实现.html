@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery动画</title>
+	<style>
+		#box{position:absolute;width:100px;height:100px;background-color: #f00;}
+	</style>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			/*
+				窗口宽度：$(window).width()
+			 */
+			$('#btnGo').click(function(){
+				$('#box').animate({left:$(window).width()-$('#box').outerWidth(),height:300},2000,function(){
+					// 回调函数:动画完成后执行的函数
+					$('#box').css('background-color','#0f0');
+				});
+				
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="btnGo">动画</button>
+	<div id="box"></div>
+</body>
+</html>

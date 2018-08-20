@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生成表格</title>
+	<style>
+	table{border:1px solid #ddd;border-collapse: collapse;width:100%;}
+	td{border:1px solid #ddd;padding:5px 10px;}
+	</style>
+	<script>
+		/*
+			生成表格
+			思路：
+				1）获取页面元素，并得到输入的行数和列数
+				2）根据输入的行数列数进行循环,并进行字符串拼接
+					<1>外层循环控制行数
+					<2>内层循环控制列数
+		 */ 
+		function createTable(){
+			var container = document.getElementById('container');
+			var row = document.getElementById('row').value;
+			var col = document.getElementById('col').value;
+
+			var table = '<table>';
+
+			// 外层循环控制行数
+			while(row > 0){
+				table += '<tr>';
+
+				var j = col;
+
+
+				// 内层循环控制列数
+				while(j>0){
+					table += '<td>单元格</td>';
+
+					// 条件更新
+					j--;
+
+				}
+
+				// 闭合tr标签
+				table += '</tr>';
+
+
+				// 条件更新
+				row--;
+			}
+			table += '</table>';
+
+			container.innerHTML = table;
+
+			/*
+				分析：
+					1)初始化：table = '<table>';
+					2)进入循环
+						<1>外层循环：
+						row=3 ==> table='<table><tr>'
+							内层循环：
+								j=3 ==> table='<table><tr><td>单元格</td>'
+								j=2 ==> table='<table><tr><td>单元格</td><td>单元格</td>'
+								j=1 ==> table='<table><tr><td>单元格</td><td>单元格</td><td>单元格</td>'
+								j=0 ==> 结束内层循环
+							table = '<table><tr><td>单元格</td><td>单元格</td><td>单元格</td></tr>'
+						row=2 ==> table='<table><tr><td>单元格</td><td>单元格</td><td>单元格</td></tr><tr>'
+							内层循环：
+								j=3 ==> table='<table><tr><td>单元格</td><td>单元格</td><td>单元格</td></tr><tr><td>单元格</td>'
+								...
+						...
+						row=0 ==> 结束外层循环
+						table='<table><tr><td>单元格</td><td>单元格</td><td>单元格</td></tr><tr><td>单元格</td><td>单元格</td><td>单元格</td></tr><tr><td>单元格</td><td>单元格</td><td>单元格</td></tr></table>'
+			 */
+		}
+	</script>
+</head>
+<body>
+	<label for="row">行数</label><input type="text" id="row">
+	<label for="col">行数</label><input type="text" id="col">
+	<button onclick="createTable()">生成表格</button>
+	<div id="container"></div>
+</body>
+</html>

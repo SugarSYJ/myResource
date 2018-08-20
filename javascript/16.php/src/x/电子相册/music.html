@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+    html,body{width: 100%;height: 100%;background:url(images/bg5.jpg);background-size:cover;}
+    .pic{width: 280px;height: 400px;position:relative;transform-style:preserve-3d;position:fixed;transform:rotateX(-10deg);}
+    .pic img{width: 280px;height: 400px;position:absolute;left:0;top:0;border:2px solid #ccc;opacity:0.8;}
+    .pic img:hover{transform:scale(1.3);}
+    .xunzhaun{animation:xuanzhuan 2s infinite ;}
+    @keyframes xuanzhuan{
+    from{transform: rotate(0);}
+    to{transform: rotate(360deg);}
+    }
+    .aside{position:fixed;left:0;bottom:0;width: 100px;}
+
+    </style>
+</head>
+<body>
+    <img src="images/musicBtn.png" id="musicbtn" class="xunzhaun"/>              
+    <audio src="mp3/群星 - 铃儿响叮当.mp3" id="player" autoplay="autoplay" loop="loop"></audio>
+    <div class="pic">
+        <img src="images/lao1.gif" />
+        <img src="images/lao2.gif" />
+        <img src="images/lao3.gif" />
+        <img src="images/lao4.gif" />
+        <img src="images/lao5.gif" />
+        <img src="images/lao6.gif" />
+        <img src="images/lao7.gif" />
+        <img src="images/lao8.gif" />
+        <img src="images/lao9.gif" />
+        <img src="images/lao10.gif" />
+    </div>
+    <img src="images/lao7.gif" class="aside"/>
+</body>
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded',function(){
+
+        var pic=document.querySelector('.pic');
+        var imgs=pic.children;
+        console.log(imgs);
+        // 大盒子居中
+        var left=window.innerWidth/2-pic.offsetWidth/2;
+        var tops=window.innerHeight/2-pic.offsetHeight/2;
+        console.log(left,tops);
+        pic.style.left=left+'px';
+        pic.style.top=tops+'px';
+        // 计算每张图片旋转的角度
+        var len=imgs.length;
+        var unit=360/len;
+        for(var i=0;i<len;i++){
+            imgs[i].style.transform='rotateY('+unit*i+'deg) translateZ(500px)';
+        }
+        var timer=setInterval(play, 50);
+        var i=0;
+        function play(){
+            i++;
+            i=i%360;
+            var deg=2*i;
+            pic.style.transform='rotateY('+deg+'deg) rotateX(-5deg)';
+        }
+        pic.onmouseover=()=>{
+            clearInterval(timer);
+        }
+        pic.onmouseout=()=>{
+            timer=setInterval(play, 50);
+        }
+        // 鼠标移入移出
+        for(let i=0;i<len;i++){
+            imgs[i].onmouseover=()=>{
+                for(let j=0;j<len;j++){
+                    if(i===j){
+                        imgs[i].style.opacity=1;
+                        imgs[i].style.transform='rotateY('+unit*i+'deg) translateZ(500px) scale(1.4)';
+                    }
+                    else{
+                        imgs[j].style.opacity=0.8;
+                        imgs[j].style.transform='rotateY('+unit*j+'deg) translateZ(500px)';
+                    }
+                }
+            }
+            imgs[i].onmouseout=()=>{
+                for(let j=0;j<len;j++){
+                    imgs[j].style.transform='rotateY('+unit*j+'deg) translateZ(500px)';
+                }   
+                
+            }
+        }
+        var player=document.getElementById("player");
+        var musicbtn=document.getElementById('musicbtn');
+        musicbtn.onclick=playMusic;
+        function playMusic(){
+            if(player.paused){
+                player.play();
+                this.src="images/musicBtn.png";             
+            }else{
+                player.pause();
+                this.src="images/musicBtnOff.png";                
+            }
+        }
+    })
+
+</script>
+</html>

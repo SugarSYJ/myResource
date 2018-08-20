@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>评分功能</title>
+	<style>
+		ul{list-style:none;padding:0;margin:0;}
+		#rating{overflow:hidden;}
+		#rating li{float:left;width:27px;height:28px;background:url(star.gif) no-repeat;}
+		#rating li.active{background-position:0 -28px;}
+	</style>
+	<script>
+	window.onload = function(){
+		var rating = document.getElementById('rating');
+		var items = rating.getElementsByTagName('li');
+		var info = document.getElementById('info');
+		for(var i=0;i<items.length;i++){
+			items[i].onmouseover = (function(i){
+				return function(){
+					for(var j=0;j<items.length;j++){
+						// 当前li之前的li
+						if(j<=i){
+							items[j].className = 'active';
+						}else{
+							items[j].className = '';
+						}
+					}
+				}
+			})(i);
+			items[i].onmouseup = (function(i){
+				return function(){
+					info.innerHTML = '你打了' + (i+1) + '分';
+				}
+			})(i);
+		}
+	}
+	
+	</script>
+</head>
+<body>
+	<ul id="rating">
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<div id="info"></div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>猜数字游戏</title>
+	<style>
+	.container{width:200px;margin:20px auto;text-align:center;}
+	#number{display:block;margin:10px auto;width:100px;height:50px;line-height:50px;border:1px solid #ccc;font-size:30px;text-align:center;}
+	button{width:106px;line-height:2;border:2px solid #ccc;background-color:#efefef;}
+	</style>
+	<script>
+		/*
+			Math.random()
+			得到一个0-1但不等1的随机数
+			parseInt():取整数
+		 */
+		/*
+			思路：
+			1)得到一个1-100的随机数
+			2)获取用户输入的值
+			3)对两个数字进行对比，并做出相应提示
+		 */
+		
+		// 1)得到一个1-100的随机数
+		var randomNum = parseInt(Math.random()*100) + 1;//88
+
+		// 获取用户输入的值
+		function check(){
+			var number = document.getElementById('number').value;
+			var info = document.getElementById('info');
+
+			// 3)对两个数字进行对比，并做出相应提示
+			if(number > randomNum){
+				info.innerHTML = '大了';
+			}else if(number < randomNum){
+				info.innerHTML = '小了';
+			}else{
+				// js修改标签内容
+				info.innerHTML = '<strong>恭喜你，都会抢答了</strong>';
+
+				// 在js里修改css样式
+				info.style.textDecoration = 'underline';
+				info.style.color = '#f00';
+			}
+		}
+</script>
+</head>
+<body>
+	<div class="container">
+		<h1>猜数子游戏</h1>
+		<p>现在已生成一个1-100的数字，猜中有奖</p>
+		<input type="text" id="number">
+		<button onclick="check()">确定</button>
+		<div id="info" style="padding-top:20px;color:#999"></div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动轮播图</title>
+	<style>
+		body{margin:50px;}
+		ul{padding:0;margin:0;list-style:none;}
+		#lbt{position:relative;margin:0 auto;width:810px;height:320px;overflow:hidden;}
+		#lbt ul{position:relative;left:0;top:0;}
+		li{height:320px;overflow:hidden;}
+		.page{position: absolute;right:15px;bottom:15px;}
+		.page span{display:inline-block;margin:0 5px;width:30px;height:30px;line-height:30px;text-align:center;background-color:#efefef;border-radius:50%;}
+		.page span.active{background-color:#f60;color:#fff;}
+
+		.prev,.next{position: absolute;width:30px;height:50px;line-height:50px;background-color:#f60;color:#fff;text-align:center;}
+		.prev{left:0;top:0;bottom:0;margin:auto 0;}
+		.next{right:0;top:50%;margin-top:-25px;}
+	</style>
+	<script src="../common.js"></script>
+	<script>
+		window.onload = function(){
+			var lbt = document.getElementById('lbt');
+			var ul = lbt.children[0];
+			var page = lbt.getElementsByClassName('page')[0];
+			var spans = page.children;
+			var next = lbt.getElementsByClassName('next')[0];
+			var prev = lbt.getElementsByClassName('prev')[0];
+			
+			// 初始化
+			var index = 0;
+
+			// 定时切换的效果
+			var timer = setInterval(animation,3000);
+
+			// 鼠标移入停止切换
+			lbt.onmouseover = function(){
+				clearInterval(timer);
+			}
+
+			// 鼠标移开时从新开启定时器
+			lbt.onmouseout = function(){
+				timer = setInterval(animation,3000);
+			}
+
+			// 前后按钮
+			prev.onclick = function(){
+				index--;
+				if(index < 0){
+					index = ul.children.length - 1
+				}
+				show();
+			}
+			next.onclick = function(){
+				index++;
+				if(index > ul.children.length - 1){
+					index = 0;
+				}
+				show();
+			}
+
+			// 给所有span绑定点击事件
+			for(var i=0,len=spans.length;i<len;i++){
+				spans[i].index = i;
+				spans[i].onclick = function(){
+					index = this.index;
+					show();
+				}
+			}
+
+			// 图片切换
+			function animation(){
+				index++;
+				if(index == 4){
+					index = 0;
+				}
+				show();
+			}
+
+			// 图片显示
+			function show(){
+				// 清除其他span的高亮样式
+				for(var i=0;i<spans.length;i++){
+					spans[i].className = '';
+				}
+				spans[index].className = 'active';
+				animate(ul,{top:-index*320});
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="lbt">
+		<ul>
+			<li><img src="img/001.jpg"></li>
+			<li><img src="img/002.jpg"></li>
+			<li><img src="img/003.jpg"></li>
+			<li><img src="img/004.jpg"></li>
+		</ul>
+		<div class="page"><span class="active">1</span><span>2</span><span>3</span><span>4</span></div>
+		<div class="prev">&lt;</div>
+		<div class="next">&gt;</div>
+	</div>
+</body>
+</html>

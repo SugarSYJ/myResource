@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{margin:0;}
+        #ball{width:30px; height:30px; border-radius:50%; background-color:#00ff90; position:absolute;}
+        #bar{width:150px; height:10px; background:#000; position:absolute; bottom:20px;}
+    </style>
+    <!--<script src="02.js"></script>-->
+    <script type="text/javascript">
+        window.onload = function () {
+            var bar = document.getElementById('bar');
+            var ball = document.getElementById('ball');
+
+            var xSpeed = 10;
+            var ySpeed = 5;
+
+            function ballMove() {
+                window.setInterval(function () {
+                    //水平移动
+                    var left = ball.offsetLeft;
+                    left += xSpeed;
+                    if (left >= window.innerWidth - ball.clientWidth || left <= 0) {
+                        xSpeed *= -1;
+                        left = left <= 0 ? 0 : window.innerWidth - ball.clientWidth;
+                    }
+                    ball.style.left = left + 'px';
+
+                    //上下移动
+                    var top = ball.offsetTop;
+                    top += ySpeed;
+                    if (top >= window.innerHeight - ball.clientHeight || top <= 0) {
+                        ySpeed *= -1;
+                        top = top <= 0 ? 0 : window.innerHeight - ball.clientHeight;
+                    }
+
+                    if (top >= bar.offsetTop - ball.clientHeight ) {
+                        if (left >= bar.offsetLeft && left <= bar.clientWidth + bar.offsetLeft) {
+                            ySpeed *= -1;
+                        }
+                    }
+                    ball.style.top = top + 'px';
+                }, 30);
+            }
+
+            ballMove();
+
+
+            //球拍的初始速度
+            var barSpeed = 10;
+
+            //球拍的左右移动
+            document.onkeydown = function (_event) {
+                _event = _event || window.event;
+                var keycode = _event.keyCode;
+
+                if (keycode == 39) {//键盘方向键右键
+                    //球拍加速
+                    barSpeed++;
+                    if (barSpeed >= 50) {
+                        barSpeed = 50;
+                    }
+                    var left = bar.offsetLeft;
+                    left += barSpeed;
+                    if (left >= window.innerWidth - bar.clientWidth) {
+                        left = window.innerWidth - bar.clientWidth;
+                    }
+                    bar.style.left = left + 'px';
+                } else if (keycode == 37) {//键盘方向键左键
+                    barSpeed++;
+                    if (barSpeed >= 50) {
+                        barSpeed = 50;
+                    }
+                    var left = bar.offsetLeft;
+                    left -= barSpeed;
+                    if (left <= 0) {
+                        left = 0;
+                    }
+                    bar.style.left = left + 'px';
+                }
+            }
+
+            //松开键盘按键，恢复球拍的初始速度
+            document.onkeyup = function () {
+                barSpeed = 10;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="ball"></div>
+    <div id="bar"></div>
+</body>
+</html>

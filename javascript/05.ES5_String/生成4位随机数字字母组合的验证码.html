@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>生成4位随机数字字母组合的验证码</h3>
+        <button id="btn">重选</button>
+        <div id="output"></div>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            var btn = document.getElementById('btn');
+            var output = document.getElementById('output');
+            var code = document.getElementById('code');
+            btn.onclick = function(){
+                output.innerHTML = getCode();
+                output.style.color = getColor();
+            }
+            function getCode(){
+                var str = '0123456789abcdefghijklnmopqrstuvwsyz';
+                var res = '';
+                for(var i=0;i<4;i++){
+                    var idx = Math.random()*str.length;
+                    res += str.charAt(idx);
+                }
+                return res;
+            }
+        </script>
+    </body>
+</html>

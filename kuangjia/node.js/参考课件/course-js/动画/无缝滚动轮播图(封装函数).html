@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动轮播图</title>
+	<style>
+		body{margin:50px;}
+		ul{padding:0;margin:0;list-style:none;}
+		#focus{position:relative;margin:0 auto;width:810px;height:320px;overflow:hidden;}
+		#focus ul{position:relative;top:0;}
+		li{height:320px;overflow:hidden;}
+		.prev,.next{position:absolute;left:0;top:50%;margin-top:-25px;height:50px;line-height:50px;width:30px;text-align:center;background-color:#fc0;color:#fff;font-weight:bold;}
+		.next{left:auto;right:0;}
+	</style>
+	<script src="../common.js"></script>
+	<script>
+		/*
+			滚动轮播图
+			思路：
+				1）设置ul相对定位
+				2）设置定时器，实现轮播效果
+					每次改变index索引值
+				3）不断改变ul的top值，实现向上滚动的效果
+					<1>定时器改变top值，改变的值为图片的高度
+		 */
+		window.onload = function(){
+			var focus = document.getElementById('focus');
+			var ul = focus.firstElementChild;
+			var lis = focus.getElementsByTagName('li');
+
+			// 当前索引值，用于确定显示哪一张图片
+			var index = 0;
+
+			// 方向
+			var dir = true;
+
+			// 图片高度
+			var imgHeight = lis[0].offsetHeight;//320
+
+			// 复制第一张到最后
+			ul.appendChild(lis[0].cloneNode(true));
+
+			// 2）设置定时器，实现轮播效果
+			var timer = setInterval(animation,3000);
+
+			// 鼠标移入停止轮播
+			focus.onmouseover = function(){
+				clearInterval(timer);
+			}
+
+			// 鼠标离开时，重启定时器
+			focus.onmouseout = function(){
+				timer = setInterval(animation,3000);
+			}
+
+			// 前后按钮点击事件
+			focus.onclick = function(e){
+				e = e || window.event;
+
+				// 前一张按钮
+				if(e.target.className == 'prev'){
+					index--;
+					showImg();
+					dir = false;
+				}
+				// 下一张按钮
+				else if(e.target.className == 'next'){
+					index++;
+					showImg();
+					dir = true;
+				}
+			}
+
+			function animation(){
+				index++;
+				dir = true;
+				
+
+				// 直接跳转
+				// ul.style.top = -imgHeight * index + 'px'; //1==>0,2==>320,3==>640,4==>960
+				
+				showImg();
+			}
+
+			// 图片展示函数
+			function showImg(){
+				// 当滚动到最后一张(复制那一张)时，直接回到第一张
+				if(index >= lis.length){
+					index = 0;
+				}else if(index < 0){
+					index = lis.length - 2;
+				}
+
+				animate(ul,{top:-index*imgHeight});
+				// index=1 ==> top:-320
+				// ul.style.top
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="focus">
+		<ul>
+			<li><img src="images/001.jpg"></li>
+			<li><img src="images/002.jpg"></li>
+			<li><img src="images/003.jpg"></li>
+			<li><img src="images/004.jpg"></li>
+		</ul>
+		<div class="prev">&lt;</div>
+		<div class="next">&gt;</div>
+	</div>
+</body>
+</html>

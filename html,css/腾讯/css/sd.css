@@ -1,0 +1,29 @@
+*{
+    margin:0;
+    padding:0;
+}
+ul li{
+    list-style:none;
+}
+a{
+    text-decoration:none;
+}
+.box{
+    width: 100%;
+    height:3000px;
+    background:yellow;
+}
+.box .box1{
+    width: 1066px;
+    height: 78px;
+    margin:0 auto;
+    /*overflow:hidden;*/
+    background-color:pink;
+}
+.box .box1 .box2{
+    width: 176px;
+    height: 37px;
+    border:1px solid red;
+    margin-left:195px;
+    margin-top:20px;
+}

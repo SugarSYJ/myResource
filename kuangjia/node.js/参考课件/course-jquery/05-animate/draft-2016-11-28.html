@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <style type="text/css">
+        .box{width:100px; height:100px; background-color:#0094ff;}
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <input type="button" id="btn" value="show/hide" />
+    <script type="text/javascript">
+        $('#btn').click(function () {
+            //if ($('.box').is(':hidden')) {
+            //    $('.box').show(5000, function () {
+            //        console.log('show complete');
+            //    });
+            //} else {
+            //    $('.box').hide(5000, function () {
+            //        console.log('hide complete');
+            //    });
+            //}
+
+            //if (!$(this)[0].dkHide) {
+            //    $('.box').fadeOut();
+            //    $(this)[0].dkHide = true;
+                
+            //} else {
+            //    $('.box').fadeIn()
+            //    $(this)[0].dkHide = false;
+            //}
+
+            //if (!$(this).attr('hide') || $(this).attr('hide') == 'false') {
+            //    $('.box').fadeTo(500, 0.3);
+            //    $(this).attr('hide', 'true');
+            //} else {
+            //    $('.box').fadeTo(500, 1);
+            //    $(this).attr('hide', 'false');
+            //}
+
+            //$('.box').fadeToggle(5000);
+
+            //if (!$(this).attr('hide') || $(this).attr('hide') == 'false') {
+            //    $('.box').slideUp(500);
+            //    $(this).attr('hide', 'true');
+            //} else {
+            //    $('.box').slideDown(500);
+            //    $(this).attr('hide', 'false');
+            //}
+
+            if (!$(this).attr('hide') || $(this).attr('hide') == 'false') {
+                $('.box').animate({width: 1000, height: 500, opacity: 0.3}, 1000);
+                $(this).attr('hide', 'true');
+            } else {
+                $('.box').animate({width: 100, height: 100, opacity: 1}, 1000);
+                $(this).attr('hide', 'false');
+            }
+        })
+    </script>
+</body>
+</html>

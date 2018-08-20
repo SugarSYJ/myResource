@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串拼接</title>
+	<style>
+		.city{color:#f00;}
+	</style>
+	<script>
+	// ['北京','上海','广州','深圳']
+		var str = '中国';
+		var str2 = '台湾';
+		var str3 = str + str2;
+		// alert(str3);
+
+		// 往页面写入城市列表
+		// <ul><li>北京</li><li>上海</li><li>广州</li><li>深圳</li></ul>
+		var bj = '北京';
+		var sh = '上海';
+		var gz = '广州';
+		var sz = '深圳';
+
+		var cities = '<ul class="city">';
+		/*cities = cities + '<li>' + bj + '</li>';//<ul><li>北京</li>
+		cities = cities + '<li>' + sh + '</li>';//<ul><li>北京</li><li>上海</li>
+		cities = cities + '<li>' + gz + '</li>';
+		cities = cities + '<li>' + sz + '</li>';
+		cities = cities + '</ul>';*/
+
+		// 优化
+		cities += '<li>' + bj + '</li>';//<ul><li>北京</li>
+		cities = cities + '<li>' + sh + '</li>';//<ul><li>北京</li><li>上海</li>
+		cities = cities + '<li>' + gz + '</li>';
+		cities = cities + '<li>' + sz + '</li>';
+		cities = cities + '</ul>';*/
+		// alert(cities);
+		document.write(cities);
+		
+	</script>
+</head>
+<body>
+
+</body>
+</html>

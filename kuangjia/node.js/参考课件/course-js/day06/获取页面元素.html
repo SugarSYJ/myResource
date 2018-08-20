@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		window.onload = function(){
+			var box = document.getElementById('box');
+			var buttons = document.getElementsByTagName('button');
+			console.log(box,buttons);
+
+			box.innerHTML = '今天我迟到了~';
+
+			// **代码执行顺序
+			// for循环可能只用了10毫秒就执行完毕
+			for(var i=0;i<buttons.length;i++){
+				//这里的代码循环过程中执行
+				buttons[i].innerHTML = '明天你迟到' + i;
+				buttons[i].onclick = function(){
+					// 这里的代码，点击按钮的时候才执行
+					// **变量的读取规则
+					// alert(buttons[i].innerHTML);
+
+					// **this
+					// 表示当前对象，每一个function内部都有一个this
+					// 当前对象就是函数的执行者
+					
+					alert(this.innerHTML);
+				}
+			}
+			console.log(i);
+			console.log(buttons[i]);
+			console.log('for循环结束');
+		}
+	</script>
+</head>
+<body>
+	<div id="box">#box</div>
+	<button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+	<button>按钮4</button>
+	<button>按钮5</button>
+	<button>按钮6</button>
+</body>
+</html>

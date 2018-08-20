@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数据类型的转换</title>
+	<script>
+		/*
+			字符串：String()
+				所有的数字/布尔值都转换成对应的字符串
+					123 ==> '123'
+					true ==> 'true'
+					false ==> 'false'
+			数字：Number()
+				字符串转数字
+					能成功转换成数字的字符串 ==> 相应的数字
+						'123' ==> 123
+					不能成功转换成数字的字符 ==> NaN
+						'123a' ==> NaN
+					空字符串'' ==> 0
+				布尔值转数字
+					true ==> 1
+					false ==> 0
+
+			布尔: Boolean()
+				字符串转布尔值：
+					空字符串'' ==> false
+					其他字符 ==> true;
+				数字转布尔值：
+					0 ==> false
+					NaN ==> false
+					其他数字 ==> true
+		*/
+	var str = '20';
+	// 转换成数字类型
+	document.write('<p>字符串转数字:' + Number(str) + '</p>');
+
+	// 转换成布尔类型
+	document.write('<p>字符串转数字:' + Boolean(str) + '</p>');
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

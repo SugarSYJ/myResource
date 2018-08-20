@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>障碍物碰撞</title>
+	<style>
+	html{height:100%;overflow:hidden;}
+	#box{position:absolute;left:100px;top:100px;width:40px;height:40px;background-color:#f00;border-radius:50%;}
+	#bar{position:absolute;bottom:50px;left:50px;width:200px;height:20px;background-color: #000;}
+	</style>
+	<script>
+		window.onload = function(){
+			var box = document.getElementById('box');
+			var bar = document.getElementById('bar');
+
+			//水平速度
+			var hspeed = 5;
+
+			// 垂直速度
+			var vspeed = 10;
+
+			setInterval(function(){
+				// 获取小球当前状态
+				var startLeft = box.offsetLeft;
+				var startTop = box.offsetTop;
+
+				// 边界处理
+				if(startLeft >= window.innerWidth - box.offsetWidth || startLeft <= 0){
+					hspeed *= -1;
+				}
+
+				if(startTop >= window.innerHeight - box.offsetHeight || startTop <=0){
+					vspeed *= -1;
+				}
+
+				if(startTop >= bar.offsetTop - box.offsetHeight && startTop <= bar.offsetTop + bar.offsetHeight){
+					if(startLeft >= bar.offsetLeft - box.offsetWidth/2 && startLeft <= bar.offsetLeft + bar.offsetWidth - box.offsetWidth/2){
+						vspeed *= -1;
+					}
+				}
+
+				// 改变小球的top,left值
+				box.style.left= startLeft + hspeed + 'px';
+				box.style.top =startTop + vspeed + 'px';
+			},30);
+
+
+			// #bar的移动速度
+			var barSpeed = 10;
+
+			// 移动#bar
+			document.onkeydown = function(e){
+				e = e || window.event;
+				var keyCode = e.keyCode || e.which;
+
+				// 不断按下左右方向键时，barSpeed自增，实现加速效果
+				barSpeed++;
+				if(barSpeed >= 50){
+					barSpeed = 50;
+				}
+
+				//获取#bar元素的当前left值
+				var startLeft = bar.offsetLeft;
+
+				// 按下右方左键, #bar的left值减小
+				if(keyCode == 37){
+					if(startLeft <= 0){
+						startLeft = barSpeed;
+					}
+					bar.style.left = startLeft - barSpeed + 'px';
+				}
+				// 按下右方向键，#bar的left值增加
+				else if(keyCode == 39){
+					if(startLeft >= window.innerWidth - bar.offsetWidth){
+						startLeft = window.innerWidth - bar.offsetWidth - barSpeed;
+					}
+					bar.style.left = startLeft + barSpeed + 'px';
+				}
+			}
+
+			// 当键盘松开时，重置#bar移动速度
+			document.onkeyup = function(){
+				barSpeed = 10;
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+	<div id="bar"></div>
+</body>
+</html>

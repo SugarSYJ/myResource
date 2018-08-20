@@ -1,0 +1,328 @@
+#nav{
+    background: #A21F25;
+}
+#nav .nav_l{
+    /*height: 34px;*/
+    position:relative;
+}
+#nav .nav_l h3{
+    width: 190px;
+    /*height: 34px;*/
+    font-size:15px;
+    color:#fff;
+    font-weight:bold;
+    text-align:center;
+    background: #B9363C;
+    line-height:34px;
+    float: left;
+}
+#nav .nav_l .nav_l1{
+    height: 381px;
+    padding-top:4px;
+    background: #1F1909;
+    position:absolute;
+    left:0;
+    top:34px;
+}
+#nav .nav_l .nav_l1 li{
+    width: 190px;
+    padding-top:4px;
+    position:relative;
+}
+#nav .nav_l .nav_l1 li a{
+    display:block;
+    padding-left:40px;
+    font-size:14px;
+    color:#FFFAFE;
+    line-height:38px;
+}
+#nav .nav_l .nav_l1 i{
+    display:block;
+    width: 20px;
+    height: 30px;
+    background:url("../images/tubiao.fw.png") 0 -120px;
+    position:absolute;
+    left:12px;
+    top:10px;
+}
+#nav .nav_c li,#nav .nav_r li{
+    float: left;
+}
+#nav .nav_c li a,#nav .nav_r li a{
+    display:block;
+    height: 25px;
+    padding-top:9px;
+    float: left;
+}
+#nav .nav_c li a span{
+    display:block;
+    height: 15px;
+    line-height: 15px;
+    font-size:15px;
+    color:#fff;
+    float: left;
+    padding:0 17px 0 13px;
+    border-right:1px dashed #BA636B;
+}
+#nav .nav_c li:hover a,#nav .nav_r li:hover a{
+    background: #434343;  
+    margin-left:-1px;
+    padding-left:1px;
+}
+#nav .nav_c li:hover a span{
+    border-right:1px dashed #434343;
+}
+#nav .nav_c li a .c{
+    color:#FFE508;
+}
+#nav .nav_r li a span{
+    display:block;
+    height: 15px;
+    line-height: 15px;
+    font-size:15px;
+    color:#fff;
+    padding:0 11px 0 10px;
+    border-right:1px solid #D08E90;
+    float: left;
+}
+#nav .nav_r li:hover a span{
+    border-right:1px solid #434343;
+}
+#nav .nav_r li a .c{
+    color:#FFCC01;
+}
+#nav .nav_r li{
+    position:relative;
+    float: left;
+}
+#nav .nav_r li i{
+    display:block;
+    width: 33px;
+    height: 17px;
+    background:url("../images/201410111038.gif") -68px 0;
+    position:absolute;
+    right:-4px;
+    top:-8px;
+}
+#banner{
+    height: 385px;
+    background: pink;
+}
+#sports{
+    background: #F6F6F6;
+    padding-bottom:22px;
+    border-bottom:1px solid #CE3C3D;
+}
+#sports .sports_t{
+    height: 33px;
+    padding-top:9px;
+}
+#sports .sports_t h2{
+    height: 24px;
+    line-height: 24px;
+    font-size:14px;
+    color:#000000;
+    font-weight:bold;
+    border-bottom:2px solid #000000;
+    float: left;
+}
+#sports .sports_t h3{
+    height: 24px;
+    line-height: 24px;
+    font-size:14px;
+    color:#000000;
+    float: left;
+    padding-left:20px;
+}
+#sports .sports_b1{
+    width: 988px;
+    border-top:1px solid #DEDEDE;
+    border-left:1px solid #DEDEDE;
+    background: #fff;
+}
+#sports .sports_b11 li{ 
+    border-bottom:1px solid #DEDEDE;
+    border-right:1px solid #DEDEDE;
+    float: left;
+}
+#sports .sports_b11 li a{
+    display:block;
+    width: 140px;
+    height: 70px;
+    background:url("../images/logo.png") no-repeat -630px -9px;
+    position:relative;
+}
+#sports .sports_b11 li a i{
+    display:block;
+    width: 33px;
+    height: 17px;
+    background:url("../images/201410111038.gif") no-repeat -34px 0;
+    position:absolute;
+    right:8px;
+    top:-3px;
+}
+#sports .sports_b2{
+    width: 188px;
+    border:1px solid #DEDEDE;
+    background: #fff;
+}
+#sports .sports_b2t{
+    height: 66px;
+    border-bottom:1px solid #DEDEDE;
+}
+#sports .sports_b2t li{
+    padding-left:18px;
+    position:relative;
+}
+#sports .sports_b2t li a{
+    display:block;
+    height: 22px;
+    font-size:12px;
+    line-height: 22px;
+    color:#777777;}
+#sports .sports_b2t li i{
+    display:block;
+    width: 5px;
+    height: 5px;
+    background:url("../images/tubiao.fw.png") no-repeat -140px 0;
+    position:absolute;
+    left:7px;
+    top:11px;
+}
+#sports .sports_b2b{
+    height: 145px;
+}
+#sports .sports_b2b h3{
+    padding-top:2px;
+    font-size:16px;
+    line-height: 32px;
+    color:#6C6C6C;
+    border-bottom:1px solid #DEDEDE;
+    position:relative;
+}
+#sports .sports_b2b h3 i{
+    display:block;
+    width: 57px;
+    height: 16px;
+    background:url("../images/tubiao.fw.png") 0 -160px;
+    position:absolute;
+    left:69px;
+    top:11px;
+}
+#sports .sports_b2b div{
+    height: 110px;
+    width: 188px;
+    position:relative;
+}
+#sports .sports_b2b div i{
+    display:block;
+    width: 182px;
+    height: 104px;
+    background:url("../images/tubiao.fw.png") 0 -185px;
+    position:absolute;
+    left:3px;
+    top:3px;
+}
+#sports .xiaohai{
+    height: 326px;
+}
+#sports .xiaohai_box{
+    padding:11px 0 25px;
+}
+#sports .xiaohai_box li{
+    padding-left:10px;
+}
+#sports .xiaohai_box .c1 a{
+    display:block;
+    width: 350px;
+    height: 290px;
+    background:url("../images/c1.jpg") no-repeat;
+}
+#sports .xiaohai_box .c2 a{
+    display:block;
+    width: 205px;
+    height: 290px;
+    background:url("../images/c2.jpg") no-repeat;
+}
+#sports .xiaohai_box .c3 a{
+    display:block;
+    width: 215px;
+    height: 290px;
+    background:url("../images/c3.jpg") no-repeat;
+}
+#sports .xiaohai_box .c4 a{
+    display:block;
+    width: 190px;
+    height: 290px;
+    background:url("../images/c4.jpg") no-repeat;
+}
+#sports .xiaohai_box .c5 a{
+    display:block;
+    width: 190px;
+    height: 290px;
+    background:url("../images/s150827zj5.jpg") no-repeat;
+    float: right;
+}
+#sports .xiuxian_l{
+    width: 199px;
+    background: #FFFFFF;
+}
+#sports .xiuxian_l h3{
+    width: 190px;
+    height: 60px;
+    background:url("../images/c6.png") no-repeat;
+}
+#sports .xiuxian_l1 li{
+    float: left;
+}
+#sports .xiuxian_l1 li a{
+    display:block;
+    width: 95px;
+    height: 40px;
+    border-bottom:1px dashed #DDDDDD;
+    border-right:1px dashed #DDDDDD;
+    background:url("../images/201409101646002.png") no-repeat 0 -1160px;
+}
+#sports .xiuxian_l2{
+    width: 190px;
+    height: 130px;
+    padding:10px 0 25px 9px;
+}
+#sports .xiuxian_l2 li{
+    float: left;
+}
+#sports .xiuxian_l2 li a{
+    display:block;
+    width: 95px;
+    line-height: 26px;
+    color:#413D3C;
+}
+#sports .xiuxian_c{
+    width: 393px;
+    height: 426px;
+    background:url("../images/c7.jpg") no-repeat;
+}
+#sports .xiuxian_r .t1 li{
+    float: left;
+    border-right:1px solid #D2D2D2;
+    border-bottom:1px solid #D2D2D2;
+}
+#sports .xiuxian_r .t1 li a{
+    display:block;
+    width:198px;
+    height:243px;
+    float: left;
+    background:url("../images/b1.fw.png") no-repeat;
+}
+#sports .xiuxian_r .t2 li{
+    float: left;
+    border-right:1px solid #D2D2D2;
+    border-bottom:1px solid #D2D2D2;
+}
+#sports .xiuxian_r .t2 li a{
+    display:block;
+    width:198px;
+    height:183px;
+    float: left;
+    background:url("../images/b1.fw.png") no-repeat;
+}

@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var get = document.getElementById('get');
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log(xhr.response);
+                }
+            }
+
+            get.onclick = function () {
+                xhr.open('get', '/course/api/api/ajax/get?username=admin&pwd=123456');
+                xhr.send();
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="get">获取</button>
+</body>
+</html>

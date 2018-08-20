@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #box{position:absolute;width: 200px;height: 200px;border:3px solid #ddd;}
+            h3{border-bottom:2px dashed #ccc;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                var xi = document.getElementById('xi');
+                var btn = document.getElementById('btn');
+                box.onmousedown = function(e){
+                    var ox = e.offsetX;
+                    var oy = e.offsetY;
+                    document.onmousemove = function(ev){
+                        box.style.left = ev.clientX - ox + 'px';
+                        box.style.top = ev.clientY - oy + 'px';
+                        xi.innerHTML = '可视区域：'+ ev.clientX + ',' + ev.clientY + '<br/>电脑屏幕：' + ev.screenX + ',' + ev.screenY;
+                    }
+                }
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                }
+                btn.onclick = function(e){
+                    box.style.display = 'none';
+                    e.stopPropagation();
+                }
+                var xl
+            }
+        </script>
+    </head>
+    <body>
+        <div id="box">
+            <h3>改变弹窗位置与大小<span id="btn">&times;</span></h3>
+            <div id="xi"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        div {
+            width: auto;
+            height: 38px;
+            line-height: 38px;
+            text-align: center;
+            border: solid 1px #ccc;
+            margin: 10px 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onclick = function (_event) {
+            var self = _event.target;
+            var txt = self.innerHTML;
+            if (self.id == 'div1'){
+                var reg = 'd';
+                //reg = new RegExp('d');
+                reg = /o$/i;
+                console.log(txt.match(reg));
+            } else if (self.id == 'div2') {
+                var reg = /java/ig;
+                console.log(txt.replace(reg, 'html5'));
+            } else if (self.id == 'div3') {
+                console.log(txt);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">stop</div>
+    <div id="div2">javascript Java Script JAVA</div>
+    <div id="div3">good good Study day day Study</div>
+</body>
+</html>

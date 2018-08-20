@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<form name="form1" action="draft_submit" method="get" accept-charset="utf-8">
+		<input type="text" name="zhongfen" value="" placeholder="">
+		<input type="text" name="yuwen" value="20" placeholder="">
+		<input type="text" name="shuxue" value="30" placeholder="">
+		<input type="button" id="button1" name="" value="btn">
+	</form>
+	<div id="div" style="width: 100px; height: 100px; background-color: red; position: absolute;"></div>
+	<script type="text/javascript">
+		function a(){
+			setTimeout (function(){
+				setTimeout(arguments.callee,100);
+				/*代码块，执行时间150ms*/
+				var now = Date.now();
+				while(true){
+					var end = Date.now();
+
+					if(end-now>=150){
+						console.log(end-now);
+						break;
+					}
+				}
+			},100)
+			setInterval(function(){
+				/*代码块，执行时间150ms*/
+				window.setTimeout(function(){
+					console.log(1);
+				},150);			
+			},100)
+
+		}
+
+		var start = Date.now();
+		var qty = 0;
+		var timer = setTimeout (function(){
+				timer = setTimeout(arguments.callee,100);
+				/*代码块，执行时间150ms*/
+				var now = Date.now();
+				while(true){
+					var end = Date.now();
+
+					if(end-now>=150){
+						//console.log(end-now);
+						break;
+					}
+				}
+
+				qty++;
+
+				var stop = Date.now();
+				console.log(stop-start)
+				if(stop - start >=1000){
+					clearTimeout(timer);
+					console.log(qty);
+				}
+		},100)
+	</script>
+
+
+</body>
+</html>

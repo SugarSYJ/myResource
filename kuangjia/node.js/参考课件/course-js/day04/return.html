@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>return</title>
+	<script>
+		/*
+			return
+
+		 */
+		function test(num){
+			if(num>100){
+				return;
+			}
+			console.log(num);
+		}
+		for(var i=0;i<1000;i++){
+			// test(i);
+		}
+
+		/*
+			return 返回值
+		 */
+		function sum(){
+			var res = 0;
+			for(var i=0;i<arguments.length;i++){
+				res += arguments[i];
+			}
+
+			return res;
+		}
+		var a = sum(10,5,6,56,65,544,22);
+		console.log(a);
+		
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            .ball{width: 60px;height: 60px;position:absolute;left:0;top:0;border-radius:50%;}
+        </style>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var box = document.querySelector('.box');
+                createBall(box,10);
+                function createBall(ele,num){
+                    for(var i=0;i<num;i++){
+                        var ball = document.createElement('div');
+                        ball.className = 'ball';
+                        ball.speedx = i + 1;
+                        ball.speedy = i + 1;
+                        ball.style.backgroundColor = getColor();
+                        ele.appendChild(ball);
+                    }
+                }
+                var balls = box.children;
+                setInterval(()=>{
+                    for(var i=0;i<balls.length;i++){
+                        var left = balls[i].offsetLeft + balls[i].speedx;
+                        var top = balls[i].offsetTop + balls[i].speedy;
+                        if(left>=window.innerWidth-balls[i].offsetWidth){
+                            left = window.innerWidth-balls[i].offsetWidth;
+                            balls[i].speedx = -balls[i].speedx;
+                            balls[i].style.backgroundColor = getColor();
+                        }
+                        if(left<=0){
+                            left = 0;
+                            balls[i].speedx = -balls[i].speedx;
+                            balls[i].style.backgroundColor = getColor();
+                        }
+                        if(top>=window.innerHeight-balls[i].offsetHeight){
+                            top = window.innerHeight-balls[i].offsetHeight;
+                            balls[i].speedy = -balls[i].speedy;
+                            balls[i].style.backgroundColor = getColor();
+                        }
+                        if(top<=0){
+                            top = 0;
+                            balls[i].speedy = -balls[i].speedy;
+                            balls[i].style.backgroundColor = getColor();
+                        }
+                        balls[i].style.left = left + 'px';
+                        balls[i].style.top = top + 'px';
+                    }
+                },30);
+            })
+        </script>
+    </head>
+    <body>
+        <div class="box"></div>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="../js/vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3 :f="name" v-text="age" v-if="1==1" v-once>{{name}}-{{age}}</h3>
+        <!-- 指令 -->
+        <div v-html="note"></div>
+        <!-- <img v-bind:src="file"> -->
+        <input type="text" v-model="age"/>
+        <span v-pre>{{name}}</span>
+        <div v-for="(obj,index) in data" :key="obj.id">
+            <span v-text="obj.name"></span>
+            <span>{{index}}</span>
+        </div>
+    </div>
+    <div id="app2"></div>
+
+    <script type="text/javascript">
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                name:'Sam',
+                age:23,
+                note:'<h1>gz1707</h1>',
+                file:'001.jpg',
+                data:[{id:'1',name:'d1',age:12},{id:'2',name:'d2',age:24}]
+            }
+        })
+    </script>
+</body>
+</html>

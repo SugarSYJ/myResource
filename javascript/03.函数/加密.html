@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>某个公司采用公用电话传递数据，数据是四位的整数，在传递过程中是加密的，加密规则如下：每位数字都加上5,然后用除以10的余数代替该数字，再将第一位和第四位交换，第二位和第三位交换，请编写一个函数，传入原文，输出密文</h3>
+        <script type="text/javascript">
+            function sum(i){
+                var g = (i%10+ 5)%10;
+                var s = (parseInt((i%100)/10)+ 5)%10;
+                var b = (parseInt((i%1000)/100)+ 5)%10;
+                var q = (parseInt(i/1000)+ 5)%10;
+                var res = g*1000 + s*100 + b*10 + q;
+                return res;
+            }
+        </script>
+    </body>
+</html>

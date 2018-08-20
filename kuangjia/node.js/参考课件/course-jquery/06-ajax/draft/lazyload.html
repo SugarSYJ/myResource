@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>足球解说</title>
+	<style>
+	body{padding:50px;}
+		ul{list-style: none;padding:0;margin:0;}/*reset*/
+		#datalist{border:1px solid #ddd;padding:15px;}
+		#datalist li{padding:15px 5px;border-bottom:1px dotted #ccc;}
+		#page span{display:inline-block;margin:5px;width:40px;line-height:1.8;text-align: center;background-color:#dfdfdf;color:#666;}
+		#page span.active{background-color:#fc0;color:#fff;}
+	</style>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			var pageNo = 1;
+			// 全局设置: 设置了默认选项
+			$.ajaxSetup({
+				url:'http://localhost:3000/ajax/football',
+				data:{pageNo:1},
+				dataType:'json',
+				success:function(res){
+					console.log(res);
+					var $ul = $('<ul/>')
+					$.each(res.data,function(idx,item){
+						$('<li/>').html('<strong>' + item.name + ': </strong>'+ item.content).appendTo($ul);
+					});
+					$('#datalist').append($ul);
+
+				}
+			})
+
+			// 服务根据传参的不同，返回不同的数据
+			$.ajax();
+
+			$(window).on('scroll',function(){
+				
+
+				// 滚动条滚动过的距离
+				var scrollTop = $(window).scrollTop();
+
+				// 可视化窗口高度
+				var winHeight = $(window).height();
+
+				// 文档高度
+				var docHeight = $('html').height();
+
+				// 滚动条差不多滚动到底部时，加载下一页
+				if(scrollTop >= docHeight - winHeight - 200){
+					pageNo++;
+					if(pageNo == 4){
+						pageNo = 1;
+					}
+					$.ajax({
+						data:{
+							pageNo:pageNo
+						}
+					});
+				}
+			}).trigger('scroll');
+		});
+	</script>
+</head>
+<body>
+	<h1>足球解说：如果有一天，央视所有解说员聚在一起</h1>
+	<div id="datalist">
+		
+	</div>
+</body>
+</html>

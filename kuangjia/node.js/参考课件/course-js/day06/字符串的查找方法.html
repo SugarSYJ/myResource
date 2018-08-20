@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串的查找方法</title>
+	<script>
+		/*
+			字符串的查找方法
+		 */
+		var str = 'CAT, beaT, fAt, saturday at';
+		console.log('indexOf',str.indexOf('at'));//1
+		console.log('lastIndexOf',str.lastIndexOf('at'));//11,12,13,17
+
+		var reg = /at/gi
+		console.log('search:',str.search(reg))
+
+		console.log('match:',str.match(reg));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

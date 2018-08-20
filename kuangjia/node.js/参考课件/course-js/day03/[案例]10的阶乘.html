@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>10的阶乘</title>
+	
+</head>
+<body>
+	<script>
+		/*
+			10的阶乘
+			10x9x8x7x6x5x4x3x2x1;
+
+			while(条件){
+				变量更新
+			}
+
+		 */
+		var num=5;
+		var res=1;
+		while(num > 0){
+			// res = res * num;
+			res *= num;
+
+			// 变量更新
+			num--;
+		}
+
+		/*
+			分析：
+				1) num=5 ==> res = 1 * 5 ==>5
+				2) num=4 ==> res = 5 x 4
+				3) num=3 ==> res = 5 x 4 x 3
+				4) num=2 ==> res = 5 x 4 x 3 x 2
+				5) num=1 ==> res = 5 x 4 x 3 x 2 x 1
+				6) num=0 ==> 结束循环
+		 */
+		// alert(res);
+
+		/*
+			do{
+				
+			}while(条件)
+		 */
+		var num = 20;
+		do{
+			alert(num);
+			num -= 5;
+		}while(num>10)
+
+		
+	</script>
+</body>
+</html>

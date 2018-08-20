@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自动定位</title>
+    <script>
+        /*
+            为什么要跨域：
+                * 其他服务器提供接口
+                    * jsonp
+                    * cors
+                * 其他服务器不提供接口（提供接口但不授权）
+                    * 服务端代码
+            自动定位
+                1）先获取IP：http://localhost:1707/api/get_ip.php
+                2）根据IP获取城市：http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=27.46.236.176
+         */
+        var xhr_ip = new XMLHttpRequest();
+        var status = [200,304];
+        xhr_ip.onload = function(){
+            if(status.includes(xhr_ip.status)){
+                console.log(xhr_ip.responseText);
+                var ip = xhr_ip.responseText;
+                // 获取Ip城市
+                var xhr_city = new XMLHttpRequest();
+                xhr_city.onload = function(){
+                    if(status.includes(xhr_city.status)){
+                        var city = xhr_city.responseText;
+                    }
+                }
+                xhr_city.open('get','http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip='+ip,true);
+                xhr_city.send();
+            }
+        }
+        xhr_ip.open('get','http://localhost:18/api/get_ip.php',true);
+        xhr_ip.send();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

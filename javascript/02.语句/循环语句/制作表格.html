@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            table{border:1px solid #ddd;border-collapse:collapse;}
+            tr{height: 45px;border:1px solid #ddd;padding:10px;}
+            td{width: 100px;border:1px solid #ddd;}
+        </style>
+    </head>
+    <body>
+        <h3>制作表格</h3>
+        <input type="text" id="row"/>
+        <input type="text" id="col"/>
+        <button onclick="zhizuo()">制作</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var row = document.getElementById('row');
+            var col = document.getElementById('col');
+            var output = document.getElementById('output');
+            function zhizuo(){
+                var _row = row.value*1;
+                var _col = col.value*1;
+                var res = '<table><tbody>';
+                for(var i = 1;i<=_row;i++){
+                    res += '<tr>';
+                    for(var j = 1;j<=_col;j++){
+                        res += '<td>单元格' + i + j + '</td>';
+                    }
+                    res += '</tr>';
+                }
+                res += '</tbody></table>';
+                output.innerHTML = res;
+            }
+        </script>
+    </body>
+</html>

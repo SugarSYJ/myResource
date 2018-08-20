@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>03创建对象的方式</title>
+	<script>
+		/*
+			只要通过new 调用函数，都返回一个对象
+				1）创建一个Object对象
+				2）将构造函数的this指向这个对象
+				3）执行构造函数中的代码
+				4）返回Object对象
+
+			面向对象三大组成部分：
+			* 构造函数
+			* 实例
+			* 原型对象
+				* 根据构造函数获取
+		 */
+		// 1.字面量
+		var obj1 = {};
+
+		// 构造函数
+		// 2.内置构造函数
+		var obj2 = new Object();
+
+		// 3.自定义构造函数
+		function person(){
+			// 模拟
+			// 1）var obj = {}
+			// 2）把this指向obj
+			// 3）执行构造函数中的代码
+			// 4）return obj
+		}
+
+		// 普通函数调用
+		var o1 = person();//undefined
+		var o2 = new person();//得到一个对象
+		console.log(o1,o2);
+
+
+		function Person(name,age,gender){
+			// var obj = {}
+			// 把this指向obj：这里的This
+			// return obj
+			this.name = name;
+			this.age = age;
+			this.gender = gender;
+		}
+
+		// 构造函数调用
+		// new
+		// obj3就是实例
+		var obj3 = new Person('lemon',30,'不详');//{name:'lemon',age:30,gender:'不详'} 指向obj3
+		console.log(obj3);
+
+
+		// 原型对象（隐藏的对象）
+		// 获取原型对象
+		// 	* 通过构造函数获取
+		// 	* 通过实例获取
+		console.log(Person.prototype);
+		console.log(obj3.__proto__);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

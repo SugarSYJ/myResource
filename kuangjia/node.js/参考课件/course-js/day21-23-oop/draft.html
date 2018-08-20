@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{background-color:#000;}
+        .ball{width:30px; height:30px; border-radius:50%; background-color:#4cff00; position:absolute;}
+        .bar{width:150px; height:20px; background-color:#ff6a00; position:absolute; bottom: 30px;}
+    </style>
+    <script type="text/javascript">
+        /*
+            1、获取鼠标点击的位置
+            2、创建小球
+            3、给小球样式和位置
+            4、让小球动起来
+        */
+        //工厂模式(面向对象)
+        //小球
+        function createBallByObject(_x, _y) {
+            var obj = {
+                x: _x,
+                y: _y,
+                ball: document.createElement('div')
+            };
+            obj.ball.className = 'ball';
+            obj.ball.style.left = obj.x + 'px';
+            obj.ball.style.top = obj.y + 'px';
+            obj.bar = document.createElement('div');
+            obj.bar.className = 'bar';
+            //正在运行的函数所依附的对象
+            //小球运动
+            obj.startMove = function () {
+                //速度
+                var speedX = 10;
+                var speedY = 5
+                //计时器  => 元素对象本身的一个自定义属性
+                obj.ball.timer = window.setInterval(function () {
+                    //获取当前小球的 left 值
+                    var left = obj.ball.offsetLeft;
+                    //获取当前小球的 top 值
+                    var top = obj.ball.offsetTop;
+                    left += speedX;
+                    top += speedY;
+                    //当小球移动到边界的时候，反向移动
+                    if (left >= document.documentElement.clientWidth - obj.ball.clientWidth || left <= 0) {
+                        //给小球的 left 一个边界值
+                        left = left > 0 ? document.documentElement.clientWidth - obj.ball.clientWidth : 0;
+                        //改变移动方向
+                        speedX *= -1;
+                    }
+                    //当小球移动到边界的时候，反向移动
+                    if (top >= document.documentElement.clientHeight - obj.ball.clientHeight || top <= 0) {
+                        //给小球的 top 一个边界值
+                        top = top > 0 ? document.documentElement.clientHeight - obj.ball.clientHeight : 0;
+                        //改变移动方向
+                        speedY *= -1;
+                    }
+                    //改变小球的定位
+                    obj.ball.style.left = left + 'px';
+                    obj.ball.style.top = top + 'px';
+                }, 100);
+            };
+
+            //移除小球
+            obj.removeBall = function () {
+                this.ball.parentNode.removeChild(this.ball);
+            }
+
+            //球拍的移动
+            obj.barMove = function (direction, speed) {
+                var left = this.bar.offsetLeft;
+                if (direction == 'left') {
+                    left -= speed;
+                    if (left <= 0) {
+                        left = 0;
+                    }
+                } else if (direction == 'right') {
+                    left += speed;
+                    if (left >= document.documentElement.clientWidth - this.bar.clientWidth) {
+                        left = document.documentElement.clientWidth - this.bar.clientWidth;
+                    }
+                }
+
+                this.bar.style.left = left + 'px';
+            }
+            return obj;
+        }
+
+        //按方向键移动 bar  球拍
+        window.onkeydown = function (_event) {
+            _event = _event || window.event;
+            var ball = window.balls[0];
+            if (_event.keyCode == 37) {
+                ball.barMove('left', 50);
+            } else if (_event.keyCode == 39) {
+                ball.barMove('right', 50);
+            }
+        }
+
+        //行为操作
+        document.onclick = function (_event) {
+            console.log(window.balls);
+            window.balls = window.balls || [];
+            //event 对象
+            _event = _event || window.event;
+            //三元运算符
+            _event = _event ? _event : window.event;
+            //当前点击的对象
+            var self = _event.target;
+            if (self.className == 'ball') {
+                window.clearInterval(self.timer);
+            } else {
+                var ballObj = createBallByObject(_event.clientX, _event.clientY);
+                document.body.appendChild(ballObj.ball);
+                document.body.appendChild(ballObj.bar);
+                ballObj.startMove();
+                window.balls.push(ballObj);
+            }
+
+
+        }
+        //右键事件
+        document.oncontextmenu = function (_event) {
+            _event = _event || window.event;
+            window.balls = window.balls || [];
+            _event.preventDefault();
+            var self = _event.target;
+            if (self.className == 'ball') {
+                for (var i = 0; i < window.balls.length; i++) {
+                    //找到所有小球中当前点击的小球
+                    if (self == window.balls[i].ball) {
+                        window.balls[i].removeBall();
+                        window.balls.splice(i, 1);
+                        break;
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

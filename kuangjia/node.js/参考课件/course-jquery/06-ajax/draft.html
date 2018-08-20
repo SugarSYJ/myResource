@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <style type="text/css">
+        .mask{position: fixed; top: 0;}
+    </style>
+</head>
+<body>
+    <input type="text" name="city" id="city" value="广州"/>
+    <input type="button" id="btn"  value="search"/>
+    <div class="mask">
+
+    </div>
+    <script type="text/javascript">
+        var url = 'http://10.16.151.33/course/api/api/student/FetchAllStudent';
+        url = 'http://wthrcdn.etouch.cn/weather_mini';
+        // 参数 => account
+        // 返回结果 => json
+        // 交互格式一般为两种格式 => JSON("{}"), XML
+        // 请求方式 => get, post
+        // 同域或跨域由后端人员配置
+
+        //jsonp
+
+        //var _data = { name: 'dk', age: 18 };
+        //JSON.stringify(_data);
+        //?name=dk&age=18
+        
+        $('#btn').click(function () {
+            //参数$.get|post(url, data, complete, datatype)
+            //$.get(url, { city: $('#city').val() }, function (_response, textStatus, xhr) {
+            //    console.log(_response);
+            //},'json');
+            //外部资源文件不要重复引用 ******
+            //get 请求最好加上随机数以防缓存导致各种问题的出现
+            //$('.mask').load('pagea.html?_' + Math.random());
+
+            //$('#city').click(function () { });
+
+            //$('#city').bind('click', function () { });
+            
+            //$('#city').on('click', function () { })
+
+            $.ajax({
+                url: 'pagea.html',
+                type: 'get',
+                async: true,
+                //data: { '_': Math.random() },
+                contentType: 'text/html',
+                cache: false,
+                success: function (_response) {
+                    $('.mask').html(_response);
+                }
+            })
+
+            return;
+            $.ajax({
+                url: url,
+                type: 'get',
+                data: { name: 'dk', age: 18, email: '', phone: '' },
+                success: function (p1) {
+                    console.log(p1);
+                }, complete: function (p1) {
+                    console.log(p1);
+                }, beforeSend: function (p1) {
+                    console.log(p1);
+                }, error: function (p1) {
+                    console.log(p1);
+                }
+            })
+        })
+
+        var _ajax = function () {
+            $.ajax({
+                url: url,//*****
+                type: "get",
+                async: true,
+                error: function () {
+                    //请求发生错误时执行
+                    //XMLHttpRequest.status != 200
+                },
+                success: function () {
+                    //请求成功时执行
+                    //XMLHttpRequest.status == 200
+                },
+                beforSend: function () {
+                    //请求发送之前执行
+                    //XMLHttpRequest.readystates == 0
+                },
+                complete: function () {
+                    //请求完成之后执行
+                    //XMLHttpRequest.readystates == 4
+                },
+                data: { params1: "value1", params2: "value2" },
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'xml|json|script||html'
+
+            })
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>网页换肤</title>
+<link id="link" href="css/css1.css" rel="stylesheet" type="text/css" />
+<script src="../../common.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            /*
+                换肤功能
+                思路：
+                    1）修改#link路径时，保存当前css路径到cookie
+                        document.cookie = 'skin=css1'
+                    2）当页面刷新或重新打开时，判断是否有cookie的存在
+                        如果存在，则把cookie的值写入#link的href属性
+             */
+            // 获取页面元素
+            var message = document.getElementById('message');
+            var btns = message.getElementsByTagName('input');
+            var link = document.getElementById('link');
+
+            // 遍历btns，并绑定点击事件
+            for (var i = 0; i < btns.length; i++) {
+
+                if (btns[i].getAttribute('data-css')) {
+                    btns[i].onclick = function () {
+                        var _skin = this.getAttribute('data-css');
+                        link.href = 'css/' + _skin + '.css';
+
+                        // 1）修改#link路径时，保存当前css路径到cookie
+                        var now = new Date('2026/1/1');
+                        //document.cookie = 'skin=' + _skin + ';expires='+now;
+                        addCookie('skin', _skin, now);
+
+                    }
+                }
+            }
+
+            // 2）当页面刷新或重新打开时，判断是否有cookie的存在
+            /*var cookie = document.cookie;
+            if(cookie){
+                var arr_cookie = cookie.split('; ');
+                for(var i=0;i<arr_cookie.length;i++){
+                    var _temp = arr_cookie[i].split('=');//['skin','css1']
+                    if(_temp[0] == 'skin'){
+                        link.href = 'css/' + _temp[1] + '.css';
+                    }
+                }
+            }*/
+            var skin_cookie = getCookie('skin');
+            if (skin_cookie) {
+                link.href = 'css/' + skin_cookie + '.css';
+            }
+
+            // 清除cookie
+            var btnClear = document.getElementById('btnClear');
+            btnClear.onclick = function () {
+                /*var now = new Date();
+                now.setMinutes(now.getMinutes()-1);
+                document.cookie = 'skin=123;expires='+now;*/
+                removeCookie('skin');
+
+                // 刷新页面
+                location.reload();
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+<dl id="message">
+	<form>
+		<dt>
+			<strong>可以换肤的提交框：</strong>
+			<input type="button" value="皮肤1" data-css="css1" />
+			<input type="button" value="皮肤2" data-css="css2" />
+		</dt>
+		<dd>输入姓名：<input class="text" type="text" /></dd>
+		<dd>输入密码：<input class="text" type="password" /></dd>
+		<dd>请您留言：<textarea></textarea></dd>
+		<dd class="center"><input class="btn" type="submit" value="提交" /></dd>
+	</form>
+</dl>
+<button id="btnClear">清除cookie</button>
+</body>
+</html>

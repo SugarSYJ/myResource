@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',function(){
+                var person = {
+                    name:'王思聪',
+                    nickName:'国民老公',
+                    age:38,
+                    gender:'不详'
+                }
+                // 传统做法（浅拷贝）
+                // 创建空对象
+                // 遍历对象并复制到新对象、
+                var obj1 = {};
+                for(let attr in person){
+                    obj1[attr] = person[attr];
+                }
+                console.log(obj1);
+
+                // ES5(深拷贝)
+                // 把引用数据类型变为基本能数据类型，JSON字符串
+                var obj2 = JSON.parse(JSON.stringify(person));
+                obj2.age = 36;
+                console.log(obj2);
+
+                // ES6（浅拷贝）
+                // var o = Object.assign({a:10,b:20},{a:11,c:30,d:40});//{a: 11, b: 20, c: 30, d: 40}
+                var obj3 = Object.assign({},person);
+                obj3.gender = '男';
+                console.log(obj3);
+
+
+                /*
+                    对象简写
+                     * 属性简写：使用变量名作为对象的属性名，使用变量值作为属性值
+                     * 方法简写：省略function关键字
+                 */
+                var myName = 'laoxie';
+                var obj11 = {myName};//属性名为变量名, 属性值为变量的值
+
+                //等效于
+                // var obj = {myName:'laoxie'}
+
+
+                 //使用变量值作为属性名
+                 //把变量值作为属性名
+                var obj12 = {
+                    [myName]:18
+                }
+                //等效于
+                // obj[myName] = 18
+                // var obj = {laoxie:18}
+
+                // var obj13 = {
+                //  show:function(){}
+                // }
+                
+                // 简写
+                var obj13 = {
+                    show(){
+
+                    }
+                }
+            })
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

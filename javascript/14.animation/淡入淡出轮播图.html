@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐现轮播图</title>
+    <style>
+        ul{padding:0;margin:0;list-style: none;}
+        a{text-decoration:none;}
+        #focus{position:relative;width:810px;}
+        #bigpic{position:relative;width:810px;height:320px;}
+        #bigpic li{position:absolute;top:0;left:0;width:810px;height:320px;overflow:hidden;}
+        #smallpic{position:relative;left:0;margin-top:10px;overflow:hidden;}
+        #smallpic li{float:left;padding-right:10px;}
+        #smallpic img{width:160px;}
+        .prev,.next{position:absolute;top:130px;height:60px;width:30px;line-height:60px;text-align:center;background-color:#f60;color:#fff;}
+        .prev{left:0;}
+        .next{right:0;}
+
+        .small_wrap{width:810px;overflow:hidden;}
+    </style>
+    <script src="../common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            /*
+                淡入淡出
+                    * 移入移出
+                    * 添加前后按钮
+                    * 添加小图（动画效果）
+             */
+            let focus = document.querySelector('#focus');
+            let bigpic = focus.querySelector('#bigpic');
+            let bigItems = bigpic.children;
+            let small_wrap = bigpic.nextElementSibling;
+            let smallpic = document.querySelector('#smallpic');
+            let bigItems1 = smallpic.children;
+
+            let baseWidth = bigItems1[0].offsetWidth;
+            smallpic.style.width = baseWidth*bigItems1.length + 'px';
+
+            let len = bigItems.length;
+            let index = 0;
+            let lastIndex = 0;
+
+            for(let i=0;i<len;i++){
+                if(i!==index){
+                    animation(bigItems[i],'opacity',0);
+                    animation(bigItems1[i],'opacity',0.3);
+                }
+            }
+            let timer = setInterval(autoPlay,2000);
+
+            let btnPrev = document.createElement('btnPrev');
+            btnPrev.className = 'prev';
+            btnPrev.innerHTML = '&lt;';
+            focus.appendChild(btnPrev);
+            let btnNext = document.createElement('btnNext');
+            btnNext.className = 'next';
+            btnNext.innerHTML = '&gt;';
+            focus.appendChild(btnNext);
+
+            focus.onclick = e=>{
+                e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(target.className.toLowerCase()==='prev'){
+                    index--;
+                    showImg();
+                }
+                if(target.className.toLowerCase()==='next'){
+                    index++;
+                    showImg();
+                }
+            }
+
+            focus.onmouseenter = ()=>{
+                clearInterval(timer);
+            }
+            focus.onmouseleave = ()=>{
+                timer = setInterval(autoPlay,2000);
+            }
+
+            function autoPlay(){
+                index++;
+                showImg();
+            }
+            function showImg(){
+                if(index >= len){
+                    index = 0;
+                }else if(index < 0){
+                    index = len - 1;
+                }
+                animation(bigItems[index],'opacity',1);
+                animation(bigItems[lastIndex],'opacity',0);
+                animate(smallpic,{left:-baseWidth*index});
+                animation(bigItems1[index],'opacity',1);
+                animation(bigItems1[lastIndex],'opacity',0.3);
+                lastIndex = index;
+            }
+            
+        });
+    </script>
+</head>
+<body>
+    <div id="focus">
+        <ul id="bigpic">
+            <li><img src="img/001.jpg"></li>
+            <li><img src="img/002.jpg"></li>
+            <li><img src="img/003.jpg"></li>
+
+            <li><img src="img/001.jpg"></li>
+            <li><img src="img/002.jpg"></li>
+            <li><img src="img/003.jpg"></li>
+
+            <li><img src="img/001.jpg"></li>
+            <li><img src="img/002.jpg"></li>
+            <li><img src="img/003.jpg"></li>
+        </ul>
+        <div class="small_wrap">
+           <ul id="smallpic">
+               <li><img src="img/001.jpg"></li>
+               <li><img src="img/002.jpg"></li>
+               <li><img src="img/003.jpg"></li>
+       
+               <li><img src="img/001.jpg"></li>
+               <li><img src="img/002.jpg"></li>
+               <li><img src="img/003.jpg"></li>
+       
+               <li><img src="img/001.jpg"></li>
+               <li><img src="img/002.jpg"></li>
+               <li><img src="img/003.jpg"></li>
+           </ul>
+       </div>
+        <!-- <a href="#" class="prev">&lt;</a> -->
+        <!-- <a href="#" class="next">&gt;</a> -->
+    </div>
+</body>
+</html>

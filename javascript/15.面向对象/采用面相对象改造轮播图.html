@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <style type="text/css">
+        *{margin: 0;padding: 0;}
+        .box{width: 810px;height: 320px;border:3px solid red;margin: 50px auto;overflow:hidden;position:relative;}
+        .box div{height: 320px;position:absolute;left:0;top:0;}
+        .box div img{float: left;display:block;width: 810px;height: 320px;}
+    </style>
+    <script src="../common.js"></script>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded',()=>{
+            let banner = new Banner();
+            banner.init(document.querySelector('.box'));
+            function Banner(){
+                this.init = (ele)=>{
+                    this.ele = ele;
+                    this.box1 = this.ele.querySelector('.box div');
+                    this.imgs = this.box1.querySelectorAll('.box div img');
+                    this.baseWidth = this.imgs[0].offsetWidth;
+                    this.box1.style.width = this.baseWidth * this.imgs.length + 'px';
+                };
+                this.play = ()=>{
+                    let index = 0;
+                    let timer = setInterval(autoPlay,1000);
+                    function autoPlay(){
+                        index++;
+                        showImg();
+                    };
+                    function showImg(){
+                        if(index>len-1){
+                            index = 0;
+                        };
+                        animate(this.box1,{left:-this.baseWidth*index});
+                        
+                    }
+                };
+            }
+        })
+    </script>
+    <body>
+        <div class="box">
+            <div>
+                <img src="img/001.jpg" />
+                <img src="img/002.jpg" />
+                <img src="img/003.jpg" />
+                <img src="img/004.jpg" />
+            </div>
+        </div>
+    </body>
+</html>

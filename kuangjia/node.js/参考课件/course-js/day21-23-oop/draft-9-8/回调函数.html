@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script type="text/javascript">
+        //options
+        //在一个函数中用参数的形式调用另一个函数 => 回调函数
+        function funA(opt) {
+            var name = 'admin';
+            opt(name);
+        }
+
+        funA(function (n) {
+            console.log(n);
+        })
+    </script>
+</head>
+<body>
+
+</body>
+</html>

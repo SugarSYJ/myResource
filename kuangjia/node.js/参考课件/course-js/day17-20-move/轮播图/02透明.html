@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>01左右轮播图</title>
+    <style type="text/css">
+        #focus{width:810px; height:310px; overflow:hidden; position:relative; margin:auto;}
+        ul{list-style:none; margin:0; padding:0; position:relative}
+        #focus>ul>li{position:absolute; top:0; right:0; bottom:0; left:0; opacity:0; z-index:1;}
+        #focus>ul>li:first-child{opacity:1;}
+        #focus > a {
+            position: absolute;
+            text-decoration: none;
+            height: 60px;
+            width: 30px;
+            background-color: #ff6a00;
+            color: #fff;
+            text-align: center;
+            line-height: 60px;
+            top: 40%;
+            z-index:100;
+        }
+
+            #focus > a:first-child {
+                left: 0;
+            }
+
+            #focus > a:last-child {
+                right: 0;
+            }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var slide_ul = document.getElementsByTagName('ul')[0];
+            var slide_li = slide_ul.getElementsByTagName('li');
+            var slide_li_width = slide_li[0].clientWidth;
+
+            var slide_timer, sub_slide_timer;
+
+            function start(_index) {
+                window.clearInterval(slide_timer);
+                slide_timer = window.setInterval(function () {
+                    slide(_index);
+                    _index++;
+                    if (_index >= slide_li.length) {
+                        _index = 0;
+                    }
+                    slide_li[_index].style.opacity = 1;
+                    slide_li[_index].style.zIndex = 0;
+                }, 3300);
+            }
+
+            function slide(_index) {
+                window.clearInterval(sub_slide_timer);
+                sub_slide_timer = window.setInterval(function () {
+                    var currSlide = slide_li[_index];
+                    var nextSlide = slide_li[_index + 1 >= slide_li.length ? 0 : _index + 1];
+                    var currSlide_opacity = window.getComputedStyle(currSlide).opacity * 1;
+                    currSlide_opacity -= 0.1;
+                    if (currSlide_opacity <= 0) {
+                        window.clearInterval(sub_slide_timer);
+                        currSlide_opacity = 0;
+                        nextSlide.style.zIndex = 1;
+                    }
+                    currSlide.style.opacity = currSlide_opacity;
+                }, 50);
+            };
+
+            start(0);
+        }
+    </script>
+</head>
+<body>
+    <div id="focus">
+        <ul>
+            <li><img src="../images/001.jpg"></li>
+            <li><img src="../images/002.jpg"></li>
+            <li><img src="../images/003.jpg"></li>
+            <li><img src="../images/004.jpg"></li>
+        </ul>
+        <a href="#" class="prev">&lt;</a>
+        <a href="#" class="next">&gt;</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{
+    "url": "https://cnodejs.org/api/v1/topics?page=1&limit=10",
+    "cols": "title,last_reply_at,top,reply_count,visit_count,create_at,loginname,avatar_url",
+    "colAttributes": {
+      "loginname": {
+        "type": "mapping",
+        "datasource": "author",
+        "value": "loginname"
+      },
+      "avatar_url": {
+        "type": "mapping",
+        "datasource": "author",
+        "value": "avatar_url"
+      },
+      "last_reply_at": {
+        "type": "pipe",
+        "name": "date",
+        "format": "yyyy-MM-dd"
+      },
+      "create_at": {
+        "type": "pipe",
+        "name": "date",
+        "format": "yyyy-MM-dd"
+      },
+      "reply_count": {
+        "type": "pipe",
+        "name": "number",
+        "format": "1.2-2"
+      }            
+    }, 
+    "multiple": true
+}

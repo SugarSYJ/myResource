@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>全局对象window</title>
+	<script>
+	// 通过var关键字声明的全局变量不能删除
+	var a = 10;
+
+	// 不用var声明的变量能删除
+	b = 20;
+	console.log(window.a,window.b);
+	delete window.a;
+	delete window.b;
+	console.log(window.a,window.b);
+
+	window.onload = function(){
+		var sum = 10 + 20;
+		var test = 'html5 test';
+
+		// 在函数里不加var声明变量，则这个变量就成为全局变量
+		globalNum = 1000;
+
+		console.log(window);
+
+		function test2(){
+			alert('test2')
+		}
+
+		// 删除对象属性
+		var obj = {name:'xxx',age:18}
+		console.log(obj);
+
+		delete obj.name;
+		console.log(obj)
+
+		// test2();
+		// test();
+	}
+	
+	function test(){
+		alert('test');
+	}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>try_catch</title>
+    <script>
+        // var num = 100;
+        // console.log(num);//报错会终止代码的执行
+
+        try{
+            //尝试执行这里的代码
+            console.log(num);
+        }catch(err){
+            // 如果try中的代码无法执行
+            // 则执行这里的代码，并把错误信息写入err参数
+            console.log(err);
+        }
+
+        console.log('end');
+
+
+        /*function getCss(ele,key){
+            //判断思路：判断用户使用的浏览器是否支持getComputedStyle
+            if(window.getComputedStyle){
+                return getComputedStyle(ele)[key]
+            }else if(ele.currentStyle){
+                return ele.currentStyle[key]
+            }else{
+                // 如果以上都不支持，直接返回内联样式
+                return ele.style[key];
+            }
+        }*/
+
+        function getCss(ele,key){
+            try{
+                return getComputedStyle(ele)[key];
+            }catch(error){
+                try{
+                    return ele.currentStyle[key];
+                }catch(err){
+                    return ele.style[key];
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

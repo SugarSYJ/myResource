@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script type="text/javascript">
+        //计算器的工厂
+        var calculation = function (a, b, operator) {
+            //字面量方式定义计算器对象
+            var obj = {
+                numA: a,
+                numB: b,
+                operator: operator,
+                result: 0,
+                calc: function () {
+                    switch (obj.operator) {
+                        case '+':
+                            obj.result = obj.numA + obj.numB;
+                            break
+                        case '-':
+                            obj.result = obj.numA - obj.numB;
+                            break
+                        case '*':
+                            obj.result = obj.numA * obj.numB;
+                            break
+                        case '/':
+                            obj.result = obj.numA / obj.numB;
+                            break
+                        case '%':
+                            obj.result = obj.numA % obj.numB;
+                            break
+                    }
+                }
+            }
+            return obj;
+        }
+
+        var obj = calculation(1, 2, '+');
+        console.log(obj.result);//0
+        obj.calc();
+        console.log(obj.result);//3
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            function jieGuo(){
+                var n1 = document.getElementById("num1");
+                var n2 = document.getElementById("num2");
+                var _num1 = n1.value;
+                var _num2 = n2.value;
+                var _fuhao = fuhao.value;
+                var _jia = jia.value;
+                var _jian = jian.value;
+                var _cheng = cheng.value;
+                var _chu = chu.value;
+                if(_fuhao == _jia){
+                    var res = Number(_num1) + Number(_num2);
+                }
+                if(_fuhao == _jian){
+                    var res = Number(_num1) - Number(_num2);
+                }
+                if(_fuhao == _cheng){
+                    var res = Number(_num1) * Number(_num2);
+                }
+                if(_fuhao == _chu){
+                    var res = Number(_num1) / Number(_num2);
+                }
+                var output = document.getElementById("output");
+                output.value = res;
+            }
+        </script>
+    </head>
+    <body>
+        <h1>计算两个文本框的加减乘除，并把结果写入第三个文本框</h1>
+        <input type="number" id="num1"/>
+        <select name="fuhao" id="fuhao">
+            <option value="+" id="jia">+</option>
+            <option value="-" id="jian">-</option>
+            <option value="*" id="cheng">*</option>
+            <option value="/" id="chu">/</option>
+        </select>
+        <input type="number" id="num2"/>
+        <button onclick="jieGuo()">提交</button>
+        <input type="text" id="output"/>
+    </body>
+</html>

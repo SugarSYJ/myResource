@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cashier</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="http://cdn.bootcss.com/jquery-confirm/3.1.0/jquery-confirm.min.css" rel="stylesheet">
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+    <script src="http://cdn.bootcss.com/jquery-confirm/3.1.0/jquery-confirm.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+    <script src="https://cdn.bootcss.com/socket.io/2.0.4/socket.io.js"></script>
+    <style>
+        li{list-style: none;}
+        .opa{position:absolute;left:0;top:0;}
+        .active{opacity:0.3;background:#1d1b1b;}
+        #qrcode{position: absolute; display: none; left: 50%; top:50%; transform: translate(-50%, -50%);z-index:121;}
+    </style>
+</head>
+<body>
+    <div>
+        <div class="form-horizontal" style="width: 600px; margin: auto;">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">编码</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" id="barCode">
+                </div>
+                <div class="col-sm-2">
+                    <input type="button" value="付款码" class="btn btn-primary" id="btnQrCode">
+                </div>         
+            </div>
+
+            <ul>
+                <li class="col-sm-6">名称</li>
+                <li class="col-sm-2">数量</li>
+                <li class="col-sm-2">单价</li>
+                <li class="col-sm-2">总价</li>
+            </ul>    
+        </div>
+        <div class="opa"></div>
+        <div id="qrcode"></div>
+    </div>
+    <script>
+        $(function(){
+            var productList = [];
+            $('#barCode').focus().keydown(function(event){
+                if(event.keyCode==13){
+                    $(this).select();
+                    $.get('getproduct',{barcode:$(this).val()},function(res){
+                        if(res.status){
+                            $.each(res.data,function(idx,item){
+                                productList.push(item);
+                                var $ul = $('<ul/>');
+                                $('<li/>').text(item.name).addClass("col-sm-6").appendTo($ul);
+                                $('<li/>').text(1).addClass("col-sm-2").appendTo($ul);
+                                $('<li/>').text(item.price).addClass("col-sm-2").appendTo($ul);
+                                $('<li/>').text(item.price).addClass("col-sm-2").appendTo($ul);
+                                $ul.appendTo('.form-horizontal');
+                            })
+                        }
+                    })
+                }
+            });
+            $('#btnQrCode').click(function(){
+                $.post('generateorder',{data:JSON.stringify(productList)},function(res){
+                    console.log(res);
+                    if(res.status){
+                        $('.opa').addClass('active').width(innerWidth).height(innerHeight);
+                        $('#qrcode').qrcode({text:"http://192.168.191.1:3333/payment.html?id=" + res.data.ops[0]._id}).show();
+                        var socket = io.connect('ws://192.168.191.1:3333');
+                        socket.on('scan',function(){
+                            $.alert('扫码成功');
+                        });
+                        socket.on('payment',function(){
+                            $.alert('扫码成功');
+                        })
+
+                    }
+                })
+            });
+        })
+    </script>
+</body>
+</html>

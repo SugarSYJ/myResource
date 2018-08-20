@@ -1,0 +1,12 @@
+{
+    "en": {
+        "title": "Title",
+        "last_reply_at": "Last Reply Time",
+        "top": "Top"
+    },
+    "cn": {
+        "title": "标题",
+        "last_reply_at": "最新回复时间",
+        "top": "置顶"
+    }
+}

@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>冒泡案例</title>
+    <style type="text/css">
+        div{padding:20px 30px; border:solid 1px; background: #fff;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            console.log(document.cookie);
+
+            //获取一组随机的颜色
+            function randomColor() {
+                var r = parseInt(Math.random() * 255);
+                var g = parseInt(Math.random() * 255);
+                var b = parseInt(Math.random() * 255);
+                var color = 'rgb(' + r + ',' + g + ', ' + b + ')';
+                return color;
+            }
+
+            //获取对像
+            var divs = document.getElementsByTagName('div');
+
+            // divs[0].onclick = function (_event) {
+            //     console.log('当前点击了：' + this.getAttribute('class'));
+            //     //改变当前对像的背景
+            //     this.style.background = randomColor();
+            // }
+
+            // divs[2].onclick = function (_event) {
+            //     console.log('当前点击了：' + this.getAttribute('class'));
+            //     //改变当前对像的背景
+            //     this.style.background = randomColor();
+            //     //_event.stopPropagation();
+            // }
+
+            // return false;
+
+            for (var i = 0; i < divs.length; i++) {
+                //给每个对像点击事件
+                divs[i].onclick = function (_event) {
+                    console.log(this)
+                    console.log('当前点击了：' + this.getAttribute('class'));
+                    //console.log('当前点击了：' + this.className);
+                    //改变当前对像的背景
+                    this.style.background = randomColor();
+
+                    //阻止冒泡
+                    // _event.stopPropagation();
+                }
+            }
+
+            //divs[0].onclick = function (event) {
+            //    var _event = event || window.event;
+            //}
+        }
+    </script>
+</head>
+<body>
+    <div class="div1">
+        <span class="red">div1</span>
+        <div class="div2">
+            <span>div2</span>
+            <div class="div3">
+                <span>div3</span>
+                <div class="div4">
+                    <span>div4</span>
+                    <div class="div5">
+                        <span>div5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

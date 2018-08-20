@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .man{
+                width: 500px;
+                height: 500px;
+                border:1px solid pink;
+                background: #CCCCCC;
+                margin:100px auto;
+            }
+            #m_header{
+                width: 200px;
+                height: 100px;
+                border-radius:100px 100px 0 0;
+                margin:25px auto 0;
+                background: green;
+                position:relative;
+            }
+            #m_header::before,#m_header::after{
+                display:block;
+                content:"";
+                width: 20px;
+                height: 20px;
+                border-radius:10px;
+                background: #fff;
+                position:absolute;
+                top:50px;
+            }
+            #m_header::before{
+                left:60px;
+            }
+            #m_header::after{
+                right:60px;
+            }
+            #m_body{
+                width: 200px;
+                height: 230px;
+                border-radius:0 0 15px 15px;
+                margin:10px auto 0;
+                background: green;
+                position:relative;
+            }
+            #m_body::before,#m_body::after{
+                display:block;
+                content:"";
+                width: 30px;
+                height: 180px;
+                border-radius:10px;
+                background: green;
+                position:absolute;
+                top:10px;
+            }
+            #m_body::before{
+                left:-40px;
+            }
+            #m_body::after{
+                right:-40px;
+            }
+            #m_foot{
+                width: 200px;
+                height: 80px;
+                position:relative;
+                margin:0 auto;
+            }
+            #m_foot::before,#m_foot::after{
+                display:block;
+                content:"";
+                width: 30px;
+                height: 80px;
+                border-radius:0 0 10px 10px;
+                background: green;
+                position:absolute;
+                top:0px;
+            }
+            #m_foot::before{
+                left:40px;
+            }
+            #m_foot::after{
+                right:40px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="man">
+            <div id="m_header"></div>
+            <div id="m_body"></div>
+            <div id="m_foot"></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,61 @@
+﻿吴鹏 18:26:32
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+        #div1 {
+            
+            width: 200px;
+            height: 500px;
+            background: pink;
+        }
+
+        #div2 {
+            width: 20px;
+            height: 20px;
+            background: blue;
+            position: relative;
+            top: 50%;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var times;
+            var inp = document.getElementsByTagName("input");
+            var div1 = document.getElementById("div1");
+            var div2 = document.getElementById("div2");
+            var z = 10;
+            inp[0].onclick = function () {
+                clearInterval(times);
+                times = setInterval(function () {
+                    var left = div2.offsetLeft;
+                    console.log(left);
+                    var target = left + z;
+                    if (target >= 180) {
+                        z *= -1;
+                    } else if (target <= 0) {
+                        z *= -1;
+                    }
+                    div2.style.left = target + "px";
+                }, 100);
+            }
+            inp[1].onclick = function () {
+                clearInterval(times);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <div id="div2"></div>
+    </div>
+    <input type="button" value="开始" />
+    <input type="button" value="结束" />
+</body>
+</html>

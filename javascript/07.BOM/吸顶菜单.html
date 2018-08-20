@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            body{margin: 0;}
+            .too{height: 100px;background: pink;}
+            #search{height: 100px;background: blue;}
+            img{display:block;width: 80px;height: 80px;float: left;}
+            .fixed{position:fixed;top:0;right:0;left:0;}
+            .main{height: 1600px;}
+            footer{height: 100px;background:red;}
+        </style>
+    </head>
+    <body>
+        <div class="too">toolbar</div>
+        <header id="search">
+            <div class="logo">
+                <img src="img/g5.jpg" />
+            </div>
+            <input type="search" /><button>搜索</button>
+        </header>
+        <div class="main">
+            abc
+        </div>
+        <footer>foot</footer>
+        <script type="text/javascript">
+            window.onload = function(){
+                var search = document.getElementById('search');
+                window.onscroll = function(){
+                    var scrollTop = window.scrollY;
+                    if(scrollTop>=100){
+                        search.className = 'fixed';
+                    }else{
+                        search.className = '';
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            .tu1{width: 200px;position:absolute;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                var tu = box.children;
+                var tu1 = document.getElementsByClassName('tu1')[0];
+                for(var i=0;i<tu.length;i++){
+                    (function(i){
+                        tu[i].onmouseover = function(){
+                            tu1.src = 'img/small_' + (i+1) + '.jpg';
+                        }
+                        tu[i].onmousemove = function(e){
+                            if(e.clientX>window.innerWidth-200){
+                                tu1.style.left = e.clientX - 200 + 'px';
+                                tu1.style.top = e.clientY + 20 + 'px';
+                            }else{
+                                tu1.style.left = e.clientX + 'px';
+                                tu1.style.top = e.clientY + 20 + 'px';
+                            }
+                        }
+                    })(i)
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h2>放大镜简单版</h2>
+        <div id="box">
+            <img src="img/small_1.jpg" />
+            <img src="img/small_2.jpg" />
+            <img src="img/small_3.jpg" />
+            <img src="img/small_4.jpg" />
+            <img src="img/small_5.jpg" />
+            <img src="img/small_6.jpg" />
+            <img src="img/small_7.jpg" />
+            <img src="img/small_8.jpg" />
+            <img src="img/small_9.jpg" />
+            <img src="img/small_10.jpg" />
+            <img src="img/small_11.jpg" />
+        </div>
+        <footer>
+            <img src="img/small_1.jpg" class="tu1"/>
+        </footer>
+    </body>
+</html>

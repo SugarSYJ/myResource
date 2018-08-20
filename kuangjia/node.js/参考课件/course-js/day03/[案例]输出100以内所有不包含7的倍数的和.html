@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>输出100以内所有除7的倍数以外的数的和</title>
+	<script>
+		/*
+			[案例]输出100以内所有除7的倍数以外的数的和
+
+		 */
+		var sum = 0;
+		for(var i=1;i<=100;i++){
+			if(i%7!=0){
+				sum += i;
+			}
+		}
+
+		/*
+			[案例]输出100以内所有除10,20,30,40,80,90以外的数的和
+		 */
+		var sum = 0;
+		for(var i=1;i<=100;i++){
+			if(i==10 || i==20 || i==30 || i==40 || i==80 || i==90){
+				continue;//跳出本次循环,继续下一次的循环
+			}
+			sum += i;
+		}
+		// alert(sum);
+
+		/*
+			[案例]计算1到100,输入的数的和
+		 */
+		window.onload = function(){
+			// 获取页面元素
+			var num = document.getElementById('num');
+			var btnCalc = document.getElementById('calc');
+
+			//绑定点击事件
+			//把事件绑定到js，实现行为与结构的分离
+			btnCalc.onclick = fnCalc;
+
+			function fnCalc(){
+				var _num = num.value;
+				var sum = 0;
+				for(var i=1;i<=100;i++){
+					sum += i;
+					if(i==_num){
+						break;//终止当前循环
+					}
+				}
+				alert(sum);
+			}
+
+			/* 
+				函数的调用
+					1.手动调用：函数名()
+					2.事件调用：
+						元素.事件名 = 函数名
+			*/
+			var sum = 0;
+			outside:for(var i=1;i<10;i++){
+				for(var j=10;j>=1;j--){
+					if(i==j){
+						continue outside;
+					}
+					sum += j;
+
+					// 往控制台输出信息，多用于测试与调试
+					console.log(i,j,sum);
+				}
+			}
+			alert(sum);
+		}
+	</script>
+</head>
+<body>
+	<label for="num">计算1到输入的数的和:</label><input type="text" id="num"><button id="calc">计算</button>
+</body>
+</html>

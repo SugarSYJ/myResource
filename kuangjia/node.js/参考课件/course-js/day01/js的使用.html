@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js的使用</title>
+	<style>
+	/*
+	
+	 */
+	#box{border:1px solid #ddd;}
+	</style>
+	<!-- html注释 -->
+	<!-- 
+	js代码放置位置 
+		1.放在script标签内
+		2.script便签可以放置在html文档的任何位置
+		3.js可以放置在外部的js文件里
+			通过script标签的src属性链接入页面
+
+	引号问题：
+		1.相同的引号(单引号/双引号)不能嵌套；
+		2.如果非要嵌套，要转义（反斜线“\”）
+			转义：在需要转义的字符前加“\”
+
+	js对大小写敏感
+
+	浏览器解析代码是从上往下顺序执行
+	-->
+	<!-- <script src="js/common.js"></script> -->
+	<script type="text/javascript">
+		// document.write('<h1>广州html5 <span style=\'color:#f00;\'>1601班</span></h1>');
+		document.write('&lt;h1&gt;广州html5 &lt;span style=\'color:#f00;\'&gt;1601班&lt;/span&gt;&lt;/h1&gt;');alert(111);
+		document.write('<p>test line</p>');
+
+		// alert
+		alert('你属性的用户名已经存在');
+	</script>
+</head>
+<body>
+	<div id="box">#box</div>
+	实体标签：&lt;&gt;
+</body>
+</html>

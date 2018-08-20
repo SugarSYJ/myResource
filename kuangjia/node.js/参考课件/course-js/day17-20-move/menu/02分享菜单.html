@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{margin:0;}
+        #menu{}
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 5px 0;
+            position: relative;
+            left: 0;
+            height:30px;
+        }
+        li {
+            background-color: #d50d0d;
+            color: #fff;
+            font-size: 12px;
+            padding: 5px;
+            position:absolute; left:0; top:0; bottom:0;
+        }
+        li:first-child{z-index:100; width:34px;}
+        li:last-child{left:-400px;}
+    </style>
+    <!--<script src="01.js"></script>-->
+    <script type="text/javascript">
+        window.onload = function () {
+            var tabs = document.getElementsByClassName('tab');
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].onmouseover = function (_event) {
+                    var tab = _event.target;
+                    var content = tab.nextSibling.nextSibling;
+
+                    var contentLeft = (content.clientWidth - tab.clientWidth) * -1;
+                    content.style.left = contentLeft + 'px';
+                    
+                    if (tab.timer) {
+                        window.clearInterval(tab.timer);
+                    }
+                    var speed = Math.random() * 55;
+                    tab.timer = window.setInterval(function () {
+                        var left = content.offsetLeft;
+                        left += speed;
+                        
+                        if (left >= tab.clientWidth) {
+                            left = tab.clientWidth;
+                            window.clearInterval(tab.timer);
+                        }
+                        content.style.left = left + 'px';
+                    }, 30)
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="menu">
+        <ul>
+            <li class="tab">会员</li>
+            <li>我是会员我是会员dddddddddddddddddddddddd</li>
+        </ul>
+        <ul>
+            <li class="tab">收藏</li>
+            <li>我是收藏dssssssssssss</li>
+        </ul>
+        <ul>
+            <li class="tab">足迹</li>
+            <li>我是足迹</li>
+        </ul>
+        <ul>
+            <li class="tab">消息</li>
+            <li>我是消息</li>
+        </ul>
+        <ul>
+            <li class="tab">咨询</li>
+            <li>我是咨询</li>
+        </ul>
+    </div>
+</body>
+</html>

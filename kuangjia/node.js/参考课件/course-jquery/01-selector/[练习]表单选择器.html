@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        /*// document.getElementById('sex').value = 'female';
+        // jquery对象转成原生对象的方法
+        $('#sex').value = 'female';
+
+        // 当值改变时触发
+        $('#sex').get(0).onchange = function(){
+            alert(11)
+        }
+
+        //document.getElementById('username')
+        $('#username')[0].onchange = function(){
+            alert(this.value);
+        }
+        
+        console.log($(':button'));*/
+
+        /*
+            .val()等同于原生js中的value
+            .html()等同于原生js中的innerHTML
+            **无参数时为取值，带参数时为赋值**
+         */
+        $('#username')[0].value = '王尼玛';
+        $('#username').val('王铁锤');
+        $('#sex').val('female');
+
+        $('.center input').eq(1).val('再见');
+        // $('.center button[type=submit]').val('提&nbsp;交')
+        $('.center button[type=submit]').html('提 &nbsp; 交')
+
+        $('label[for]').html(function(index,_html){
+            $(this).html(_html + "：");
+        });
+    })
+    </script>
+</head>
+
+<body>
+    <form>
+        <p>
+            <label for="username">用户名</label>
+            <input type="text" id="username" placeholder="请输入用户名">
+        </p>
+        <p>
+            <label for="nickname">昵称</label>
+            <input type="text" id="nickname" placeholder="输入一个昵称">
+        </p>
+        <p>
+            <label for="password">密码</label>
+            <input type="password" id="password">
+        </p>
+        <p>
+            <label for="passwordchecked">确认密码</label>
+            <input type="password" id="passwordchecked">
+        </p>
+        <p>
+            <label for="sex">性别</label>
+            <select id="sex">
+                <option value="male">男</option>
+                <option value="female">女</option>
+            </select>
+        </p>
+        <p>
+            <label for="">爱好</label>
+            <label>
+                <input type="checkbox" value="1">旅游
+            </label>
+            <label>
+                <input type="checkbox" value="2">睡觉
+            </label>
+            <label>
+                <input type="checkbox" value="3">上网
+            </label>
+                <label>
+                <input type="checkbox" value="4">看电影
+                </label>
+        </p>
+        <p>
+            <label for="">是否已婚</label>
+            <label>
+                <input type="radio" value="1" name="married">是</label>
+            <label>
+                <input type="radio" value="0" name="married">否</label>
+        </p>
+        <div class="center">
+            <input type="hidden" value="注册表单">
+            <input type="button" value="返回" />
+            <button type="submit">提交</button>
+            <button type="reset">重置</button>
+        </div>
+    </form>
+    <div class="msg"></div>
+</body>
+
+</html>

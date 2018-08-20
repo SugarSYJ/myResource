@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>闭包</title>
+	<script>
+		/*
+			闭包
+				* getNumber闭包函数
+
+			* 垃圾回收机制
+				* 自动清理无引用的数据
+		 */
+		
+		function show(){
+			var num = 10;
+
+			function getNumber(){
+				num++;
+				console.log(num);
+			}
+
+			return getNumber;
+		}
+
+		// show();//10
+		// show();//10
+
+		// getNumber();//报错
+		show()();//11
+		show()();//11
+		show()();//11
+
+		var res = show();//此处操作函数内的num值
+		res();//11
+		res();//12
+		res();//13
+		res();//14
+
+
+		// console.log(num);// num is not defined
+		// 结论：函数外部能不访问函数内部的变量
+
+		/*function aa(){
+	        var num=10;
+	        function bb(){
+	            num++
+	            console.log(num);
+	        }
+	        return bb;
+	    }
+	    //bb(); //无法直接访问函数内部的函数
+
+	    aa()();//11
+	    aa()();//11
+	    aa()();//11
+
+	    var closure = aa();
+	    closure();//11
+	    closure();//12
+	    closure();//13*/
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

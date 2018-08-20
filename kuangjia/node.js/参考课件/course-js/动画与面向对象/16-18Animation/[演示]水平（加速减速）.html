@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加减速运动</title>
+	<style>
+		html{height:100%;}
+		#ball{position:absolute;top:0;left:200px;width:50px;height:50px;border:1px solid #aaa;border-radius:50%;background:#f00 radial-gradient(at 20px 20px, #fff 2%,#ccc 40%, #999);box-shadow:0 5px 30px rgba(255,255,255,.8),0 5px 10px rgba(0,0,0,.6);}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ball = document.getElementById('ball');
+			var btnAc = document.getElementById('btnAc');
+			var btnDe = document.getElementById('btnDe');
+
+			// 加速运动
+			btnAc.onclick = function(){
+				var speed = 10;
+				var timer = setInterval(function(){
+					var currentLeft = parseInt(getComputedStyle(ball).left);
+					speed += 2;
+					if(currentLeft >= 1000){
+						clearInterval(timer);
+						return;
+					}
+					ball.style.left = currentLeft + speed +'px';
+				},30);
+			}
+			
+			// 减速运动
+			btnDe.onclick = function(){
+				var speed = 70;
+				var timer = setInterval(function(){
+					var currentLeft = parseInt(getComputedStyle(ball).left);
+					speed -= 2;
+					if(speed <=0){
+						speed = 0;
+						clearInterval(timer);
+					}
+					ball.style.left = currentLeft + speed +'px';
+				},30);
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<h1>加减速运动</h1>
+	<button id="btnAc">加速运动</button><button id="btnDe">减速运动</button>
+		<div id="ball"></div>
+</body>
+</html>

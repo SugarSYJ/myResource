@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>冒泡排序法</h3>
+        <script type="text/javascript">
+            var arr = [10,15,2,32,5,4,20,8,48,54,6];
+            var res = [];
+            for(var i=0;i<arr.length;i++){
+                for(var j=0;j<arr.length-i-1;j++){
+                    if(arr[j]>arr[j+1]){
+                        res = arr[j];
+                        arr[j] = arr[j+1];
+                        arr[j+1] = res;
+                    }
+                }
+            }
+            document.write(arr);
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dom操作</title>
+    <style>
+    
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script>
+    $(function() {
+        // 指定元素.replaceWith(匹配元素) 将指定元素替换成匹配元素
+        // 1.如果匹配元素不存在，则忽略本次替换操作
+        // 2.如果匹配元素存在页面上，则用匹配元素替换指定元素（并移动到相应得位置）
+        // 
+        // 匹配元素.replaceAll(指定元素)
+        // $('.box').replaceWith('<strong>体育新闻</strong>');
+        return;
+        $('.box').replaceWith($('.content'));
+
+        $('.content').insertBefore('.box');
+        $('.box').remove();
+
+        // $('a').replaceWith('头条：')
+        $('<strong style="color:red">头条：</strong>').replaceAll('a');
+    });
+    </script>
+</head>
+
+<body>
+    <div class="box">娱乐新闻</div>
+    <div class="container">
+        <h1>新闻内容</h1>
+        <span class="content">科比退役</span>
+    </div>
+
+    <div class="news">
+        <a href="#">科比退役</a>
+        <span>科比退役</span>
+        <strong>科比退役</strong>
+        <a href="#">科比退役</a>
+        <span>科比退役</span>
+        <strong>科比退役</strong>
+    </div>
+</body>
+
+</html>

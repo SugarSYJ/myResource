@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #num{height: 30px;vertical-align:middle;}
+            #code{display:inline-block;padding:5px;margin: 5px;border:1px solid #ddd;vertical-align:middle;}
+        </style>
+    </head>
+    <body>
+        <h3>编写生成4位数字验证码的函数，并显示在页面，点击重新生成验证码</h3>    
+        <input type="text" id="num"/><span id="code"></span>
+        <p>
+            <button id="btn">验证</button>
+        </p>
+
+        <script type="text/javascript">
+            var num = document.getElementById('num');
+            var btn = document.getElementById('btn');
+            var code = document.getElementById('code');
+            function creatCode(){
+                var res = '';
+                for(var i=0;i<4;i++){
+                    var num = parseInt(Math.random()*10);
+                    res = res + num;
+                }
+                return res;
+            }
+            var currentCode = creatCode();
+            code.innerHTML = currentCode;
+            btn.onclick = function(){
+                var _num = num.value;
+                if(_num===currentCode){
+                    alert('你已通过验证...');
+                }else{
+                    alert('你是不是瞎的...')
+                }
+            }
+        </script>
+    </body>
+</html>

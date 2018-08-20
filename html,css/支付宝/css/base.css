@@ -1,0 +1,236 @@
+@charset "UTF-8";
+/*css 初始化 */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img,input{ margin:0; padding:0; }
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none; }   /*去掉input等聚焦时的蓝色边框*/
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0; font-family: "SimSun","宋体";}
+select, input { vertical-align:middle;}
+/*select, input, textarea { font-size:12px; margin:0; }*/
+textarea { resize:none; } /*防止拖动*/
+img {border:0; vertical-align:middle; }  
+/*  去掉图片低测默认的3像素空白缝隙，或者用display：block也可以*/
+table { border-collapse:collapse; }
+
+
+/*添加公共样式*/
+/*body {
+    font:12px/150% Arial,Verdana,"\5b8b\4f53";
+    color:#666;
+    background:#fff
+}*/
+.clearfix:after{
+    content:"";
+    display:block;
+    height: 0;
+    clear:both;
+    overflow:hidden;
+    visibility:hidden;
+    zoom:1;
+}
+a {color:#666; text-decoration:none; }
+a:hover{color:#C81623;}
+h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:1em;}  /*设置h标签的大小，设置跟父亲一样大的字体font-size:100%;*/
+s,i,em{font-style:normal;text-decoration:none;}
+
+
+/*公共类*/
+.container {  /*版心 提取 */
+    width: 1210px;
+    margin:0 auto;
+}
+.fl {
+    float:left;
+}
+.fr {
+    float:right;
+}
+.al {
+    text-align:left;
+}
+.ac {
+    text-align:center;
+}
+.ar {
+    text-align:right;
+}
+.hide {
+    display:none;
+}
+.font12{ font-size: 12px;}
+.font14{ font-size: 14px;}
+.font16{ font-size: 16px;}
+@font-face {font-family: "iconfont";
+  src: url('../font/iconfont.eot?t=1484793044531'); /* IE9*/
+  src: url('../font/iconfont.eot?t=1484793044531#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../font/iconfont.woff?t=1484793044531') format('woff'), /* chrome, firefox */
+  url('../font/iconfont.ttf?t=1484793044531') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('../font/iconfont.svg?t=1484793044531#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family:"iconfont";
+}
+.icon-caidan:before { content: "\f000d"; }
+
+.icon-erweima:before { content: "\f0050"; }
+
+.icon-tuichu:before { content: "\e796"; }
+
+.icon-my:before { content: "\e607"; }
+
+.icon-fangdajing:before { content: "\e653"; }
+
+.icon-shouyeshouye:before { content: "\e600"; }
+
+.icon-camera:before { content: "\e501"; }
+
+/*公共部分*/
+body,html{
+    height: 100%;
+}
+.zhifubao{
+  height: 100%;
+  display:flex;
+  flex-direction:column;
+}
+#z_head{
+  height: 70px;
+  background: #3F454F;
+  display:flex;
+  justify-content:space-between;
+}
+#z_head h1{
+  height: 70px;
+  font-size:30px;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  padding-left:30px;
+}
+#z_head ul{
+  height: 70px;
+  font-size:30px;
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+#z_head i{
+  padding:0 25px 0 0;
+}
+#z_nav{
+  height: 240px;
+  background: #3F454F;
+}
+#z_nav ul{
+  height: 240px;
+  display:flex;
+  justify-content:space-between;
+}
+#z_nav ul li{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+#z_nav ul li i{
+  font-size:60px;
+  color:#fff;
+}
+#z_nav ul li span{
+  font-size:40px;
+  color:#fff;
+}
+#z_main{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  overflow-x:hidden;
+}
+#z_main .z_main_t,#z_main .z_main_b{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-start;
+}
+#z_main .z_main_t{
+  /*height: 540px;*/
+}
+#z_main .z_main_t li,#z_main .z_main_b li{
+  display:flex;
+  box-sizing:border-box;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  width: 25%;
+  height: 180px;
+  border:1px solid #ccc;
+}
+#z_main .z_main_t li i,#z_main .z_main_b li i{
+  font-size:50px;
+  color:red;
+}
+#z_main .z_main_t li span,#z_main .z_main_b li span{
+  font-size:30px;
+}
+#z_main .z_main_c{
+  background: #F5F5F9;
+}
+#z_main .z_main_c1{
+  height: 168px;
+  margin:30px 0;
+  background: #fff;
+  display:flex;
+  justify-content:space-between;
+  border:1px solid #ccc;
+}
+#z_main .z_main_c1 div{
+  width: 267px;
+  height: 168px;
+  background:url("../images/zhi.png") no-repeat;
+}
+#z_main .z_main_c1 li:nth-child(2){
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-end;
+  padding-right:55px;
+}
+#z_main .z_main_c1 li p{
+  font-size:42px;
+  color:#000;
+}
+#z_main .z_main_c1 li p u{
+  color:#FD6C75;
+  text-decoration:none;
+}
+#z_main .z_main_c1 li span{
+  font-size:26px;
+  color:#B7BCC2;
+}
+#z_main .z_main_b{
+  flex:1;
+}
+#z_foot{
+  height: 100px;
+}
+#z_foot ul{
+  height: 100px;
+  display:flex;
+  justify-content:space-between;
+}
+#z_foot ul li{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+#z_foot ul li i{
+  font-size:46px;
+  color:#929292;
+}
+#z_foot ul li span{
+  font-size:30px;
+  color:#808080;
+}

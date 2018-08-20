@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>飞翔的小鸟（匀速）</title>
+        <style type="text/css">
+            .bird{position:absolute;left:0;top:0;width:100px;}
+            .hui{transform:rotateY(180deg);}
+        </style>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var bird = document.querySelector('.bird');
+                var speed = 10;
+                var timer1 = setInterval(()=>{
+                    var current = bird.offsetLeft;
+                    var left = current + speed;
+                    if(left >= window.innerWidth - bird.offsetWidth){
+                        bird.classList.toggle('hui');
+                        speed = -10;
+                        left = window.innerWidth - bird.offsetWidth;
+                    }
+                    if(left<=0){
+                        bird.classList.toggle('hui');
+                        speed = 10;
+                        left = 0;
+                    }
+                    bird.style.left = left + 'px';
+                },30)
+            })
+        </script>
+    </head>
+    <body>
+        <img src="img/bird.gif" class="bird"/>
+    </body>
+</html>

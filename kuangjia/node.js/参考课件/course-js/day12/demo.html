@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        table{background:#ccc;}
+        td{border:solid 1px;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            var div = document.getElementById('div');
+            div.onclick = function (_event) {
+                console.log('offsetX：' + _event.offsetX);
+                console.log('offsetY：' + _event.offsetY);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="width:150px; height:150px; background:#ccc; position:absolute; top: 45%; left:45%;" id="div">点我</div>
+</body>
+</html>

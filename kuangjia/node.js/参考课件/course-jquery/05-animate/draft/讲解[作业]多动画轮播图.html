@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <style type="text/css">
+        .content{width:760px; height:300px; background-color:#0094ff; position: relative; overflow:hidden;}
+        .content>div{width: 100px; height: 30px; position: absolute; left: -100px;}
+        .content>div:first-child{background-color:#b6ff00; top:20px;}
+        .content>div:last-child{background-color:#ff6a00; top: 100px;}
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div></div>
+        <div></div>
+    </div>
+
+    <script type="text/javascript">
+        $(function () {
+            $('.content>div:first-child').animate({ left: 300 }, 800, 'linear', function () {
+                $('.content>div:last-child').animate({ left: 150 }, 800, 'linear');
+            });
+        })
+    </script>
+</body>
+</html>

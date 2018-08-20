@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>加载html文档</title>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			// load()
+			// 1)加载html文档
+			// 2)当事件来使用
+			$('#btnLoad').on('click',function(){
+				$('#output').load('qin.html #mp');
+			});
+
+			// 往页面生成一样图片
+			var $img = $('<img/>').attr('src','http://imgsrc.baidu.com/baike/pic/item/0b46f21fbe096b6329270c190c338744ebf8acb9.jpg');
+			$img.appendTo('body');
+			$img.load(function(){
+				$('<p style="color:#f00">图片加载完毕</p>').appendTo('body');
+				console.log('width2：',$img.width())
+			});
+			$('<p>图片加载中....</p>').appendTo('body');
+			console.log('width1：',$img.width());
+			
+		});
+		
+		// 跟原生js中的window.onload是一样的
+		$(window).load(function(){
+
+		});
+
+
+	</script>
+</head>
+<body>
+	<h1>load方法的使用</h1>
+	<button id="btnLoad">加载</button>
+	<div id="output"></div>
+</body>
+</html>

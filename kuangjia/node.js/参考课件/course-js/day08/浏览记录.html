@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>浏览记录</title>
+	<style>
+	.header{
+		height:60px;
+		background-color:#999;
+		overflow:hidden;
+	}
+	.header button{float:left;margin:13px 0 0 10px;background:#fff;padding:8px 10px;border:1px solid #ccc;}
+	.header #next{float:right;margin-right:10px;}
+	</style>
+	<script>
+		window.onload = function(){
+			var btnBack = document.getElementById('back');
+			var btnNext = document.getElementById('next');
+
+			btnNext.onclick = function(){
+				history.forward();
+			}
+
+			btnBack.onclick = function(){
+				history.back();
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="header">
+		<button id="back">返回</button>
+		<button id="next">下一个页面</button>
+	</div>
+	<a href="history.html">上一个页面</a>
+	<br><a href="history2.html">下一个页面</a>
+	<br><br><br>
+</body>
+</html>

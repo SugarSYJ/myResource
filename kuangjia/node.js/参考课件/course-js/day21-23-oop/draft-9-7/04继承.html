@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script type="text/javascript">
+        //父类 => 基类
+        function Person1(age) {
+            this.name = 'Parent';
+            this.age = age;
+            this.giveAll = function () {
+                console.log('我已给了你我的所有！别再来找我了！');
+            }
+        };
+        
+        Person1.prototype.pwd = '1234';
+
+        //子类 => 派生类
+        function Person2(age) {
+            Person1.call(this, age);
+            //Person1.apply(this, [age]);
+        }
+
+        Person2.prototype = new Person1();
+
+        var person2 = new Person2(26);
+        console.log(person2.name);
+        console.log(person2.age);
+        console.log(person2.pwd);
+        //person2.giveAll();
+    </script>
+</head>
+<body>
+
+</body>
+</html>

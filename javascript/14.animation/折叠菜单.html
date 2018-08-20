@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .main-nav{width: 250px;}
+            .main-nav ul{background-color: #fc0;overflow:hidden;}
+        </style>
+        <script src="../common.js"></script>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var mainNav = document.querySelector('.main-nav');
+                var navItem = mainNav.children;
+                for(var i=0;i<navItem.length;i++){
+                    navItem[i].children[0].onclick = function(e){
+                        e = e || window.event;
+                        var ul = this.nextElementSibling;
+                        var height = ul.clientHeight;
+                        
+                        height = height > 0 ? 0 : 168;
+                        animation(ul,'height',height);
+                        // animate(ul,{height:height})
+                        console.log(animate)
+                        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+                    }
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <ul class="main-nav">
+            <li>
+                <a href="http://www.baidu.com">Girls' Shoes</a>
+                <ul>
+                    <li><a href="#">Men's Casual Shoes</a></li>
+                    <li><a href="#">Men's Sneakers</a></li>
+                    <li><a href="#">Men's Jordan Shoes</a></li>
+                    <li><a href="#">Men's Slippers</a></li>
+                    <li><a href="#">Men's Running Shoes</a></li>
+                    <li><a href="#">Men's Snow Boots</a></li>
+                    <li><a href="#">Men's Basketball Shoes</a></li>
+                    <li><a href="#">Men's Fashion Shoes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Men's Shoes</a>
+                <ul>
+                    <li><a href="#">Men's Casual Shoes</a></li>
+                    <li><a href="#">Men's Sneakers</a></li>
+                    <li><a href="#">Men's Jordan Shoes</a></li>
+                    <li><a href="#">Men's Slippers</a></li>
+                    <li><a href="#">Men's Running Shoes</a></li>
+                    <li><a href="#">Men's Snow Boots</a></li>
+                    <li><a href="#">Men's Basketball Shoes</a></li>
+                    <li><a href="#">Men's Fashion Shoes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Women's Shoes</a>
+                <ul>
+                    <li><a href="#">Men's Casual Shoes</a></li>
+                    <li><a href="#">Men's Sneakers</a></li>
+                    <li><a href="#">Men's Jordan Shoes</a></li>
+                    <li><a href="#">Men's Slippers</a></li>
+                    <li><a href="#">Men's Running Shoes</a></li>
+                    <li><a href="#">Men's Snow Boots</a></li>
+                    <li><a href="#">Men's Basketball Shoes</a></li>
+                    <li><a href="#">Men's Fashion Shoes</a></li>
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>

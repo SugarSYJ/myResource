@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,user-scalable=no">
+		<title>多人聊天系统</title>
+	</head>
+	<link href="css/bootstrap.css" type="text/css" rel="stylesheet">
+	<style>
+		.loginBar{position:relative;margin-top:15px;}
+		.loginBar .logout{position:absolute;right:35px;top:50%;margin-top:-10px;}
+		.loginBar h1{margin-top:0;}
+		.media{padding-bottom:15px;border-bottom:1px dotted #ccc;}
+		.media h4{margin:0;font-size:14px;overflow:hidden;text-overflow:ellipsis;}
+		.media .alert{margin-bottom:5px;}
+		#chatWindow{padding-right:10px;padding-bottom:20px;height:330px;overflow-y:auto;}
+		.chat-area{display:none;}
+		.current{color:#5cb85c;}
+		.current .media-body{text-align:right;}
+	</style>
+	<script type="text/javascript">
+		/*
+			多人聊天系统
+			1）点击登录时
+				验证用户名不能为空
+			2）登录成功后
+				1>显示聊天窗口
+				2>隐藏登录窗口，并显示登陆信息
+			3）每隔3s获取一次数据
+				利用定时器每隔3s发送一次ajax请求
+				API：ip地址/ajax/chat?type=query
+			4）发送数据
+				API：ip地址/ajax/chat?type=send&sender=xiejinrong&msg=hello
+		 */
+		window.onload = function(){
+			// 获取页面元素
+			var loginBar = document.getElementsByClassName('loginBar')[0];
+			var chatArea = document.getElementsByClassName('chat-area')[0];
+			var chatWindow = document.getElementById('chatWindow');
+
+			// 登录框元素
+			var username = document.getElementById('username');
+			var gender = document.getElementsByName('gender');
+			var btnLogin = document.getElementById('btnLogin');
+
+			// 发送消息框与按钮
+			var msg = document.getElementById('msg');
+			var btnSend = document.getElementById('btnSend');
+
+			var timer;
+
+			/*
+				请求地址配置
+					host:域名
+					ipURL:获取本机ip
+					reqURL:获取数据的地址
+					postURL:发送数据地址
+
+			 */
+			// var host = 'http://10.16.155.12:3000';
+			var ipURL = host + '/ajax/getIP';
+			var reqURL = host + '/ajax/chat?type=query';
+			var postURL = host + '/ajax/chat?type=send';
+
+			// 全局变量
+			var _ip,_username,_gender;
+
+			// 获取本机ip
+			var ipxhr = new XMLHttpRequest();
+			ipxhr.onreadystatechange = function(){
+				if(ipxhr.readyState == 4 && ipxhr.status == 200){
+					_ip = ipxhr.responseText;
+				}
+			}
+
+			/*
+				@获取数据
+			 */
+
+			var req = new XMLHttpRequest();
+
+			// 处理返回的数据
+			req.onreadystatechange = function(){
+				if(req.readyState == 4 && req.status == 200){
+					var data = JSON.parse(req.responseText)
+					console.log(data);
+					/*<div class="media">
+						<div class="media-left">
+							<span class="glyphicon glyphicon-user alert alert-warning"></span>
+							<h4>yintao</h4>
+						</div>
+						<div class="media-body">
+							哈哈哈哈
+						</div>
+					</div>*/
+					// 写入前，先清空
+					chatWindow.innerHTML = '';
+
+					// 遍历数据
+					// data.data.forEach(function(obj,idx){
+					for(var i=data.data.length-1;i>=0;i--){
+						var obj = data.data[i];
+						var media = document.createElement('div');
+						media.className = 'media';
+
+						// 写入内容
+						var mbody = document.createElement('div');
+						mbody.className = 'media-body';
+						mbody.innerHTML = obj.content;
+
+						// 写入名字
+						var mname = document.createElement('div');
+						mname.className = 'media-left';
+						mname.innerHTML = '<span class="glyphicon glyphicon-user alert alert-warning"></span><h4>'+obj.name+'</h4>';
+
+						// 如果当前消息是我发送的
+						if(_ip==obj.ipfrom){
+							media.className = 'media current';
+							mname.className = 'media-right';
+							media.appendChild(mbody);
+							media.appendChild(mname);
+						}else{
+							media.appendChild(mname);
+							media.appendChild(mbody);
+						}
+						
+
+						// 把每一条数据写入#chatWindow
+						chatWindow.appendChild(media);
+
+						// 把最后一条滚动到可见区域
+						if(i == 0){
+							media.scrollIntoView();
+						}
+					};
+				}
+			}
+
+			/*
+				@发送数据
+					1）创建xhr对象
+					4）处理数据
+					2）建立与服务器的连接
+					3）发送请求
+			 */
+
+			var postreq = new XMLHttpRequest();
+
+			// 发送成功立即获取数据
+			postreq.onreadystatechange = function(){
+				if(postreq.readyState == 4 && postreq.status == 200){
+					// 发送成功后清空输入框
+					msg.value = '';
+
+					// 自动获取焦点
+					msg.focus();
+
+					getMsg();
+				}
+			}
+
+			// 初始化
+			init();
+
+			// 点击发送消息
+			btnSend.onclick = function(){
+				// 获取输入的内容
+				var _msg = msg.value;
+
+				postreq.open('post',postURL+'&sender=' + _username + '&gender=' + _gender + '&msg='+_msg,true);
+				postreq.send();
+			}
+
+			// 1）点击登录时,验证用户名不能为空
+			btnLogin.onclick = function(){
+				// 获取输入的用户名
+				_username = username.value;
+				for(var i=0;i<gender.length;i++){
+					if(gender[i].checked){
+						_gender = gender[i].value;
+						break;
+					}
+				}				
+
+				/*正则判断输入是否为空
+					\s:表示一个空格
+					*: 数量词，表示0个或则多个
+					$: 表示结束
+					^: 表示开始
+					
+					.test(str): 正则方法，用于检测是否匹配, 返回true,false
+				*/
+				var reg = /^\s*$/;
+				if(reg.test(_username)){
+					alert('好汉，留下的你大名');
+					return;
+				}
+
+				if(!_gender){
+					alert('天哪，你连性别都不敢告诉别人？');
+					return;
+				}
+
+
+				// 把用户名、性别存入cookie
+				var _cookie = {username:_username,gender:_gender,ip:_ip};
+				document.cookie = 'userInfo=' + JSON.stringify(_cookie);
+				
+				// 设置登录信息
+				setInfo(_username,_gender,_ip);
+
+				getMsg();
+
+				// 每隔5s获取一次数据
+				timer = setInterval(getMsg,5000);
+			}
+
+			// 退出登录
+			loginBar.onclick = function(e){
+				if(/logout/.test(e.target.className)){
+					var now = new Date();
+					now.setDate(now.getDate()-1);
+					document.cookie = 'userInfo=null;expires=' + now;
+					location.reload();
+				}
+			}
+
+			// 初始化
+			// 有cookie时直接显示聊天窗口
+			// 无cookie时显示登陆状态
+			function init(){
+				var cookie = document.cookie;
+				if(/userInfo\=(\{.+\})/.test(cookie)){
+					var userInfo = JSON.parse(RegExp.$1);
+					_username = userInfo.username;
+					_gender = userInfo.gender;
+					_ip = userInfo.ip;
+					setInfo(_username,_gender,_ip);
+
+					// 立即向服务器请求数据
+					getMsg();
+
+					// 每隔5s获取一次数据
+					timer = setInterval(getMsg,5000);
+
+					return;
+				}
+
+				// 请求服务器获取本地ip
+				ipxhr.open('get',ipURL,true);
+				ipxhr.send(null);
+			}
+
+			//设置欢迎信息
+			function setInfo(username,gender,ip){
+				var m = {'男':'帅锅','女':'美女','保密':''}
+
+				// 2）登录成功后
+				// 1>显示聊天窗口
+				// 2>隐藏登录窗口，并显示登陆信息
+				chatArea.style.display = 'block';
+
+				// 写入登录信息
+				loginBar.innerHTML = '<strong>' + username + ' ' + m[gender] + '</strong>, 欢迎登陆在线实时聊天系统' + (ip? '，您当前的IP地址为：' + ip : '') + '<a href="#" class="btn btn-success btn-xs logout">退出</a>';
+			}
+
+			// 封装获取数据函数
+			function getMsg(){
+				req.open('get',reqURL,true);
+				req.send();
+			}
+		}
+	</script>
+	<body>
+		<div class="container">
+			<div class="loginBar jumbotron">
+				<h1>多人聊天系统</h1>
+				<div class="form-group">
+					<label for="username">用户名：</label>
+					<input type="text" id="username" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="ip">性别：</label>
+					<label class="checkbox-inline"><input type="radio" name="gender" value="男"> 男</label>
+					<label class="checkbox-inline"><input type="radio" name="gender" value="女"> 女</label>
+					<label class="checkbox-inline"><input type="radio" name="gender" value="保密"> 保密</label>
+				</div>
+				<button id="btnLogin" class="btn btn-primary">登录</button>
+			</div>
+			<div class="chat-area">
+				<div id="chatWindow">
+					<div class="media">
+						<div class="media-left">
+							<span class="glyphicon glyphicon-user alert alert-warning"></span>
+							<h4>yintao</h4>
+						</div>
+						<div class="media-body">
+							
+							哈哈哈哈
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-body">
+							aaaaaaaaaaaaaaaaa
+						</div>
+						<div class="media-right">
+							<span class="glyphicon glyphicon-user alert alert-success"></span>
+							<h4>xiaoming</h4>
+						</div>
+					</div>
+					<div class="media">
+						<div class="media-left">
+							<span class="glyphicon glyphicon-user alert alert-success"></span>
+							<h4>xiaomingxiaoming</h4>
+						</div>
+						<div class="media-body">bbbbbbbbbb</div>
+					</div>
+					<div class="media">
+						<div class="media-left">
+							<span class="glyphicon glyphicon-user alert alert-success"></span>
+							<h4>xiaoming</h4>
+						</div>
+						<div class="media-body">ccccccccccccc</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<textarea id="msg" class="form-control"></textarea>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-primary" id="btnSend">发送</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

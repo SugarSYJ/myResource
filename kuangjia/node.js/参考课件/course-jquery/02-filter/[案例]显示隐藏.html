@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>显示隐藏</title>
+	<style>
+	.content{padding:15px;background-color:#efefef;border:1px solid #ddd;}
+	#btnShow{display:inline-block;padding:5px 15px;color:#fff;text-decoration:none;border:1px solid #f60;background-color:#f60;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+	$(function(){
+		var $content = $('#btnShow').next('.content');
+		$('#btnShow').click(function(){
+			if($content.is(':hidden')){
+				$content.show();
+				$(this).text('隐藏');
+			}else{
+				$content.hide();
+				$(this).text('显示')
+			}
+		});
+	});
+	</script>
+</head>
+<body>
+	<!-- 显示隐藏 -->
+	<a href="#" id="btnShow">隐藏</a>
+	<div class="content">轻轻的我走了，正如我轻轻的来....</div>
+</body>
+</html>

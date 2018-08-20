@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>反弹和边界处理</title>
+	<style>
+		html{height:100%;overflow:hidden;}
+		#ball{position:absolute;top:0;left:0;width:50px;height:50px;border:1px solid #aaa;border-radius:50%;background:#f00 radial-gradient(at 20px 20px, #fff 2%,#ccc 40%, #999);box-shadow:0 5px 30px rgba(255,255,255,.8),0 5px 10px rgba(0,0,0,.6);}
+		#wall{position:absolute;bottom:100px;left:100px;width:180px;height:20px;background-color:#000;}
+	</style>
+	<script>
+		window.onload = function(){
+			var ball = document.getElementById('ball');
+			var wall = document.getElementById('wall');
+
+			// 不断改变#ball的top,left属性
+			var hspeed = 15;//横向速度
+			var vspeed = 20;//纵向速度
+			setInterval(function(){
+				var h1 = document.documentElement.offsetHeight;
+				var h2 = ball.offsetHeight;
+				var top = ball.offsetTop;
+
+				// 垂直边界处理
+				if(top < 0 || h1- top <= h2){
+					vspeed *= -1;
+				}
+
+				// 水平边界处理
+				if(ball.offsetLeft < 0 || document.documentElement.offsetWidth - ball.offsetLeft <= ball.offsetWidth){
+					hspeed *= -1;
+				}
+
+				// 判断是否碰到#wall障碍物
+				// 垂直
+				if(ball.offsetTop >= wall.offsetTop - ball.offsetHeight && ball.offsetTop <= wall.offsetTop + wall.offsetHeight){
+					if(ball.offsetLeft >= wall.offsetLeft - ball.offsetWidth/2 && ball.offsetLeft <= wall.offsetLeft + wall.offsetWidth - ball.offsetWidth/2){
+						vspeed *= -1;
+					}
+					
+				}
+
+				//水平
+				if(ball.offsetLeft >= wall.offsetLeft - ball.offsetWidth && ball.offsetLeft <= wall.offsetLeft + wall.offsetWidth){
+					if(ball.offsetTop >= wall.offsetTop - ball.offsetHeight/2 && ball.offsetTop <= wall.offsetTop + wall.offsetHeight - ball.offsetHeight/2){
+						hspeed *= -1;
+					}
+				}
+
+				ball.style.top = ball.offsetTop + vspeed + 'px';
+				ball.style.left = ball.offsetLeft + hspeed + 'px';
+			},50);
+			
+			// 移动障碍物
+			var wallSpeed = 5;
+			document.onkeydown = function(e){
+				e = e || window.event;
+
+				// 按左方向键
+				if(e.keyCode == 37){
+					wall.style.left = wall.offsetLeft - wallSpeed++ + 'px';
+
+					// 边界处理
+					if(wall.offsetLeft <= 0){
+						wall.style.left = 0;
+					}
+				}else if(e.keyCode == 39){
+					wall.style.left = wall.offsetLeft + wallSpeed++ + 'px';
+
+					// 边界处理
+					if(document.documentElement.offsetWidth - wall.offsetLeft <= wall.offsetWidth){
+						wall.style.left = document.documentElement.offsetWidth - wall.offsetWidth + 'px';
+					}
+				}
+			}
+			document.onkeyup = function(){
+				wallSpeed = 5;
+			}
+			// var wspeed = 5;
+			// document.onkeydown = function(e){
+			// 	e = e || window.event;
+			// 	var key = e.keyCode || e.which;
+			// 	switch(key){
+			// 		case 37: 
+			// 			move(-wspeed++);
+			// 			break;
+			// 		case 39: 
+			// 			move(wspeed++) 
+			// 			break;
+			// 	}
+			// }
+			
+			// document.onkeyup = function(e){
+			// 	e = e || event;
+			// 	wspeed = 5;
+			// 	// //关闭定时器
+			// 	// clearInterval(control);
+			// 	// var key = e.keyCode || e.which;
+			// 	// switch(key){
+			// 	// 	case 37: dirL=false; break;
+			// 	// 	case 39: dirR=false; break;
+			// 	// }
+			// }
+
+			// function move(speed){
+			// 	if(wall.offsetLeft < 0){
+			// 		wall.style.left = 0;
+			// 		return;
+			// 	}else if(document.documentElement.offsetWidth - wall.offsetLeft < wall.offsetWidth){
+			// 		wall.style.left = document.documentElement.offsetWidth - wall.offsetWidth + 'px';
+			// 		return;
+			// 	}
+			// 	wall.style.left = wall.offsetLeft + speed + 'px';
+			// }
+		}
+	</script>
+</head>
+<body>
+	<div id="ball"></div>
+	<div id="wall"></div>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>验证用户名是否已被注册</title>
+	<style>
+		.error{display:inline-block;padding:3px 5px;color:#f00;}
+		.success{display: inline-block;width:17px;height:17px;border-radius: 50%;background-color: #0f0;color:#fff;}
+	</style>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			/*$('#btnReg').on('click',function(e){
+				// 获取输入的名字
+				var _username = $('#username').val();
+
+				$.ajax({
+					url:'http://localhost:3000/ajax/checkname',
+					data:{regname:_username},
+					success:function(res){
+						// 已注册
+						if(res == 'false'){
+							alert('亲，你来晚了哦');
+						}else{
+
+						}
+					}
+				})
+
+				// 阻止表单提交
+				e.preventDefault();
+			});*/
+
+			$('#username').on('blur',function(e){
+				// 获取输入的名字
+				var _username = $('#username').val();
+
+				$.ajax({
+					url:'http://localhost:3000/ajax/checkname',
+					data:{regname:_username},
+					success:function(res){
+						// 已注册
+						if(res == 'false'){
+							$('#username').next('.error').remove();
+							$('<span class="error">亲，你来晚了哦</span>').insertAfter($('#username'));
+						}else{
+							$('#username').next('.success').remove();
+							$('<span class="success">勾</span>').insertAfter($('#username'));
+						}
+					}
+				})
+
+				// 阻止表单提交
+				e.preventDefault();
+			});
+		});
+	</script>
+</head>
+<body>
+	<form>
+		<p>
+			<label for="username">用户名</label>
+			<input type="text" name="username" id="username">
+		</p>
+		<p>
+			<label for="password">密码</label>
+			<input type="password" name="password" id="password">
+		</p>
+		<p>
+			<label for="ckpassword">确认密码</label>
+			<input type="password" name="ckpassword" id="ckpassword">
+		</p>
+		<p><button id="btnReg">注册</button></p>
+	</form>
+</body>
+</html>

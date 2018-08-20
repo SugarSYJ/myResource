@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            form{
+                width: 691px;
+                height: 678px;
+                margin:50px auto;
+                padding-top:19px;
+                padding-left:30px;
+                overflow:hidden;
+            }
+            .dangan{
+                width: 623px;
+                height: 630px;
+                padding-left:20px;
+            }
+            .dangan p{
+                font-size:16px;
+                color:#000000;
+                line-height: 36px;
+            }
+            .dangan input{
+                width: 600px;
+                height: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="xuesheng">
+            <fieldset class="dangan">
+                <legend>学生档案</legend>
+                <p>姓名：</p>
+                <input type="tpxt" placeholder="请输入姓名" />
+                <p>手机号码：</p>
+                <input type="tel" />
+                <p>邮箱地址：</p>
+                <input type="email" />
+                <p>所属学院：</p>
+                <input type="search" placeholder="请选择"/>
+                <p>入学成绩：</p>
+                <input type="number" placeholder="0" />
+                <p>基础水平：</p>
+                <meter min="0" max="100" low="60" high="90" style="width:600px;height:30px;"></meter>
+                <p>入学日期：</p>
+                <input type="date" />
+                <p>毕业时间：</p>
+                <input type="date" />
+                <input type="submit" style="margin-top:10px;height:40px;"/>
+            </fieldset>
+        </form>
+    </body>
+</html>

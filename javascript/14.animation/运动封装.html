@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div style="width:100px; height:100px; background:#58bc58; position: absolute;" id="div1"></div>
+
+    <script>
+        window.onload = function(){
+            var ele = document.getElementById('div1');
+            // animate(ele, {left: 200, top: 200, width: 200, height: 200})
+            animate(ele, {width: 200}, function(){
+                animate(ele, {height: 200});
+            });
+            
+            // animate(ele, {left: 200});
+            // animate(ele, {top: 200});
+        }
+        // var _cb = function(){}
+        // _cb()
+        //回调函数
+        //链式运动
+        function animate(_ele, _opt, _cb){
+            var speedx = 10;
+
+            var timer = window.setInterval(function(){
+                // var width = _ele.offsetWidth;
+                for(var key in _opt){
+                    //元素当前的一个样式值
+                    var _val = parseInt(getComputedStyle(_ele)[key]);
+                    console.log(_val)
+                    if(_val + speedx >= _opt[key] || _val == _opt[key]){
+                        window.clearInterval(timer);
+                        _val = _opt[key];
+                        if(_cb){
+                            _cb();
+                        }
+                    } else if(_val > _opt[key]){
+                        _val -= speedx;
+                    } else {
+                        _val += speedx;
+                    }   
+                    document.getElementById('div1').style[key] = _val + 'px';                 
+                }
+            }, 100)
+        }        
+        
+        // 多个运动同时进行
+        // function animate(_ele, _opt){
+        //     var speedx = 10;
+        //     // var width = _ele.offsetWidth;
+        //     for(let key in _opt){
+        //         _ele["timer" + key] = window.setInterval(function(){
+        //             // console.log(key);
+        //             //闭包
+        //             //元素当前的一个样式值
+        //             var _val = parseInt(getComputedStyle(_ele)[key]);
+        //             if(_val + speedx >= _opt[key] || _val == _opt[key]){
+        //                 window.clearInterval(_ele["timer" + key]);
+        //                 _val = _opt[key]
+        //             } else if(_val > _opt[key]){
+        //                 _val -= speedx;
+        //             } else {
+        //                 _val += speedx;
+        //             }
+        //             document.getElementById('div1').style[key] = _val + 'px';
+        //         }, 100);
+        //     }
+        // }
+
+        //封装
+        //一、如何使用（调用）
+        //单个运动封装
+        // function animate(_ele, _opt){
+        //     var speedx = 10;
+
+        //     var timer = window.setInterval(function(){
+        //         // var width = _ele.offsetWidth;
+        //         for(var key in _opt){
+        //             //元素当前的一个样式值
+        //             var _val = parseInt(getComputedStyle(_ele)[key]);
+        //             console.log(_val)
+        //             if(_val + speedx >= _opt[key] || _val == _opt[key]){
+        //                 window.clearInterval(timer);
+        //                 _val = _opt[key];
+        //             } else if(_val > _opt[key]){
+        //                 _val -= speedx;
+        //             } else {
+        //                 _val += speedx;
+        //             }   
+        //             document.getElementById('div1').style[key] = _val + 'px';                 
+        //         }
+        //     }, 100)
+        // }
+    </script>
+</body>
+</html>

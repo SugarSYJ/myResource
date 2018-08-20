@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var get = document.getElementById('get');
+            //创建 ajax 对像
+            var xhr = new XMLHttpRequest();
+            //ajax 回调（监听）事件
+            xhr.onreadystatechange = function () {
+                //xhr.readyState == 4 表示请求完成
+                //xhr.status == 200 表示请回结果OK
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    //console.log(xhr.getAllResponseHeaders())
+                    //回应
+                    console.log(xhr.responseText);
+                }
+            }
+
+            get.onclick = function () {
+                xhr.open('post', '/course/api/api/ajax/getpostdata');
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.send("username=admin&pwd=123456");
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="get">获取</button>
+</body>
+</html>

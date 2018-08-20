@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>数组的复制</h3>
+        <script type="text/javascript">
+            var arr = [10,15,2];
+
+            // 复制的是数值
+            // var res = arr;
+            // res.push(22);
+            // document.write('arr' + arr);
+            // document.write('res' + res);
+
+            // var a = 10;
+            // var b = a;
+            // b += 1;
+            // document.write(a,b);
+            
+            // 复制的是数组
+            var copyArr = [];
+            for(var i=0;i<arr.length;i++){
+                copyArr[i] = arr[i];
+            }
+            copyArr.push(33);
+            document.write('arr' + arr);
+            document.write('copyArr: ' + copyArr);
+        </script>
+    </body>
+</html>

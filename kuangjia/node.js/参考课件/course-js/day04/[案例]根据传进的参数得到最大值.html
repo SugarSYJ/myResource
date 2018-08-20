@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>根据传进的参数得到最大值</title>
+	<script>
+		/*
+			[案例]根据传进的参数得到最大值
+		 */
+		function max(){
+			var _max=arguments[0];
+			for(var i=1;i<arguments.length;i++){
+				if(arguments[i] > _max){
+					_max = arguments[i];
+				}
+			}
+			return _max;
+		}
+
+		max(20,39,20,8);//39
+		max(2,10);//10
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

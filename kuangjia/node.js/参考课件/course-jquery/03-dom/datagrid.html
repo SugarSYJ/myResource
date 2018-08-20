@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <style type="text/css">
+        tr.selected{background-color:#0094ff; color:#fff;}
+        
+        tbody{counter-reset: trNum;}
+        tbody>tr{counter-increment: trNum;}
+        tbody>tr>td:first-child:before{ content: counter(trNum);}
+    </style>
+
+    <script src="datagrid.js"></script>
+</head>
+<body>
+    <div id="datagrid"></div>
+    <!--<input type="radio" checked="checked" />
+    <input type="checkbox" checked="checked" />-->
+    <script type="text/javascript">
+        $(function () {
+            //实例化的过程
+            //config 配置
+            var datagrid = new DataGrid();
+            datagrid.readonly = true;
+            datagrid.id = "dk";
+            datagrid.container = '#datagrid';
+            datagrid.url = 'http://localhost/course/api/api/student/FetchAllStudent';
+            datagrid.init();
+        });
+    </script>
+</body>
+</html>

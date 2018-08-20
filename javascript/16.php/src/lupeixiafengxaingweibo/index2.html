@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style type="text/css">
+        *{ margin: 0; padding: 0; }
+         ol, ul ,li{ list-style: none; } 
+         .fl{ float: left; }
+         .fr{ float: right; }
+         .wrap img{ display: block; border:0; margin-left: 6px; width: 20px; height: 20px; }
+         .wrap h3 span{ font-size:12px; font-weight: normal; color: #666; line-height: 30px; }
+         .wrap{ height:800px; width:1000px; margin:50px auto; }
+         .wrap input{ border:1px solid #ccc; }
+         .wrap .title{ border-bottom:1px solid #ccc; height:100px; }
+         .wrap .tContent{ height: 50px; }
+         .wrap .tContent p{ padding: 0; }
+         .wrap .tCRight span{ padding-top: 5px; width:30px; height:40px; display:block; background: #58bc58; border:1px solid #ccc; text-align: center; color:#fff; }
+         .wrap .mianList{ margin-top: 10px; height:26px; }
+         .wrap .pingcont{ width: 100%; height: 0px; display: block; border:none; }
+         .wrap .btn{ display: none; }
+               
+    </style>
+</head>
+<body>
+    <div class="wrap"></div>
+
+<script type="text/javascript" src ="js/common.js"></script>
+<script type="text/javascript">
+
+    //属性写入构造函数
+    function Weibo(e,zan){
+        this.jsonUrl = 'api/data/weibo.json';
+        this.ajax(this.jsonUrl);
+    }
+
+    //方法写入原型对象
+    Weibo.prototype = {
+        // 重置原型对象
+        constructor:Weibo,
+
+        //初始化页面
+        init(){
+            // console.log(this.data[0].comment)
+            // 获取dom节点
+            this.getDom();
+            this.ul = document.createElement('ul');
+            // 根据数据生成界面
+            let listArr = this.data[0].comment;
+            // console.log(listArr);
+            // 生成list
+            let list = listArr.map(function(item){
+                // console.log(item.name)
+                return `
+                    <div class="mianList">
+                        <p class="fl"> <span class="fl">${item.name}：</span><span class="fr">${item.con}</span></p>
+                        <p class="fr">${item.time}</p>
+                    </div>
+                `;
+            }).join('');
+            //生成页面内容
+            let content = this.data.map(function(item){
+                // console.log(item);
+                return `
+                   <div class="title">
+                        <div class="tContent">
+                            <h3 class ="fl tCLeft">${item.name}：<span class="fr">${item.time}</span></h3><p class="tCRight fr"><span class="fl zan"><img src="img/icon/zan.svg" alt="" /><i class="zan_in">${item.zan}</i></span><span class="fr ping"><img src="img/icon/com.svg" alt="" /><i class=" ping_num">${item.comment_num}</i></span></p>
+                        </div>
+                       <p>${item.content}</p>
+                   </div>
+                   <div class="mainContent">
+                        ${list}
+                   </div>
+               
+                   <input type="text"  class = "pingcont"/>
+                   <button class="btn">提交</button>
+                       
+                `;
+            }).join('');
+            //写入页面
+            this.wrap.innerHTML = content;
+        },
+
+        //ajax请求
+        ajax(url){
+            // 发起ajax请求
+           
+            let xhr = new XMLHttpRequest();
+            let that = this;
+            xhr.onreadystatechange = function(e){
+                if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+                    that.data = JSON.parse(xhr.responseText);
+                    // 初始化页面
+                    that.init();
+                    //绑定事件
+                    that.blindEvent(e);
+                }
+            }
+
+            xhr.open('get', url,true);
+            xhr.send();
+        },
+
+        //获取节点
+        getDom(){
+            //获取节点 
+           function DOM(str){
+                return document.querySelector(str)
+            }
+
+            this.wrap = DOM('.wrap');
+            this.mianList = DOM('.mianList');
+            this.btn = DOM('.btn');
+            this.comment = DOM('.ping');
+            this.msg = DOM('.pingcont');
+            this.mainContent = DOM('.mainContent');
+            this.comment_num = DOM('.ping_num');
+            this.zan = DOM('.zan');
+            this.zan = DOM('.zan');
+            this.zan_num = DOM('.zan_in');
+        },
+
+        //绑定事件
+        blindEvent(e,zan){
+            //获取dom节点
+            this.getDom();
+
+            var that = this;
+
+            this.msg.idx = 0;
+
+            // 点击评论小图标出现输入框
+            this.comment.onclick = function(){
+                that.btn.style.display='block';
+              if(that.msg.idx===0){
+                // 出现的时候添加border
+                that.msg.style.border='1px solid #ccc';
+                animate(that.msg,{height:100});
+                that.msg.idx = 1;
+              }else if(that.msg.idx===1){
+                animate(that.msg,{height:0},function(){
+                    // 收回的时候border隐藏
+                    that.msg.style.border='';
+                });
+                that.msg.idx = 0;
+              }
+            }
+
+            //点赞
+            this.zan.onclick = function(zan){
+                zan = this.children[1].innerText*1;
+                let xhr = new XMLHttpRequest();
+                let that = this;
+                xhr.onreadystatechange = function(e){
+                    if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+                        that.data = JSON.parse(xhr.responseText)
+                        // console.log(that.data);
+                        that.children[1].innerText = that.data;
+                    }
+                }
+
+                xhr.open('get','api/weibo.php?zan='+zan,true);
+                xhr.send();
+            }
+
+
+            // 点击提交按钮，发送信息
+            this.btn.onclick = send;
+            
+            //发送
+            function send(){
+        
+                let _msg = that.msg.value;
+                let div =document.createElement('div');
+                let _time = that.Time();
+                // console.log(_time)
+                div.innerHTML = `
+                    <div class="mianList">
+                        <p class="fl"> 
+                            <span class="fl">小薛：</span>
+                            <span class="fr">${_msg}</span>
+                        </p>
+                        <p class="fr">${_time}</p>
+                    </div>
+                `
+                that.mainContent.appendChild(div);
+                //清空
+                that.msg.value = "";
+                //自动获取焦点
+                that.msg.focus();
+
+                // console.log( that.mianList)
+                // var shef = that;
+                that.getDom();
+                var commentNum =that.comment_num.innerText*1;
+                // var name = that.mianList.children[0].children[0];                        
+                var name = "小薛";
+                var con = _msg;
+                var time =  _time;
+
+                // console.log(commentNum);//3
+                let xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = function(e){
+                    if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+                        that.data = JSON.parse(xhr.responseText)
+                        console.log(that.data);
+                        that.comment_num.innerText = that.data;
+                    }
+                }
+
+                xhr.open('get','api/weibo.php?commentNum='+commentNum + "&name=" + name + "&con=" + con + "&time=" + time,true);
+
+                xhr.send();
+            }
+
+           
+            //回车+ctrl发送
+            this.msg.onkeydown=function(e){
+                that.key = e.keyCode;
+                that.ctr = e.ctrlKey;
+                if (that.ctr && that.key===13){
+                  // console.log(666)
+                  send();
+
+                  // 5、清除默认样式
+                  e.preventDefault();
+
+                };
+            }
+        },
+
+        //获取时间
+        Time(){
+            // 获取时间、时分秒 
+            this.tody = new Date();
+            this.nian = this.tody.getFullYear();
+            this.youe = this.tody.getMonth() + 1;
+            this.day = this.tody.getDate();
+            this.hour = this.tody.getHours();
+            this.min = this.tody.getMinutes();
+            this.miao = this.tody.getSeconds();
+
+            // 补0操作
+            this.hour = (this.hour<10 ? '0' : '') + this.hour;
+            this.min = (this.min<10 ? '0' : '') + this.min;
+            this.miao  = (this.miao <10 ? '0' : '') +this.miao ;
+            this.time = this.nian + '-' + this.youe + '-' + this.day  + '   ' + this.hour  + ':' +  this.min + ':' +  this.miao;
+           return this.time;
+        }
+    }
+
+    //实例化 
+    new Weibo();
+
+
+
+</script>
+</body>
+</html>

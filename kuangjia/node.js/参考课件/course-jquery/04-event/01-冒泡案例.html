@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>冒泡案例</title>
+    <style type="text/css">
+        div{padding:20px 30px; border:solid 1px; background: #fff;}
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            //获取一组随机的颜色
+            function randomColor() {
+                var r = parseInt(Math.random() * 255);
+                var g = parseInt(Math.random() * 255);
+                var b = parseInt(Math.random() * 255);
+                var color = 'rgb(' + r + ',' + g + ', ' + b + ')';
+                return color;
+            }
+
+            //$('div').click(function (event) {
+            //    $(event.target).css('background', randomColor());
+            //})
+
+            $('div').each(function (index, div) {
+                $(div).click(function (event) {
+                    $(this).css('background', randomColor());
+                    event.stopPropagation();
+                }).contextmenu(function (event) {
+                    $(this).css('background', '#fff');
+                    //event.preventDefault();
+                    return false;
+                })
+            })
+
+
+            
+
+            //获取对像
+            //$('.div1').on('click.a', function (event, arg1, arg2) {
+                //console.log($('>span', event.target).text());
+                //console.log($(event.target).find('span:first').text())
+                //console.log(event.data.mess);
+                //console.log(arg1 + "\n" + arg2);
+                //console.log('A');
+            //})
+
+            //获取对像
+            //$('.div1').on('click.b', function (event) {
+                //console.log($('>span', event.target).text());
+                //console.log($(event.target).find('span:first').text())
+                //console.log(event.data.mess);
+                //console.log('B');
+            //})
+            //$('.div1').on('aaa', function (event, param1, param2) {
+                //console.log(param1 + "\n" + param2);
+            //});
+           
+        }
+    </script>
+</head>
+<body>
+    <div class="div1">
+        <span>div1</span>
+        <div class="div2">
+            <span>div2</span>
+            <div class="div3">
+                <span>div3</span>
+                <div class="div4">
+                    <span>div4</span>
+                    <div class="div5">
+                        <span>div5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{background-color:#98d0f8; color: #fff; text-align:center; font-size:12px;}
+        body>div{margin-top:30px;}
+        body>div>ul{padding:0; margin:0;}
+        body>div>ul>li{width:120px; list-style:none; border-left:dotted 1px; float:left;}
+        body>div>ul>li:last-child{border-right: dotted 1px;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var ajaxRequest = new XMLHttpRequest();
+            var city = document.getElementById('city');
+            var container = document.getElementById('container');
+
+            //获取天气
+            var getWeather = function () {
+                ajaxRequest.open('get', 'http://wthrcdn.etouch.cn/weather_mini?city=' + city.value.trim(), true);
+                ajaxRequest.send();
+            }
+
+            //监听（ajax 请求的状态）
+            ajaxRequest.onreadystatechange = function () {
+                // readyState == 4 请求已完成
+                //status == 200 请求成功返回值
+                if (ajaxRequest.readyState === 4 && ajaxRequest.status === 200) {
+                    console.log(JSON.parse(ajaxRequest.response));
+                    //调用初始化天气
+                    initWeather(JSON.parse(ajaxRequest.response));
+                }
+            }
+
+            //初始化天气
+            var initWeather = function (_data) {
+                //判断返回的结果状态，状态等于 1000 表示正常
+                if (_data.status != 1000) {
+                    container.innerHTML = "没有对应的天气信息，确认城市名称是否错误！";
+                    return false;
+                }
+                var ul = document.createElement("ul");
+                
+                //for (var currDate in _data.data.forecast) {
+                //    console.log(currDate);
+                //}
+                for (var i = 0; i < _data.data.forecast.length; i++) {
+                }
+
+                _data.data.forecast.forEach(function (currDate) {
+                   
+                    var imgIndex = 1;
+                    switch (currDate.type) {
+                        case '多云':
+                            imgIndex = 5;
+                            break;
+                        case '雷阵雨':
+                            imgIndex = 16;
+                            break;
+                        case '阵雨':
+                            imgIndex = 8;
+                            break;
+                    }
+                    var li = document.createElement('li');
+                    li.innerHTML += "<h4>" + currDate.date + "</h4>";
+                    li.innerHTML += "<img src='img/" + imgIndex + ".png' />";
+                    li.innerHTML += "<p>" + currDate.type + "</p>";
+                    li.innerHTML += "<p>" + currDate.high.replace('高温', '') + " - " + currDate.low.replace('低温', '') + "</p>";
+                    li.innerHTML += "<p>" + currDate.fengli + "</p>";
+                    li.innerHTML += "<p>" + currDate.fengxiang + "</p>";
+                    ul.appendChild(li);
+                })
+                container.innerHTML = "";
+                container.appendChild(ul);
+            }
+
+
+            //查询按钮
+            document.getElementById('search').onclick = function () {
+                //获取天气
+                getWeather();
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="city" value="深圳" />
+    <input type="button" value="查询" id="search" />
+    <div id="container"></div>
+</body>
+</html>

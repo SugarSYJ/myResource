@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>异步请求ajax</title>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			$.ajax({
+				url:'http://localhost:3000/ajax/getCity',
+				dataType:'json',
+				success:function(data){
+					// var res = eval('(' + data + ')');
+					// var res = JSON.parse(data);//ES5的方法
+					// console.log(res)
+					console.log(data);
+					$.each(data,function(idx,city){
+						// console.log(arguments)
+						$('<li/>').html(city).appendTo('#city');
+					})
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>我最喜欢的城市</h1>
+	<ul id="city"></ul>
+</body>
+</html>

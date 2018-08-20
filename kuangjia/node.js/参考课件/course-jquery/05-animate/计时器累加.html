@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <style type="text/css">
+        div{width:100px; height:100px; background-color:#0094ff; position:absolute;}
+    </style>
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+    <div id="div"></div>
+    <script type="text/javascript">
+        $(function () {
+            var timer = null;
+            $('#div')[0] == document.getElementById('div');
+            $('div').mouseover(function () {
+                if (timer) {
+                    window.clearInterval(timer);
+                }
+                timer = window.setInterval(function () {
+                    $('div').css({ left: $('div').offset().left + 10 });
+                }, 500)
+            })
+        })
+    </script>
+</body>
+</html>

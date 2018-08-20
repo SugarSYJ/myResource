@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab标签切换</title>
+	<style>
+		.tab{width:800px;margin:0 auto;}
+		.tab .header{border-bottom:1px solid #ddd;}
+		.tab .header span{display:inline-block;padding:5px 15px;}
+		.tab .header span.active{background-color:#ddd;}
+		.content{border:1px solid #ddd;padding:15px;min-height:100px;background-color:#efefef;}
+	</style>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			// 隐藏除第一个以外的所有.content
+			// $('.content').hide().first().show();
+			$('.content').not(':first').hide();
+
+			$('.header span').click(function(){
+				// 得到当前索引值
+				var index = $(this).index();
+
+				// 当前加高亮
+				$(this).addClass('active').siblings('span').removeClass('active');
+
+				$('.content').eq(index).show(600).siblings('.content').hide();
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="tab">
+		<div class="header"><span class="active">Tab1</span><span>Tab2</span><span>Tab3</span></div>
+		<div class="content">内容1</div>
+		<div class="content">内容2</div>
+		<div class="content">内容3</div>
+	</div>
+</body>
+</html>

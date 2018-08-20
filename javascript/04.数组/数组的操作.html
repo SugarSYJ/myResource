@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>数组的操作</h3>
+        <script type="text/javascript">
+            /*
+            数组操作
+                * 增
+                    * 利用索引值写入
+                * 删
+                    * 利用数组方法实现
+                * 查
+                    * 利用索引读取
+                    * 超过索引值范围，得到undefined
+                * 改
+                    * 利用现有索引值
+            
+            数组索引：0~arr.length-1
+         */
+            var arr = ['haha','xixi','hehe'];
+            arr[0];
+            arr[3] = 'guagua';
+            arr[arr.length] = 'wowo';
+            arr[3] = 'didi';
+            console.log(arr);
+            arr.shift();
+            console.log(arr);
+            arr.pop();
+            console.log(arr);
+            arr.splice(1,1);
+            console.log(arr);
+        </script>
+    </body>
+</html>

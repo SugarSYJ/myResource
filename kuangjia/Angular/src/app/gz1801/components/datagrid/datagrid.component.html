@@ -1,0 +1,32 @@
+<div>
+	<table *ngIf="dataset" class="table">
+		<thead>
+			<tr>
+				<th *ngIf="configObj.multiple" (click)="selectTr()">
+					<input type="checkbox" name="all" *ngIf="chosenids.length == dataset.length" checked/>
+					<input type="checkbox" name="all" *ngIf="chosenids.length < dataset.length"/>
+				</th>
+				<ng-template ngFor let-key [ngForOf]="columns">
+					<!-- <th>{{dictionary[lanType] && dictionary[lanType][key] ? dictionary[lanType][key] : key}}</th> -->
+					<th>{{common.getDictionary(key)}}</th>
+				</ng-template>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let obj of dataset" (click)="selectTr(obj)" [class.actived]="chosenids.indexOf(obj.id) > -1">
+				<td *ngIf="configObj.multiple">
+					<input type="checkbox" name="all" *ngIf="chosenids.indexOf(obj.id) < 0"/>
+					<input type="checkbox" name="all" *ngIf="chosenids.indexOf(obj.id) > -1" checked/>
+				</td>
+				<ng-template ngFor let-key [ngForOf]="columns">
+					<!-- <td>{{dataFilter(key, obj)}}</td> -->
+					<td *ngIf="configObj.colAttributes[key] && configObj.colAttributes[key].type == 'pipe' && configObj.colAttributes[key].name == 'date'">{{obj[key] | date: configObj.colAttributes[key].format}}</td>
+					<td *ngIf="configObj.colAttributes[key] && configObj.colAttributes[key].type == 'pipe' && configObj.colAttributes[key].name == 'number'">{{obj[key] | number: configObj.colAttributes[key].format}}</td>
+					<td *ngIf="configObj.colAttributes[key] && configObj.colAttributes[key].type == 'mapping'">{{obj[configObj.colAttributes[key].datasource][configObj.colAttributes[key].value]}}</td>
+					<td *ngIf="!configObj.colAttributes[key]|| configObj.colAttributes[key].type != 'pipe'">{{obj[key]}}</td>
+				</ng-template>				
+			</tr>
+		</tbody>
+	</table>
+</div>
+<!-- <h1 *ngFor="let i of [] | range: 5">{{i}}</h1> -->

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body {
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .fire {
+            width: 10px;
+            height: 30px;
+            background: #00ff21;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+        //产生烟花，从下到上移动
+        function Fire(_x, _y) {
+            this.x = _x;
+            this.y = _y;
+            this.generateFire = function () {
+                var self = this;
+                var _fire = document.createElement('div');
+                _fire.className = 'fire';
+                _fire.style.left = this.x + 'px';
+                _fire.style.top = document.documentElement.clientHeight - _fire.clientHeight + 'px';
+                document.body.appendChild(_fire);
+
+                _fire.timer = window.setInterval(function () {
+                    var top = _fire.offsetTop;
+                    var speed = Math.ceil(top / 8);
+                    top -= speed;
+                    if (top <= self.y) {
+                        top = self.y;
+                        window.clearInterval(_fire.timer);
+                        document.body.removeChild(_fire);
+                        self.bomb();
+                    } else {
+                        _fire.style.top = top + 'px';
+                    }
+                }, 30);
+            }
+        };
+
+        Fire.prototype.bomb = function () {
+            var flowers = [];
+            for (var i = 0; i < 50; i++) {
+                var flower = document.createElement('div');
+                flower.style.width = (Math.random() * 30) + 'px';
+                flower.style.height = flower.style.width;
+                flower.style.background = 'red';
+                flower.style.left = this.x + 'px';
+                flower.style.top = this.y + 'px';
+                flower.speedX = parseInt(Math.random() * 40 - 20);
+                flower.speedY = parseInt(Math.random() * 40 - 20);
+                flower.style.position = 'absolute';
+                document.body.appendChild(flower);
+                flowers.push(flower);
+            }
+
+            var timer = window.setInterval(function () {
+                for (var i = 0; i < flowers.length; i++) {
+                    flowers[i].style.left = flowers[i].offsetLeft + flowers[i].speedX + 'px';
+                    flowers[i].style.top = flowers[i].offsetTop + flowers[i].speedY + 'px';
+                    var left = flowers[i].offsetLeft;
+                    var top = flowers[i].offsetTop;
+                    if (left <= 0 || left >= document.documentElement.clientWidth || top <= 0 || top >= document.documentElement.clientHeight) {
+                        document.body.removeChild(flowers[i]);
+                        flowers.splice(i, 1);
+                    }
+                }
+
+                if (flowers.length <= 0) {
+                    window.clearInterval(timer);
+                }
+            }, 30)
+        }
+        
+        window.onclick = function (_event) {
+            _event = _event || window.event;
+            var _fire = new Fire(_event.clientX, _event.clientY);
+            _fire.generateFire();
+        }
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

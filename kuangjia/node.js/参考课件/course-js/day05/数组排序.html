@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组排序</title>
+	<script>
+		var arr = [5,34,2,10,12,30];
+		// console.log(arr.reverse());
+		// arr.sort();
+		// console.log(arr);
+		// var max = arr[0];
+		// for(var i=0;i<arr.length;i++){
+		// 	if(arr[i] > max){
+		// 		max = arr[i];
+		// 	}
+		// }
+		
+		arr.sort(function(a,b){
+			// if(a>b){
+			// 	return 1;//返回1，说明a>b
+			// }else if(a<b){
+			// 	return -1//返回-1，说明a<b
+			// }else{
+			// 	return 0;//返回0
+			// }
+
+			return a-b;//简写
+		});
+		console.log(arr);
+		arr.reverse();
+		console.log(arr);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>03构造函数-运动</title>
+    <style type="text/css">
+        .ball {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #b6ff00;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            //正在运行的函数所依附的对象
+            function CreateBall(x, y) {
+                var self = this;
+                //实体
+                //this.generate = function () {
+                //    this.element = null;
+                //    this.element = document.createElement('div');
+                //    this.element.className = 'ball';
+                //    this.element.style.left = x + 'px';
+                //    this.element.style.top = y + 'px';
+                //    document.body.appendChild(this.element);
+                //};
+                //this.startMove = function () {
+                //    var speed = 10;
+                //    this.timer = window.setInterval(function () {
+                //        var left = self.element.offsetLeft;
+                //        left += speed;
+                //        if (left >= window.innerWidth - self.element.clientWidth || left <= 0) {
+                //            speed *= -1;
+                //        }
+                //        self.element.style.left = left + 'px';
+                //    }, 30);
+                //}
+            }
+
+            CreateBall.prototype.generate = function () {
+                    this.element = null;
+                    this.element = document.createElement('div');
+                    this.element.className = 'ball';
+                    this.element.style.left = x + 'px';
+                    this.element.style.top = y + 'px';
+                    document.body.appendChild(this.element);
+                };
+               
+
+            CreateBall.prototype.startMove = function () {
+                var speed = 10;
+                this.timer = window.setInterval(function () {
+                    var left = self.element.offsetLeft;
+                    left += speed;
+                    if (left >= window.innerWidth - self.element.clientWidth || left <= 0) {
+                        speed *= -1;
+                    }
+                    self.element.style.left = left + 'px';
+                }, 30);
+            }
+
+            document.onclick = function (event) {
+                var ball = new CreateBall(event.clientX, event.clientY);
+                ball.generate();
+                ball.startMove();
+
+                //var ball2 = new CreateBall(event.clientX, event.clientY);
+                //ball2.generate();
+                //ball2.startMove();
+            }
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>

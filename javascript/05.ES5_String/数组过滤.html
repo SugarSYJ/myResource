@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>数组过滤</h3>
+        <script type="text/javascript">
+            var arr = [10,8,20,66,2,6,12,5];
+            // 获取所有小于10的数
+            var res = arr.filter(function(item){
+                return item<10;
+            });
+            document.write(arr + '<br/> ' + res + '<br/> ');
+
+            var result1 = arr.every(function(item){
+                return item>5;
+            });
+            document.write('every:' + result1 + '<br/> ');
+
+            var result2 = arr.some(function(item){
+                return item===5;
+            });
+            document.write('some:' + result2);
+        </script>
+    </body>
+</html>

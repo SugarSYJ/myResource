@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分页获取数据</title>
+	<style>
+	.datalist{height:400px;border:1px solid #ddd;font-size:12px;}
+	.datalist li{margin-bottom:8px;padding:0 10px 10px;height:20px;border-bottom:1px dotted #ddd;}
+	.page span{display: inline-block;margin:5px;padding:5px;background-color:#ccc;color:#999;}
+	.page span.active{background-color:#f90;color:#fff;}
+	</style>
+	<script>
+		// http://localhost:8080/ajax/football?pageNo=1
+		window.onload = function(){
+			var datalist = document.getElementsByClassName('datalist')[0];
+			var page = document.getElementsByClassName('page')[0];
+
+			//list临时存储分页span
+			var list = document.createDocumentFragment();
+			for(var i=0;i<5;i++){
+				var span = document.createElement('span');
+				span.innerHTML = i+1;
+				if(i==0) span.className = 'active';
+				list.appendChild(span);
+			}
+			page.appendChild(list);
+
+			// 给分页绑定事件
+			for(var i=0;i<page.children.length;i++){
+				page.children[i].idx = i;
+				page.children[i].onclick = function(){
+					req.open('get','http://localhost:8080/ajax/football?pageNo='+(this.idx+1),true);
+					req.send();
+
+					// 给分页添加高亮
+					for(var i=0;i<page.children.length;i++){
+						page.children[i].className = '';
+					}
+					page.children[this.idx].className = 'active';
+				}
+			}
+
+			// 创建异步请求
+			var req = new XMLHttpRequest();
+			req.onreadystatechange = function(){console.log(req.readyState)
+				if(req.readyState == 4){
+					if(req.status == 200){
+						var dataList = JSON.parse(req.responseText);
+						dataList = dataList.data.tweetlist;
+
+						// 创建ul
+						var ul = document.createElement('ul');
+						for(var i=0;i<dataList.length;i++){
+							var li = document.createElement('li');
+							li.innerHTML = dataList[i].content;
+							ul.appendChild(li);
+						}
+
+						// 把ul放入页面.datalist元素
+						datalist.innerHTML = '';
+						datalist.appendChild(ul);
+					}
+				}
+			}
+			req.open('get','http://localhost:8080/ajax/football?pageNo=1',true);
+			req.send();
+		} 
+	</script>
+</head>
+<body>
+	<h1>今日头条</h1>
+	<div class="datalist">
+		
+	</div>
+	<div class="page"></div>
+</body>
+</html>

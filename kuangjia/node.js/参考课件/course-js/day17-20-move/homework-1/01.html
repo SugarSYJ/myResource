@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{margin:0; font-size:12px; }
+        .container{width:100%; height:300px;}
+        .box{width:300px; height:170px; float:left; position:relative; margin: 10px; overflow:hidden;}
+        .box>a{display:block; position:absolute; top:140px; left: 0; right: 0; bottom: 0; color:#fff; background:#000; opacity:0.8; line-height:25px; padding:0 5px;}
+    </style>
+    <!--<script src="01.js"></script>-->
+    <script type="text/javascript">
+         
+        /* //任意对像都可以设置任意属性，属性值可以为任意对像
+        值类型 
+            var arg1 = 1; 
+            var arg2 = arg1;
+            agr2 = 2;
+            arg1 //1
+        引用类型(对像克隆)
+            var obj1 = {"p": 1};
+            var obj2 = JSON.parse(JSON.stringify(obj1));
+            obj2.p = 2;
+            console.log(obj1);
+            console.log(obj2);
+        */
+        window.onload = function () {
+            var container = document.getElementById('container');
+            var timer = null;
+            container.onmouseover = function (_event) {
+                
+                var self = _event.target;
+                var tagname = self.tagName.toLowerCase();
+                if (tagname == 'img' || tagname == 'a') {
+                    if (tagname == 'img') {
+                        self = self.nextSibling.nextSibling;
+                    }
+
+                    if (self.timer) {
+                        window.clearInterval(self.timer);
+                    }
+                    self.timer = window.setInterval(function () {
+                        var top = self.offsetTop;
+                        var speed = Math.ceil(top / 8);
+                        top -= speed;
+                        if (top <= 0) {
+                            top = 0;
+                            window.clearInterval(self.timer);
+                        }
+                        self.style.top = top + 'px';
+                    }, 30);
+                }
+            }
+            container.onmouseout = function (_event) {
+                var self = _event.target;
+                var tagname = self.tagName.toLowerCase();
+                if (tagname == 'img' || tagname == 'a') {
+                    if (tagname == 'img') {
+                        self = self.nextSibling.nextSibling;
+                    }
+                    if (self.timer) {
+                        window.clearInterval(self.timer);
+                    }
+                    self.timer = window.setInterval(function () {
+                        var top = 140 - self.offsetTop;
+                        var speed = Math.ceil(top / 8);
+                        top = self.offsetTop + speed;
+                        if (top >= 140) {
+                            top = 140;
+                            window.clearInterval(self.timer);
+                        }
+                        self.style.top = top + 'px';
+                    }, 30);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="box">
+            <img src="../images/b1.jpg" />
+            <a href="#">学会html5 <br />本课程由浅入深，逐步推进，以示例为主线，详细完整地介绍HTML5的新功能与新特征</a>
+        </div>
+        <div class="box">
+            <img src="../images/b2.jpg" />
+            <a href="#">圆角水晶按钮制作 <br />网页中的圆角按钮和宽度自适应按钮就这么轻松制作！</a>
+        </div>
+        <div class="box">
+            <img src="../images/b3.jpg" />
+            <a href="#">导航条菜单的制作 <br />30分钟教你轻松制作出各种形式的网站导航条菜单
+        </div>
+    </div>
+</body>
+</html>

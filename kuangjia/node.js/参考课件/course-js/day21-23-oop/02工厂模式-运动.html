@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>02工厂模式-运动</title>
+    <style type="text/css">
+        .ball {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #b6ff00;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            function createBall(x, y) {
+                var ball = {
+                    left: x,
+                    top: y,
+                    element: null,
+                    init: function () {
+                        this.element = document.createElement('div');
+                        this.element.className = 'ball';
+                        this.element.style.left = this.left + 'px';
+                        this.element.style.top = this.top + 'px';
+                        document.body.appendChild(this.element);
+                    },
+                    startMove: function () {
+                        var self = this;
+                        var speed = 10;
+                        this.timer = window.setInterval(function () {
+                            var left = self.element.offsetLeft;
+                            left += speed;
+                            if (left >= window.innerWidth - self.element.clientWidth || left <= 0) {
+                                speed *= -1;
+                            }
+                            self.element.style.left = left + 'px';
+                        }, 30);
+                    }
+                }
+                return ball;
+            }
+            document.onclick = function (event) {
+                var ball = createBall(event.clientX, event.clientY);
+                ball.init();
+                ball.startMove();
+            }
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>

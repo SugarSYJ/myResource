@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>复制数组</title>
+	<script>
+		// 引用数据类型复制
+		// 仅仅是快捷方式的复制
+		var arr = ['html','css','javascript'];
+		var arr2 = arr;
+		arr.push('html5');
+		arr2.push('css3');
+		console.log(arr,arr2);
+
+		//基本数据类型复制
+		//是值复制
+		var a = 10;
+		var b=a;
+		a = 20;
+		console.log(b);
+
+		
+		var cities = ['北京','上海','广州','深圳'];
+
+		// 通过遍历复制数组
+		var newCities = [];
+		for(var i=0;i<cities.length;i++){
+			newCities[i] = cities[i];
+		}
+		newCities.push('重庆');
+		console.log(cities,newCities);
+
+		var newCities2 = cities.slice(0);
+		newCities2.push('天津');
+		console.log(cities,newCities2);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

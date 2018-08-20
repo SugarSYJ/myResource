@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            /*
+                Map映射（键：值）
+                    * 类似于对象（属性：属性值）
+                    * 所以ES6推出了一种类似于对象的数据集合：Map映射，它能让所有类型的数据作为属性名
+
+                对象缺点：
+                    * 属性名只能是字符串（自动转成字符串）
+                    * 这让它的使用有了很大的限制
+             */
+            var obj = {
+                name:'xiaowang'
+            };
+            var arr = [10,20];
+            var o = {a:10};
+            obj[arr] = '数组';
+            obj[o] = '对象';
+            for(let attr in obj){
+                console.log(typeof name);
+            }
+            // 创建方式:
+            // 构造函数
+            var map = new Map();
+            map.set('name','xiaowang');
+            map.set(arr,'数组');
+            map.set(o,'对象');
+            console.log(map);
+            // 遍历map
+            // for..of
+            for(let [key,val] of map){
+                console.log(key,val);
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            var xhr = new XMLHttpRequest();
+            // xhr.onreadystatechange = function(){
+            //     if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+            //         console.log(xhr.responseText);
+            //     }
+            // }
+            // 简化
+            xhr.onload = function(){
+                if(xhr.status === 200 || xhr.status === 304){
+                    console.log(xhr.responseText);
+                }
+            }
+            xhr.open('get','http://localhost:18121/api21/cors.php',true);
+            xhr.send();
+
+
+
+            /*<?php
+                header('Access-Control-Allow-Origin:*');
+            ?>
+        </script>
+    </head>
+    <body>
+        <h1>CORS</h1>
+    </body>
+</html>

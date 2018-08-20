@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>02关闭页面事件</title>
+	<script>
+		window.onbeforeunload = function(){
+			console.log(1111);
+
+			// 一定要在onbeforeunload事件中写return语句
+			// 并且return后要有值
+			return '你真的忍心不看这个小饰品么？'
+		}
+	</script>
+</head>
+<body>
+	<h1>关闭页面事件</h1>
+</body>
+</html>

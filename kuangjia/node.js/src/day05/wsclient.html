@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <h3 id="status"></h3>
+        <label for="">昵称</label> <input type="text" id="nickname"/>
+        <input type="button" value="登录" id="btn_login"/>
+        <input type="button" value="下线" id="btn_logout"/>
+        <div id="messageList">
+            <ul></ul>
+        </div>
+        <input type="text" id="txt_message"/>
+        <input type="button" value="发送" id="btn_send"/>
+
+        <script type="text/javascript">
+            $(function(){
+                var socket;
+                $('#btn_login').click(function(){
+                    socket = new WebSocket('ws://localhost:8080');
+                    socket.onopen = function(){
+                        $('#status').text('服务已连接');
+                    }
+                    socket.onclose = function(){
+                        $('#status').text('服务已断开');
+                        socket = null;
+                    };
+                    socket.onmessage = function(msg){
+                        var msgObj = JSON.parse(msg.data);
+                        $('<li/>').text(`${msgObj.nickname}: ${msgObj.message}`).appendTo('#messageList>ul');
+                        console.log(msg);
+                    };
+                });
+                $('#btn_logout').click(function(){
+                    socket.close();
+                });
+                $('#btn_send').click(function(){
+                    if(socket){
+                        socket.send(JSON.stringify({nickname: $('#nickname').val(),message: $('#txt_message').val()}));
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

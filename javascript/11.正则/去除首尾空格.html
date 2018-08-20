@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            window.onload = function(){
+                var username = document.getElementById('username');
+                var password = document.getElementById('password');
+                var btn = document.getElementById('btn');
+                btn.onclick = function(){
+                    var _username = username.value;
+                    _username = _username.replace(/^\s{1,}|\s{1,}$/g,'');
+                    console.log(_username); 
+                }
+                
+            }
+        </script>
+    </head>
+    <body>
+        <h3>去除首尾空格</h3>
+        <div>
+            <label for="username">用户名</label>
+            <input type="text" id="username" name="username"/>
+            <label for="password">密码</label>
+            <input type="text" id="password" name="password"/>
+            <button id="btn">提交</button>
+        </div>
+    </body>
+</html>

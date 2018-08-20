@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="lib/jquery-3.2.1.js"></script>
+        <script type="text/javascript">
+            /*
+                write less,do more
+
+                编写jquery代码只需两步
+                1. 选择元素
+                2. 操作元素
+             */
+            document.addEventListener('DOMContentLoaded',function(){
+
+            });
+            jQuery(document).ready(function(){
+                jQuery('.box');
+            });
+            // 简化
+            jQuery(function(){//延迟代码执行
+                var box = jQuery('.box');//获取元素,得到一个实例
+                console.log(box);
+                box.hide();
+            });
+            // 再简化
+            // // window.jQuery = window.$ = jQuery;
+            $(function(){
+                var $box = $('box');
+                //得到一个实例（jQuery对象）
+                // 操作元素
+                $box.show();
+            });
+        </script>
+    </head>
+    <body>
+        <div class="box">jquery的使用及原理</div>
+        <div class="box">jquery的使用及原理</div>
+    </body>
+</html>

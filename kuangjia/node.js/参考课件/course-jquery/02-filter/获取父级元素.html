@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取父级元素</title>
+	<style>
+		html{background-color:#0f0;}
+		body{position:relative;min-height:600px;background-color: #fff;margin:50px;}
+		.container{}
+		#box{position:absolute;top:0;left:0;width:100px;height:100px;background-color:#f00;color:#fff;text-align: center;line-height:100px;}
+	</style>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			$('#box').parent();//body
+			$('#box').parents();//body,html
+			$('#box').closest();//一般用于比较复杂的html结构
+
+			$('#box').offsetParent();//document.documentElement
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div id="box">我是一个box</div>
+	</div>
+</body>
+</html>

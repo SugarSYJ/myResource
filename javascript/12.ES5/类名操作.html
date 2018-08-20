@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #box{width: 100px;height: 100px;background: pink;}
+            .dp{display:none;}
+        </style>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',function(){
+                var btn = document.querySelector('button');
+                var box = document.querySelector('.box');
+                console.log(box.classList);
+                box.classList.add('main');
+                box.classList.add('title');
+                box.classList.remove('title');
+                box.classList;
+
+                btn.onclick = function(){
+                    // if(box.classList.contains('dp')){
+                    //     box.classList.remove('dp');
+                    // }else{
+                    //     box.classList.add('dp');
+                    // }
+                    box.classList.toggle('dp');
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <h2>类名操作</h2>
+        <button>显示/隐藏</button>
+        <div id="box" class="box title content"></div>
+    </body>
+</html>

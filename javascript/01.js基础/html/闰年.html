@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            function isRunNian(){
+                var year = document.getElementById("year");
+                var output = document.getElementById("output");
+                var _year = year.value;
+                if(_year % 4 === 0 && _year % 100 != 0 || _year % 400 === 0){
+                    output.innerHTML = '<strong style="color:red;">闰年</strong>';
+                }
+                else{
+                    output.innerHTML = '<b style="color:blue;">平年</b>';
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>判断输入框输入的年份是否为闰年</h1>
+        <input type="text" id="year"/><button onclick="isRunNian()">检查闰年</button>
+        <div id="output"></div>
+    </body>
+</html>

@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>draft</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            var div_content = document.getElementById('div_content');
+            var sub_div = document.getElementById('sub_div');
+
+            //容器的滚动事件
+            div_content.onscroll = function () {
+                //容器事件的一个参数
+                var _event = arguments.length > 0 ? arguments[0] : window.event;
+                console.log(_event);
+            }
+
+            div_content.onclick = function (evt) {
+                console.log(evt.button);
+            }
+
+            //
+            div_content.onmousemove = function (evt) {
+                console.log('clientX：' + evt.clientX);
+                console.log('clientY：' + evt.clientY);
+                console.log('screenX：' + evt.screenX);
+                console.log('screenY：' + evt.screenY);
+                div_content.onmousemove = null;
+            }
+
+            //右键点击
+            window.oncontextmenu = function () {
+                console.log('右键点击');
+            }
+
+            //坐标是从 0, 0 到 容器的总宽度和总高度
+
+            window.onkeydown = function (evt) {
+                //console.log('alt');
+                //console.log(evt.altKey);
+                //console.log('shift');
+                //console.log(evt.shiftKey);
+                //console.log('ctrl');
+                //console.log(evt.ctrlKey);
+                //console.log(evt.keyCode);
+            }
+
+            var mess = document.getElementById('mess');
+            var send = document.getElementById('send');
+            send.onclick = function () {
+                console.log('消息发送成功！');
+            }
+
+            mess.onkeyup = function (evt) {
+                console.log('charcode：' + evt.charCode);
+                console.log('keycode：' + evt.keyCode);
+                console.log(String.fromCharCode(evt.charCode));
+            }
+
+            //mess.onkeypress = function (evt) {
+            //    console.log(evt.keyCode);
+            //    if (evt.keyCode == 13 &&  evt.ctrlKey) {
+            //        //console.log('按了回车键！');
+            //        console.log('同时按了 ctrl + 回车键！');
+            //        //if (evt.ctrlKey) {
+            //        //    console.log('同时按了 ctrl + 回车键！');
+            //        //}
+            //    }
+            //}
+
+            // 问题1：event.clientX, event.clientY, event.screenX, event.screenY 这两组坐标有什么不同？
+            // 问题2：还有没有其它坐标？
+
+        }
+    </script>   
+</head>
+<body>
+    <div style="width:400px;height:500px; border:solid 5px red; overflow: hidden; display:none;" id="div_content">
+        <div style="width:200px; height:1500px; background-color:yellow;" id="sub_div"></div>
+    </div>
+    <input type="text" id="mess" />
+    <button id="send">发送</button>
+</body>
+</html>

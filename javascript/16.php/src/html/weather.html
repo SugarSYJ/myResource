@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>天气预报</title>
+    <style>
+        body{font-family:'微软雅黑';}
+        ul{list-style: none;padding:0;margin:0;}
+        #weather{border:1px solid #ddd;padding:10px;font-size:12px;}
+        #weather h1 small{display: block;font-size:16px;margin:5px 0;font-weight:normal;color:#c00;}
+        #weather ul{padding:5px;overflow:hidden;}
+        #weather li{float:left;padding:5px;width:143px;height:200px;border-right:1px dotted #ddd;}
+        #weather li.last{border-right:none;float:right;}
+        #weather .date{padding-bottom:10px;margin-bottom:10px;text-align:center;font-weight:bold;border-bottom:1px dotted #ddd;}
+        
+        .type{height:70px;}
+        .qt{background:url(tianqi/1.png) no-repeat center;}
+        .yt{background: url(tianqi/2.png) no-repeat center;}
+        .zhenyu{background:url(tianqi/10.png) no-repeat center;}
+        .duoyun{background:url(tianqi/3.png) no-repeat center;}
+        .by{background:url(tianqi/12.png) no-repeat center;}
+        .zy{background:url(tianqi/10.png) no-repeat center;}
+        .xy{background:url(tianqi/9.png) no-repeat center;}
+        .leiyu{background: url(tianqi/16.png) no-repeat center;}
+        .dayu{background: url(tianqi/11.png) no-repeat center;}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var h1 = document.querySelector('h1');
+            var weather = document.querySelector('#weather');
+            var city = document.querySelector('#city');
+            var btnShow = document.querySelector('#btnShow');
+
+            var statusCode = [200,304];
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && statusCode.indexOf(xhr.status)>=0){
+                    var res = JSON.parse(xhr.responseText);
+                    console.log(xhr.responseText);
+                    if(res.status !== 1000){
+                        return;
+                    }
+                    var data = res.data;
+                    h1.innerHTML = `${data.city}天气预报`;
+                    // 日期
+                    var h4 = document.createElement('h4');
+                    h4.className = 'date';
+                    h4.innerHTML = '';
+
+                    // 天气数据
+                    var ul = document.createElement('ul');
+                    ul.innerHTML = data.forecast.map(item=>{
+                        var type = '';
+                        if(item.type == '多云'){
+                            type = 'duoyun';
+                        }else if(item.type == '晴'){
+                            type = 'qt';
+                        }else if(item.type == '小雨'){
+                            type = 'xy';
+                        }
+                        return `<li>
+                            <h4 class="date">${item.date}</h4>
+                            <div class="type ${type}">${item.type}</div>
+                            <div class="tem">${item.low} / ${item.high}</div>
+
+                        </li>`
+                    }).join('');
+                    weather.innerHTML = '';
+                    weather.appendChild(ul);
+                }
+            }
+            xhr.open('get','http://wthrcdn.etouch.cn/weather_mini?city=广州',true);
+            xhr.send();
+            btnShow.onclick = function(){
+                var _city = city.value;
+                if(_city.trim()===''){
+                    alert('请输入城市');
+                    return;
+                }
+                xhr.open('get','http://wthrcdn.etouch.cn/weather_mini?city='+_city,true);
+                xhr.send();
+            }
+        })
+    </script>
+</head>
+<body>
+    <input type="text" id="city"><button id="btnShow">查看天气</button>
+    <h1>天气预报</h1>
+    <div id="weather"></div>
+</body>
+</html>

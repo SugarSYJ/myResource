@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取小米5的价格</title>
+	<style>
+	#output{font-size:30px;color:#f00;}
+	</style>
+	<script>
+		function getPrice(){
+			var price = document.getElementById('price').innerHTML;//'1999.90元'
+			var output = document.getElementById('output');
+
+			// output.innerHTML = '&yen;' + parseInt(price) + '.00';
+			output.innerHTML = '&yen;' + parseFloat(price).toFixed(2);
+		}
+
+	</script>
+</head>
+<body>
+	<h1>小米5</h1>
+	<div>价格：<span id="price">1999.90元</span></div>
+	<button onclick="getPrice()">获取小米5的价格</button>
+	<div id="output"></div>
+</body>
+</html>

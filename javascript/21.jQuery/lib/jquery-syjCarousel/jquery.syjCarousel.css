@@ -1,0 +1,12 @@
+ul,ol,li,div {margin: 0;padding: 0;}
+ul,ol {list-style: none;}
+.syj-carousel {position: relative;width: 320px;height: 320px;overflow: hidden;}
+.syj-carousel .carousel-inner {position: absolute;left: 0;top: 0;}
+.syj-carousel .carousel-inner .carousel-item {float: left;}
+.syj-carousel .carousel-item img {}
+.syj-carousel .carousel-indicators {position: absolute;left: 0;bottom: 10px;text-align: center;font-size: 0;}
+.syj-carousel .carousel-indicators span {display: inline-block;width: 12px;height: 12px;background-color: #fff;margin: 0 4px;border-radius: 50%;cursor: pointer;}
+.syj-carousel .carousel-indicators span.active {background-color: #f60;}
+.syj-carousel .carousel-btn {position: absolute;top: 50%;width: 50px;height: 45px;margin-top: -25px;cursor: pointer;}
+.syj-carousel .carousel-prev-btn {left: 0;background: url('../../img/prev.png') no-repeat;}
+.syj-carousel .carousel-next-btn {right: 0;background: url('../../img/next.png') no-repeat;}

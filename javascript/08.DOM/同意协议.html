@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            window.onload = function(){
+                var agree = document.getElementsByName('agree')[0];
+                var btn = document.getElementById('btn');
+                agree.onclick = function(){
+                    if(agree.checked){
+                        btn.disabled = false;
+                    }else{
+                        btn.disabled = true;
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h2>同意协议</h2>
+        <label for="username">用户名：</label>
+        <input type="text" id="username" name="username"/>
+        <label for="password">密码：</label>
+        <input type="password" id="password" name="password"/>
+        <p><input type="checkbox" name="agree"/>《保密协议》</p>
+        <button disabled id="btn">注册</button>
+    </body>
+</html>

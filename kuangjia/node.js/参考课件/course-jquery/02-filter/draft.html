@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <style>
+        div{margin:25px 0;}
+        span{padding:10px 20px; background-color:#ccc; cursor:pointer;}
+        span:nth-child(1){background:red;}
+        span:nth-last-child(1){background: green;}
+        div:not(#div2){border: solid 2px red;}
+    </style>
+    <script src="../jquery/juqery-1.11.2.min.js"></script>
+</head>
+<body>
+    <div id="div1">
+        <span>A1</span>
+        <span>A2</span>
+        <span>A3</span>
+        <span>A4</span>
+        <span>A5</span>
+    </div>
+    <div id="div2">
+        <span>B1</span>
+        <span>B2</span>
+        <span>B3</span>
+        <span>B4</span>
+        <span>B5</span>
+    </div>
+    <div id="div3">
+        <span>C1</span>
+        <span>C2</span>
+        <span>C3</span>
+        <span>C4</span>
+        <span>C5</span>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //让当前元素获取焦点(事件)
+            //$('input').focus();
+            //获取(过滤出)当前有焦点的元素
+            //console.log($('input:focus'));
+            //(1) * -1
+        })
+        $(function () {
+            //获取元素的长度
+            //console.log($('div').length);
+            //console.log($('div').size());
+
+            var divs = $('div');
+
+            //参数1：数组
+            //参数2：回调函数 => 参数1：数组的下标(0,1,2...), 参数2：数组里循环的当前下标元素
+            var id2 = $.each(divs, function (i, n) {
+                return this.id;
+                //*
+                //$('div:eq(' + i + ') span:eq(0)');
+                ////*****
+                //console.log($('span:eq(0)', this).html())
+                // i => 0,1,2
+                // n => $('div:eq(i)')
+                //console.log(n);
+                //console.log($('div:eq(' + i + ')>span:eq(0)'));
+            })
+            console.log(id2.get());
+            //var target = $('div').map(function () {
+            //    return $('span:first-of-type', this);
+            //});
+            //console.log(target[0].css('background', 'red'));
+
+            //first-child 
+
+            //循环生成一个全新的 jQuery 数组对象
+            var id = $('div').map(function () {
+                //#div1, #div2, #div3
+                return this.id;
+            });
+
+            console.log(id);
+
+            var _array = [];
+
+            //jQuery.prop => 获取 html 元素属性
+            for (var i = 0; i < $('div').size() ; i++) {
+                _array.push($('div').eq(i).prop('id'));
+            }
+            console.log(_array);
+            //jQuery 大量使用了回调函数
+            //封装当中大量使用回调函数
+            //_obj => $('div').eq(i)
+            $('div').each(function (_index, _obj) {
+                //console.log($(_obj));
+                //console.log($('div').eq(_index));
+                //this => #div1, #div2, #div3
+                console.log($(this));
+                window.setTimeout(function () {
+                    console.log($(this));
+                }, 100);
+                //return false;
+            })
+            return false;
+            // 能支持 css 过滤器，都能在 jQuery 过滤器中支持
+            console.log($('div').not('#div1')); // => #div2, #div3
+            console.log($('div:not(#div1)')); // => #div2, #div3
+            console.log($('div').filter('#div1')); // => #div1
+            //console.log($('div:filter(#div1)')); // => #div1
+
+            console.log($('div:eq(2)'));
+            console.log($('div').eq(2));
+
+            console.log($('#div1').nextAll());
+
+            console.log($('#div3').prevAll());
+
+            //console.log($('#div3').prevAll()[0]);
+            //get 返回的 js 对象, eq 返回的是 jQuery 数组对象
+            console.log($('#div3').prevAll().get(0));
+
+            if ($('#div4')[0]) {
+                console.log(true);
+            } else {
+                console.log(false);
+            }
+
+            var _agrs = 0;
+            _agrs = false;
+            _agrs = undefined;
+            _agrs = NaN;
+            _agrs = null;
+            if (!_agrs) {
+                console.log(false);
+            } else {
+                console.log(true);
+            }
+        });
+    </script>
+</body>
+</html>

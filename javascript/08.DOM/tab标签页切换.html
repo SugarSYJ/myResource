@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .tab{border:2px solid #ddd;padding:2px;width:353px;}
+            .tab header{padding-bottom:2px;border-bottom:2px solid #ddd;overflow:hidden;}
+            .tab header div{float:left;padding:5px 15px;border-right:1px solid #ddd;}
+            .tab .active{background-color: #fc0;color:#fff;}
+            .tab .content{padding:15px;min-height: 100px;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var tab = document.getElementsByClassName('tab')[0];
+                var tabItem = tab.children[0].children;
+                var tabContent = tab.children[1].children;
+                var len = tabItem.length;
+                for(var i=0;i<len;i++){
+                    if(i===0){
+                        tabItem[i].className = 'active';
+                    }else{
+                        tabContent[i].style.display = 'none';
+                    }
+                    // 切换：鼠标点击tab（获取点击的index值）
+                    (function(i){
+                        tabItem[i].onmouseover = function(){
+                            for(var j=0;j<len;j++){
+                                if(j===i){
+                                    tabItem[j].className = 'active';
+                                    tabContent[j].style.display = 'block';
+                                }else{
+                                    tabItem[j].className = '';
+                                    tabContent[j].style.display = 'none';
+                                }
+                            }
+                        }
+                    })(i)
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <h1>tab标签页切换</h1>
+        <div class="tab">
+            <header>
+                <div>Tab1</div>
+                <div>Tab2</div>
+                <div>Tab3</div>
+                <div>Tab4</div>
+                <div>Tab5</div>
+            </header>
+            <div class="container">
+                <div><img src="img/g1.jpg" /></div>
+                <div><img src="img/g2.jpg" /></div>
+                <div><img src="img/g3.jpg" /></div>
+                <div><img src="img/g4.jpg" /></div>
+                <div><img src="img/g5.jpg" /></div>
+            </div>
+        </div>
+    </body>
+</html>

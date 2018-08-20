@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <link href="jquery-easyui-1.5/themes/black/easyui.css" rel="stylesheet" />
+
+    <script src="jquery-easyui-1.5/jquery.min.js"></script>
+    <script src="jquery-easyui-1.5/jquery.easyui.min.js"></script>
+</head>
+<body>
+    <table id="datagrid"></table>
+
+    <script type="text/javascript">
+        $(function () {
+            var grid = $('#datagrid').datagrid({
+                url: 'http://10.16.151.33/ctapi/dispatch/offers/FetchSupplier',
+                pagination: true,
+                pageSize: 10,
+                method: 'get',
+                singleSelect: true,
+                rownumbers: true,
+                idField: 'supplierid',
+                loadFilter: function (data) {
+                    var obj = { total: data.datagrid.data.rowscount, rows: [] };
+                    $.each(data.datagrid.data.rows, function (_index, _obj) {
+                        var _tr = {};
+                        for (var key in _obj.RowData) {
+                            _tr[key] = _obj.RowData[key].Value;
+                        }
+                        obj.rows.push(_tr);
+                    })
+                    return obj;
+                },
+                rowStyler: function(index,row){
+                    if (row.suphone == '13711079209') {
+                        return 'background-color:#6293BB;color:red;'; 
+                    }
+                },
+                columns: [[
+                    { field: 'suname', title: 'suname', width: 100 },
+                    { field: 'suaddress', title: 'suaddress', width: 100 },
+                    { field: 'contact', title: 'contact' },
+                    { field: 'suphone', title: 'suphone' }
+                ]]
+            });
+
+            //var pager = grid.datagrid('getPager');
+            //pager.pagination();
+        })
+    </script>
+</body>
+</html>

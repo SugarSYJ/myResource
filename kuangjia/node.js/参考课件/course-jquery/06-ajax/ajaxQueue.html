@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script type="text/javascript" src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		//回调地狱
+		$.get('api/a', function(){
+			$.get('api/b', function(){
+
+			})
+		})
+
+		var obj = {
+			queue: [],//{1_false: '/api/getdata', 2_true: '/api/getdata'}
+			ajaxing: false,
+			ajax: function(){
+				this.ajaxing = true;
+				for(var i = 0; i < this.queue.length; i++){
+					$.get(this.queue[i].api, function(){
+						this.queue.splice(i, 1);
+						this.ajax();
+					}.bind(this))
+				}
+				this.ajaxing = false;
+			},
+			init: function(){
+				window.setInterval(function(){
+					var _ obj = {state: false, api: '/api/getdata'};
+					this.queue.push(_obj);
+					if(!this.ajaxing){
+						this.ajax();
+					}
+				}.bind(this), 5000)
+			}
+		}
+
+		obj.init();
+
+	</script>
+</body>
+</html>

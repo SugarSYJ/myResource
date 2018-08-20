@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>城市列表</title>
+    <link rel="stylesheet" type="text/css" href="../css/city_list.css" />
+</head>
+<body>
+<!-- <input type="text" id="city"><button id="btnShow">查看天气</button> -->
+    <h1><span id="s_city">广州</span>未来5天天气预报</h1>
+    <div id="weather"></div>
+    <div class="hotcity">
+        <h2>热门城市</h2>
+    </div>
+    <div class="search">
+        <h2>按拼音字母查询</h2>
+        <ul class="alphabet">
+            <li>A</li>
+            <li>B</li>
+            <li>C</li>
+            <li>D</li>
+            <li>E</li>
+            <li>F</li>
+            <li>G</li>
+            <li>H</li>
+            <li>I</li>
+            <li>J</li>
+            <li>K</li>
+            <li>L</li>
+            <li>M</li>
+            <li>N</li>
+            <li>O</li>
+            <li>P</li>
+            <li>Q</li>
+            <li>R</li>
+            <li>S</li>
+            <li>T</li>
+            <li>U</li>
+            <li>V</li>
+            <li>W</li>
+            <li>X</li>
+            <li>Y</li>
+            <li>Z</li>
+        </ul>
+        <div class="citylist">
+            <ul id="a"><span>A</span></ul>
+            <ul><span>B</span></ul>
+            <ul><span>C</span></ul>
+            <ul><span>D</span></ul>
+            <ul><span>E</span></ul>
+            <ul><span>F</span></ul>
+            <ul><span>G</span></ul>
+            <ul><span>H</span></ul>
+            <ul><span>I</span></ul>
+            <ul><span>J</span></ul>
+            <ul><span>K</span></ul>
+            <ul><span>L</span></ul>
+            <ul><span>M</span></ul>
+            <ul><span>N</span></ul>
+            <ul><span>O</span></ul>
+            <ul><span>P</span></ul>
+            <ul><span>Q</span></ul>
+            <ul><span>R</span></ul>
+            <ul><span>S</span></ul>
+            <ul><span>T</span></ul>
+            <ul><span>U</span></ul>
+            <ul><span>V</span></ul>
+            <ul><span>W</span></ul>
+            <ul><span>X</span></ul>
+            <ul><span>Y</span></ul>
+            <ul><span>Z</span></ul>
+        </div>
+    </div>
+</body>
+<script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var weather = document.querySelector('#weather');
+            var hotcity=document.querySelector('.hotcity');
+            var search=document.querySelector('.search');
+            var citylist=document.querySelector('.citylist');
+            var uls=citylist.children;
+            var s_city=document.querySelector('#s_city');
+            var alphabet=document.querySelector('.alphabet');
+            var lis=alphabet.children;
+
+            var statusCode = [200,304];
+
+            // 创建异步请求对象
+            var xhr = new XMLHttpRequest();
+
+            // // 处理数据（难度）
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && statusCode.indexOf(xhr.status)>=0){
+                    var res = JSON.parse(xhr.responseText);console.log(xhr.responseText)
+                    console.log(res);
+                    if(res.status !== 1000){
+                        alert("没有当前城市信息！");
+                        return;
+                    }
+
+                    var data = res.data;
+                    s_city.innerHTML = `${data.city}`;
+
+                    // 日期
+                    var h4 = document.createElement('h4');
+                    h4.className = 'date';
+                    h4.innerHTML = '';
+
+                    // 天气数据
+                    var ul = document.createElement('ul');
+                    ul.innerHTML =  data.forecast.map(item=>{
+                        var type = '';
+                        if(item.type == '多云'){
+                            type = 'duoyun';
+                        }else if(item.type == '晴'){
+                            type = 'qt';
+                        }else if(item.type == '小雨'){
+                            type = 'xy';
+                        }
+                        return `<li>
+                            <h4 class="date">${item.date}</h4>
+                            <div class="type ${type}">${item.type}</div>
+                            <div class="tem">${item.low} / ${item.high}</div>
+                        </li>`
+                    }).join('');
+
+                    weather.innerHTML = '';
+                    weather.appendChild(ul);
+
+                }
+            }
+
+            xhr.open('get','http://wthrcdn.etouch.cn/weather_mini?city=广州',true);
+            // xhr.setRequestHeader('Content-Type','text/plain;charset=gbk')
+            xhr.send(null);
+
+            // 点击按钮查看点击城市的天气预报
+            citylist.onclick = function(e){
+                if(e.target.tagName.toLowerCase()=='li'){
+
+                    var _city = e.target.innerText;
+                    var lenout=uls.length;
+                    for(var i=0;i<lenout;i++){
+                        for(var j=0;j<uls[i].children.length;j++){
+                            uls[i].children[j].style.backgroundColor='white';
+                        }
+                    }
+                    e.target.style.backgroundColor='pink';
+                    window.scrollTo(0,0);
+                }
+
+                
+
+                xhr.open('get','http://wthrcdn.etouch.cn/weather_mini?city='+_city,true);
+                xhr.send(null);
+               
+            };
+            hotcity.onclick=function(e){
+                if(e.target.tagName.toLowerCase()=='li'){
+
+                    var _city = e.target.innerText;
+                }
+
+                
+
+                xhr.open('get','http://wthrcdn.etouch.cn/weather_mini?city='+_city,true);
+                xhr.send(null);
+                
+            }
+            
+                
+            
+
+            // 获取城市列表
+            var status = [200,304];
+            var xhr_hot=new XMLHttpRequest();
+            xhr_hot.onload=function(){
+                if(status.includes(xhr_hot.status)){
+                    var city=JSON.parse(xhr_hot.responseText);
+                    console.log(city.regions);
+                    // 生成城市列表
+                    var ul_hot=document.createElement('ul');
+                    city.regions.forEach(item=>{
+                        if(item['hot']==true){
+                            var li=document.createElement('li');
+                            li.innerText=item['name'];
+                            ul_hot.appendChild(li);
+                        }
+                        if(item['regions']){
+                            item['regions'].forEach(item2=>{
+                                if(item2['hot']){
+                                   var li=document.createElement('li');
+                                    li.innerText=item2['name'];
+                                    ul_hot.appendChild(li); 
+                                }
+                            })
+                        }
+                    })
+                    console.log(ul_hot);
+                    hotcity.appendChild(ul_hot);
+                    // 按拼音字母
+                    city.regions.forEach(item=>{
+                        var Fletter1=item['pinyin'].substring(0,1);
+                        var li=document.createElement('li');
+                        // console.log('Fletter1',Fletter1);
+                        input(Fletter1,li,item);
+                        if(item['regions']){
+                            item['regions'].forEach(item=>{
+                                if(item['pinyin']){
+                                    var Fletter2=item['pinyin'].substring(0,1);
+                                    var li=document.createElement('li');
+                                    input(Fletter2,li,item);
+                                    // console.log('Fletter2',Fletter2);
+                                }
+                                
+                            })
+                        }
+                        // 讲对应拼音的城市插入列表
+                        function input(Fletter,li,item){
+                                switch(Fletter){
+                                case "A":{
+                                    li.innerText=item.name;
+                                    uls[0].appendChild(li);
+                                    break;
+                                }
+                                case "B":{
+                                    li.innerText=item.name;
+                                    uls[1].appendChild(li);
+                                    break;
+                                }
+                                case "C":{
+                                    li.innerText=item.name;
+                                    uls[2].appendChild(li);
+                                    break;
+                                }
+                                case "D":{
+                                    li.innerText=item.name;
+                                    uls[3].appendChild(li);
+                                    break;
+                                }
+                                case "E":{
+                                    li.innerText=item.name;
+                                    uls[4].appendChild(li);
+                                    break;
+                                }
+                                case "F":{
+                                    li.innerText=item.name;
+                                    uls[5].appendChild(li);
+                                    break;
+                                }
+                                case "G":{
+                                    li.innerText=item.name;
+                                    uls[6].appendChild(li);
+                                    break;
+                                }
+                                case "H":{
+                                    li.innerText=item.name;
+                                    uls[7].appendChild(li);
+                                    break;
+                                }
+                                case "I":{
+                                    li.innerText=item.name;
+                                    uls[8].appendChild(li);
+                                    break;
+                                }
+                                case "J":{
+                                    li.innerText=item.name;
+                                    uls[9].appendChild(li);
+                                    break;
+                                }
+                                case "K":{
+                                    li.innerText=item.name;
+                                    uls[10].appendChild(li);
+                                    break;
+                                }
+                                case "L":{
+                                    li.innerText=item.name;
+                                    uls[11].appendChild(li);
+                                    break;
+                                }
+                                case "M":{
+                                    li.innerText=item.name;
+                                    uls[12].appendChild(li);
+                                    break;
+                                }
+                                case "N":{
+                                    li.innerText=item.name;
+                                    uls[13].appendChild(li);
+                                    break;
+                                }
+                                case "O":{
+                                    li.innerText=item.name;
+                                    uls[14].appendChild(li);
+                                    break;
+                                }
+                                case "P":{
+                                    li.innerText=item.name;
+                                    uls[15].appendChild(li);
+                                    break;
+                                }
+                                case "Q":{
+                                    li.innerText=item.name;
+                                    uls[16].appendChild(li);
+                                    break;
+                                }
+                                case "R":{
+                                    li.innerText=item.name;
+                                    uls[17].appendChild(li);
+                                    break;
+                                }
+                                case "S":{
+                                    li.innerText=item.name;
+                                    uls[18].appendChild(li);
+                                    break;
+                                }
+                                case "T":{
+                                    li.innerText=item.name;
+                                    uls[19].appendChild(li);
+                                    break;
+                                }
+                                case "U":{
+                                    li.innerText=item.name;
+                                    uls[20].appendChild(li);
+                                    break;
+                                }
+                                case "V":{
+                                    li.innerText=item.name;
+                                    uls[21].appendChild(li);
+                                    break;
+                                }
+                                case "W":{
+                                    li.innerText=item.name;
+                                    uls[22].appendChild(li);
+                                    break;
+                                }
+                                case "X":{
+                                    li.innerText=item.name;
+                                    uls[23].appendChild(li);
+                                    break;
+                                }
+                                case "Y":{
+                                    li.innerText=item.name;
+                                    uls[24].appendChild(li);
+                                    break;
+                                }
+                                case "Z":{
+                                    li.innerText=item.name;
+                                    uls[25].appendChild(li);
+                                    break;
+                                }
+                                
+                            }
+                        }
+                        
+                    })
+
+
+
+                        }
+            }
+            xhr_hot.open('get','http://localhost:1218/api/data/region.JSON',true);
+            xhr_hot.send();
+            // 字母的定位
+            for(let i=0;i<lis.length;i++){
+                lis[i].onclick=function(){
+                    window.scrollTo(0,uls[i].offsetTop);
+                    console.log(uls[i].offsetTop);
+                }
+            }
+            
+
+        })
+    </script>
+</html>

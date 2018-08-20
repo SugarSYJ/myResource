@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画队列</title>
+	<style>
+		.box{position: relative;width:200px;}
+		.box img{width:100%;}
+	</style>
+	<script src="lib/jquery-3.2.1.js"></script>
+	<script>
+		// jQuery(document).ready(function(){})
+		$(function(){
+			var $box = $('.box');
+			$('#btn1').on('click',function(){
+				$box.animate({width:100},2000).animate({top:250},1000);
+				$('.box2').animate({fontSize:48});
+			});
+			$('#btn2').on('click',function(){
+				$box.animate({left:400},1000);
+			});
+			$('#btn3').on('click',function(){
+				$box.animate({opacity:0.3},1000);
+			});
+			$('#btnStop').on('click',function(){
+				$box.stop(true,true);
+			});
+		});
+	</script>
+</head>
+<body>
+	<button id="btn1">width</button>
+	<button id="btn2">left</button>
+	<button id="btn3">opacity</button>
+	<button id="btnStop">stop</button>
+	<div class="box"><img src="img/g5.jpg"></div>
+	<div class="box2">黑妹牙膏</div>
+</body>
+</html>

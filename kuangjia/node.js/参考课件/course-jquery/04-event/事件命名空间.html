@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件绑定</title>
+	<style>
+		table{width:100%;border:1px solid #ddd;border-collapse: collapse;}
+		td{padding:5px 10px;border:1px solid #ddd;}
+		.active{background-color: #fc0;}
+		.selected{background-color: #f60;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			// 鼠标移入高亮显示当前行
+			var $datalist = $('.datalist');
+
+			$datalist.on('mouseenter','tr',function(){
+				$(this).addClass('active');
+			}).on('mouseleave','tr',function(){
+				$(this).removeClass('active');
+			}).on('click.select','tr',function(){
+				$(this).addClass('selected').find(':checkbox').prop('checked',true);
+			}).on('click.alert','td',function(){
+				alert($(this).text());
+			});
+
+			$('.rm-mouseenter').on('click',function(){
+				$datalist.off('mouseenter');
+			});
+			$('.rm-click').on('click',function(){
+				$datalist.off('click');
+			});
+
+			$('.rm-click-select').on('click',function(){
+				$datalist.off('click.select');
+			});
+			$('.rm-click-alert').on('click',function(){
+				$datalist.off('click.alert');
+			});
+			$('.rm-all').on('click',function(){
+				$datalist.off();
+			});
+		});
+	</script>
+</head>
+<body>
+	<button class="rm-mouseenter">移除mouseenter</button>
+	<button class="rm-mouseleave">移除mouseleave</button>
+	<button class="rm-click">移除click</button>
+	<button class="rm-click-select">移除click.select</button>
+	<button class="rm-click-alert">移除click.alert</button>
+	<button class="rm-all">移除所有</button>
+	<table class="datalist">
+		<tbody>
+			<tr>
+				<td width="20"><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

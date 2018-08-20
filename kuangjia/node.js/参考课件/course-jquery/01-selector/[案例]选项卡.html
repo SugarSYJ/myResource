@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <style>
+    ul{list-style:none;padding:0;margin:0;}
+    .tab .header li{display:inline-block;padding:5px 15px;}
+    .tab .header li.active{font-weight:bold;color:#f60;}
+    .content{padding:20px;border:1px solid #ddd;background-color: #efefef;}
+    .show{display:block;}
+    .hide{display:none;}
+    </style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        // $('.content').css('display','none');
+        // $('.content:eq(0)').css('display','block');
+        // 隐藏所有.content，然后显示第一个.content
+        //$('.content').hide().eq(0).show();
+        /*for(var i=0; i< $('.tab li').length;i++){
+            $('.tab li')[i].onclick = (function(i){
+                return function(){
+                    // $('.content').css('display','none');
+                    // hide隐藏元素
+                    $('.content').hide();
+                    $('.tab li').removeClass();
+                    // $('.tab li')[i].className = 'active';
+                    $('.tab li').eq(i).addClass('active');
+                    // $('.content:eq('+i+')').css('display','block');
+                    // show显示元素
+                    $('.content').eq(i).show();
+                }
+            })(i);
+        }*/
+        /*
+            1. css()
+            2. removeClass()/addClass()
+            3. show()/hide()
+            4. click
+            5. index()
+            6. DOM对象与jquery对象的互转[get()]
+            7. 链式操作
+            8. 隐式迭代
+            9. eq(index)获取下标对应jquery对象
+         */
+        //var $li = $('.tab li');
+        //$li.click(function(){
+        //    // index方法获取当前索引
+        //    var i = $(this).index();
+        //    $('.content').hide().eq(i).show();;
+        //    $li.removeClass().eq(i).addClass('active');
+        //})
+
+        //代表操作的是 jQuery 的数组对象
+        //$('.content').hide().eq(0).show();
+        $('.content').removeClass('show').addClass('hide').eq(0).removeClass('hide').addClass('show');
+        var $li = $('li');
+        //jQuery 的数组对象，给数组对象事件，是代表所有元素都有该事件
+        $li.click(function () {
+            //元素选择器
+            //$('<li></li>')
+            console.log($(this));
+
+            //removeClass() 如果不指定 className 则删除所有 class
+            //addClass('className') 添加指定的 className
+            $('.content').removeClass('show').addClass('hide').eq($(this).index()).removeClass('hide').addClass('show');
+        })
+    })
+    </script>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="header">
+            <li>选项1</li>
+            <li>选项2</li>
+            <li>选项3</li>
+        </ul>
+        <div class="content">内容1</div>
+        <div class="content">内容2</div>
+        <div class="content">内容3</div>
+    </div>
+</body>
+
+</html>

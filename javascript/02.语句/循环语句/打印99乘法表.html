@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #cfb{width: 900px;}
+            #cfb span{display:inline-block;width: 60px;height: 40px;line-height: 40px;margin: 5px;padding:0 10px;background: #ddd;}
+            #cfb span:hover{background: #58bc58;}
+        </style>
+    </head>
+    <body>
+        <h3>打印99乘法表</h3>
+        <div id="cfb"></div>
+        <script type="text/javascript">
+            var cfb = document.getElementById('cfb');
+            var res = '';
+            for(var i = 1;i<=9;i++){
+                for(var j = 1;j<=i;j++){
+                    res = res + '<span>' + i + 'x' + j + '=' + i*j + '</span>';
+                }
+                res = res + '<br/>';
+            }
+            cfb.innerHTML = res;
+        </script>
+    </body>
+</html>

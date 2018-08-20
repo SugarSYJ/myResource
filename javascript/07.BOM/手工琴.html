@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            *{margin: 0;padding: 0;}
+            #main_l{width: 210px;font-size:12px;}
+            #main_l h3{height: 22px;border-bottom:3px solid #CFCFCF;}
+            #main_l h3 span{display:block;width: 45px;line-height: 22px;font-weight:bold;border-bottom:3px solid #000;}
+            #main_l div ul{display:none;padding-left:10px;}
+        </style>
+    </head>
+    <body>
+        <div class="main_l fl" id="main_l">
+            <h3>
+                <span>Shoes</span>
+            </h3>
+            <div>
+                <p>Girls' Shoes</p>
+                <ul>
+                    <li><a href="#">Girl' Snow Boots</a></li>
+                </ul>
+            </div>
+            <div>
+                <p>Men's Shoes</p>
+                <ul>
+                    <li><a href="#">Men's Casual Shoes</a></li>
+                    <li><a href="#">Men's Sneakers</a></li>
+                    <li><a href="#">Men's Jordan Shoes</a></li>
+                    <li><a href="#">Men's Slippers</a></li>
+                    <li><a href="#">Men's Runnings</a></li>
+                    <li><a href="#">Men's Snow Boots</a></li>
+                    <li><a href="#">Men's Basketball Shoes</a></li>
+                    <li><a href="#">Men's Fashion Shoes</a></li>
+                </ul>
+            </div>
+            <div>
+                <p>Women's Shoes</p>
+                <ul>
+                    <li><a href="#">Heels&Pumps</a></li>
+                    <li><a href="#">Sandals</a></li>
+                    <li><a href="#">Boots</a></li>
+                    <li><a href="#">Women's Casual Shoes</a></li>
+                    <li><a href="#">Women's Jordan Shoes</a></li>
+                    <li><a href="#">Women's Sneakers</a></li>
+                    <li><a href="#">Women's Runnings</a></li>
+                    <li><a href="#">Women's Snow Boots</a></li>
+                    <li><a href="#">Women's Fashion Shoes</a></li>
+                </ul>
+            </div>
+        </div>
+        <script type="text/javascript">
+            window.onload = function(){
+                var main_l = document.getElementById('main_l');
+                var p = main_l.getElementsByTagName('p');
+                var ul = main_l.getElementsByTagName('ul');
+                for(var i in p){
+                    p[i].idx = i;
+                    p[i].onclick = function(){
+                        var u = ul[this.idx];
+                        if(u.style.display==='block'){
+                            u.style.display = 'none';
+                        }else{
+                            u.style.display='block';
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

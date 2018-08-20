@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>替换</title>
+	<script src="../common.js"></script>
+	<script>
+		window.onload = function(){
+			var username = document.getElementById('username');
+			var btn = username.nextElementSibling;
+
+			// 点击提交时，验证用户名是否为空
+			// 把前面和后面所有的空格删除后，在验证是否为空
+			// 'abc',' abc','   abc','abc ','a b  c','     '
+			btn.onclick = function(){
+				var value = trim(username.value);
+				/*// 去掉前后空格
+				var reg = /^\s*|\s*$/g
+
+				value = value.replace(reg,'');*/
+				if(value == ''){
+					alert('用户名不能为空');
+				}else{
+					alert('成功登陆');
+					username.value = value;
+				}
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="username"><button>提交</button>
+</body>
+</html>

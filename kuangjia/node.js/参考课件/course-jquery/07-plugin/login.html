@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+        <script src="../jquery/jquery-2.1.1.min.js"></script>
+        <script src="jquery-validation-1.15.0/dist/jquery.validate.js"></script>
+        <script src="jquery-validation-1.15.0/dist/jquery.validate.extend.methods.js"></script>
+        <script src="jquery-validation-1.15.0/dist/jquery.metadata.js"></script>
+        <script src="jquery-validation-1.15.0/dist/localization/messages_zh.js"></script>    
+	</head>
+	<body>
+        <form>
+            <div class="item-input item-relative">
+                <span>密码</span>
+                <input type="password" id="password" name="pwd" placeholder="输入密码" class="{required:true,minlength:6}">
+            </div>
+            <div class="item-input item-relative">
+                <span>确认密码</span>
+                <input type="password" name="confirmpwd" placeholder="输入确认密码" class="{required:true,minlength:6,comparePwd:'#password'}">
+            </div>  
+        </form>
+    </body>
+</html>

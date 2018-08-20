@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        *{margin: 0; padding: 0;}
+        #focus{width: 810px; height: 320px; position: relative; margin: auto; overflow: hidden;}
+        ul:nth-child(1){list-style: none; position: absolute; top: 0; bottom: 0;}
+        li{float: left;}
+        ul:nth-child(2){bottom: 20px; width: 120px; height: 15px; position: absolute; list-style: none; left: 45%;}
+        ul:nth-child(2)>li{width: 12px; height: 12px; border-radius: 50%; margin: 0 5px; cursor: pointer; border: solid 2px #fff;}
+        ul:nth-child(2)>li.active{background-color:#fff;}
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            //轮播图-工厂模式
+            function swiper() {
+                var obj = new Object();
+                obj.focus = document.getElementById('focus');
+                obj.ul = obj.focus.getElementsByTagName('ul')[0];
+                obj.lis = obj.ul.getElementsByTagName('li');
+
+                obj.bar = obj.focus.getElementsByTagName('ul')[1];
+                obj.bar_li = obj.bar.getElementsByTagName('li');
+                obj.index = 0;
+
+                //定义初始化的方法 init
+                //把所有要轮播的图片一字排开
+                obj.init = function () {
+                    //计算出所有轮播图的总宽度
+                    var _width = this.lis[0].clientWidth * this.lis.length;
+                    //把计算出来的宽度给到 ul
+                    this.ul.style.width = _width + 'px';
+                };
+
+                //切换轮播图
+                obj.mainMove = function () {
+                    this.mainTimer = window.setInterval(function () {
+                        obj.index++;
+                        if (obj.index >= obj.lis.length) {
+                            obj.index = 0;
+                        }
+                        obj.subMove(obj.index);
+                    }, 3500);
+                };
+
+                //实现轮播功能
+                obj.subMove = function (index) {
+                    var speed = 10;
+                    var _width = this.lis[0].clientWidth * index;
+                    this.subTimer = window.setInterval(function () {
+                        var left = obj.ul.offsetLeft;
+                        left -= speed;
+                        if (Math.abs(left) >= _width) {
+                            left = _width * -1;
+                            window.clearInterval(obj.subTimer);
+
+                            for (var i = 0; i < obj.bar_li.length; i++) {
+                                obj.bar_li[i].className = '';
+                            }
+                            obj.bar_li[index].className = 'active';
+                        }
+                        obj.ul.style.left = left + 'px';
+                    }, 10);
+                };
+
+                obj.bar_li_click = function () {
+                    for (var i = 0; i < obj.bar_li.length; i++) {
+                        obj.bar_li[i].index = i;
+                        obj.bar_li[i].onclick = function () {
+                            if (this.index == obj.index) {
+                                return false;
+                            }
+                            obj.index = this.index;
+                            window.clearInterval(obj.mainTimer);
+                            obj.subMove(this.index);
+                            obj.mainMove();
+                        }
+                    }
+                };
+
+                return obj;
+            }
+
+            var obj = swiper();
+            obj.init();
+            obj.mainMove();
+            obj.bar_li_click();
+        }
+    </script>
+</head>
+<body>
+    <div id="focus">
+        <ul>
+            <li><img src="../images/001.jpg" /></li> <!--0-->
+            <li><img src="../images/002.jpg" /></li> <!--1-->
+            <li><img src="../images/003.jpg" /></li> <!--2-->
+            <li><img src="../images/004.jpg" /></li> <!--3-->
+        </ul>
+        <ul>
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>

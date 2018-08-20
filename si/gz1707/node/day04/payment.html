@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="http://libs.baidu.com/fontawesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="http://cdn.bootcss.com/jquery-confirm/3.1.0/jquery-confirm.min.css" rel="stylesheet">
+
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/socket.io/2.0.4/socket.io.js"></script>
+        <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+        <script src="http://cdn.bootcss.com/jquery-confirm/3.1.0/jquery-confirm.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+        <style>
+            li{list-style: none;}
+        </style>    
+    </head>
+    <body>
+        <div class="form-horizontal" style="width: 600px; margin: auto;">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <label id="total"></label>
+                    <input type="button" value="微信付款" class="btn btn-primary" id="btnPayment">
+                </div>
+            </div>
+            <ul>
+                <li class="col-xs-6">名称</li>
+                <li class="col-xs-2">数量</li>
+                <li class="col-xs-2">单价</li>
+                <li class="col-xs-2">总价</li>
+            </ul>    
+        </div>    
+        <script>
+            //获取 id
+            //到数据库查找对应的 order
+            //判断该定单的状态是否为未付款
+            //如果已付款则提示已付款
+            //如果未付款则可以进行微信付款
+            //付款成功后 => 发起 ajax 改变该订单的状态为已付款；
+            //打印小票
+            var id = window.location.search.replace('?', '').split('=')[1];
+            $.get('getorder',{id:id},function(res){
+                // console.log(res);
+                if(res.status){
+                    if(res.data[0].type){
+                        $('#total').closest('div').html('该订单已付款');
+                    }else{
+                        $('#total').text(res.data[0].total);
+                    }
+                }
+            })
+            $(function(){
+                var socket = io.connect('ws://10.3.136.211:3333');
+                socket.emit('scan');
+                $('#btnPayment').on('touchstart',function(res){
+                    $.post('editorder',{id:id},function(res){
+                        console.log(res);
+                        // 打印小票
+                        $.post('http://10.3.136.211:81/print',{text:$('#total').text()});
+                        $('#total').closest('div').html('该订单已付款');
+                        socket.emit('payment');
+                    })
+                })
+            })
+        </script>
+    </body>
+</html>

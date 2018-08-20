@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>01获取css</title>
+    <style>
+        #box {
+            width: 100px;
+            height: 100px;
+            background-color: #f00;
+        }
+        #box:before{content:"e"}
+    </style>
+    <script>
+        /*
+			getComputedStyle(node): 获取css（伪类）样式;
+				node:元素节点;
+
+			node.currentStyle: IE低版本浏览器（ie8-）获取css样式
+				使用：node.currentStyle.width/node.currentStyle['width']
+		 */
+        window.onload = function () {
+            var box = document.getElementById('box');
+            // 通过style属性获取内联样式，如果没有相应的内联样式，则返回空字符串
+            console.log(box.style.opacity);
+
+            // 获取非内联样式（写在css文件或者style标签里面的样式）
+            var style = getComputedStyle(box, ':before');
+            console.log(style.getPropertyValue('content'));
+        }
+    </script>
+</head>
+<body>
+    <div id="box" style="opacity:0.5;"></div>
+</body>
+</html>

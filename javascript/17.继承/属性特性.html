@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>06属性特性</title>
+	<script>
+		/*
+			属性特性
+				* configurable:可配置型（是否可修改其他属性特性）
+				* enumerable：可枚举性（可遍历）
+				* writable:可写性
+				* vaule:值
+
+			普通添加属性的方式：属性特性默认都为true
+			通过Object.defineProperty()添加：属性特性默认为false
+
+			设置属性特性的方法：
+				* Object.defineProperty(object, propertyname, descriptor)
+				* Object.defineProperties(object,descriptors)
+			查看属性特性：Object.getOwnPropertyDescriptor(object, propertyname)
+		 */
+		var obj = {
+			name:'laoxie',
+			age:18,
+			gender:'male'
+		}
+
+		// 修改age属性特性：让它不可枚举
+		Object.defineProperty(obj,'age',{
+			enumerable:false,
+			writable:false,
+			value:20
+		});
+
+		// 属性特性默认为false
+		Object.defineProperty(obj,'hobby',{
+			value:['coding','羽毛球','玩游戏']
+		});
+
+		// 修改多个属性
+		Object.defineProperties(obj,{
+			name:{
+				value:'xiaoxie'
+			},
+			gender:{
+				writable:false
+			}
+		})
+
+		for(var attr in obj){
+			console.log(attr)
+		}
+
+		console.log(obj);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

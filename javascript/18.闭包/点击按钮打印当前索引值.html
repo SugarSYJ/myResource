@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点击按钮打印当前索引值</title>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			let btns = document.querySelectorAll('button');
+
+			// 匿名函数
+			// for(var i=0,len = btns.length;i<len;i++){
+			// 	(function(i){
+			// 		btns[i].onclick = function(){
+			// 			console.log(i);
+			// 		}
+			// 	})(i);
+			// }
+
+
+			// ES6解决方案
+			for(let i=0;i<btns.length;i++){
+				btns[i].onclick = function(){
+					// console.log(i);
+				}
+			}
+
+			// 闭包解决方案
+			for(var i=0;i<btns.length;i++){
+				btns[i].onclick = (function(i){
+					return function(){
+						console.log(i);
+					}
+				})(i);
+			}
+		})
+	</script>
+</head>
+<body>
+	<h1>点击按钮打印当前索引值</h1>
+	<button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+	<button>按钮4</button>
+	<button>按钮5</button>
+	
+</body>
+</html>

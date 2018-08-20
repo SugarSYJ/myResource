@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        
+        $('.center :submit').click(function(e){
+            // console.log($('#myForm').serialize());
+            var data = $('#myForm').serializeArray();
+            console.log(data);
+            $.ajax({
+                url: 'api....?' + $('#myForm').serialize(),
+            })
+
+            return false;
+            /*
+                data = [{name:'username',value:'你好'}, {name:'nickname',value:'xx'}]
+                {username:'你好',nickname:'xx',hobby:[1,2,3]}
+                1)循环data
+                2)把data中的name和value分别取出，并放置到一个新的对象
+             */
+            
+            // 新建一个空对象
+            var _data = {};
+
+            // 循环data数据
+            $.each(data,function(i,obj){
+
+                // 有多个值得情况，把值变成数组
+                if(_data[obj.name] != undefined){
+                    //_data = {hobby:1} ==> [1].push(2);
+                    var _value = _data[obj.name];
+
+                    // 如果获取到的值已经是数组，直接push新值
+                    if($.type(_value) == 'array'){
+                        _value.push(obj.value);
+                        _data[obj.name] = _value;
+                    }else{
+                        // 否则就新建一个新的数组
+                        var _arr = [_value];
+                        _arr.push(obj.value);
+                        _data[obj.name] = _arr;
+                    }
+                }else{
+                    // 只有一个值得情况
+                    // 把data中的name和value分别取出，并放置到一个新的对象
+                    _data[obj.name] = obj.value;
+                }
+                
+                // _data.username = '你好';
+                // _data['username'] = '你好'
+            });
+            console.log(_data);
+            e.preventDefault();
+
+            // var data = {}
+            // data.username = '小明';
+            // data['username'] = '小明';
+
+            // data.sex = '女';
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <form id="myForm">
+        <p>
+            <label for="username">用户名</label>
+            <input type="text" id="username" name="username" placeholder="请输入用户名">
+        </p>
+        <p>
+            <label for="nickname">昵称</label>
+            <input type="text" id="nickname" name="nickname" placeholder="输入一个昵称">
+        </p>
+        <p>
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password">
+        </p>
+        <p>
+            <label for="passwordchecked">确认密码</label>
+            <input type="password" id="passwordchecked" name="passwordchecked">
+        </p>
+        <p>
+            <label for="sex">性别</label>
+            <select id="sex" name="sex">
+                <option value="male">男</option>
+                <option value="female">女</option>
+            </select>
+        </p>
+        <p>
+            <label for="hobby">爱好</label>
+            <label>
+                <input type="checkbox" value="1" name="hobby">旅游</label>
+            <label>
+                <input type="checkbox" value="2" name="hobby">睡觉</label>
+            <label>
+                <input type="checkbox" value="3" name="hobby">上网</label>
+                <label>
+                <input type="checkbox" value="4" name="hobby">看电影</label>
+        </p>
+        <p>
+            <label for="">是否已婚</label>
+            <label>
+                <input type="radio" value="1" name="married">是</label>
+            <label>
+                <input type="radio" value="0" name="married">否</label>
+        </p>
+        <div class="center">
+            <input type="hidden" value="注册表单">
+            <input type="button" value="返回" />
+            <button type="submit">提交</button>
+            <button type="reset">重置</button>
+        </div>
+    </form>
+    <div class="msg"></div>
+</body>
+
+</html>

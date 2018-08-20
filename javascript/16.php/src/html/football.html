@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分页获取数据</title>
+    <style>
+        body{padding:50px;}
+        ul{list-style: none;padding:0;margin:0;}/*reset*/
+        #datalist{border:1px solid #ddd;padding:15px;}
+        #datalist li{padding:15px 5px;border-bottom:1px dotted #ccc;}
+        #datalist li h4{margin:0;}
+        #page span{display:inline-block;margin:5px;width:40px;line-height:1.8;text-align: center;background-color:#dfdfdf;color:#666;}
+        #page span.active{background-color:#fc0;color:#fff;}
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded',function(){
+        /*
+            * 实现分页加载
+            * 实现滚动加载更多
+         */
+        var datalist = document.querySelector('#datalist');
+        var page = document.querySelector('#page');
+
+        var pageNo = 1;
+        var qty = 8; 
+        var status = [200,304];
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            if(status.includes(xhr.status)){
+                var res = JSON.parse(xhr.responseText);
+                console.log(res);
+                var ul = document.createElement('ul');
+                ul.innerHTML = res.data.map(item=>{
+                    return `<li>
+                        <h4>${item.name}</h4>
+                        <div class="content">${item.content}</div>
+                    </li>`
+                }).join('');
+                datalist.innerText = '';
+                datalist.appendChild(ul);
+                // 处理分页
+                page.innerText = '';
+                var pageQty = Math.ceil(res.total/res.qty);
+                for(var i=1;i<=pageQty;i++){
+                    var span = document.createElement('span');
+                    span.innerHTML = i;
+                    if(i===pageNo){
+                        span.className = 'active';
+                    }
+                    page.appendChild(span);
+                }
+            }
+        }
+        xhr.open('post','../api/football.php',true);
+        // post请求需要设置一个请求头
+        // setRequestHeader(key,val)
+        xhr.setRequestHeader('Content-Type',"application/x-www-form-urlencoded");
+        // post请求，数据写在send方法中
+        xhr.send(`pageNo=${pageNo}&qty=${qty}`);
+        // 点击分页切换
+        page.onclick = function(e){
+            if(e.target.tagName.toLowerCase()==='span'){
+                pageNo = e.target.innerText*1;
+                xhr.open('post','../api/football.php',true);
+                xhr.setRequestHeader('Content-Type',"application/x-www-form-urlencoded");
+                xhr.send(`pageNo=${pageNo}&qty=${qty}`);
+            }
+        }
+    });
+        
+    </script>
+</head>
+<body>
+    <div id="datalist"></div>
+    <div id="page"></div>
+</body>
+</html>

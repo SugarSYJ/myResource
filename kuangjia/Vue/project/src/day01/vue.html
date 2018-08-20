@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="div1"></div>
+        <div id="app1">
+            <h2 v-once>{{txt}}</h2>
+            <p v-html="html" v-if="show"></p>
+            <a v-bind:href="href">百度</a>
+            <a :href="href">百度</a>
+            <input type="button" value="login" @click="login"/>
+            <input type="text" v-model="txt"/>
+            <ul>
+                <li v-for="(value,key) in data">
+                    {{key}} - {{value}}
+                </li>
+            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th v-for="(value,key) in data[0]">{{key}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="(obj,index) in data">
+                        <td v-for="(value,key) in obj">{{value}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script>
+            var txt = "我是节点驱动的数据";
+            document.getElementById('div1').innerText = txt;
+            var vm = new Vue({
+                el:"#app1",
+                data:{
+                    txt:"我是节点驱动的数据",
+                    html:"<h1>HTML</h1>",
+                    href:"http://baidu.com",
+                    show:true,
+                    data:[{name:"Tom",age:22,gender:"男"},{name:"Tom",age:22,gender:"男"},{name:"Tom",age:22,gender:"男"}]
+                },
+                methods:{
+                    login:function(){}
+                }
+            })
+        </script>
+    </body>
+</html>

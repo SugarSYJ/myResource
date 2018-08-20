@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        .ball {
+            width: 30px;
+            height: 30px;
+            background-color: #00ff21;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+
+        //工厂模式
+        //制造者
+        //可扩展性高
+        function createBall(_width, _height, _x, _y, _background) {
+            //字面量模式
+            var ball = {
+                width: _width,
+                height: _height,
+                background: _background,
+                left: _x,
+                top: _y,
+                element: document.createElement('div')
+            };
+            ball.element.className = 'ball';
+            ball.element.style.left = ball.left + 'px';
+            ball.element.style.top = ball.top + 'px';
+            ball.element.style.width = ball.width + 'px';
+            ball.element.style.height = ball.height + 'px';
+            //ball.element.oncontextmenu = function (_e) {
+            //    _e = _e || window.event;
+            //    ball.remove();
+            //    _e.preventDefault();
+            //}
+
+            ball.startMove = function () {
+                if (ball.element.timer) {
+                    window.clearInterval(ball.element.timer);
+                }
+                var speed = 3;
+                ball.element.timer = window.setInterval(function () {
+                    var _left = ball.element.offsetLeft;
+                    _left += speed;
+                    if (_left >= window.innerWidth - ball.element.clientWidth || _left <= 0) {
+                        speed *= -1;
+                    }
+                    ball.element.style.left = _left + 'px';
+                }, 200);
+            };
+            ball.stopMove = function () {
+                if (ball.element.timer) {
+                    window.clearInterval(ball.element.timer);
+                }
+            };
+            ball.remove = function () {
+                document.body.removeChild(ball.element);
+            };
+            return ball;
+        }
+
+        //使用者
+        var balls = [];
+        document.onclick = function (event) {
+            var ball = createBall(40, 40, event.clientX, event.clientY, '#00ff21');
+            balls.push(ball);
+            var self = event.target;
+            if (self.className == 'ball') {
+                for (var i = 0; i < balls.length; i++) {
+                    //判断 html 元素是否同一个元素（是否相等）
+                    if (balls[i].element == self) {
+                        balls[i].stopMove();
+                    }
+                }
+            } else {
+                document.body.appendChild(ball.element);
+                ball.startMove();
+            }
+            //基于 object 对象
+            //var ball = new Object();
+            //ball.width = 30;
+            //ball.height = 30;
+            //ball.background = '#00ff21';
+            //ball.left = event.clientX;
+            //ball.top = event.clientY;
+            //ball.element = document.createElement('div');
+            //ball.element.className = 'ball';
+            //ball.element.style.left = ball.left + 'px';
+            //ball.element.style.top = ball.top + 'px';
+            //ball.element.style.width = ball.width + 'px';
+            //ball.element.style.height = ball.height + 'px';
+            //document.body.appendChild(ball.element);
+        }
+
+        document.oncontextmenu = function () {
+
+        }
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+
+</body>
+</html>

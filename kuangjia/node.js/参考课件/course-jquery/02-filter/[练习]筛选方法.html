@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSS选择器</title>
+	<style>
+	.data-list{border:1px solid #ddd;width:80%;border-collapse:collapse;}
+	.data-list td{border:1px solid #ddd;padding:5px;}
+	.active{background-color:#f90;color:#fff;}
+	.content{padding:15px;background-color:#efefef;border:1px solid #ddd;}
+	#btnShow{display:inline-block;padding:5px 15px;color:#fff;text-decoration:none;border:1px solid #f60;background-color:#f60;}
+
+	.red{background-color:red;}
+	.green{background-color:green;}
+	.blue{background-color:blue;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+	$(function(){
+		//hasClass用于条件判断，判断当前元素是否包含某一class 
+		$('.data-list td').each(function(){
+			if($(this).hasClass('green')){
+				console.log($(this).text());
+			}
+		});
+
+		// :not 去除所有与给定选择器匹配的元素
+		// not() 删除与指定表达式匹配的元素
+		$('td:not(.green,.red,.blue)').css('font-size',30);
+
+		console.log($('td').not(function(index){
+			// if(index % 3 == 0){
+			// 	$(this).addClass('green');
+			// }
+			return index % 3 == 0
+		}).length);
+
+		// 输出选中的爱好
+		// map() 将一组元素转换成其他数组
+		// not() 删除与指定表达式匹配的元素
+		// filter 筛选出与指定表达式匹配的元素集合
+		$('.btnShow').click(function(){
+			var checkebox = $('.options :checkbox');
+
+			// not筛选出选中的选项
+			// var checked = checkebox.not(function(){
+			// 	return !this.checked;
+			// });
+			// var checked = checkebox.filter(function(){
+			// 	return this.checked
+			// });
+			var checked = checkebox.filter(':checked');
+
+			// map方法返回新的数组，数组包含checkbox的值
+			var checkedVal = checked.map(function(){
+				return this.value;
+			});
+			console.log(Array.prototype.slice.call(checkedVal).join());
+		});
+	});
+	</script>
+</head>
+<body>
+	<!-- 隔行换色 -->
+	<input type="text"><button class="btnSearch">搜索</button>
+	<table class="data-list">
+		<tr>
+			<td>徐志摩</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>毛泽东</td>
+			<td>02</td>
+			<td>03</td>
+			<td class="msg red">04</td>
+		</tr>
+		<tr>
+			<td>奥巴马</td>
+			<td>02</td>
+			<td class="green abc">03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>孔子</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>周恩来</td>
+			<td>02</td>
+			<td class="blue">03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>习大大</td>
+			<td>02</td>
+			<td class="blue">03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td class="green css3">岳飞</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>孙悟空</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>孙中山</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>老子</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+	</table>
+
+	<div class="options">
+		<input type="checkbox" value="爬山">爬山
+		<input type="checkbox" value="数钱">数钱
+		<input type="checkbox" value="花钱">花钱
+		<input type="checkbox" value="游戏">游戏
+		<button class="btnShow">显示选中的爱好</button>
+	</div>
+	<div class="options">
+		<form>
+			<input type="text">
+		</form>
+	</div>
+</body>
+</html>

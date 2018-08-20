@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>for循环</title>
+	<style>
+	.sum{font-weight:bold;color:#f00;}
+	</style>
+	<script>
+		/*
+			for循环
+		 */
+		for(var num = 10;num>0;num--){
+			document.write(num + '<br>');
+		}
+		/*
+			[案例]输出100以内所有7的倍数
+		 */
+		document.write('<br><br>100之内7的倍数为：');
+		for(var i=1;i<=100;i++){
+			if(i%7 == 0){
+				document.write(i + ',');
+			}
+		}
+
+		/*
+			[案例] 打印100–200之间所有能被3或者7整除的数
+		 */
+		document.write('<br><br>100–200之间所有能被3或者7整除的数：');
+		 for(var i=200;i>=100;i--){
+		 	if(i%3==0 || i%7==0){
+		 		document.write(i + ',');
+		 	}
+		 }
+
+		/*
+			[案例]输出1-100内所有的偶数以及偶数的和
+		 */
+		document.write('<br><br>1-100内所有的偶数：');
+		var sum = 0;
+		for(var i=1;i<=100;i++){
+			// i对2求余，如果为0，则是偶数
+			if(i%2==0){
+				document.write(i + ',');
+				sum += i;
+			}
+		}
+		document.write('<br>1-100内所有的偶数的和：'+sum);
+
+		// 更简单的方法
+		document.write('<br><br>1-100内所有的偶数：');
+		var sum = 0;
+		for(var i=2;i<=100;i+=2){
+			document.write(i + ',');
+			sum += i;
+		}
+		document.write('<br>1-100内所有的偶数的和：'+sum);
+
+
+		/*
+			[练习]计算1-100内所有奇数的和
+		 */
+		var sum = 0;
+		for(var i=1;i<=100;i+=2){
+			sum += i;
+		}
+		document.write('<br><br>1-100内所有的奇数的和：<span class="sum">'+sum + '</span>');
+
+		/*
+			[练习]打印出1900-2016年中所有的闰年,输出每4个一行
+		 */
+		document.write('<br><br>打印出1900-2016年中所有的闰年：<br>');
+
+		// 创建一个全局变量
+		var n = 0;
+		for(var i=1900;i<=2016;i++){
+			// 闰年的判断条件
+			if(i%4==0 && i%100 !=0 || i%400 == 0){
+				document.write(i + ', ');
+
+				// 没得到一个闰年就自增1
+				n++;
+
+				// 得到的闰年数量是否为4的倍数
+				if(n%4 == 0){
+					document.write('<br>');
+				}
+			}
+		}
+
+
+
+		document.write('<br><br>打印1到10：');
+		var i=1;
+		var j=0;
+
+		// 一次声明多个变量：
+		var a=1,b=2,c=3;
+		for(var i=0,j=0;i<=10;i++){
+			document.write(i + ', ');
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

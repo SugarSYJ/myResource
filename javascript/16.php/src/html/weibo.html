@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>微博信息</title>
+    <style>
+        .datalist{margin:0 auto;line-height:2;}
+        .datalist li{position:relative;border-bottom:1px dotted #ddd;padding-right:100px;}
+        .datalist li span{position:absolute;right:0;top:0;margin:0 5px;padding:2px 5px 2px 20px;background:skyblue url(icon/com.svg) no-repeat 5px center;background-size:20px;border-radius: 5px;width:30px;text-align:center;color:#fff;}
+        .datalist li span.like{right:70px;background-image:url(icon/zan.svg);background-color:orange;}
+
+    </style>
+    <script>
+        /*
+            200（OK）：服务器成功返回了页面
+            304（Not Modified）：数据与服务器相同，不需要重服务器请求（直接使用缓存的数据）
+            400（Bad Request）：语法错误导致服务器不识别
+            401（Unauthorized）：请求需要用户认证
+            404（Not found）：请求地址不存在
+            500（Internal Server Error）：服务器出错或无响应
+            503（ServiceUnavailable）：由于服务器过载或维护导致无法完成请求
+         */
+        document.addEventListener('DOMContentLoaded',()=>{
+            var datalist = document.querySelector('.datalist');
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)){
+                    var data = JSON.parse(xhr.responseText);
+                    console.log(data);
+                    // 根据数据生成界面
+                    var ul = document.createElement('ul');
+                    ul.innerHTML = data.map(item=>{
+                        return `
+                            <li data-id="${item.id}">
+                                <h4>${item.username}</h4>
+                                <div class="content">${item.content}</div>
+                                <span class="like">${item.likecnt}</span>
+                                <span class="com">${item.comtcnt}</span>
+                            </li>
+                        `
+                    }).join('');
+                    datalist.appendChild(ul);
+                }
+            }
+            xhr.open('get','http://localhost:18/api/data/weibo.json',true);
+            xhr.send();
+
+            datalist.onclick = function(e){
+                if(e.target.className=='like'){
+                    var id = e.target.parentNode.dataset.id;
+                    var xhr_zan = new XMLHttpRequest();
+                    xhr_zan.onreadystatechange = function(){
+                        if(xhr_zan.readyState === 4 && (xhr_zan.status === 200 || xhr_zan.status=== 304)){
+                            var data = JSON.parse(xhr_zan.responseText);
+                            e.target.innerHTML = data.likecnt;
+                        }
+                    }
+                    xhr_zan.open('get','http://localhost:18/api/weibo.php?id='+id,true);
+                    xhr_zan.send();
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>xx明星微博信息</h1>
+    <div class="datalist">
+        
+    </div>
+</body>
+</html>

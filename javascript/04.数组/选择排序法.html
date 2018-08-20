@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>选择排序法</h3>
+        <script type="text/javascript">
+            var arr = [10,15,2,32,5,4,20,8,48,54,6];
+            var res = [];
+            for(var i=0;i<arr.length;i++){
+                for(var j=i+1;j<arr.length;j++){
+                    if(arr[i]>arr[j]){
+                        res = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = res;
+                    }
+                }
+            }
+            document.write(arr);
+        </script>
+    </body>
+</html>

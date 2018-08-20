@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>判断用户名是否已被注册</title>
+	<style>
+		.error{color:#f00;border-color:#f00;}
+	</style>
+	<script src="js/common.js"></script>
+	<script>
+		window.onload = function(){
+			var username = document.getElementById('username');
+			var btn = document.getElementById('send');
+
+			// 点击按钮时请求服务器，判断当前用户名是否被占用
+			username.onblur = function(){
+				var name = username.value;
+
+				// 建立xhr请求
+				/*var req = new XMLHttpRequest();
+
+				req.onreadystatechange = function(){
+					if(req.readyState == 4){
+						if(req.responseText == 'yes'){
+							var p = document.createElement('p');
+							p.className = 'error';
+							p.innerHTML = '这个用户名已经被占用';
+
+							document.body.appendChild(p);
+
+							username.className = 'error';
+						}else{
+							username.className = '';
+
+							var error = document.getElementsByTagName('p')[0];
+							if(error) document.body.removeChild(error);
+						}
+					}
+				}
+
+				//建立与服务器的链接
+				// req.open('get','http://localhost:8080/ajax/checkname?regname='+name,true);
+				req.open('get','http://localhost:3000/check?username='+name,true);
+
+				// 发送请求
+				req.send(null);*/
+				ajax({
+					url:'http://localhost:3000/ajax/check?username='+name,
+					success:function(data){
+						console.log(data)
+					}
+				});
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="username">
+	<button id="send">请求数据</button>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set集合</title>
+    <script>
+        /*
+            Set集合:类似于数组，但是成员的值都是唯一的，可自动去重(恒等的数据才会被去重)。
+                * 创建：构造函数new Set()
+                * 方法
+                    * add(value)：添加某个值，返回Set结构本身。
+                    * delete(value)：删除某个值，返回一个布尔值，表示删除是否成功。
+                    * has(value)：返回一个布尔值，表示Set集合中是否存在该值。
+                    * clear()：清除所有成员，没有返回值。
+         */
+        
+        let imgs = new Set();
+        imgs.add(10);
+        imgs.add(20);
+        imgs.add(30);
+        imgs.add(40);
+        imgs.add('10');
+        console.log(imgs);
+        var arr = [30,10,20,30,20,10,23,23,30,40,50,10];
+        var nArr = new Set(arr);
+        console.log(nArr);
+        // 遍历set集合
+        var res = [];
+        for(let val of nArr){
+            console.log(val);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

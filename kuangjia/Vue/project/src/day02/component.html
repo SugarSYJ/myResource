@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <component1></component1>
+
+            <component2></component2>
+            <h1>vm-{{count}}</h1>
+            <input type="button" value="Increment" @click="increment"/>
+
+            <component3></component3>
+
+            <select>
+                <option value="男">男</option>
+                <option is="component4"></option>
+            </select>
+            <input type="button" :value="color == 'red' ? 'green' : 'red'" @click="color = color == 'red' ? 'green' : 'red'"/>
+            <p :is="color"></p>
+            <p is="red"></p>
+
+            <component5 title="我是组件5" :txt="color"></component5>
+        </div>
+        <script>
+            Vue.component("component1",{
+                template:"<h1>Component1</h1>"
+            });
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    count:0,
+                    color:"red"
+                },
+                methods:{
+                    increment:function(){
+                        this.count += 1;
+                    }
+                },
+                components:{
+                    'component2':{
+                        template:'<h1>Component2</h1>'
+                    },
+                    'component3':{
+                        template:'<div><h1>component3-{{count}}</h1><input type="button" value="Component3-Increment" @click="increment" /></div>',
+                        data:function(){
+                            return {
+                                count:0
+                            }
+                        },
+                        methods:{
+                            increment:function(){
+                                this.count += 1;
+                            }
+                        }
+                    },
+                    'component4':{
+                        template:'<option value="女">女</option>'
+                    },
+                    'red':{
+                        template:'<h1>Red</h1>'
+                    },
+                    'green':{
+                        template:'<h1>Green</h1>'
+                    },
+                    'component5':{
+                        template:'<h1>Component-{{title}}-{{txt}}</h1>',
+                        props:['title','txt']
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>

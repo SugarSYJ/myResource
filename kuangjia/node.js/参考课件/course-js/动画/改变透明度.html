@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动画实现渐现效果</title>
+	<style>
+	#box{width:100px;height:100px;background-color: #f00;opacity:0.5;}
+	</style>
+	<script>
+		/*
+			思路：
+				1）绑定onmouseover
+					把透明度改成1（动画效果，定时器）
+				2)绑定onmouseout
+					把透明度改成0.5（动画效果，定时器）
+		 */
+		window.onload = function(){
+			var box = document.getElementById('box');
+
+			box.onmouseover = function(){
+				// 当前透明度
+				var currentOpacity = 1*getComputedStyle(box).opacity;
+
+				// 目标透明度
+				var endOpacity = 1;
+
+				if(this.timer){
+					clearInterval(this.timer);
+					// this.timer = undefined;
+					delete this.timer
+				}
+
+				this.timer = setInterval(function(){
+					currentOpacity += 0.1;
+
+					if(currentOpacity >= endOpacity){
+						clearInterval(box.timer);
+						currentOpacity = endOpacity;
+					}
+
+					console.log(currentOpacity)
+
+					// 写入透明度
+					box.style.opacity = currentOpacity;
+				},50);
+			}
+
+			// 鼠标移开时，透明度改为0.5
+			box.onmouseout = function(){
+				// 获取当前透明度
+				var currentOpacity = 1*getComputedStyle(box).opacity;
+
+				var endOpacity = 0.5;
+
+				if(this.timer){
+					clearInterval(this.timer);
+					// this.timer = undefined;
+					delete this.timer
+				}
+				this.timer = setInterval(function(){
+					currentOpacity -= 0.1;
+
+					if(currentOpacity <= endOpacity){
+						clearInterval(box.timer);
+						currentOpacity = endOpacity;
+					}
+
+					// 写入透明度
+					box.style.opacity = currentOpacity;
+				},50);
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

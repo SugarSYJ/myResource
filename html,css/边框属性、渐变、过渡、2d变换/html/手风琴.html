@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .box{
+                width: 200px;
+                height: 160px;
+                background:skyblue;
+                margin: 100px auto;
+            }
+            .box .box0{
+                height: 40px;
+                color:pink;
+                font-size:20px;
+                line-height: 40px;
+                text-align:center;
+                position:relative;
+            }
+            .box .t1{
+                height: 160px;
+                background: yellow;
+                position:absolute;
+                left:0;
+                top:-160px;
+                display:none;
+                transition:transform 3s;
+            }
+            .box .t1 div{
+                width: 200px;
+                height: 40px;
+                line-height: 40px;
+                text-align:center;     
+            }
+            .box .box0:hover .t1{
+                display:block;
+                background: yellow;
+                left:0;
+                top:40px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="box0">
+                市内新闻
+                <div class="t1">
+                    <div>猪肉档被抢了</div>
+                    <div>猪肉档被抢了</div>
+                    <div>猪肉档被抢了</div>
+                    <div>猪肉档被抢了</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>七天免登陆</title>
+    <style>
+        .welcome{display: none;}
+    </style>
+    <script>
+        window.onload = function(){
+            var form = document.getElementsByClassName('form')[0];
+            var username = document.getElementById('username');
+            var password = document.getElementById('password');
+            var mdl = document.getElementById('mdl');
+            var btn = document.getElementById('btn');
+            var currentName = document.getElementById('currentName');
+            var welcome = document.getElementsByClassName('welcome')[0];
+            btn.onclick = function(){
+                var _username = username.value;
+                var _password = password.value;
+                form.style.display = 'none';
+                welcome.style.display = 'block';
+                currentName.innerText = _username;
+                if(mdl.checked){
+                    var now = new Date();
+                    now.setDate(now.getDate()+7);
+                    document.cookie = 'username=' + _username + ';expires=' + now.toUTCString();
+                    document.cookie = 'password=' + _password + ';expires=' + now.toUTCString();
+                }
+                
+            }
+            var cookies = document.cookie;
+            if(cookies.length){
+                cookies = cookies.split('; ');
+                cookies.forEach(function(item){
+                    var arr = item.split('=');
+                    if(arr[0]==='username'){
+                        currentName.innerText = arr[1];
+                        form.style.display = 'none';
+                        welcome.style.display = 'block';
+                    }   
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>七天免登陆</h1>
+    <div class="form">
+        <label for="username">用户名</label>
+        <input type="text" id="username" name="username">
+        <label for="password">密码</label>
+        <input type="password" id="password" name="password">
+        <input type="checkbox" id="mdl">七天免登陆
+        <button id="btn">登录</button>
+    </div>
+    <div class="welcome">
+        <p>hello,<span id="currentName"></span>，欢迎来约</p>
+        <img src="img/g4.jpg">
+    </div>
+</body>
+</html>

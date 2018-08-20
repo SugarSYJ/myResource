@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>搜索高亮</title>
+	<style>
+	.data-list{border:1px solid #ddd;width:80%;border-collapse:collapse;}
+	.data-list td{border:1px solid #ddd;padding:5px;}
+	.active{background-color:#f90;color:#fff;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+	$(function(){
+		// 点击高亮显示
+		$('.data-list tr').click(function(){
+			// $('.data-list tr').css({
+			// 	'background':'#fff',
+			// 	'color':'#000'
+			// 	});
+			// $(this).css({
+			// 	'background':'#f90',
+			// 	'color':'#fff'
+			// 	});
+			// 	
+			// 	优化方案
+			// 	siblings表示当前元素的兄弟元素
+			$(this).addClass('active').siblings().removeClass('active');
+
+		});
+
+		// 搜索高亮
+		// 如果调用siblings的jquery对象不是唯一，对象之前的操作会相互抵消
+		$('.btnSearch').click(function(){
+		    var value = $('.btnSearch').prev().val();
+		    //removeClass('className') => removeClass()
+			$('.data-list tr').removeClass();
+			$('.data-list tr:contains('+value+')').addClass('active');
+			// console.log($('.data-list tr:contains('+value+')').addClass('active'))
+		});
+	});
+	</script>
+</head>
+<body>
+    <div class="content"></div>
+	<!-- 隔行换色 -->
+	<input type="text"><button class="btnSearch">搜索</button>
+	<table class="data-list">
+		<tr>
+			<td>徐志摩</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>毛泽东</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>奥巴马</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>孔子</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>周恩来</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>习大大</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>岳飞</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>孙悟空</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>孙中山</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+		<tr>
+			<td>老子</td>
+			<td>02</td>
+			<td>03</td>
+			<td>04</td>
+		</tr>
+	</table>
+</body>
+</html>

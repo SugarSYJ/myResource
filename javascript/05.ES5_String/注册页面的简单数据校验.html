@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            .box{margin: 0 auto;text-align:center;}
+        </style>
+    </head>
+    <body>
+        <h3>
+            注册页面的简单数据校验，并在页面上显示输入的内容
+
+            用户名只能包含数字、字母和下划线，数字不可以开头，长度不低于6，不高于20
+            密码必须一致
+            输入框中要有默认提示
+            昵称一栏要将敏感词或特殊符号自动过滤，删除不文明用语
+            所有输入框不能为空，并数据合法，点击提交才可以正确提交表单数据
+        </h3>
+        <div class="box">
+            用户名：<input type="text" id="Yname" placeholder="请输入用户名"/><br/>
+            昵称：<input type="text" id="Nname" placeholder="请输入昵称"/><br/>
+            密码：<input type="password" id="MM" placeholder="请输入密码"/><br/>
+            再输入密码：<input type="password" id="mm" placeholder="请再输入密码"/><br/>
+            <button id="btn">提交</button>
+        </div>
+        <script type="text/javascript">
+            var Yname = document.getElementById('Yname');
+            var Nname = document.getElementById('Nname');
+            var MM = document.getElementById('MM');
+            var mm = document.getElementById('mm');
+            var btn = document.getElementById('btn');
+            var str = '0123456789abcdefghijklnmopqrstuvwsyz_';
+            var arr = ['你妹','妈蛋','fuck','傻逼','金三胖'];
+            btn.onclick = function(){
+                render();
+            };
+            function render(){
+                var _Yname = Yname.value;
+                var _Nname = Nname.value;
+                var _MM = MM.value;
+                var _mm = mm.value;
+                arr.forEach(function(item){
+                    _Nname = _Nname.replace(item,'');
+                });
+                if(_Yname===''){
+                    alert('用户名不能为空');
+                }else if(_Yname!=str.charAt()){
+                    alert('用户名只能包含数字、字母和下划线');
+                }else if(_Nname===''){
+                    alert('昵称不能为空');
+                }else if(_MM===''){
+                    alert('密码不能为空');
+                }else if(_mm===''){
+                    alert('请再输入密码');
+                }else if(_MM!=_mm){
+                    alert('两次输入密码不一致');
+                }else{
+                    alert('提交成功！');
+                }
+            }
+        </script>
+    </body>
+</html>

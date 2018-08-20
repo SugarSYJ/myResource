@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>封装一个函数，计算所有传入参数的和</h3>
+        <script type="text/javascript">
+            function sum(){
+                var res = 0;
+                for(var i=0;i<arguments.length;i++){
+                    res += arguments[i];
+                }
+                return res;
+                console.log(res);
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册验证</title>
+    <style>
+        .success{color:#58bc58;}
+        .error{color:#f00;}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var username = document.getElementById('username');
+            var password = document.getElementById('password');
+            var btn = document.getElementById('btn');
+            username.onblur = function(){
+                var _username = username.value;
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = ()=>{
+                    if(xhr.readyState === 4){
+                        var p = username.nextElementSibling;
+                        if(!p){
+                            p = document.createElement('p');
+                        }
+                        if(xhr.responseText === 'yes'){
+                            p.className = 'success';
+                            p.innerText = '恭喜你，成功绿了';
+                        }else{
+                            p.className = 'error';
+                            p.innerText = '很遗憾，我红了';
+                        }
+                        username.parentNode.appendChild(p);
+                    }
+                }
+                xhr.open('get',`http://localhost:18/api/reg.php?username=${_username}`,true);
+                xhr.send();
+            }
+        })
+    </script>
+</head>
+<body>
+    <h1>注册</h1>
+    <div class="form">
+        <div class="form-group">
+            <label for="username">用户名：</label>
+            <input type="text" id="username" name="username">
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password">
+        </div>
+        <button id="btn">注册</button>
+    </div>
+</body>
+</html>

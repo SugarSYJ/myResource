@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            #box{position:absolute;top:0;left:0;width:200px;height:200px;background-color:#58bc58;}
+            #box img{width:200px;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                box.onmousedown = function(e){
+                    var ox = e.offsetX;
+                    var oy = e.offsetY;
+                    document.onmousemove = function(eve){
+                        box.style.left = eve.clientX - ox + 'px';
+                        box.style.top = eve.clientY - oy + 'px';
+                        eve.preventDefault();
+                    }
+                    e.preventDefault();
+                }
+                document.onmouseup = function(){
+                    document.onmousemove = null;
+                    var left = box.offsetLeft;
+                    var top = box.offsetTop;
+                    document.cookie = 'left=' + left;
+                    document.cookie = 'top=' + top;
+                }
+                var cookie = document.cookie;
+                cookie = cookie.split('; ');
+                cookie.forEach(function(item){
+                    var arr = item.split('=');
+                    if(arr[0]==='left'){
+                        box.style.left = arr[1] + 'px';
+                    }else if(arr[0]==='top'){
+                        box.style.top = arr[1] + 'px';
+                    }
+                })
+                box.style.left = cookie[1] + 'px';
+                // box.style.top = cookie[1] + 'px';
+            }
+        </script>
+    </head>
+    <body>
+        <div id="box"><img src="img/g5.jpg" /></div>
+    </body>
+</html>

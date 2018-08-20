@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dom操作</title>
+    <style>
+        #menu .content{display:none;padding:20px;background:#ff9;border:1px solid #c00;}
+    </style>
+    <script src="../assets/jquery.js"></script>
+    <script>
+    $(function() {
+        // var test = $('#test');
+        var test = document.getElementById('test')
+        test.children[1];
+        var prev = document.getElementById('div2').previousSibling;
+        console.log(prev);
+
+        // jquery取元素节点
+        $('#div2').prev(); //
+        $('#div2').parent().find('span')
+
+        // 取父级元素
+        $('#menu').parent().css({
+            'border':'1px solid #ddd',
+            'padding':20,
+            'font-size':16
+        });
+        $('.dream').parents('#menu');
+        $('.dream').parents('.sleep.header');
+        $('.dream').closest('.header');//取到与当前元素最近的.header
+        $('.content.header').closest('.header');
+
+        // 取子元素
+        $('#menu').find(document.getElementsByClassName('sleep'));
+
+        // 取兄弟元素
+        console.log('siblings: ',$('#homework').siblings());
+        console.log('prevAll: ',$('#homework').prevAll());
+        console.log('nextAll: ',$('#homework').nextAll());
+
+        // show,hide： 改变的是元素的width,height,opacity
+        $('#menu li').mouseover(function(){
+            // $(this).find('.content').show();
+            // $(this).siblings().find('.content').hide();
+            
+            $(this).find('.content').slideDown().parent().siblings().find('.content').slideUp();
+        });
+
+        // 添加文字
+        // $('.header h1').html($('.header h1').html() + '，基本上都是：');
+        // 
+        // 内部添加
+        // append在元素内最后面追加内容（后置）
+        // prepend向元素内部增加内容（前置）
+        $('.header h1').append('<small>，基本上都是：</small>');
+
+        $('body').append('<h2>副标题</h2>');
+        $('body').prepend('<h1>主标题</h1>');
+    });
+    </script>
+</head>
+
+<body>
+    <div id="test">
+        <span>span1</span>
+        <div>1</div>
+        <div id="div2">2</div>
+        <div>3</div>
+    </div>
+
+    <div class="header">
+        <h1>我在千锋的日子</h1>
+        <ul id="menu">
+            <li>
+                <h4>上课</h4>
+                <div class="content">上课的时候我总是想着什么时候能吃饭</div>
+            </li>
+            <li id="homework">
+                <h4>写作业</h4>
+                <div class="content">写作业时我的思绪异常的凌乱</div>
+            </li>
+            <li>
+                <h4>复习</h4>
+                <div class="content">复习的时候我总是爱看天花板</div>
+            </li>
+            <li>
+                <h4>自习</h4>
+                <div class="content">自习的时候我总是暗暗自喜</div>
+            </li>
+            <li class="sleep header">
+                <h4>睡觉</h4>
+                <div class="content header">
+                    <div>
+                        <strong class="dream">做梦</strong> 睡着的时候我还想着你------我的代码
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>

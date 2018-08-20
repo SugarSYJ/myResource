@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>延迟执行</title>
+	<style>
+	#box{display:none;margin:10px 0;padding:10px;border:1px solid #ddd;font-size:30px;}
+	img{width:600px;}
+	</style>
+	<script>
+		/*
+			轮播图;
+			思路：
+				1）获取页面元素
+				2）每隔2s改变src属性
+		 */
+		window.onload = function(){
+			// 1）获取页面元素
+			var img = document.getElementsByTagName('img')[0];
+
+			// 2）每隔2s改变src属性
+			var i=1;
+			var timer = setInterval(showImg,2000);
+
+			img.onmouseover = function(){
+				clearInterval(timer)
+			}
+
+			img.onmouseout = function(){
+				timer = setInterval(showImg,2000);
+			}
+
+			// 显示图片函数
+			function showImg(){
+				i++;
+				if(i>6){
+					i=1;
+				}
+				img.src = 'images/'+i + '.jpg';
+			}
+		}
+	</script>
+</head>
+<body>
+	<img src="images/1.jpg">
+</body>
+</html>

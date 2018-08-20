@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>02节点类型</h1>
+        <div id="list">
+            <a href="#">google</a>
+            <a href="#" id="baidu">百度</a>
+            <a href="#">Yahoo</a>
+        </div>
+        <div class="box">.box</div>
+        <label for="hobby">爱好</label>
+        <input type="checkbox" name="hobby">
+        <input type="checkbox" name="hobby">
+        <input type="checkbox" name="hobby">
+        <input type="checkbox" name="hobby">
+        <script type="text/javascript">
+            window.onload = function(){
+                var list = document.getElementById('list');
+                console.log(list.nodeType);
+                var h1 = document.getElementsByTagName('h1');
+                console.log(h1);
+                var h2 = document.getElementsByTagName('h2');
+                console.log(h2);
+                var box = document.getElementsByClassName('box');
+                console.log(box);
+                var hobby = document.getElementsByName('hobby');
+                console.log(hobby);
+                var links = list.getElementsByTagName('a');
+                console.log(links);
+            }
+        </script>
+    </body>
+</html>

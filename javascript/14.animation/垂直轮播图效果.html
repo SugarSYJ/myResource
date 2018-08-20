@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            ul{list-style: none;padding:0;margin:0;}
+            .banner{position:relative;width:810px;height:320px;margin:0 auto;border:2px solid #f00;overflow: hidden;}
+            .banner ul{position:absolute;top:0;left:0;}
+            .banner img{display: block;}
+            .banner .next,.banner .prev{position:absolute;left:0;top:50%;transform: translate(0,-50%);padding:10px 5px;width:30px;height:50px;line-height:50px;background-color: rgba(0,0,0,.3);text-align:center;color:#fff;}
+            .banner .next{left:auto;right:0;}
+            .page{position: absolute;right:15px;bottom:15px;}
+            .page span{display:inline-block;margin:0 5px;width:30px;height:30px;line-height:30px;text-align:center;background-color:#efefef;border-radius:50%;}
+            .page span.active{background-color:#f60;color:#fff;}
+        </style>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                let banner = document.querySelector('.banner');
+                let ul = banner.firstElementChild;
+                // 图片的数量
+                let length = ul.children.length;
+                // 切换图片定时器
+                let timer;
+                // 图片的高度
+                let imgHeight = 320;
+                // 初始索引值（默认显示第一张图片）
+                let index = 0;
+                // 动画定时器
+                let animationTimer;
+                // 添加前后按钮
+                let btnNext = document.createElement('span');
+                btnNext.className = 'next';
+                btnNext.innerHTML = '&gt;';
+                let btnPrev = document.createElement('span');
+                btnPrev.className = 'prev';
+                btnPrev.innerHTML = '&lt;';
+                banner.appendChild(btnNext);
+                banner.appendChild(btnPrev);
+                // 添加页码
+                let page = document.createElement('div');
+                page.className = 'page';
+                for(let i=0;i<length;i++){
+                    var span = document.createElement('span');
+                    span.innerText = i+1;
+                    // 给当前页码添加高连
+                    if(i===index){
+                        span.className = 'active';
+                    }
+                    page.appendChild(span);
+                }
+                banner.appendChild(page);
+                // 初始化
+                showImg();
+                banner.onclick = e=>{
+                    e = e || window.event;
+                    let target = e.target || e.srcElement;
+                    // 前后按钮
+                    if(target.className.toLowerCase()==='prev'){
+                        index--;
+                        showImg();
+                    }
+                    if(target.className.toLowerCase()==='next'){
+                        index++;
+                        showImg();
+                    }
+                    // 点击页码
+                    if(target.parentNode.className.toLowerCase()==='page'){
+                        index = target.innerText - 1;
+                        showImg();
+                    }
+                }
+                // 图片切换
+                timer = setInterval(autoPlay,2000);
+                // 鼠标移入移出
+                banner.onmouseenter = ()=>{
+                    clearInterval(timer);
+                }
+                banner.onmouseleave = ()=>{
+                    timer = setInterval(autoPlay,2000);
+                }
+                // 定时器函数
+                function autoPlay(){
+                    index++;
+                    showImg();
+                }
+                // 动画函数
+                function showImg(){
+                    if(index>=length){
+                        index = 0;
+                    }else if(index<0){
+                        index = length - 1;
+                    }
+                    // 目标值
+                    let target = -imgHeight * index;
+                    // 清除之前的定时器
+                    clearInterval(animationTimer);
+                    animationTimer = setInterval(()=>{
+                        // 获取当前top值
+                        let current = ul.offsetTop;
+                        let speed = (target - current)/10;
+                        speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                        current += speed;
+                        if(current===target){
+                            clearInterval(animationTimer);
+                            current = target;
+                        }
+                        ul.style.top = current + 'px';
+                    },30);
+                    // 高亮页码
+                    // 先清除所有高亮，再给当前添加高亮
+                    for(let i=0;i<length;i++){
+                        page.children[i].className = '';
+                    }
+                    page.children[index].className = 'active';
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <div class="banner">
+            <ul>
+                <li><img src="img/001.jpg"></li>
+                <li><img src="img/002.jpg"></li>
+                <li><img src="img/003.jpg"></li>
+                <li><img src="img/004.jpg"></li>
+            </ul>
+        </div>
+    </body>
+</html>

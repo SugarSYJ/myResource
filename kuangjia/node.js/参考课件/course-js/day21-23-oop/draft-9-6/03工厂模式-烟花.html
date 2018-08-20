@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        *{margin: 0; padding: 0;}
+        body{background-color:#000; overflow: hidden;}
+        .fire{background-color:#ff0000; width: 10px; height: 30px; position: absolute; border-radius: 50%;}
+        .flower{position: absolute; border-radius: 50%; background-color: #00ff21; width: 10px; height: 10px;}
+    </style>
+
+    <script type="text/javascript">
+        var fire = function () {
+            var obj = new Object();
+            //定义一个产生烟花的实现方法
+            obj.generateFire = function (x, y) {
+                this.fire = document.createElement('div');
+                this.fire.className = 'fire';
+                this.fire.style.left = x + 'px';
+                this.fire.style.top = document.documentElement.clientHeight - this.fire.clientHeight + 'px';
+                document.body.appendChild(this.fire);
+
+                //烟花从下往上运动
+                this.fire.fireTimer = window.setInterval(function () {
+                    var top = obj.fire.offsetTop;
+                    var speed = Math.ceil(top / 8);
+                    top -= speed;
+                    if (top <= y) {
+                        top = y;
+                        window.clearInterval(obj.fire.fireTimer);
+                        document.body.removeChild(obj.fire);
+                        obj.bomb(x, y);
+                    }
+                    obj.fire.style.top = top + 'px';
+                }, 50);
+            }
+
+            //产生爆炸效果
+            obj.bomb = function (x, y) {
+                //烟花集
+                var flowers = [];
+                //先产生烟花
+                for (var i = 0; i < 50; i++) {
+                    var flower = document.createElement('div');
+                    flower.className = 'flower';
+                    flower.style.left = x + 'px';
+                    flower.style.top = y + 'px';
+                    flower.speedX = Math.random() * 40 - 20;
+                    flower.speedY = Math.random() * 40 - 20;
+                    document.body.appendChild(flower);
+                    flowers.push(flower);
+                }
+
+                //爆炸效果
+                var bombTimer = window.setInterval(function () {
+                    for (var i = 0; i < flowers.length; i++) {
+                        var left = flowers[i].offsetLeft;
+                        var top = flowers[i].offsetTop;
+                        left += flowers[i].speedX;
+                        top += flowers[i].speedY;
+                        flowers[i].speedY += 1;
+                        if (top <= 0 || top >= document.documentElement.clientHeight || left <= 0 || left >= document.documentElement.clientWidth) {
+                            document.body.removeChild(flowers[i]);
+                            flowers.splice(i, 1);
+                        } else {
+                            flowers[i].style.left = left + 'px';
+                            flowers[i].style.top = top + 'px';
+                        }
+                        if (flowers.length <= 0) {
+                            window.clearInterval(bombTimer);
+                        }
+                    }
+                }, 30);
+            }
+
+            return obj;
+        }
+
+        var obj = fire();
+
+        //行为操作
+        //点击产生烟花
+        window.onclick = function (_event) {
+            _event = _event || window.event;
+            obj.generateFire(_event.clientX, _event.clientY);
+        }
+    </script>
+</head>
+<body>
+    <!--<div class="fire"></div>-->
+</body>
+</html>

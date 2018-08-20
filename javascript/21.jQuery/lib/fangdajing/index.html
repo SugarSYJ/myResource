@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body>
+    <ul id="etalage">
+        <li>
+            <img class="etalage_thumb_image" src="img/1-thumb.jpg" title="first img" />
+            <img class="etalage_big_image" src="img/1.jpg"/>
+        </li>
+        <li>
+            <img class="etalage_thumb_image" src="img/2-thumb.jpg"/>
+            <img class="etalage_big_image" src="img/2.jpg"/>
+        </li>
+        <li>
+            <img class="etalage_thumb_image" src="img/3-thumb.jpg"/>
+            <img class="etalage_big_image" src="img/3.jpg"/>
+        </li>
+        <li>
+            <img class="etalage_thumb_image" src="img/4-thumb.jpg"/>
+            <img class="etalage_big_image" src="img/4.jpg"/>
+        </li>
+        <li>
+            <img class="etalage_thumb_image" src="img/5-thumb.jpg"/>
+            <img class="etalage_big_image" src="img/5.jpg"/>
+        </li>
+    </ul>
+	<script src="../jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="./js/jqzoom.js"></script>
+	<script type="text/javascript">
+	$("#etalage").zoom({
+		zoom_area_width: 300,
+	    autoplay_interval :3000,
+	    small_thumbs : 5,
+	    autoplay : true
+	});
+	</script>
+</body>
+</html>

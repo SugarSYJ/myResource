@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>01对象的创建方式</title>
+	<script>
+		/*
+			对象的创建方式
+			1)直接量
+			2)构造函数（new Object()）
+			3)工厂函数（封装）
+		 */
+		var abm = {name:'奥巴马',age:58,gender:'男',say:function(){alert('hello, my name is 奥巴马')}};
+		// 对象的属性：对象有什么, 格式：对象.属性名
+		// 对像的方法：对象能做什么, 格式：对象.方法名()
+		// 奥巴马能说话：abm.say()
+		abm.say();
+		abm.weight;//undefined
+
+		var pj = new Object();
+		pj.name = '普京';
+		pj.age = 68;
+		pj['gender'] = '男';
+		pj['say'] = function(){
+			alert('&&%$##@@' + this.name);
+		}
+		// this：当前对象
+		pj.say();
+
+		function createObject(name,age,gender){
+			var obj = {};
+			obj.name = name;
+			obj.age = age;
+			obj.gender = gender;
+			obj.say = function(){
+					alert('my name is' + this.name);
+			};
+			return obj;
+		}
+		var abm = createObject('奥巴马',58,'男');
+		var pj = createObject('普京',68,'男')
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

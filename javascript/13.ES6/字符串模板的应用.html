@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',function(){
+                var datalist = document.querySelector('.datalist');
+                var goodslist = [{
+                    title:'ipone X',
+                    nickname:'肾X',
+                    price:8888,
+                    color:'白色'
+                },{
+                    title:'Note 7',
+                    nickname:'炸7',
+                    price:99,
+                    color:'黑色'
+                },{
+                    title:'Honor 7',
+                    nickname:'农药',
+                    price:1999,
+                    color:'白色'
+                }]
+                var ul = document.createElement('ul');
+                ul.innerHTML = goodslist.map(function(goods){
+                    return `<li>
+                        <h4>${goods.title}</h4>
+                        <h5>昵称：${goods.nickname}</h5>
+                        <p class="price">价格：${goods.price}</p>
+                        <p class="color">颜色：${goods.color}</p>
+                    </li>`
+                }).join('');
+                datalist.appendChild(ul);
+            })
+        </script>
+    </head>
+    <body>
+        <h2>字符串模板的应用</h2>
+        <div class="datalist"></div>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>生成表格</title>
+	<style>
+		table{margin-top:20px;width:100%;border:1px solid #ddd;border-collapse: collapse;}
+		td{padding:5px 15px;border:1px solid #ddd;}
+	</style>
+	<script>
+	window.onload = function(){
+		/*
+			生成表格
+			思路：
+				1）获取页面上的元素
+				2）给按钮绑定点击事件
+					根据输入的行数和列数生成相应的表格
+				3）把表格写入页面
+		 */
+		// 1）获取页面上的元素
+		var row = document.getElementById('row');
+		var col = document.getElementById('col');
+		var btn = col.nextElementSibling;
+
+		// 2）给按钮绑定点击事件
+		btn.onclick = function(){
+			// 获取输入的行数和列数
+			var _row = row.value;
+			var _col = col.value;
+
+			// 生成表格
+			var table = document.createElement('table');
+
+			// 循环生成表格
+			// 外循环控制行数
+			for(var i=0;i<_row;i++){
+				// 生成tr
+				var tr = document.createElement('tr');
+
+				// 内循环控制列数
+				for(var j=0;j<_col;j++){
+					// 生成td
+					var td = document.createElement('td');
+
+					// 往最后一列添加删除按钮
+					if(j==_col-1){
+						// 生成一个删除按钮
+						var button = document.createElement('button');
+						button.innerHTML = '删除';
+						td.appendChild(button);
+						button.onclick = function(){
+							// 按钮所在的tr
+							var currentTr = this.parentElement.parentElement;
+
+							// 删除tr
+							table.removeChild(currentTr);
+						}
+					}else{
+						td.innerHTML = '单元格' + (i+1)+(j+1);
+					}
+					
+
+					// 把td写入tr
+					tr.appendChild(td);
+				}
+
+				table.appendChild(tr);
+			}
+
+			// 3）把表格写入页面
+			document.body.appendChild(table);
+
+			/*// 给删除按钮添加点击事件,并删除当前行
+			var btnDels = table.getElementsByTagName('button');
+			for(var i=0;i<btnDels.length;i++){
+				btnDels[i].onclick = function(){
+					// 按钮所在的tr
+					var currentTr = this.parentElement.parentElement;
+
+					// 删除tr
+					table.removeChild(currentTr);
+				}
+			}*/
+		}
+
+		
+	}
+	</script>
+</head>
+
+<body>
+行：<input type="text" id="row"> 列：<input type="text" id="col"><button>生成表格</button>
+</body>
+</html>

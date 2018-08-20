@@ -1,0 +1,34 @@
+*{
+    padding:0;
+    margin:0;
+}
+#tou,#touxia,#zhong,#zhongxia,#wei{
+    width:1001px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#tou{
+    height:62px;
+    /*width:1001px;*/
+    background-color:#232323;
+}
+#touxia{
+    /*height:421px;*/
+    width:1001px;
+    background-color:#B0DFF1;
+}
+#zhong{
+    height:350px;
+    /*width:1001px;*/
+    background-color:#F5F5F5;
+}
+#zhongxia{
+    height:213px;
+    /*width:1001px;*/
+    background-color:#FFFFFF;
+}
+#wei{
+    height:46px;
+    /*width:1001px;*/
+    background-color:#222222;
+}

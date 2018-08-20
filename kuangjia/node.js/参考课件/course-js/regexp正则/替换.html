@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>替换</title>
+	<script>
+		var str = 'javascript Java Script JAVA';
+		
+		// str.replace('java','html5').replace('Java','html5')
+		
+
+		// 替换所有java为html5(不区分大小写)
+		var reg = /java/ig;
+		console.log(str.replace(reg,'html5'));
+
+		var str = '1,2, 3 ,4 ,  5,6';
+		var reg = /\s*,\s*/
+		console.log(str.split(reg));
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

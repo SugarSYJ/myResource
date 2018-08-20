@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>参数</title>
+	<script>
+		/*
+			函数的参数
+				1)形参:声明函数时圆括号内定义的变量
+				2)实参：函数调用时传递的变量
+				3)形参和实参的数量可以不同
+				4)arguments:函数内部隐藏的对象，保存着实参的信息
+					arguments是一个类数组[2,20,30,50]
+					length:保存着实参的数量
+				5)return
+					<1>终止函数的执行,return后的代码不会执行
+					<2>return后如果有值，则把这个值返回到函数执行的地方
+		 */
+		var a=10;
+		var b=20;
+		
+		/*
+			x,y为形参
+			sum(a,b)中的a,b为实参
+			sum():不传入参数时,x,y初始值为undefined
+		 */
+		function sum(x,y){
+			// var x;形参相当于声明了一个x
+			// var y;形参相当于声明了一个y
+			// var x = 50;
+			// var y = 20;
+			// alert(x + y);
+
+			// arguments:[2,20,30,50]
+			// arguments[0] ==>2
+			// arguments[1] ==>20
+			// arguments[3] ==>50
+			// arguments[4] ==>下标超出数组的个数，会返回undefined
+			// console.log(arguments.length);
+
+			var sum = 0;
+			for(var i=0;i<arguments.length;i++){
+				sum += arguments[i];
+			}
+			console.log(sum);
+
+		}
+		/*sum(a,b);//30
+		sum();//NaN
+		sum(50,20);//70
+		sum(2,20,30,50);
+
+		sum(2);//x=2,y=undefined
+		sum(2,20,30);//x=2,y=20,30被忽略*/
+		sum(2,20,30,50);
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            window.onload = function(){
+                var box = document.getElementById('box');
+                box.onclick = function(){
+                    console.log('box');
+                }
+                box.onclick = null;
+                var hah = function(){
+                    console.log('来啊建安街');
+                }
+                box.addEventListener('click',hah,true);
+                box.removeEventListener('click',hah,true);
+            }
+        </script>
+    </head>
+    <body>
+        <div id="box">事件移除</div>
+    </body>
+</html>

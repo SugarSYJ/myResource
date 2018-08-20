@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件绑定方法</title>
+	<style>
+		#box{border:1px solid #f00;background-color: #efefef;padding:15px;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			$('#content a').click(function(evt){
+			    $('#content').after('<p>北京的京，刘强东的东</p>');
+                //阻止浏览器默认事件
+			    evt.preventDefault();
+			});
+
+			$('#content').on('click',function(){
+				$('#content').before('<p>奶茶：你点我干嘛~</p>');
+			});
+
+			$('#btnClick').click(function(){
+				// $('#content a').trigger('click');
+				// $('#content a').triggerHandler('click');
+				
+				// $('#btnTmall').triggerHandler('click');
+				$('#box').trigger('box');
+			});
+
+			$('#btnTmall').click(function(){
+				$('#btnTmall').before('<p>天猫的天，天猫的猫');
+			});
+
+			
+			$('#box').on('box',function(){
+				console.log('over!!!');
+			});
+		});
+	</script>
+</head>
+<body>
+
+	<div id="content">
+		<a href="http://www.jd.com">京东</a>
+	</div>
+	<br><br>
+	<button id="btnClick">模拟点击</button>
+	<br><br>
+	<form action="http://www.tmall.com" target="_blank">
+		<button type="submit" id="btnTmall">我要去天猫</button>
+	</form>
+
+	<div id="box">#box</div>
+</body>
+</html>

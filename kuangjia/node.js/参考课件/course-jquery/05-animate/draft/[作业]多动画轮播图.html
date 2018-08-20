@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>多动画轮播图</title>
+		
+		<style type="text/css">
+			
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			ul li {
+				list-style: none;
+			}
+			
+			#main {
+				width: 760px;
+				height: 300px;
+				position: relative;
+				margin: 50px auto;
+			}
+			
+			#main .pic {
+				width: 760px;
+				height: 300px;
+				
+				overflow: hidden;
+			}
+			#main .pic ul li {
+				width: 760px;
+				height: 300px;
+				position: relative;
+				
+			}
+			#main .pic ul li .img1 {
+				position: absolute;
+				top: 0;
+				left: -760px;
+			}
+			#main .pic ul li .img2 {
+				position: absolute;
+				top: 0;
+				left: -20px;
+				display: none;
+			}
+			#main .nav {
+				position: absolute;
+				right: 20px;
+				bottom: 20px;
+			}
+			#main .nav ul li {
+				width: 10px;
+				height: 10px;
+				border: 1px solid #fff;
+				float: left;
+				margin-left: 5px;
+			}
+			#main .nav ul li.select{
+				background: #fff;
+			}
+
+			.prev,.next{position:absolute;left:10px;top:50%;margin-top:-40px;width:30px;height:80px;line-height:80px;background-color:rgba(0,0,0,0.2);text-align:center;color:#fff;text-decoration:none;}
+			.next{left:auto;right:10px;}
+			.prev:hover,.next:hover{background-color:rgba(0,0,0,.5);}
+		</style>
+        <script src="../../jquery/jquery-2.1.1.min.js"></script>
+		<script>
+			$(function(){
+				var $main = $('#main');
+				var $pic = $main.find('.pic li');
+				var $nav = $main.find('.nav ul');
+
+				// 轮播数量
+				var len = $pic.length;
+
+				// 初始化索引值
+				var index = 0;
+
+				// 上一张的索引
+				var lastIndex = 0;
+				show();
+
+				// 添加导航(小方块)
+				for(var i=0;i<len;i++){
+					var $li = $('<li/>');
+					if(i==0) {
+						$li.addClass('select');
+					}
+					$li.appendTo($nav);
+				}
+
+				//点击小方块切换图片
+				$nav.on('click','li',function(){
+					index = $(this).index();
+					show();
+				});
+
+				var timer;
+				$main.on('mouseenter',function(){
+					clearInterval(timer);
+				}).on('mouseleave',function(){
+					timer = setInterval(function(){
+						index++;
+						show();
+					},3000);
+				}).trigger('mouseleave')
+
+				.on('click','.next',function(){
+					index++;
+					show();
+				}).on('click','.prev',function(){
+					index--;
+					show();
+				});
+
+
+				// 图片展示效果函数
+				function show(){
+					//清空上一张的样式
+					reset();
+
+					if(index<0){
+						index = len - 1;
+					}else if(index > len - 1){
+						index = 0;
+					}
+					// 显示隐藏背景图片
+					$pic.hide().eq(index).show();
+					$pic.eq(index).find('.img1').animate({left:0},function(){
+						$pic.eq(index).find('.img2').show().animate({left:0});
+					});
+
+					// 小方块高亮效果
+					$nav.find('li').removeClass().eq(index).addClass('select');
+
+					// 清除当没有显示的li下面的img1,img2的样式
+					// $pic.eq(index).siblings('li').find('.img1,.img2').removeAttr('style');
+
+					// 更新lastIndex
+					lastIndex = index;
+				}
+
+				function reset(){
+					$pic.eq(lastIndex).find('.img1,.img2').removeAttr('style');//removeProp(attr)
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="main">
+			<div class="pic">
+				<ul>
+					<li>
+						<img class="img0" src="img/bg1.jpg"/>
+						<img class="img1" src="img/text1.png"/>
+						<img class="img2" src="img/con1.png"/>
+					</li>
+					<li>
+						<img class="img0" src="img/bg2.jpg"/>
+						<img class="img1" src="img/text2.png"/>
+						<img class="img2" src="img/con2.png"/>
+					</li>
+					<li>
+						<img class="img0" src="img/bg3.jpg"/>
+						<img class="img1" src="img/text3.png"/>
+						<img class="img2" src="img/con3.png"/>
+					</li>
+					<li>
+						<img class="img0" src="img/bg4.jpg"/>
+						<img class="img1" src="img/text4.png"/>
+						<img class="img2" src="img/con4.png"/>
+					</li>
+					<li>
+						<img class="img0" src="img/bg5.jpg"/>
+						<img class="img1" src="img/text5.png"/>
+						<img class="img2" src="img/con5.png"/>
+					</li>
+
+				</ul>
+			</div>
+			<div class="nav">
+				<ul></ul>
+			</div>
+			
+			<a href="#" class="btn prev">&lt;</a>
+			<a href="#" class="btn next">&gt;</a>
+			
+		</div>
+
+	</body>
+</html>

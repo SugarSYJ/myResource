@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td><button id="btn">删除</button></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td><button>删除</button></td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td><button>删除</button></td>
+            </tr>
+        </table>
+        <button id="btnPrint">打印</button>
+        <script type="text/javascript">
+        window.onload = function(){
+            var btn = document.getElementById('btn');
+            var btnPrint = document.getElementById('btnPrint');
+            btn.onclick = function(){
+                var res = confirm('你确认要删除当前数据？');
+                if(res){
+                    alert('删除成功');
+                }
+            }
+            btnPrint.onclick = function(){
+                print();
+            }
+        }
+        </script>
+    </body>
+</html>

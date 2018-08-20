@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js运算</title>
+	<script>
+		/*
+			作业1：将加减乘除合并到一个函数内
+			作业2:为抵抗洪水，战士连续作战89小时，编程计算共多少天零多少小时？
+			作业3:明要到美国旅游，可是那里的温度是以华氏度为单位记录的。它需要一个程序将华氏温度（80度）转换为摄氏度，并以华氏度和摄氏度为单位分别显示该温度。
+			提示：摄氏度与芈氏度的转换公式为：摄氏度 = 5/9.0*(华氏度-32)
+		 */
+		
+		/*
+			作业1：将加减乘除合并到一个函数内
+			思路：
+				1)获取页面上的元素,然后得到输入的值
+				2)判断当前选择了什么运算符,并进行相应的运算
+					如果选择了+: num1 + num2
+					如果选择了-: num1 - num2
+					...
+				3)输出
+					alert();
+					innerHTML;
+		 */
+		function calc(){
+			// 1)获取页面上的元素,然后得到输入的值
+			var n1 = document.getElementById('num1').value;
+			var n2 = document.getElementById('num2').value;
+			var op = document.getElementById('operator').value;
+			var res = document.getElementById('result');
+			var result;//undefined
+
+			// 如果输入的n1和n2都是数字，则执行运算，否则弹出提示
+			// isNaN
+			if(!isNaN(n1) && !isNaN(n2)){
+				// 判断当前选择了什么运算符,并进行相应的运算
+				// 如果选择了加法
+				if(op == '+'){
+					// alert(Number(n1) + Number(n2));
+					result = Number(n1) + Number(n2);
+				}
+				// 如果选择了减法
+				else if(op == '-'){
+					// alert(n1 - n2);
+					result = n1 - n2;
+				}
+				// 如果选择了乘法
+				else if(op == '×'){
+					// alert(n1 * n2);
+					result = n1 * n2;
+				}
+				// 如果选择了除法
+				else if(op == '÷'){
+					// alert(n1 / n2);
+					result = n1 / n2;
+				}
+				// 如果选择了除法
+				else if(op == '%'){
+					// alert(n1 % n2);
+					result = n1 % n2;
+				}
+				res.innerHTML = result;
+			}else{
+				alert('你输入的什么玩意儿');
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="num1"/>
+	<select id="operator">
+		<option value="+">+</option>
+		<option value="-">-</option>
+		<option value="×">×</option>
+		<option value="÷">÷</option>
+		<option value="%">%</option>
+	</select>
+	<input type="text" id="num2"/> <button onclick="calc()">计算</button><span id="result"></span>
+</body>
+</html>

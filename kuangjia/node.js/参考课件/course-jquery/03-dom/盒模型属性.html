@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>盒模型属性</title>
+	<style>
+		body{margin:0;background-color: #fff;}
+		.container{position:relative; width: 500px; height:500px; background:#ccc; }
+		#box{width:200px;height:200px;background-color: #efefef; position:absolute;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			/*
+				1)width/height	宽高
+				2)padding		内边距
+				3)border		边框
+				4)margin		外边距
+			 */
+			//原生js
+			var box = document.getElementById('box');
+			// box.style.width;box.style.height
+			// box.clientWidth = width + padding
+			// box.offsetWidth = width + padding + border
+			// box.clientLeft = borderLeft
+			// box.clientTop = borderTop
+			// console.log(box.clientLeft)
+
+			// width:$('#box').css('width')
+			//console.log('margin:50px;padding:20px;width:200px;height:200px;border:10px;')
+			var obj = {}
+			obj.width = $('#box').width();
+			obj.height = $('#box').height();
+			obj.innerWidth = $('#box').innerWidth();
+			obj.innerHeight = $('#box').innerHeight();
+			obj.outerWidth = $('#box').outerWidth();
+			obj.outerHeight = $('#box').outerHeight();
+			obj.outerWidth_true = $('#box').outerWidth(true);
+			obj.outerHeight_true = $('#box').outerHeight(true);
+			console.log(obj);
+
+		});
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div id="box"></div>
+	</div>
+</body>
+</html>

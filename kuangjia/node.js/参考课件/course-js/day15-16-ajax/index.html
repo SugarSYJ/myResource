@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="cookie2.js"></script>
+    <title></title>
+    <script type="text/javascript">
+        var getUrlParams = function () {
+            var result = {};
+
+            //param1=1&param2=2
+            var paramsStr = document.location.search.substr(1);
+            //["param1=1", "param2=2"]
+            var paramsArray = paramsStr.split("&");
+            paramsArray.forEach(function (val) {
+                //"param1=1"
+                // ["param1", 1]
+                var subArray = val.split('=');
+                //result[subArray[0]] = subArray[1];
+                //subArray[0] = "username"
+                result[subArray[0]] = subArray[1];
+                //result.username = subArray[1];
+            })
+            return result;
+        }
+
+        console.log(getUrlParams());
+    </script>
+</head>
+<body>
+
+</body>
+</html>

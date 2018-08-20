@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+            ul li{
+                list-style:none;
+            }
+            a{
+                text-decoration:none;
+            }
+            .tab1{
+                height:40px;
+                border:1px solid red;
+                float: left;
+            }
+            .tab1>li{
+                float: left;
+                position:relative;
+            }
+            .tab1>li>a,.tab2>li>a,.tab1 .tab3>li>a{
+                display:block;
+                width: 40px;
+                height: 40px;
+                line-height:40px;
+                border:1px solid green;
+                text-align:center;
+                background:pink;
+            }
+            .tab1 .tab2{
+                position:absolute;
+                left:0;
+                top:40px;
+                display:none;
+            }
+            .tab1>li:hover .tab2,.tab2>li:hover .tab3{
+                display:block;   
+            }
+            .tab1 .tab2>li{
+                position:relative;
+            }
+            .tab1 li:hover>a{
+                background:red;
+                color:#fff;
+            }
+            .tab1 .tab2 .tab3{
+                position:absolute;
+                left:40px;
+                top:0;
+                display:none;
+            }
+        </style>
+
+    </head>
+    <body>
+        <ul class="tab1">
+            <li>
+                <a href="#">电影</a>
+                <ul class="tab2">
+                    <li>
+                        <a href="#">拳王</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">越狱</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>                        
+                    </li>
+                    <li>
+                        <a href="#">战狼</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>                        
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">电器</a>
+                <ul class="tab2">
+                    <li>
+                        <a href="#">电视</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">电机</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">电笔</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">宠物</a>
+                <ul class="tab2">
+                    <li>
+                        <a href="#">青蛇</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">小狗</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">小猫</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">音乐</a>
+                <ul class="tab2">
+                    <li>
+                        <a href="#">浮夸</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">红日</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">蜗牛</a>
+                        <ul class="tab3">
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                            <li><a href="#">分公</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </body>
+</html>

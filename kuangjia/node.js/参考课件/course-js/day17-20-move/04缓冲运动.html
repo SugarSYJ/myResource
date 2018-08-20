@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>04缓冲运动</title>
+    <style type="text/css">
+        .ball {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            background-color: #b6ff00;
+            position: absolute;
+            left: 0;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            var ball = document.getElementsByClassName('ball')[0];
+            var timer = null;
+            var goleft = false;
+            timer = setInterval(function () {
+                //得到要移动的距离
+                var len = window.innerWidth - ball.clientWidth;
+                //得到速度
+                var speed = goleft == false ? (len - ball.offsetLeft) / 8 : ball.offsetLeft / 8 * -1;
+                speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                ball.style.left = ball.offsetLeft + speed + "px";
+                if (ball.offsetLeft == window.innerWidth - ball.clientWidth) {
+                    goleft = true;
+                } else if (ball.offsetLeft <= 0) {
+                    goleft = false;
+                }
+            }, 30);
+        }
+
+    </script>
+</head>
+<body>
+    <div class="ball"></div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            h3{text-align:center;margin: 50px auto;}
+            #yuan{width: 200px;height: 200px;border:2px solid red;border-radius:50%;margin: 100px auto;}
+        </style>
+    </head>
+    <body>
+        <h3>画一个表盘刻度</h3>
+        <ul id="yuan"></ul>
+        <script type="text/javascript">
+            var yuan = document.getElementById('yuan');
+            for(var i=1;i<=60;i++){
+                var deg = 360/60*i;
+                var rad = deg*Math.PI/180;
+                var a = 100*Math.cos(rad);
+                var b = 100*Math.sin(rad);
+                // return '<li><div style="transform:translate(a,b)"></div></li>';
+            }
+        </script>
+    </body>
+</html>

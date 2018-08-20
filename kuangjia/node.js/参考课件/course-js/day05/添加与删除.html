@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>添加与删除</title>
+	<script>
+		/*
+			splice(start,deleteNum,items)：在数组中插入、删除、替换的通用方法
+				start：开始的下标
+				deleteNum：删除的个数
+				items:多个参数,表示插入的元素
+				返回一个新的数组（包含被删除的元素）
+		 */
+		var cities = ['北京','上海','广州','深圳'];
+		//删除“深圳”
+		// cities.pop();
+		// var tem = cities.splice(0,3);
+		// console.log(tem,cities);
+
+		//往后面添加“杭州”
+		//unshift()
+		// var tem2 = cities.splice(0,0,'杭州');
+		// console.log(tem2,cities);
+
+
+		// 替换
+		// var tem3 = cities.splice(1,1,'杭州','成都','天津');
+		// console.log(tem3,cities);
+
+		//slice(start,end)：返回数组的片段或子数组，从start开始到end(不包括end所对应的元素)
+		
+		// var newCities = cities.slice(1,3);
+		// console.log(newCities,cities);
+
+		// newCities[2] = '重庆';
+		// console.log(newCities,cities);
+
+		
+
+
+		
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

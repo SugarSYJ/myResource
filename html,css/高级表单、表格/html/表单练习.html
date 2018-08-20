@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            form{
+                width: 418px;
+                height: 508px;
+                background: #F3F3F3;
+                margin:50px auto 0;
+            }
+            .box{
+                width: 360px;
+                height: 508px;
+                border:0 none;
+            }
+            .box p{
+                line-height: 34px;
+                font-size:12px;
+                text-align:right;
+            }
+            .c1{
+                height: 9px;
+                border:0 none;
+                border-top:1px solid #C9DCA6;
+            }
+            .c2{
+                font-weight:bold;
+            }
+            .c3{
+                margin-left:29px;
+            }
+            .box label{
+                display:block;
+                width: 85px;
+                color:#333333;
+                text-align:right;
+                float: left;
+            }
+            .box input{
+                margin-bottom:14px;
+            }
+            .box span{
+                display:block;
+                width: 200px;
+                height: 22px;
+                padding-left:152px;
+            }
+            .box textarea{
+                overflow-y:scroll;
+                margin-left:29px;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="#">
+            <fieldset class="box">
+                <p>*号所在项为必填项</p>
+                <fieldset class="c1">
+                    <legend class="c2">个人信息</legend>
+                </fieldset>
+                <label for="xingming">姓名*&nbsp;</label><input type="text" id="xingming"/><br/>
+                <label for="dizhi">地址*&nbsp;</label><input type="text" id="dizhi"/><br/>
+                <label for="chusheng">出生*&nbsp;</label>
+                    <select name="shu" id="chusheng"><option value="1">1</option></select>
+                    <select name="data" id="yue"><option value="Jan">Jan</option></select>
+                    <select name="fen" id="nian"><option value="1979">1979</option></select><br/>
+                <label for="xingbie">性别*&nbsp;</label>
+                    <select name="xing" id="xingbie">
+                        <option value="女" selected>女</option><option value="男">男</option>
+                    </select>
+                <fieldset class="c1">
+                    <legend class="c2">其他信息</legend>
+                </fieldset>
+                <fieldset class="c1">
+                    <legend>你喜欢这个表单吗？*</legend>
+                </fieldset>
+                <input class="c3" type="radio" />喜欢&nbsp;<input type="radio" />不喜欢
+                <fieldset class="c1">
+                    <legend>你喜欢什么运动？*</legend>
+                </fieldset>
+                <input class="c3" type="checkbox" />足球 <input type="checkbox" />篮球 <input type="checkbox" />排球
+                <fieldset class="c1">
+                    <legend>请写下你的建议？*</legend>
+                </fieldset>
+                <textarea name="jianyi" id="jian" cols="30" rows="5"></textarea>
+                <span><input type="submit" value="提交个人信息"/></span>
+            </fieldset>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件类型演示</title>
+	<script>
+		window.onload = function(){
+			var btn = document.getElementById('btn');
+
+			// 点击事件
+			btn.onclick = function(){
+				console.log('click');
+			}
+
+			//双击事件
+			btn.ondblclick = function(){
+				console.log('双击');
+			}
+
+			//鼠标按下事件
+			btn.onmousedown = function(){
+				console.log('鼠标按下')
+			}
+
+			//鼠标弹开事件
+			btn.onmouseup = function(){
+				console.log('鼠标弹开');
+			}
+		}
+	</script>
+</head>
+<body>
+	<button id="btn">点我</button>
+</body>
+</html>

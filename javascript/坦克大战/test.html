@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <script>
+
+        //function A() {
+
+        //}
+        //A.prototype.i = 10;
+
+        //console.log(A.prototype.i);
+        // 在一个线程中停用另一个
+        /*
+        1、在A线程停止B线程， A线程的执行频率高于B，否则B会不在满足A的终止条件后立即停止。
+        */
+        //var n = 0;
+        //var int1 = setInterval(function () {
+        //    console.log('线程id: ' + int1 + "结果： " + ++n);
+        //}, 50);
+        //var int2 = setInterval(function () {
+        //    if (n >= 2) {
+        //        clearInterval(int1);
+        //    }
+        //}, 50);
+        Array.prototype.removeAt = function (index) {
+            var arr = [];
+            // 遍历数组，过滤指定位置的元素
+            for (var i = 0; i < this.length; i++) {
+                if (i!=index) {
+                    arr[i] = this[i];
+                }
+            }
+            return arr;
+        }
+
+        var arr = [1, 2, 3, 4, 5];
+        var newArr = arr.removeAt(2)
+        console.log();
+    </script>
+</body>
+</html>

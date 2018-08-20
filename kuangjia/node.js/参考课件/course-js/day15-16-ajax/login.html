@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>demo2</title>
+    <script src="cookie2.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var login = document.getElementById('login');
+            var username = document.getElementById('username');
+            var pwd = document.getElementById('pwd');
+            var pagename = "login";
+            login.onclick = function () {
+
+                //setCookie('username', username.value, 10);
+                //setCookie('pwd', pwd.value, 10);
+                window.location.href = 'index.html?username=' + username.value + "&pwd=" + pwd.value + "&pagename=" + pagename;
+            }
+        }
+    </script>
+</head>
+<body>
+
+        <input type="text" id="username" />
+        <input type="text" id="pwd"/>
+        <button id="login">Login</button>
+
+</body>
+</html>

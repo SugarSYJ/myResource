@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>减速运动</title>
+	<style>
+	#box{position:absolute;top:0;left:0;width:40px;height:40px;background-color: #f00;border-radius:50%;}
+	</style>
+	<script>
+		/* 
+			减速运动:增幅不断减少
+		*/
+		window.onload = function(){
+			var box = document.getElementById('box');
+
+			var speed = 2;
+
+			// 动画：不断改变#box的top,left值
+			var timer = setInterval(function(){
+				// 获取当前top,left值
+				var startLeft = box.offsetLeft;
+				var startTop = box.offsetTop;
+
+				if(startLeft >= 1000){
+					clearInterval(timer);
+				}
+
+				if(speed >= 40){
+					speed = 40;
+				}
+
+				box.style.left = startLeft + speed++ + 'px';
+				// box.style.top = startTop + 10 + 'px';
+			},50);
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+        <script src="../js/jquery-2.1.1.min.js"></script>
+        <style>
+            .actived{background-color: #428bca; color: #fff;}
+        </style>
+    </head>
+    <body>
+        <template id="datagrid">
+            <div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" v-if="trs.length == dataset.length" checked @click="selectAll" key="'b'"/>
+                                <input type="checkbox" v-else @click="selectAll" key="'a'"/>
+                            </th>
+                            <th>title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(obj,idx) in dataset" :class="{actived:trs.indexOf(idx)>-1}" @click="selectTr(idx)" :key="obj.id">
+                            <td>
+                                <input type="checkbox" v-if="trs.indexOf(idx)>-1" checked :key="'a' + idx"/>
+                                <input type="checkbox" v-else :key="'b' + idx"/>
+                            </td>
+                            <td>{{obj.title}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </template>
+        <div id="app">
+            <datagrid :dataset="dataset" :name="name"></datagrid>
+            <h1 :name="name">{{dataset.length}}</h1>
+            <h2>{{obj.name}}</h2>
+            <input type="button" value="setName" @click="setName"/>
+            <input type="text" ref="focus"/>
+        </div>
+        <script>
+            var vm = new Vue({
+                el:"#app",
+                data:{
+                    dataset:[],
+                    name:"Tom",
+                    obj:{}
+                },
+                methods:{
+                    setName:function(){
+                        this.$set(this.obj,'name',"Sam");
+                        this.$refs.focus.focus();
+                    }
+                },
+                components:{
+                    'datagrid':{
+                        template:'#datagrid',
+                        props:['dataset','name'],
+                        data:function(){
+                            return {
+                                trs:[]
+                            }
+                        },
+                        methods:{
+                            selectTr:function(idx){
+                                if(this.trs.indexOf(idx)>-1){
+                                    this.trs.splice(this.trs.indexOf(idx),1);
+                                }else{
+                                    this.trs.push(idx);
+                                }
+                            },
+                            selectAll:function(){
+                                if(this.trs.length == this.dataset.length){
+                                    this.trs = [];
+                                }else{
+                                    this.trs = [];
+                                    for(var i=0;i<this.dataset.length;i++){
+                                        this.trs.push(i);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            $.get('https://cnodejs.org/api/v1/topics', {page: 1, limit: 10}, function(res){
+                vm.dataset = res.data;
+            });
+        </script>
+    </body>
+</html>

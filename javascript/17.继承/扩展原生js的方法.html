@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>05扩展原生js的方法</title>
+	<script>
+		/*
+			trim()
+		 */
+		
+		if(!String.prototype.trim){
+			String.prototype.trim = function(){
+				//这里如何获取字符串str
+				//this
+				return this.replace(/^\s+ | \s+$/g,'');
+			}
+		}
+		
+		var str = '   我 们 不 一 样 ';
+		str = str.trim();
+
+		function Person(){
+
+		}
+
+
+		// Person.prototype.say = function(){} 
+		// Person.prototype.eat = function(){} 
+		// Person.prototype.sing = function(){} 
+		// Person.prototype.coding = function(){}
+
+		Person.prototype = {
+			constructor:Person,
+			say(){},
+			eat(){},
+			sing(){},
+			coding(){}
+		}
+
+
+		var p = new Person();
+
+		for(var attr in p){
+			console.log(attr);
+		}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

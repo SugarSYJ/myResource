@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery动画队列</title>
+	<style>
+		#box,#box2{position:absolute;top:50px;width:100px;height:100px;background-color: #f00;}
+		#box2{background-color: #00f;top:200px;}
+	</style>
+    <script src="../../../libs/jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			$('#btnDH').on('click',function(){
+				// 当animate中存在多个属性时，动画同时发生
+				// 当同一个元素链式调用animate时，动画是按顺序发生(队列)
+				$('#box').animate({width:500},2000).animate({height:200},1000);
+				$('#box2').animate({height:200},2000).animate({top:400},1000,function(){
+					$('#box2').html('oh yeah~~');
+				})
+			});
+
+			$('#btnAdd').on('click',function(){
+			    $('#box').animate({ left: 300 }, 5000, function () {
+			        console.log($('#box').queue("fx").length);
+			    }).animate({ top: 200 }, 5000, function () {
+			        console.log($('#box').queue("fx").length);
+			    });
+			});
+
+			$('#btnClear').on('click', function () {
+			    //从列队中移除所有未执行的项。(不会停止当前动画)
+			    $('#box').clearQueue("fx")
+			})
+
+			// 停止正在运行的动画
+			$('#btnStop').on('click',function(){
+				$('#box').stop(false,true);
+			});
+
+			$('#btnDelay').on('click',function(){
+				$('#box').delay(3000)
+			})
+
+			$('#btnFinish').on('click', function () {
+			    $('#box').finish();
+			})
+		});
+	</script>
+</head>
+<body>
+	<button id="btnDH">动画</button>
+	<button id="btnAdd">添加动画</button>
+    <button id="btnClear">清除动画</button>
+	<button id="btnStop">停止正在运行的动画</button>
+	<button id="btnDelay">延迟3s</button>
+    <button id="btnFinish">瞬间完成</button>
+	<div id="box"></div>
+	<div id="box2"></div>
+</body>
+</html>

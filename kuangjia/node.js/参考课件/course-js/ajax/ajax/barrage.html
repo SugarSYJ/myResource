@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹幕</title>
+	<style>
+	.container{width:800px;margin:0 auto;padding-bottom:10px;background-color:#dfdfdf;}
+	#barrage{position:relative;height:400px;margin-bottom:10px;background-color:#000;overflow:hidden;}
+	#barrage .bar-item{position:absolute;left:100%;white-space:nowrap;}
+	#msg{margin-left:10px;width:400px;height:30px;border:1px solid #999;border-right:none;box-sizing:border-box;vertical-align:middle;}
+	#msg+button{padding:0 10px;height:30px;vertical-align:middle;}
+	</style>
+	<script src="js/common.js"></script>
+	<script>
+		window.onload = function(){
+			var barrage = document.getElementById('barrage');
+			var msg = document.getElementById('msg');
+			var btn = msg.nextElementSibling;
+
+			// btn.onclick = sendMsg;
+
+			msg.onkeypress = function(e){
+				e = e || window.event;
+				if(e.keyCode == 13){
+					sendMsg();
+				}
+			}
+
+			// function sendMsg(){
+			// 	var _msg = msg.value;
+			// 	var barItem = new barMsg(_msg);
+			// 	barItem.move();
+			// 	msg.value = '';
+			// 	msg.focus();
+			// }
+
+			function barMsg(_msg){
+				this.color = getRandomColor();
+				this.size = getRandomNum(12,32);
+				this.speed = getRandomNum(1,10);
+				this.top = getRandomNum(10,barrage.offsetHeight - 30);
+				this.init = function(){
+					var span = document.createElement('span');
+					span.className = 'bar-item';
+					span.innerHTML = _msg;
+
+					// 随机参数
+					span.style.color = this.color;
+					span.style.fontSize = this.size;
+					span.style.top = this.top + 'px';
+
+					this.ele = span;
+
+					barrage.appendChild(span);
+				}
+				
+			}
+			barMsg.prototype.move = function(){
+				this.init();
+				var self = this;
+				var barItem = this.ele;
+				this.timer = setInterval(function(){
+					barItem.style.left = barItem.offsetLeft - self.speed + 'px';
+					if(barItem.offsetLeft<-barItem.offsetWidth){
+						clearInterval(self.timer);
+						barrage.removeChild(barItem);
+					}
+				},50);
+			}
+
+			// ajax
+			// 进入页面，要求输入IP
+			var username = prompt('好汉，留下你的大名');
+			// var ip = prompt('请输入IP');
+
+			// 过滤html正则
+			var reg_html = /<\/?\w+[^>]*>/gi;
+
+
+			// 创建xhr对象
+			var request = new XMLHttpRequest();
+			var req = new XMLHttpRequest();
+
+			// 请求数据的接口
+			var getUrl = 'http://10.3.131.3:8080/ajax/chat?type=query';
+			var sendUrl = 'http://10.3.131.3:8080/ajax/chat?type=send&sender='+username;
+
+			// 绑定处理事件,接收数据
+			var arr = [];
+			request.onreadystatechange = function(){
+				if(request.readyState == 4 && request.status == 200){
+					// 处理数据
+					// {"name":"老王","content":"哈哈","ipfrom":"10.2.153.241"}
+					var dataList = JSON.parse(request.responseText);
+					console.log(dataList);
+
+					/*
+						过滤数据
+							1.把出现过的弹幕保存起来，保存在数据arr
+							2.把从服务器得到的数据跟arr里的每一项进行对比，如果已经存在于arr里，则不显示
+
+						break：跳出当前整个循环
+						break label: label为循环标识，可以跳出label所在的循环
+						continue:跳出本次循环，进入下一次循环
+					 */
+
+					for(var i=0,len=dataList.length;i<len;i++){
+						// 当前消息是否已经出现过
+						var hasItem = false;
+
+						// 遍历之前获取到的数据
+						for(var j=0,leng=arr.length;j<leng;j++){
+
+							// 只有当content,name,ip三者都相同是菜判断是否已经出现过
+							if(dataList[i].content == arr[j].content && dataList[i].name == arr[j].name && dataList[i].ipfrom == arr[j].ipfrom){
+								hasItem = true;
+								break;
+							}
+						}
+						if(!hasItem){
+							var _msg = dataList[i].content;
+							var barItem = new barMsg(_msg);
+							barItem.move();
+							msg.value = '';
+							msg.focus();
+						}
+					}
+
+					// 更新数据
+					arr = dataList;
+				}
+			}
+
+			// 绑定处理事件,用于发送数据
+			req.onreadystatechange = function(){
+				if(req.readyState == 4 && req.status == 200){
+					// 发送数据成功后，立即获取一次数据
+					getMsg();
+
+					// 清空输入框，并获得焦点
+					msg.value = '';
+					msg.focus();
+
+					// 从新开启定时器
+					timer = setInterval(getMsg,3000);
+				}
+			}
+
+			// 页面加载时立即获取聊天记录
+			getMsg();
+
+			// 每3秒获取一次数据，得到最新的聊天记录
+			var timer = setInterval(getMsg,3000);
+
+			//给按钮绑定事件，用于发送消息
+			btn.onclick = sendMsg;
+
+			// 回车发送消息
+			msg.onkeypress = function(e){
+				e = e || window.event;
+				if(e.keyCode == 13){
+					sendMsg();
+				}
+			}
+
+			// 从服务器获取聊天记录
+			function getMsg(){
+				request.open('get',getUrl,true);
+				request.send();
+			}
+
+			// 发送消息函数
+			function sendMsg(){
+				// 发送前清空定时器
+				clearInterval(timer);
+
+				// 取到输入的信息内容
+				var _msg = msg.value;
+
+				// 防止输入空字符
+				var reg = /^\s*$/
+				if(reg.test(_msg)){
+					alert('不能发送空消息')
+					return;
+				}
+
+				// 过滤前后空格
+				_msg = _msg.replace(/^\s+|\s+$/g,'');
+
+				// 过滤所有html标签
+				_msg = _msg.replace(reg_html,'');
+
+				// 跟服务器建立连接
+				req.open('post',sendUrl+'&msg='+_msg,true);
+				req.send();
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div id="barrage"></div>
+		<input type="text" id="msg"><button>发送</button>
+	</div>
+</body>
+</html>

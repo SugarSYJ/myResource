@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>五星评分</title>
+    <style type="text/css">
+    #star {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        width: 300px;
+        height: 28px;
+    }
+    
+    #star li {
+        float: left;
+        background: url(img/star.gif) no-repeat 0 0;
+        width: 27px;
+        height: 28px;
+    }
+    
+    #star .active{background-position:0 -29px;}
+    
+    .default {}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded',function(){
+            var star = document.querySelector('#star');
+            var info = document.querySelector('#info');
+            var lis = star.children;
+            var currentStar = 0;
+            var arr = ['差评', '不推荐', '一般', '推荐', '强力推荐'];
+            star.onmouseover = e=>{
+                e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(target.tagName.toLowerCase()==='li'){
+                    for(var i=0;i<lis.length;i++){
+                        if(lis[i]===target){
+                            break;
+                        }
+                    }
+                    for(var j=0;j<lis.length;j++){
+                        if(j<=i){
+                            lis[j].className = 'active';
+                        }else{
+                            lis[j].className = '';
+                        }
+                    }
+                }
+            }
+            star.onclick = e=>{
+                e = e || window.event;
+                var target = e.target || e.srcElement;
+                if(target.tagName.toLowerCase()==='li'){
+                    for(var i=0;i<lis.length;i++){
+                        if(lis[i]===target){
+                            currentStar = i;
+                            info.innerText = arr[i];
+                            break;
+                        }
+                    }
+                }
+            }
+            star.onmouseout = ()=>{
+                for(var i=0;i<lis.length;i++){
+                    if(i<=currentStar){
+                        lis[i].className = 'active';
+                    }else{
+                        lis[i].className = '';
+                    }
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <ul id="star">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <div id="info"></div>
+</body>
+
+</html>

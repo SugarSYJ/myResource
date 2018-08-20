@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>day9作业讲解</title>
+	<script>
+	window.onload = function(){
+		/*
+			作业：
+			1、全选和反选checked
+			2、获取浏览地址后的参数并转换成对象格式
+				?name=green&age=18&school=千锋&class=h5开发&lesson=javascript
+			3、简易日历
+			[扩展]表格的即时编辑
+		 */
+
+		 /*
+		 	1、全选和反选checked
+		 	思路：
+		 		1）获取全选复选框和所有爱好复选框
+		 		2）给全选复选框绑定点击事件
+		 			当选中时，勾选所有的爱好
+		 			当不选中时，取消勾选所有的爱好
+		 		3）给每一个爱好复选框绑定点击事件
+		 			当有一个未选中，则全选复选框取消勾选
+		 			当每个爱好都选中，则全选复选框勾选
+		  */
+		 // 1）获取全选复选框和所有爱好复选框
+		 var dataList = document.getElementById('dataList');
+		 var all = document.getElementById('all');
+		 var hobby = document.getElementsByName('hobby');
+
+		 // 2）给全选复选框绑定点击事件
+		 all.onclick = function(){
+		 	// 当选中时，勾选所有的爱好,当不选中时，取消勾选所有的爱好
+		 	/*if(all.checked){
+		 		for(var i=0;i<hobby.length;i++){
+		 			hobby[i].checked = true;
+		 		}
+		 	}else{
+		 		for(var i=0;i<hobby.length;i++){
+		 			hobby[i].checked = false;
+		 		}
+		 	}*/
+		 	for(var i=0;i<hobby.length;i++){
+	 			hobby[i].checked = this.checked;
+	 		}
+		 }
+
+		 // 3）给每一个爱好复选框绑定点击事件
+		 for(var i=0;i<hobby.length;i++){
+		 	hobby[i].onclick = function(){
+		 		// 只要有一个未选中，则全选复选框取消勾选
+		 		// 当每个爱好都选中，则全选复选框勾选
+		 		for(var i=0;i<hobby.length;i++){
+		 			// 只要有一个未选中，则全选复选框取消勾选,并跳出整个循环
+		 			if(!hobby[i].checked){
+		 				all.checked = false;
+		 				break;
+		 			}
+		 		}
+
+		 		// 当i值等于hobby的个数时，说明所有复选框都选中了
+		 		if(i == hobby.length){
+		 			all.checked = true;
+		 		}
+		 	}
+		 }
+
+
+		 /*2、获取浏览地址后的参数并转换成对象格式
+				?name=green&age=18&school=千锋&class=h5开发&lesson=javascript*/
+		var btnSetURL = document.getElementById('setUrl');
+		var btnGetURL = document.getElementById('getUrl');
+		btnSetURL.onclick = function(){
+			location.search = '?name=green&age=18&school=千锋&class=h5开发&lesson=javascript';
+		}
+
+		btnGetURL.onclick = function(){
+			// 把URL参数转换成数组
+			var params = location.search.substring(1).split('&');
+
+			// 把数组转换成对象：
+			var obj = {};
+			params.forEach(function(val){
+				var attr = val.split('=');
+
+				// 把参数写入对象
+				obj[attr[0]] = decodeURI(attr[1]);
+			});
+
+
+		}
+
+	}
+		 
+	</script>
+</head>
+<body>
+	<table id="dataList">
+		<thead>
+			<th><input type="checkbox" name="all" id="all"></th>
+			<th>爱好</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>篮球</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>足球</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>羽毛球</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>爬山</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>游泳</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>购物</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>看电影</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>旅游</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>音乐</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" name="hobby"></td>
+				<td>画画</td>
+			</tr>
+		</tbody>
+	</table>
+<br><br>
+	<button id="setUrl">设置URL地址</button>
+	<button id="getUrl">获取URL参数</button>
+</body>
+</html>

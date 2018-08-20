@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+    <div id="div1">
+        <button id="btn1">别点我</button>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            //bind(eventType, handler)
+            //多个事件类型可以通过用空格隔开一次性绑定：
+            //$('#btn1').bind('click', { mess: '你又点我了！！！' }, function (event) {
+            //    console.log(event.data.mess);
+            //});
+            //on(eventType, element, data, callback)
+            $(document).on('click', '#btn1', function () {
+                var obj = {};
+                obj.name = "dk";
+                obj.age = function () {
+                    return 18;
+                }
+                return obj;
+            }, function (evt) {
+                //if ($(evt.target).is('#btn1')) {
+                //    console.log('你又点我了！！！');
+                //}
+                console.log(evt.data().age());
+                //console.log(evt.data.mess);
+                //console.log(evt.target);
+            })
+        })
+    </script>
+</body>
+</html>

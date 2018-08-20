@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义右键菜单</title>
+	<style>
+	ul{list-style:none;padding:0;margin:0;}
+	.context-menu{display:none;position:absolute;top:10px;left:10px;width:160px;padding:2px;border:1px solid #ddd;line-height:1.5;color:#666;}
+	.context-menu li{padding:0 5px;border-bottom:1px solid #dfdfdf;}
+	.context-menu li:hover{background-color:#efefef;color:#333;}
+	.context-menu li:last-child{border-bottom:none;}
+	</style>
+	<script>
+		window.onload = function(){
+			/*
+				自定义右键菜单
+				思路：
+					1）用css和html自定一个菜单，并隐藏
+					2）获取页面元素
+					3）给document绑定oncontextmenu事件
+						显示自定义菜单，定位到鼠标右击的位置
+						隐藏默认菜单(阻止浏览器默认行为)
+					4）点击空白地方，隐藏自定义菜单
+			 */
+			// 2）获取页面元素
+			var contextMenu = document.getElementsByClassName('context-menu')[0];
+
+			// 3）给document绑定oncontextmenu事件
+			document.oncontextmenu = function (e) {
+				e = e || window.event;
+
+				// 显示自定义菜单并定位
+				contextMenu.style.display = 'block';
+				contextMenu.style.left = e.clientX + 10 + 'px';
+				contextMenu.style.top = e.clientY + 10 + 'px';
+
+				// 隐藏默认菜单(阻止浏览器默认行为)
+				e.preventDefault();
+			}
+
+			// 4）点击空白地方，隐藏自定义菜单
+			document.onclick = function(e){
+			    contextMenu.style.display = 'none';
+			}
+
+			// 点击菜单时不隐藏菜单（阻止事件冒泡）
+			contextMenu.onclick = function(e){
+				e.stopPropagation();
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="context-menu">
+		<ul>
+			<li>菜单1</li>
+			<li>菜单2</li>
+			<li>菜单3</li>
+			<li>菜单4</li>
+			<li>菜单5</li>
+		</ul>
+	</div>
+</body>
+</html>

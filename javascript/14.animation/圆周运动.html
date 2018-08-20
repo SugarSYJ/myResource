@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            .box1{width: 300px;height: 300px;position:absolute;border:1px solid pink;border-radius:50%;}
+            .box2{width: 20px;height: 20px;position:absolute;background:green;border-radius:50%;}
+        </style>
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded',()=>{
+                var box1 = document.querySelector('.box1');
+                var box2 = document.querySelector('.box2');
+                window.onresize = ()=>{
+                    show();
+                }
+                var r = box1.offsetWidth/2;
+                var deg = 0;
+                setInterval(()=>{
+                    deg += 5;
+                    deg = deg%360;
+                    go();
+                },30);
+                show();
+                function show(){
+                    box1.style.left = (window.innerWidth-box1.offsetWidth)/2 + 'px';
+                    box1.style.top = (window.innerHeight-box1.offsetHeight)/2 + 'px';
+                    go();
+                }
+                function go(){
+                    var rad = deg*Math.PI/180;
+                    var a = r*Math.cos(rad);
+                    var b = r*Math.sin(rad);
+                    var left = window.innerWidth/2 + a - box2.offsetWidth/2;
+                    var top = window.innerHeight/2 + b - box2.offsetHeight/2;
+                    box2.style.left = left + 'px';
+                    box2.style.top = top + 'px';
+                }
+            })
+        </script>
+    </head>
+    <body>
+        <div class="box1"></div>
+        <div class="box2"></div>
+    </body>
+</html>

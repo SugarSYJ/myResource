@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            window.onload = function(){
+                /*
+                    节点关系（可能获取到文本节点）
+                        所有节点                                            元素节点（IE9+,children除外）
+                        * 父节点
+                            * parentNode                                    parentElement           获取父级节点元素
+                        * 子节点
+                            * childNodes：获取所有子节点（包括文本节点）    children                获取元素的全部子元素
+                            * firstChild：获取第一个子节点                   firstElementChild       获取第一个子元素
+                            * lastChild：获取最后一个子节点                   lastElementChild        获取最后一个子元素
+                        * 兄弟节点
+                            * nextSibling：下一个兄弟节点                   nextElementSibling      获取下一个元素
+                            * previousSibling：前一个兄弟节点               previousElementSibling  获取前一个元素
+                    
+                    兼容IE低版本浏览器（封装）
+                        * 先获取所有节点
+                        * 过滤文本节点（nodeType）
+                 */
+                var list = document.getElementById('list');
+                // 获取元素的父节点
+                console.log(list.parentNode);
+                // 通过子节点获取所有a标签
+                console.log(list.childNodes);
+                // 获取兄弟节点
+                console.log('nextSibling:',list.nextSibling);
+            }
+        </script>
+    </head>
+    <body>
+        <h1>节点关系</h1>
+        <div id="list">
+            <a href="#">google</a>
+            <a href="#" id="baidu">baidu</a>
+            <a href="#">Yahoo</a>
+            <div class="page">
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+            </div>
+        </div>
+        <div class="footer"></div>
+    </body>
+</html>

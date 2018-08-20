@@ -1,0 +1,33 @@
+*{
+    margin:0;
+    padding:0;
+}
+#toubu,#touxia,#zhongshang,#zhong,#zhongxia,#weibu{
+    width:1000px;
+    margin-left:auto;
+    margin-right:auto;
+}
+#toubu{
+    height:100px;
+    background-color:#FFFFFF;
+}
+#touxia{
+    height:59px;
+    background-color:#313131;
+}
+#zhongshang{
+    height:463px;
+    background-color:#343440;
+}
+#zhong{
+    height:547px;
+    background-color:#FFFFFF;
+}
+#zhongxia{
+    height:306px;
+    background-color:#E5E5E5;
+}
+#weibu{
+    height:82px;
+    background-color:#FFFFFF;
+}

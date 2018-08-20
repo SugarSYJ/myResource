@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            .box{
+                width: 300px;
+                height: 300px;
+                border:2px solid red;
+                position:relative;
+            }
+            .box .boximg{
+                width: 300px;
+                height: 300px;
+                overflow:hidden;
+            }
+            .box .boximg img{
+                width: 300px;
+                height: 300px;
+            }
+            .box .boxtiao{
+                width: 120px;
+                height: 20px;
+                background: pink;
+                position:absolute;
+                right:0;
+                bottom:0;
+            }
+            .box .boxtiao a{
+                display:block;
+                width: 19px;
+                height: 20px;
+                margin-right:1px;
+                float: left;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="box">
+            <div class="boximg">
+                <img src="../images/img01.jpg" id="img01"/>
+                <img src="../images/img02.jpg" id="img02"/>
+                <img src="../images/img03.jpg" id="img03"/>
+                <img src="../images/img04.jpg" id="img04"/>
+                <img src="../images/img05.jpg" id="img05"/>
+                <img src="../images/img06.jpg" id="img06"/>
+            </div>
+            <div class="boxtiao">
+                <a href="#img01">1</a>
+                <a href="#img02">2</a>
+                <a href="#img03">3</a>
+                <a href="#img04">4</a>
+                <a href="#img05">5</a>
+                <a href="#img06">6</a>
+            </div>
+        </div>
+    </body>
+</html>

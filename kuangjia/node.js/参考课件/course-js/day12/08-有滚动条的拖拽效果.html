@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽效果</title>
+	<style>
+	body{height:2000px;}
+	#box{position:absolute;width:160px;height:160px;background-color:#f00;}
+	img{width:160px;}
+
+	</style>
+	<script>
+		window.addEventListener('load',function(){
+			/*
+				拖拽效果
+					1）前提是定位
+					2）给#box添加onmousedown事件
+						给document绑定onmousemove事件,在这个事件里不断改变#box的top,left值
+						left = e.clientX - e.offsetX
+						top = e.clientY - e.offsetY
+
+			 */
+			var box = document.getElementById('box');
+
+			box.onmousedown = function(e){
+				e = e || window.event;
+
+				// 获取点击时的位置坐标
+				var offsetLeft = e.offsetX;
+				var offsetTop = e.offsetY;
+
+				// 滚动条滚动过的距离
+				var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+				var scrollLeft = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+
+
+				document.onmousemove = function(evt){
+					evt = evt || window.event;
+					box.style.left = evt.pageX + 'px';
+					box.style.top = evt.pageY + 'px';
+
+				    // 阻止浏览器的默认行为
+					evt.preventDefault ? evt.preventDefault() : evt.retrunValue = false;
+
+					/*box.style.left = evt.clientX + scrollLeft - offsetLeft + 'px';
+					box.style.top = evt.clientY + scrollTop - offsetTop + 'px';*/
+
+					// pageX = clientX + scrollLeft;
+					// pageY = clientY + scrollTop;
+					
+					// pageX,pageY的兼容写法
+					//evt.pageX = evt.pageX || evt.clientX + scrollLeft;
+					//evt.pageY = evt.pageY || evt.clientY + scrollTop;
+
+	
+				}
+
+			}
+
+			box.onmouseup = function(){
+				document.onmousemove = null;
+			}
+
+		},false);
+	</script>
+</head>
+<body>
+	<div id="box"><img src="hg.jpg"></div>
+</body>
+</html>

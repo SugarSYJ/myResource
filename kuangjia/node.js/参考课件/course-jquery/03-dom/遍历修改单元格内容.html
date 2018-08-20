@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>遍历修改单元格内容</title>
+	<style>
+		body{padding:50px;}
+		.datalist{width:100%;border:1px solid #ddd;border-collapse:collapse;}
+		.datalist td{padding:3px 5px;border:1px solid #ddd;}
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+		$(function(){
+			var $datalist = $('.datalist');
+
+			// 点击删除按钮删除当前行
+			$datalist.click(function(e){
+				// 判断点击的是否为button
+				if($(e.target).is('button')){
+					$(e.target).closest('tr').remove()
+				}
+			});
+
+			$('#btnClear').click(function(){
+				// $('.datalist').html('');
+				// $('.datalist').text('');
+			    $datalist.empty();
+			});
+
+			// 删除表格
+			$('#btnDelete').click(function(){
+			    $datalist.remove();
+			});
+
+			$('#btnBack').click(function () {
+				$datalist.appendTo('body');
+			});
+
+			// 替换
+			$('#btnReplace').click(function(){
+				// $datalist.replaceWith('<img src="images/mv5.jpg"/>');
+				$('<img src="images/mv3.jpg"/>').replaceAll($datalist);
+			});
+
+			/*
+				.each()显性遍历
+				遍历修改单元格内容
+					1）遍历行
+					2）遍历列
+			 */ 
+
+			 $('.datalist tr').each(function(idx,tr){
+			 	/*$(tr).children().slice(1,-1).each(function(i,td){
+			 		var txt = $(td).text().replace(/\d+$/,'');
+			 		$(td).text(txt + (idx+1) + (i+1));
+			 	});*/
+
+			 	// prop,attr,css
+			 	$(tr).children().slice(1,-1).html(function(i,oldHtml){
+			 		// console.log(idx,oldHtml)
+			 		var txt = oldHtml.replace(/\d+$/,'');
+			 		return txt + (idx+1) + (i+1);
+			 	});
+			 });
+		});
+	</script>
+</head>
+<body>
+	<button id="btnClear">清空表格</button>
+	<button id="btnDelete">删除表格</button>
+	<button id="btnBack">回到从前</button>
+	<button id="btnReplace">替换</button>
+	<table class="datalist">
+		<tbody>
+			<tr>
+				<td width="10">1</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td width="60"><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+			<tr>
+				<td>10</td>
+				<td>单元格1</td>
+				<td>单元格2</td>
+				<td>单元格3</td>
+				<td>单元格4</td>
+				<td>单元格5</td>
+				<td><button>删除</button></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

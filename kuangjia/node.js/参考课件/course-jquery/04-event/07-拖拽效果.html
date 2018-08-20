@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽效果</title>
+	<style>
+	#box{width:160px;height:160px;background-color:#f00; position:absolute;}
+	img{width:160px;}
+
+	</style>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+	<script>
+	// 绑定方式
+		/*window.onload = function(){
+
+		}*/
+        //window.onclick = function () { console.log('A'); }
+        //window.onclick = function () { console.log('B'); }
+        //window.addEventListener('click', function () { console.log('C'); })
+        //window.addEventListener('click', function () { console.log('D'); })
+        $(window).click(function () {
+            console.log('A');
+        })
+        $(window).click(function () {
+            console.log('B');
+        })
+        window.addEventListener('load', function () {
+
+			/*
+				拖拽效果
+					1）前提是定位
+					2）给#box添加onmousedown事件
+						给document绑定onmousemove事件,在这个事件里不断改变#box的top,left值
+						left = e.clientX - e.offsetX
+						top = e.clientY - e.offsetY
+
+			 */
+            /*
+                1、获取要拖动的对像
+
+                2、给对像定义事件
+                   2-1、按住要拖动的对像
+	                （获取当前的鼠标位置）
+                   2-2、按住不放移动鼠标
+                      （移动过程中不断跟据鼠标位置改变对像的位置）
+                   2-3、移动到位之后松开按键
+
+                3、移除移动事件            
+            */
+
+			var box = $('#box');
+
+			box.bind('mousedown',function (e) {
+			    console.log(e);
+				var offsetLeft = e.offsetX;
+				var offsetTop = e.offsetY;
+				$(document).bind('mousemove', function (evt) {
+				    box.css({ left: evt.clientX - offsetLeft, top: evt.clientY - offsetTop });
+				}).mouseup(function () {
+				    $(document).unbind('mousemove');
+				})
+			    // 阻止浏览器的默认行为
+				e.preventDefault();
+			})
+        }, false);
+        //产生10个不重复的三位数的随机正整数
+        var result = [];
+        while (result.length < 10) {
+            var num = parseInt(Math.random() * 1000);
+            if (num > 99 && $.inArray(num, result) < 0) {
+                result.push(num);
+            }
+        }
+        console.log(result.join(','));
+	</script>
+</head>
+<body>
+	<div id="box"><img src="hg.jpg"></div>
+</body>
+</html>

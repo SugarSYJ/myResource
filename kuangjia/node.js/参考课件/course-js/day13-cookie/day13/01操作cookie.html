@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>01操作cookie</title>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            document.getElementById('setCookie').onclick = function () {
+                var expires = new Date();
+                expires.setSeconds(5);
+                document.cookie = '班级=1616;path=;expires=' + expires;
+                //document.cookie = '班级=1616;path=/coursejs/2th/day13/a/;expires=' + expires;
+                console.log('cookie 保存成功');
+            }
+
+            document.getElementById('showCookie').onclick = function () {
+                console.log(document.cookie);
+            }
+
+            document.getElementById('delCookie').onclick = function () {
+                var expires = new Date();
+                expires.setDate(1);
+                document.cookie = '班级=1616;path=;expires=' + expires;
+                console.log(document.cookie);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="setCookie">设置cookie</button>
+    <button id="showCookie">显示cookie</button>
+    <button id="delCookie">删除cookie</button>
+</body>
+</html>

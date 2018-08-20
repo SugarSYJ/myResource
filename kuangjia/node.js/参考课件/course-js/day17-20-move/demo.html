@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        body{margin: 0;}
+        .box {
+            height: 100px;
+            width: 100px;
+            background-color: #808080;
+            position:absolute;
+        }
+    </style>
+    <script src="common.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var box = document.getElementById('box');
+            box.onmouseover = function () {
+                animation({ "opacity": 0.2, "speed": 0.1, "element": box, "calc": false });
+                animationWidth({ "width": 500, "speed": 10, "element": box });
+            }
+            box.onmouseout = function () {
+                animation({ "opacity": 1, "speed": 0.1, "element": box });
+                animationWidth({ "width": 100, "speed": 10, "element": box, "calc": false });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="box" id="box"></div>
+</body>
+</html>

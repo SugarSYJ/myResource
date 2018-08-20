@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动原理</title>
+	<style>
+		html{height:100%;}
+		input[type=number]{width:60px;}
+		.container{position:relative;border:2px dashed #ddd;margin:50px auto;width:800px;height:300px;line-height:300px;text-align:center;font-size:40px;color:#ddd;}
+		#ball{position:absolute;top:0;left:0;width:50px;height:50px;border:1px solid #aaa;border-radius:50%;background:#f00 radial-gradient(at 20px 20px, #fff 2%,#ccc 40%, #999);box-shadow:0 5px 30px rgba(255,255,255,.8),0 5px 10px rgba(0,0,0,.6);}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ball = document.getElementById('ball');
+			var left = document.getElementById('left');
+			var top = document.getElementById('top');
+			var topleft = document.getElementById('topleft');
+			var btnTop = document.getElementById('btnTop');
+			var btnLeft = document.getElementById('btnLeft');
+			var fantan = document.getElementById('fantan');
+			var speed = 5;
+
+			left.oninput = function(){
+				ball.style.left = this.value*speed + 'px';
+			}
+			top.oninput = function(){
+				ball.style.top = this.value*speed + 'px';
+			}
+			topleft.oninput = function(){
+				ball.style.top = ball.style.left = this.value*5 + 'px';
+			}
+
+			var hspeed = vspeed = 10;
+			var leftTimer;
+			btnLeft.onclick = function(){
+				if(this.innerHTML == '不断改变left属性（激活）'){
+					this.innerHTML = '不断改变left属性';
+					clearInterval(leftTimer);
+					return;
+				}
+				this.innerHTML = '不断改变left属性（激活）';
+				leftTimer = setInterval(function(){
+					if(fantan.checked){
+						if(ball.parentElement.offsetWidth-ball.offsetLeft <= ball.offsetWidth){
+							hspeed = -hspeed;
+						}else if(ball.offsetLeft <=0){
+							hspeed = Math.abs(hspeed);
+						}
+					}
+					ball.style.left = ball.offsetLeft + hspeed + 'px';
+				},50);
+			}
+			var topTimer;
+			btnTop.onclick = function(){
+				if(this.innerHTML == '不断改变top属性（激活）'){
+					this.innerHTML = '不断改变top属性';
+					clearInterval(topTimer);
+					return;
+				}
+				this.innerHTML = '不断改变top属性（激活）';
+				topTimer = setInterval(function(){
+					if(fantan.checked){
+						if(ball.parentElement.offsetHeight-ball.offsetTop <= ball.offsetHeight){
+							vspeed = -vspeed;
+						}else if(ball.offsetTop <=0){
+							vspeed = Math.abs(vspeed);
+						}
+					}
+					
+					ball.style.top = ball.offsetTop + vspeed + 'px';
+				},50);
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>运动的原理</h1>
+	
+	<label for="top">top: <input type="number" id="top"></label>
+	<label for="left">left: <input type="number" id="left"></label>
+	<p><label for="topleft">同时改变top,left：<input type="number" id="topleft"></label>
+	<button id="btnTop">不断改变top属性</button><button id="btnLeft">不断改变Left属性</button><label><input type="checkbox" id="fantan">反弹</label>
+	<div class="container">
+		设置了相对定位的父级
+		<div id="ball"></div>
+	</div>
+</body>
+</html>

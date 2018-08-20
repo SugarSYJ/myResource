@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义动画</title>
+	<style>
+		.blackgirl{position: absolute;}
+	</style>
+	<script src="lib/jquery-3.2.1.js"></script>
+	<script>
+		$(function(){
+			var $bg = $('.blackgirl');
+			var $type = $('#type');
+			$('.btn').on('click',function(){
+				var attr = $type.val();
+				var property = {};
+				property[attr] = 400;
+				$bg.animate(property,2000,function(){
+					console.log(666);
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<button class="btn">动画</button>
+	<select id="type">
+		<option value="left">left</option>
+		<option value="top">top</option>
+		<option value="width">width</option>
+		<option value="height">height</option>
+	</select>
+	<img src="img/g01.jpg" class="blackgirl">
+</body>
+</html>

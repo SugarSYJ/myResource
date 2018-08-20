@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/socket.io/2.0.4/socket.io.js"></script>
+    </head>
+    <body>
+        <h3 id="status"></h3>
+        <label for="">昵称</label> <input type="text" id="nickname"/>
+        <input type="button" value="登录" id="btn_login"/>
+        <input type="button" value="下线" id="btn_logout"/>
+        <div id="messageList">
+            <ul></ul>
+        </div>
+        <input type="text" id="txt_message"/>
+        <input type="button" value="发送" id="btn_send"/>
+
+        <script type="text/javascript">
+            $(function(){
+                var socket;
+                $('#btn_login').click(function(){
+                    socket = io.connect('ws://localhost:88');
+                    socket.on('b');
+                    socket.emit('b',{nickname: $('#nickname').val(), message: $('#txt_message').val()});
+
+                    socket.on('lemonMess',function(msg){
+                        console.log(msg);
+                    });
+                });
+                $('#btn_send').click(function(){
+                    socket.emit('dkmess', JSON.stringify({nickname: $('#nickname').val(), message: $('#txt_message').val()}))
+                })
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            window.onload = function(){
+                var btn1 = document.getElementsByTagName('input')[0];
+                var btn2 = document.getElementsByTagName('input')[1];
+                var p = document.getElementsByTagName('p')[0];
+                var arr = p.getElementsByTagName('input');
+                var len = arr.length;
+                btn1.onclick = function(){
+                    for(var i=0;i<len;i++){
+                        if(btn1.checked){
+                            arr[i].checked = true;
+                        }else{
+                            arr[i].checked = false;
+                        }
+                    }
+                }
+                for(var i=0;i<len;i++){
+                    arr[i].onclick = function(){
+                        btn1.checked = all();
+                    }
+                }
+                function all(){
+                    var res = true;
+                    for(var i=0;i<len;i++){
+                        if(!arr[i].checked){
+                            res = false;
+                            break;
+                        }
+                    }
+                    return res;
+                }
+                btn2.onclick = function(){
+                    for(var i=0;i<len;i++){
+                        if(arr[i].checked){
+                            arr[i].checked = false;
+                        }else{
+                            arr[i].checked = true;
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <label><input type="checkbox" />全选</label>
+        <label><input type="checkbox" />反选</label>
+        <p>
+            爱好：<br/>
+            <label><input type="checkbox" />篮球</label>
+            <label><input type="checkbox" />排球</label>
+            <label><input type="checkbox" />足球</label>
+            <label><input type="checkbox" />乒乓球</label>
+            <label><input type="checkbox" />羽毛球</label>
+            <label><input type="checkbox" />跑步</label>
+            <label><input type="checkbox" />跳绳</label>
+            <label><input type="checkbox" />瑜伽</label>
+            <label><input type="checkbox" />骑行</label>
+            <label><input type="checkbox" />桌球</label>
+        </p>
+    </body>
+</html>

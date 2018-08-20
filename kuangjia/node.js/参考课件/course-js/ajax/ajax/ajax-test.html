@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ajax测试(阿贾克斯)</title>
+	<script>
+		window.onload = function(){
+			var btn = document.getElementById('send');
+
+			// 创建一个ajax请求
+			// 1）创建请求对象,返回一个异步请求对象
+			var req = new XMLHttpRequest();//readState=0
+
+			//处理返回数据(回调)
+			req.onreadystatechange = function(){
+				console.log(req.readyState,req.responseText);
+				if(req.readyState == 4){
+					var p = document.createElement('p');
+					p.innerHTML = req.responseText;
+					
+					document.body.insertBefore(p,btn);
+				}
+			}
+
+			// 点击按钮是请求数据
+			btn.onclick = function(){
+				// 2)设置请求参数 open(type,url,async)与服务器建立一个链接
+				// 同域：协议(http)，域名(localhost)，端口(8080)三者一致
+				// 页面地址，ajax请求地址
+				// 当数据请求完成后，这个链接会自动断开
+				req.open('get','http://localhost:8080/ajax/ajaxtest',true);//readState=1
+
+				// 3)发送请求 send(data)
+				req.send(null);//readState=2
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>Ajax测试</h1>
+
+	<button id="send">请求数据</button>
+</body>
+</html>

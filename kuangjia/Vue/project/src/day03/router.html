@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="../js/vue.js"></script>
+        <script src="../js/vue-router.js"></script>
+    </head>
+    <body>
+        <div id="app">
+            <router-link to="/foo">foo</router-link>
+            <router-link to="/bar">bar</router-link>
+            <router-link to="/params/sam/123456">params</router-link>
+            <router-view></router-view>
+        </div>
+        <script >
+            const Foo = {template:'<div><h1>Foo Content</h1></div>'};
+            const Bar = {template:'<div><h1>Bar Content</h1></div>'};
+            const Params = {template:'<div><h1>Params Content - {{$route.params.username}} - {{$route.params.pwd}}</h1></div>'};
+
+            var router = new VueRouter({
+                routes:[
+                    {path:'/foo',component:Foo},
+                    {path:'/bar',component:Bar},
+                    {path:'/params/:username/:pwd',component:Params}
+                ]
+            })
+            var vm = new Vue({
+                el:"#app",
+                router:router
+            })
+        </script>
+    </body>
+</html>

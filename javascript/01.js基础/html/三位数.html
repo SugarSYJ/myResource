@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript">
+            var num = parseInt(Math.random()*1000);
+            var geWei = num % 10;
+            var shiWei = parseInt(num % 100 / 10);
+            var baiWei = parseInt(num / 100);
+            document.write('三位数：' + num);
+            document.write('   百位：' + baiWei + '，十位数：' + shiWei + '，个位数：' + geWei);
+        </script>
+    </head>
+    <body>
+        <h1>给定一个三位数，分别把这个数字的百位、十位、个位算出来并显示。</h1>
+    </body>
+</html>

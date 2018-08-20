@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组的遍历</title>
+	<style>
+	span{display: inline-block;padding:2px 5px;margin:5px;width:100px;background-color:#fc0;text-align:center;}
+	</style>
+	<script>
+		/*
+			数组的遍历
+			往数组写入200个数
+		 */
+		var arr = [];
+		for(var i=1;i<=100;i++){
+			arr[i] = 'html' + i;
+		}
+		console.log(arr);
+
+		/*
+			把名字写入页面
+		 */
+		var namelist = ['杨鸟','黎文博','王红丽','何雯敏','胡栩宁','付光学','李俊','王可佳','张凯','王雯滔','赖金荣','杨乐','熊江林','杨冰','彭涛','欧莉玲','罗晓威','罗志明','李旭宏','杨洁','余涛','黄振业','饶家麒','吕英华','夏粤琳','邓建','吴群','张琳','许隋立','吴边','张世意','姜浩','夏龙旭','梁湛炯','杨天文','刘治洪','吴镇阳','陈昭文','廖志勇','黄萍','伍玉成','黄晓','肖锋','徐赟','林煌','陈其帆','招伟炽','王素芳','陈绵山','胡亚东','魏超','陈越','钟志伟','郑凯华','陈锦','程小权','谢雪锋','钟广华','陈华轩','姜明','黄海涛','郑卓卉','黄梅','张宇飞','杨小明','张进','张文伟','蒋露','张桂梅','余威龙','何文豪'];
+		for(var i=0;i<namelist.length;i++){
+			document.write('<span>' + namelist[i] + '</span>');
+
+			// 5个一行
+			if((i+1)%5 == 0){
+				document.write('<br>');
+			}
+		}
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

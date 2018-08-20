@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>02封装cookie</title>
+    <script src="cookie.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+
+            document.getElementById('setCookie').onclick = function () {
+                setCookie('班级', 1616, 10);
+            }
+
+            document.getElementById('showCookie').onclick = function () {
+                console.log(getCookie('班级'));
+            }
+
+            document.getElementById('delCookie').onclick = function () {
+                removeCookie('班级');
+            }
+        }
+    </script>
+</head>
+<body>
+    <button id="setCookie">设置cookie</button>
+    <button id="showCookie">显示cookie</button>
+    <button id="delCookie">删除cookie</button>
+</body>
+</html>

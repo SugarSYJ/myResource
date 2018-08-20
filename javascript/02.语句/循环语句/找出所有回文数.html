@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>五位数中，对称的数称为回文数，找出所有的回文数。
+            如: 12321</h3>
+        <script src="../../common.js"></script>
+        <script type="text/javascript">
+            var res = 0;
+            for(var i=10000;i<=99999;i++){
+                var g = i%10;
+                var s = parseInt((i%100)/10);
+                var b = (parseInt(i/100))%10;
+                var q = parseInt(i/1000)%10;
+                var w = parseInt(i/10000);
+                res = w*10000+q*1000+b*100+s*10+g;
+                if(b-1 === s && s=== q && q=== g+1 && g+1=== w+1){
+                    document.write(res + ', ');
+                }
+            }
+        </script>
+    </body>
+</html>

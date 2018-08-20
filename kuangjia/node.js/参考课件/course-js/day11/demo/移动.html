@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>draft</title>
+    <script type="text/javascript">
+        window.onload = function () {
+            //1、获取对像
+            var btn = document.getElementById('btn');
+            //2、给对像添加点击事件
+            btn.ondblclick = function () {
+                //3、执行
+                console.log("双击我！");
+            }
+
+            var div = document.getElementsByTagName('div')[0];
+            div.onmouseover = function () {
+                console.log('移进来了!');
+            }
+            div.onmouseout = function () {
+                console.log('移出去了！');
+            }
+            div.onmousemove = function () {
+                console.log('我在移动！');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div style="width:200px; height:200px; border:solid 2px;">
+        <button id="btn">双击我</button>
+        <button id="btn2">按住</button>
+    </div>
+</body>
+</html>

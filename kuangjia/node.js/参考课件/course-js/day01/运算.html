@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js运算</title>
+	<style>
+	#num1{}
+	</style>
+	<script>
+		// 函数
+		// 函数声明
+		// 加法运算
+		function sum(){
+			// 获取页面元素document.getElementById()
+			var num1 = document.getElementById('num1');
+			var num2 = document.getElementById('num2');
+
+			// 取值：
+			// value取文本输入框的值
+			var _num1 = Number(num1.value);//'10'=>10
+			var _num2 = Number(num2.value);//'20'=>20
+			alert(_num1 + _num2);
+
+			// 字符串拼接'10' + '20' = '1020';
+		}
+
+
+		// 减法运算
+		function sub(){
+			var num1 = document.getElementById('num1');//#num1元素
+			var num2 = document.getElementById('num2');//#num2元素
+			alert(num1.value - num2.value);
+
+			// '10' - '20'
+			// 在js内部（隐式转换）：如果运算不能进行下去，内部就会尝试进行数据类型的转换
+		}
+
+		// 乘法
+		function mul(){
+			var num1 = document.getElementById('num1').value;//'533'
+			var num2 = document.getElementById('num2').value;//'219'
+			alert(num1*num2);
+		}
+
+		// 除法
+		function div(){
+			var num1 = document.getElementById('num1').value;//'533'
+			var num2 = document.getElementById('num2').value;//'219'
+			alert(num1/num2);
+		}
+	</script>
+</head>
+<body>
+	<input type="text" id="num1"/> + <input type="text" id="num2"/> <button onclick="sum()">加法</button><button onclick="sub()">减法</button><button onclick="mul()">乘法</button><button onclick="div()">除法</button>
+</body>
+</html>

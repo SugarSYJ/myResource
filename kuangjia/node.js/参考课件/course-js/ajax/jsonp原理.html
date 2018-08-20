@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jsop实现原理</title>
+	<script>
+	// jsop原理
+	// 利用script标签能加载其他域名的js文件的原理，来实现跨域数据的请求
+	// API: http://localhost:3000/getJSONP?callback=getData
+		function getData(data){
+			console.log(data);
+		}
+
+		// 创建一个script标签,并放到页面相应位置
+		var script = document.createElement('script');
+		script.src = 'http://localhost:3000/getJSONP?callback=getData';
+		document.head.appendChild(script);
+	</script>
+	<!-- <script src="http://localhost:8080/ajax/jsonpdata.js?callback=getData"></script> -->
+	<!-- <script src="http://localhost:3000/getJSONP?callback=getData"></script> -->
+</head>
+<body>
+	
+</body>
+</html>

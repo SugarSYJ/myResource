@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>01事件类型</title>
+	<style>
+		.box{width:200px;height:100px;background-color:#f60;}
+	</style>
+	
+</head>
+<body>
+	<div class="box" id="box"></div>
+	<script>
+		(function(){
+			/*
+				事件处理函数的触发都是一瞬间的
+					* 
+			 */
+			var box = document.getElementsByClassName('box')[0]
+
+			box.onclick = function(){
+				console.log('click');
+			}
+
+			box.onmousedown = function(){
+				console.log('mousedown')
+			}
+
+			box.onmouseup = function(){
+				console.log('mouseup')
+			}
+
+			box.ondblclick = function(){
+				console.log('dblclick')
+			}
+
+			box.onmouseover = function(){
+				console.log('over')
+			}
+
+			box.onmouseout = function(){
+				console.log('out')
+			}
+		})();
+	</script>
+</body>
+</html>

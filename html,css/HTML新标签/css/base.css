@@ -1,0 +1,215 @@
+﻿@charset "UTF-8";
+/*css 初始化 */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img,input{ margin:0; padding:0; }
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none; }   /*去掉input等聚焦时的蓝色边框*/
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0; font-family: "SimSun","宋体";}
+select, input { vertical-align:middle;}
+/*select, input, textarea { font-size:12px; margin:0; }*/
+textarea { resize:none; } /*防止拖动*/
+img {border:0; vertical-align:middle; }  
+/*  去掉图片低测默认的3像素空白缝隙，或者用display：block也可以*/
+table { border-collapse:collapse; }
+
+
+/*添加公共样式*/
+/*body {
+    font:12px/150% Arial,Verdana,"\5b8b\4f53";
+    color:#666;
+    background:#fff
+}*/
+.clearfix:after{
+    content:"";
+    display:block;
+    height: 0;
+    clear:both;
+    overflow:hidden;
+    visibility:hidden;
+    zoom:1;
+}
+a {color:#666; text-decoration:none; }
+a:hover{color:#C81623;}
+h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:1em;}  /*设置h标签的大小，设置跟父亲一样大的字体font-size:100%;*/
+s,i,em{font-style:normal;text-decoration:none;}
+
+
+/*公共类*/
+.container {  /*版心 提取 */
+    width: 960px;
+    margin:0 auto;
+}
+.fl {
+    float:left;
+}
+.fr {
+    float:right;
+}
+.al {
+    text-align:left;
+}
+.ac {
+    text-align:center;
+}
+.ar {
+    text-align:right;
+}
+.hide {
+    display:none;
+}
+.font12{ font-size: 12px;}
+.font14{ font-size: 14px;}
+.font16{ font-size: 16px;}
+
+/*公共部分*/
+.tanluzhe{
+    min-width:960px;_width:expression(document.body.clientWidth < 960 ? "960px" : "auto");
+    height: 3333px;
+}
+#header{
+    background: #E50011;
+}
+#header .container{
+    padding-top:28px;
+    overflow:hidden;
+}
+#header h3{
+    width: 210px;
+    height: 37px;
+    background:url("../images/header1.png") no-repeat;
+    float: left;
+    margin-right:126px;
+}
+#header .header_l{
+    width: 322px;
+    height: 34px;
+    border:1px solid #fff; 
+    position:relative;
+}
+#header .header_l p{
+    width: 56px;
+    line-height: 34px;
+    font-size:14px;
+    color:#fff;
+    padding:0 35px 0 10px; 
+    position:relative;
+    float: left;
+}
+#header .header_l p i{
+    width: 13px;
+    height: 10px;
+    background: url("../images/header2.png") no-repeat;
+    position:absolute;
+    right:11px;
+    top:15px;
+}
+#header .header_l input{
+    width: 221px;
+    height: 34px;
+    color:#A9A9A9;
+    float: left;
+    background: #E50011;
+}
+#header .header_l i{
+    width: 29px;
+    height: 26px;
+    background: url("../images/header3.png") no-repeat;
+    position:absolute;
+    right:2px;
+    top:2px;
+}
+#header .header_r{
+    width: 287px;
+    height:34px;
+}
+#header .header_r li{
+    float: left;
+}
+#header .header_r li a{
+    display:block;
+    height: 34px;
+    font-size:14px;
+    color:#fff;
+    line-height: 34px;
+}
+#header .header_r li a span{
+    padding:0 8px;
+    border-left:2px solid #fff;
+}
+#nav{
+    padding-top:28px;
+    background: #E50011;
+}
+#nav .container{
+    position:relative;
+}
+#nav .nav_l{
+    width: 540px;
+    height: 37px;
+    
+}
+#nav .nav_l li{
+    float: left;
+}
+#nav .nav_l li a{
+    display:block;
+    height: 37px;
+    line-height: 37px;
+    font-size:14px;
+    color:#fff;
+    padding:0 10px;
+}
+#nav .nav_l li:hover a{
+    color:#E50011;
+    background: #fff;
+}
+#nav .container i{
+    display:block;
+    width: 290px;
+    height: 20px;
+    background: url("../images/nav.png") no-repeat;
+    position:absolute;
+    right:0px;
+    top:8px;
+}
+#banner img{
+    width: 100%;
+    height: 472px;
+}
+#main{
+    background: #FFFFFF;
+}
+#main .main_t ul{
+    padding-left:25px;
+}
+#main .main_t li{
+    float: left;
+}
+#main .main_t li a{
+    display:block;
+    width: 130px;
+    height: 180px;
+    position:relative; 
+}
+#main .main_t li a i{
+    display:block;
+    width: 86px;
+    height: 86px;
+    background:url("../images/main2.fw.png") no-repeat;
+    position:absolute;
+    left:22px;
+    top:47px;
+}
+#main .main_c{
+    background: #F5F5F5;
+    padding:40px 0;
+}
+#main .main_c1{
+    height: 250px;
+    padding:14px 0 0 20px;
+    background: #FFFFFF;
+}
+#main .main_c1l h3{
+    line-height: 18px;
+    font-size:18px;
+    color:#333333;
+}

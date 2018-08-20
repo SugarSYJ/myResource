@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            font-size: 12px;
+        }
+
+        .container {
+            width: 100%;
+            height: 300px;
+        }
+
+        .box {
+            width: 300px;
+            height: 170px;
+            float: left;
+            position: relative;
+            margin: 10px;
+            overflow: hidden;
+        }
+
+            .box > a {
+                display: block;
+                position: absolute;
+                top: 140px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                color: #fff;
+                background: #000;
+                opacity: 0.8;
+                line-height: 25px;
+                padding: 0 5px;
+            }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            //工厂模式
+            function move() {
+                var obj = new Object();
+                obj.startMove = function (_event) {
+                    //事件源当前的元素
+                    var self = _event.target;
+                    var _tagName = self.tagName.toLowerCase();
+                    if (_tagName == 'a' || _tagName == 'img') {
+                        if (_tagName == 'img') {
+                            // img > a
+                            self = self.nextSibling.nextSibling;
+                        } 
+                        if (self.timer) {
+                            window.clearInterval(self.timer);
+                        }
+
+                        self.timer = window.setInterval(function () {
+                            var top = self.offsetTop;
+                            top -= 10;
+                            if (top <= 0) {
+                                top = 0;
+                                window.clearInterval(self.timer);
+                            }
+                            self.style.top = top + 'px';
+                        }, 30)
+                    }
+                };
+                obj.startMove2 = function (_event) {
+                    //事件源当前的元素
+                    var self = _event.target;
+                    var _tagName = self.tagName.toLowerCase();
+                    if (_tagName == 'a' || _tagName == 'img') {
+                        if (_tagName == 'img') {
+                            // img > a
+                            self = self.nextSibling.nextSibling;
+                        }
+                        if (self.timer) {
+                            window.clearInterval(self.timer);
+                        }
+                        self.timer = window.setInterval(function () {
+                            var top = self.offsetTop;
+                            top += 10;
+                            if (top >= 140) {
+                                top = 140;
+                                window.clearInterval(self.timer);
+                            }
+                            self.style.top = top + 'px';
+                        }, 30)
+                    }
+                }
+                return obj;
+            }
+
+            var container = document.getElementById('container');
+            var _move = move();
+            container.onmouseover = function (_event) {
+                _event = _event || window.event;
+                _move.startMove(_event);
+            }
+            container.onmouseout = function (_event) {
+                _event = _event || window.event;
+                _move.startMove2(_event);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="box">
+            <img src="../images/b1.jpg" />
+            <a href="#">学会html5 <br />本课程由浅入深，逐步推进，以示例为主线，详细完整地介绍HTML5的新功能与新特征</a>
+        </div>
+        <div class="box">
+            <img src="../images/b2.jpg" />
+            <a href="#">圆角水晶按钮制作 <br />网页中的圆角按钮和宽度自适应按钮就这么轻松制作！</a>
+        </div>
+        <div class="box">
+            <img src="../images/b3.jpg" />
+            <a href="#">导航条菜单的制作 <br />30分钟教你轻松制作出各种形式的网站导航条菜单
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>分页获取数据</title>
+	<style>
+	.datalist{height:400px;border:1px solid #ddd;font-size:12px;}
+	.datalist li{margin-bottom:8px;padding:0 10px 10px;height:20px;border-bottom:1px dotted #ddd;}
+	.page span{display: inline-block;margin:5px;padding:5px;background-color:#ccc;color:#999;}
+	.page span.active{background-color:#f90;color:#fff;}
+	</style>
+	<script>
+		// http://localhost:8080/ajax/football?pageNo=1
+		window.onload = function(){
+			var datalist = document.getElementsByClassName('datalist')[0];
+			var page = document.getElementsByClassName('page')[0];
+
+			
+
+			// 给分页绑定事件
+			page.onclick = function(e){
+				e = e || window.event;
+				if(e.target.tagName.toLowerCase() == 'span'){
+					req.open('get','http://localhost:3000/football?pageNo='+e.target.innerHTML,true);
+					req.send();
+
+					// 给分页添加高亮
+					for(var i=0;i<page.children.length;i++){
+						page.children[i].className = '';
+					}
+					e.target.className = 'active';
+				}
+				
+
+				
+			}
+
+			// 创建异步请求
+			var req = new XMLHttpRequest();
+			req.onreadystatechange = function(){
+				if(req.readyState == 4){
+					if(req.status == 200){
+						var dataList = JSON.parse(req.responseText);
+						var pageLen = Math.ceil(dataList.total/dataList.pageCount);
+						dataList = dataList.data;
+
+						if(page.innerHTML == ''){
+							//list临时存储分页span
+							var list = document.createDocumentFragment();
+							for(var i=0;i<pageLen;i++){
+								var span = document.createElement('span');
+								span.innerHTML = i+1;
+								if(i==0) span.className = 'active';
+								list.appendChild(span);
+							}
+
+							page.appendChild(list);
+						}
+						
+
+						// 创建ul
+						var ul = document.createElement('ul');
+						for(var i=0;i<dataList.length;i++){
+							var li = document.createElement('li');
+							li.innerHTML = dataList[i].content;
+							ul.appendChild(li);
+						}
+
+						// 把ul放入页面.datalist元素
+						datalist.innerHTML = '';
+						datalist.appendChild(ul);
+					}
+				}
+			}
+			req.open('get','http://localhost:3000/football?pageNo=1',true);
+			req.send();
+		} 
+	</script>
+</head>
+<body>
+	<h1>有一天，央视的解说员集聚一堂，解说一场足球比赛 </h1>
+	<div class="datalist">
+		
+	</div>
+	<div class="page"></div>
+</body>
+</html>

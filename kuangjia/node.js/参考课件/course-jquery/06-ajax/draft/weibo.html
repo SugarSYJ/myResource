@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>微博信息</title>
+	<style>
+	body{padding:50px;}
+		ul{list-style: none;margin:0;padding:0;}
+		#datalist li{position:relative;padding:10px;border-bottom:1px dotted #ddd;}
+		#datalist li span{position:absolute;right:0;top:10px;padding:5px 10px;background-color:#ddd;border-radius:10px;}
+		#datalist .zan{right:60px;background-color:#f90;color:#fff;}
+	</style>
+	<script src="js/jquery-1.12.0.js"></script>
+	<script>
+		$(function(){
+			// API:/ajax/weibo
+			$('#btnGet').on('click',function(){
+				$.ajax({
+					url:'http://localhost:3000/ajax/weibo',
+					dataType:'json',
+					success:function(res){
+						console.log(res);
+						// 把数据转成html结构
+						var $ul = $('<ul/>');
+						$.each(res,function(idx,item){
+							var $li = $('<li/>');
+							$('<strong/>').html(item.username).appendTo($li);
+							$('<p/>').html(item.content).appendTo($li);
+							$('<span/>').addClass('zan').html(item.likecnt).appendTo($li);
+							$('<span/>').addClass('comment').html(item.comtcnt).appendTo($li);
+							$ul.append($li);
+						});
+
+						// 把数据写入页面
+						$('#datalist').html($ul);
+					}
+				});
+			})
+		});
+	</script>
+</head>
+<body>
+	<button id="btnGet">获取微博信息</button>
+	<div id="datalist">
+		
+	</div>
+</body>
+</html>

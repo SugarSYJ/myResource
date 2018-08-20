@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件绑定方法</title>
+	<script src="../jquery-1.12.0.js"></script>
+	<script>
+		/*
+			原生js事件绑定方法
+				1)html属性：<div onclick="box"></div> (淘汰)
+				2)元素.on + 事件名 = 事件处理函数
+					ele.onclick = function(){}
+				3)元素.addEventListener(事件类型,事件处理函数,是否捕获)
+					ele.addEventListener('click',fn,false);
+
+					IE8-:ele.attachEvent('onclick',fn);
+
+			jquery事件绑定方式：
+				1）事件函数
+					click(),blur(),focus()
+
+		 */
+		$(function(){
+			// 单击
+			$('#btnClickme').click(function(e){
+				console.log('click');
+
+				e.stopPropagation();
+			})
+
+			// 双击
+			.dblclick(function(){
+				console.log('dblclick');
+			})
+
+			// 鼠标按下
+			.mousedown(function(e){
+				console.log('mousedown');
+
+				e.stopPropagation();
+			})
+
+			// 鼠标松开
+			.mouseup(function(){
+				console.log('mouseup');
+			})
+
+			.mouseenter(function(){
+				console.log('mouseenter');
+			})
+			;
+
+			$(document).mouseenter(function(){
+				console.log('document mouseenter')
+			});
+		});
+	</script>
+</head>
+<body>
+	<div id="box">
+	<button id="btnClickme">点我</button></div>
+</body>
+</html>

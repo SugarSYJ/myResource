@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab标签切换</title>
+	<style>
+    ul{list-style:none;padding:0;margin:0;}
+    .tab .header li{display:inline-block;padding:5px 15px;}
+    .tab .header li.active{font-weight:bold;color:#f60;}
+    .content{padding:20px;border:1px solid #ddd;background-color: #efefef;}
+    </style>
+    <script>
+    	window.onload = function(){
+    		var content = document.getElementsByClassName('content');
+    		var header = document.getElementsByClassName('header')[0];
+    		var items = header.children;
+
+
+    		for(var i=0;i<items.length;i++){
+    			// 默认显示第一个tab
+    			if(i>0){
+    				content[i].style.display = 'none';
+    			}else{
+    				items[i].className = 'active';
+    			}
+
+    			// 添加点击事件
+    			items[i].idx = i;
+    			items[i].onclick = function(){
+    				// 清除所有高亮，隐藏所有.content
+    				for(var i=0;i<items.length;i++){
+    					items[i].className = '';
+    					content[i].style.display = 'none';
+    					content[i].style.height = 'auto';
+    				}
+
+    				// 给当前添加高亮，显示对应内容
+    				var currentCon = content[this.idx];
+    				items[this.idx].className = 'active';
+    				currentCon.style.display = 'block';
+
+    				var height = currentCon.clientHeight;
+    				timer = setInterval(function(){
+    					height +=5;
+    					if(height >= 200){
+    						clearInterval(timer);
+    						height = 200;
+    					}
+    					currentCon.style.height = height + 'px';
+    				},20);
+    			}
+    		}
+    	}
+    </script>
+</head>
+<body>
+	<div class="tab">
+		<ul class="header">
+			<li>选项卡1</li>
+			<li>选项卡2</li>
+			<li>选项卡3</li>
+		</ul>
+		<div class="content">内容1</div>
+		<div class="content">内容2</div>
+		<div class="content">内容3</div>
+	</div>
+</body>
+</html>

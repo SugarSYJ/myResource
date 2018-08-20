@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取节点关系</title>
+	<script src="../common.js"></script>
+	<script>
+		/*
+			获取节点关系
+		 */
+		window.onload = function(){
+			// 获取百度a标签
+			var baidu = document.getElementById('baidu');
+			baidu.style.color = '#f00';
+
+			console.log(baidu.previousSibling)
+			
+			// 获取兄弟元素
+			var google = getPrevElement(baidu);
+			//text ==> google = baidu.previousSibling.previousSibling
+			/*while(google.nodeType != 1){
+				google = google.previousSibling
+			}*/
+			google.style.color = '#f60';
+
+			/*var yahoo = baidu.nextSibling;
+			while(yahoo.nodeType != 1){
+				yahoo = yahoo.nextSibling
+			}*/
+			var yahoo = getNextElement(baidu);
+			yahoo.style.color = 'gray';
+			
+			// 获取父级元素
+			console.log(baidu.parentNode);
+
+			// 获取子节点
+			var list = document.getElementById('list');
+			console.log(filterNode(list.childNodes));
+
+
+			// 过滤文本节点
+			function filterNode(nodeList){
+				var element = [];
+				for(var i=0;i<nodeList.length;i++){
+					if(nodeList[i].nodeType == 1){
+						element.push(nodeList[i]);
+					}
+				}
+				return element;
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>获取节点关系</h1>
+    <div id="list">
+	    <a href="http://www.google.com">谷歌</a>
+	    <a href="http://www.baidu.com" class="baidu" id="baidu"><strong>百度</strong></a>
+	    <a href="http://www.yahoo.com">雅虎</a>
+    </div>
+</body>
+</html>

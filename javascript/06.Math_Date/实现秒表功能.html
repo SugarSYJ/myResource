@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>实现秒表功能 : 显示xx时xx分xx秒 , 点击按钮开始计时</h3>
+        <button id="btn">开始</button>
+        <div id="output"></div>
+        <script type="text/javascript">
+            var btn = document.getElementById('btn');
+            var output = document.getElementById('output');
+            btn.onclick = showtime;
+            function showtime(){
+                setInterval(show,16);
+                function show(){
+                    var timer = new Date();
+                    
+                    var sec = timer.getSeconds();
+                    var min = timer.getMinutes();
+                    var hour = timer.getHours();
+                    var mill = timer.getMilliseconds();
+                    output.innerHTML = hour + '时' + min + '分' + sec + '秒' + mill;
+                }
+            }
+        </script>
+    </body>
+</html>

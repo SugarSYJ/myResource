@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动框架的封装</title>
+	<style>
+		#box{width:100px;height:100px;background-color: #f00;opacity:0.5;}
+	</style>
+	<script src="animate.js"></script>
+	<script>
+		window.onload = function(){
+			/*
+				页面加载后，#box的宽度改为200（动画效果）
+				宽度：100 变成 200
+			 */
+			/*var box = document.getElementById('box');
+			var width = 100;
+			var endWidth = 200;
+			var timer = setInterval(function(){
+				width += 5;
+				if(width >= endWidth){
+					clearInterval(timer);
+					width = endWidth;
+				}
+				box.style.width = width + 'px';
+			},50);*/
+
+			
+
+			/*var height = 100;
+			var endHeight = 200;
+			var timer2 = setInterval(function(){
+				height += 5;
+				if(height >= endHeight){
+					clearInterval(timer2);
+					height = endHeight;
+				}
+				box.style.height = height + 'px';
+			},50);*/
+
+			// animate(box,'width',1000);
+			// animate(box,'height',50);
+			// animate(box,'opacity',1);
+
+			box.onmouseover = function(){
+				animate(box,{width:1000,opacity:1,height:100},function(){
+					box.style.backgroundColor = '#00f';
+				});
+			}
+			
+			box.onmouseout = function(){
+				animate(box,{width:100,opacity:0.5,height:50},function(){
+					box.style.backgroundColor = '#f00';
+				});
+			}
+
+			// 匿名函数的自执行
+			// (function(){
+			// 	alert(1)
+			// })()
+
+			// 匿名函数传参
+			/*var sum = 30;
+			(function(a){
+				alert(a)
+			})(sum)*/
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组装电脑</title>
+    <script>
+        var status = [200,304];
+
+        var p_cpu = new Promise(function(resolve,reject){
+            var xhr_cpu = new XMLHttpRequest();
+            xhr_cpu.onload = function(){
+                if(status.includes(xhr_cpu.status)){
+                    console.log(xhr_cpu.responseText);
+                    var cpu = xhr_cpu.responseText;
+                    resolve(cpu);
+                }
+            }
+            xhr_cpu.open('get','http://localhost:18/api/computer_cpu.php',true);
+            xhr_cpu.send();
+        });
+
+        var p_ddr = new Promise(function(resolve,reject){
+            var xhr_ddr = new XMLHttpRequest();
+            xhr_ddr.onload = function(){
+                if(status.includes(xhr_ddr.status)){
+                    console.log(xhr_ddr.responseText);
+                    var ddr = xhr_ddr.responseText;
+                    resolve(ddr);
+                }
+            }
+            xhr_ddr.open('get','http://localhost:18/api/computer_ddr.php',true);
+            xhr_ddr.send();
+        });
+
+        var p_hd = new Promise(function(resolve,reject){
+            var xhr_hd = new XMLHttpRequest();
+            xhr_hd.onload = function(){
+                if(status.includes(xhr_hd.status)){
+                    console.log(xhr_hd.responseText);
+                    var hd = xhr_hd.responseText;
+                    resolve(hd);
+                }
+            }
+            xhr_hd.open('get','http://localhost:18/api/computer_hd.php',true);
+            xhr_hd.send();
+        });
+
+        var p_mb = new Promise(function(resolve,reject){
+            var xhr_mb = new XMLHttpRequest();
+            xhr_mb.onload = function(){
+                if(status.includes(xhr_mb.status)){
+                    console.log(xhr_mb.responseText);
+                    var mb = xhr_mb.responseText;
+                    resolve(mb);
+                }
+            }
+            xhr_mb.open('get','http://localhost:18/api/computer_mb.php',true);
+            xhr_mb.send();
+        });
+
+        var p_show = new Promise(function(resolve,reject){
+            var xhr_show = new XMLHttpRequest();
+            xhr_show.onload = function(){
+                if(status.includes(xhr_show.status)){
+                    console.log(xhr_show.responseText);
+                    var show = xhr_show.responseText;
+                    resolve(show);
+                }
+            }
+            xhr_show.open('get','http://localhost:18/api/computer_show.php',true);
+            xhr_show.send();
+        });
+
+        // 将多个primise对象包装成一个promise对象
+        Promise.all([p_cpu,p_ddr,p_hd,p_mb,p_show]).then(function(data){
+            //新的promise对象状态为Resolved时执行这里的代码
+            //所有参数中的promise状态都为resolved是，新的promise状态才为resolved
+            console.log(data);
+            // 组装电脑
+            document.write(data[0],data[1],data[2],data[3],data[4]);
+        })
+        // 竞速
+        Promise.race([p_cpu,p_ddr,p_hd,p_mb,p_show]).then(function(data){
+            // 哪个快就是哪个promise的数据
+            console.log('race:',data);
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

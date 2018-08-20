@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>07借用方法</title>
+	<style>
+		img{width:100px;margin:10px;}
+	</style>
+	<script>
+		document.addEventListener('DOMContentLoaded',()=>{
+			/*
+				借用
+					* call(obj,p,p,p...)
+					* apply(obj,[])
+					* bind()
+
+					arr.forEach(function(item,idx){
+	
+					});
+			 */
+			// Array.prototype
+			var imgs = document.images;
+			console.log(imgs);
+			// 类数组不能直接使用数组的方法
+			// imgs.forEach()
+			Array.prototype.forEach.call(imgs,function(item,idx){
+				console.log(item);
+			});
+
+			// 把图片地址组合成一个数组
+			var res = Array.prototype.map.call(imgs,item=>{
+				return item.src;
+			});
+			console.log(res);
+
+
+			// 找出数组中最大值
+			var arr = [10,11,2,44,23,123,20,40];
+			var res2 = Math.max.apply(null,arr);
+			console.log(res2);
+
+
+			// 判断数据类型
+			// typeof
+			// Object.prototype.toString()
+			// [].toString()
+			Object.prototype.toString.call([]);
+		})
+	</script>
+</head>
+<body>
+	<img src="img/g1.jpg" alt="">
+	<img src="img/g2.jpg" alt="">
+	<img src="img/g3.jpg" alt="">
+	<img src="img/g4.jpg" alt="">
+	<img src="img/g5.jpg" alt="">
+</body>
+</html>

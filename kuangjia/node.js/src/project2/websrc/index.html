@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdn.bootcss.com/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+        <script src="https://cdn.bootcss.com/socket.io/2.0.4/socket.io.js"></script>
+    </head>
+    <body>
+        <input type="text" id="barcode"/>
+        <input type="button" id="btn_cashier" value="收款"/>
+        <div id="prolist">
+            <ul></ul>
+        </div>
+        <div id="qrcode" style="width:200px;height:200px;"></div>
+        <script type="text/javascript">
+            $(function(){
+                var proList = [];
+                $('#barcode').keyup(function(key){
+                    // console.log(key);
+                    if(key.keyCode == 13){
+                        $.post('cashier',{barcode:$('#barcode').val()},function(res){
+                            // console.log(res);
+                            if(!res.status && res.error == "unauthorized"){
+                                location.href = 'login.html';
+                            }else{
+                                proList.push(res.data[0]);
+                                $('<li></li>').text(`${res.data[0].proname}---${res.data[0].price}`).appendTo($('#prolist'));
+                            }
+                            $('#barcode').select();
+                        });
+                    }
+                }).focus();
+                $('#btn_cashier').click(function(){
+                    $.post('generateorder',{pros:JSON.stringify(proList)},function(res){
+                        var orderno = res.ops[0].orderno;
+                        console.log(orderno);
+                        var url = 'http://192.168.191.1:8080/payment.html?orderno=' + orderno;
+                        $('#qrcode').qrcode(url);
+                        var socket = io.connect('ws://10.3.131.232:8080');
+                        socket.on('scan',function(){
+                            alert('扫码成功');
+                        });
+                        socket.on('payment',function(){
+                            alert('付款成功');
+                        });
+                    });
+                });
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        p {
+            margin-left: 10px;
+        }
+    </style>
+    <script src="../../libs/jquery/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+    <div>
+        dk is a hero
+        <p>dk is not a hero</p>
+    </div>
+
+    <script type="text/javascript">
+
+        $(function () {
+            //text => 取或者赋值文本内容，会覆盖原有内容（包括 html 结构）
+            //html => 取或者赋值 html 结构，会覆盖原有内容（包括 html 结构）
+            console.log($('div').html());
+            console.log($('div').text());
+
+            $('div').text('<h1>dk.lan</h1>');
+        })
+
+    </script>
+</body>
+</html>

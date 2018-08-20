@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>根据数据生成表单</title>
+    <script src="../jquery-1.12.0.js"></script>
+    <script>
+    $(function() {
+        /*
+        	作业：根据数据生成表单
+                1)select ==> <select id="xx" name="xxx"><option value="xx"></option></select>
+                2)textarea ==> <textarea id="xx" name="xxx"></textarea>
+        		3)button ==> <button></button>
+                4)checkbox/radio ==> <label><input type="checkbox" name="xx">足球</label>
+                5)其他情况
+
+                最终结构：<p><label for="xx">xx</label><input type="text" id="xx" name="xx"></p>
+         */
+        var data = [{
+            label: '用户名',
+            name: 'username',
+            type: 'text'
+        }, {
+            label: '密码',
+            name: 'psw',
+            type: 'password'
+        }, {
+            label: '年龄',
+            name: 'age',
+            type: 'text'
+        }, {
+            label: '性别',
+            name: 'gender',
+            type: 'select',
+            value: ['男', '女']
+        }, {
+            label: '是否老司机',
+            name: 'olddriver',
+            type: 'radio',
+            value: ['是', '否']
+        }, {
+            label: '爱好',
+            name: 'hobby',
+            type: 'checkbox',
+            value:['篮球','足球','羽毛球','爬山','购物','旅游','看美女']
+        }, {
+            label: '是否已婚',
+            name: 'married',
+            type: 'radio',
+            value:['已婚','未婚']
+        }, {
+            label: '个人简介',
+            name: 'resume',
+            type: 'textarea'
+        }, {
+            label: '提交',
+            name: '',
+            type: 'button'
+        }];
+        
+        var $form = $('<form/>');
+        // 遍历数据
+        $.each(data,function(idx,item){
+            // 表单控件
+            var $input;
+
+            // 标题
+            var $label = $('<label/>').attr('for',item.name).text(item.label);
+
+            // 根据type属性生成不同的表单控件
+            switch(item.type){
+                // 下拉框
+                case 'select':
+                    // <select id="xx" name="xxx"><option value="男">男</option></select>
+                    $input = $('<select/>').attr({
+                        id:item.name,
+                        name:item.name
+                    });
+                    // ['男', '女'] == > ['<option value="男">男</option>','<option value="女">女</option>']
+                    console.log(item.value);
+                    var html = $.map(item.value,function(val){
+                        // console.log(arguments)
+                        return '<option value="'+val+'">'+val+'</option>';
+                    }).join('');
+                    $input.append(html);
+                    break;
+                case 'textarea':
+                    $input = $('<textarea/>').attr({id:item.name,name:item.name});
+                    break;
+                case 'button':
+                    $label = '';
+                    $input = $('<button/>').text(item.label);
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    // <label><input type="checkbox" name="xx">足球</label>
+                    // ['篮球','足球','羽毛球','爬山','购物','旅游','看美女']
+                    $input = $.map(item.value,function(val){
+                        return '<label><input type="'+item.type+'" name="'+item.name+'">'+val+'</label>';
+                    }).join('');
+                    break;
+                default:
+                    $input = $('<input/>').attr({
+                        id:item.name,
+                        name:item.name,
+                        type:item.type
+                    });
+            }
+
+            $('<p/>').append([$label,$input]).appendTo($form);
+        });
+
+        $form.appendTo('body');
+    });
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

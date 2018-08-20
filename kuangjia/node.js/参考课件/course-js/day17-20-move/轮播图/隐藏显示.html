@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style  type="text/css">
+        #focus{width: 810px; height:320px; position:relative; margin:auto;}
+        #focus ul{list-style:none; width:100%; height:100%; margin:0; padding:0;}
+        #focus .content li{position:absolute; top: 0; right: 0; bottom:0; left:0;}
+        #focus .content li:first-child{z-index:1;}
+        #focus .bar{position:absolute; width:120px; height:30px; z-index:100; left:45%; bottom:0;}
+        #focus .bar li{border-radius:50%; width:10px; height:10px; border:solid 2px #fff; float:left; margin:0 5px; cursor:pointer;}
+        #focus .bar li.active{background-color:#fff;}
+
+            #focus > a {
+                position: absolute;
+                text-decoration: none;
+                height: 60px;
+                width: 30px;
+                background-color: #ff6a00;
+                color: #fff;
+                text-align: center;
+                line-height: 60px;
+                top: 40%;
+                z-index:999;
+            }
+
+                #focus > a:first-child {
+                    left: 0;
+                }
+
+                #focus > a:last-child {
+                    right: 0;
+                }
+    </style>
+
+    <script type="text/javascript">
+        window.onload = function () {
+            var focus = document.getElementById('focus');
+            var content = focus.getElementsByTagName('ul')[0];
+            var content_li = content.getElementsByTagName('li');
+
+            var bar = focus.getElementsByTagName('ul')[1];
+            var bar_li = bar.getElementsByTagName('li');
+
+            var timer = null;
+
+            //当前 content_li 的下标
+            var index = 0;
+
+            //定义计时器
+            function timerStar() {
+                window.clearInterval(timer);
+                timer = window.setInterval(function () {
+                    //index = 1
+                    index++;
+                    if (index >= content_li.length) {
+                        index = 0;
+                    }
+                    start(index);
+                }, 3000);
+            }
+
+
+            //轮播图切换
+            //指定要哪张图片显示
+            function start(_index) {
+                //重置所有 content_li 的 z-index 为 0;
+                for (var i = 0; i < content_li.length; i++) {
+                    content_li[i].style.zIndex = 0;
+                }
+                //重置轮播图的标志为没有 active
+                for (var i = 0; i < bar_li.length; i++) {
+                    bar_li[i].className = '';
+                }
+                content_li[_index].style.zIndex = 1;
+                bar_li[_index].className = 'active';
+            }
+
+            timerStar();
+
+            //给轮播图标志点击事件，占击可以手动切换图片
+            for (var i = 0; i < bar_li.length; i++) {
+                bar_li[i].index = i;
+                bar_li[i].onclick = function () {
+                    window.clearInterval(timer);
+                    index = this.index;
+                    start(index);
+                    timerStar();
+                }
+            }
+
+            //点击下一张切换按钮
+            document.getElementById('next').onclick = function () {
+                window.clearInterval(timer);
+                index++;
+                if (index >= content_li.length) {
+                    index = 0;
+                }
+                start(index);
+                timerStar();
+            }
+
+            //点击上一张切换按钮
+            document.getElementById('prev').onclick = function () {
+                window.clearInterval(timer);
+                index--;
+                if (index < 0) {
+                    index = content_li.length - 1;
+                }
+                start(index);
+                timerStar();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="focus">
+        <ul class="content">
+            <li><img src="../images/001.jpg"></li>
+            <li><img src="../images/002.jpg"></li>
+            <li><img src="../images/003.jpg"></li>
+            <li><img src="../images/004.jpg"></li>
+        </ul>
+        <ul class="bar">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <a href="#" class="prev" id="prev">&lt;</a>
+        <a href="#" class="next" id="next">&gt;</a>
+    </div>
+</body>
+</html>

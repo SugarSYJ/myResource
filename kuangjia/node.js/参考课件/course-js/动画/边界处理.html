@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>匀速运动</title>
+	<style>
+	html{height:100%;overflow:hidden;}
+	#box{position:absolute;left:100px;top:100px;width:40px;height:40px;border:20px solid #f60;background-color:#f00;border-radius:50%;}
+	</style>
+	<script>
+		/*
+			匀速运动:速度不变的运动
+				不断改变元素的top,left属性
+				运动的前提：定位
+		 */
+		window.onload = function(){
+			var box = document.getElementById('box');
+
+			var left = box.offsetLeft;
+			var top = box.offsetTop;
+			console.log(left,top)
+
+			var dir = true;//水平方向
+			var vdir = true;//垂直方向
+
+			// 如果设置一个定时器，不断改变top,left值
+			var timer = setInterval(function(){
+				if(dir){
+					left += 10;
+				}else{
+					left -= 5;
+					
+				}
+				if(vdir){
+					top += 5;
+				}else{
+					top -= 10;
+				}
+				
+				box.style.left = left + 'px';
+				box.style.top = top + 'px';
+
+
+				if(left >= window.innerWidth-box.offsetWidth){
+					// clearInterval(timer);
+					dir = false;
+				}else if(left<=0){
+					dir = true;
+				}
+
+				if(top >= window.innerHeight - box.offsetHeight){
+					vdir = false;	
+				}else if(top <= 0){
+					vdir = true;
+				}
+
+			},30);
+			
+		}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+</body>
+</html>

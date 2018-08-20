@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件冒泡</title>
+	<style>
+		#dataList{border:1px solid #ddd;width:100%;border-collapse: collapse;font-family: '微软雅黑'}
+		td{padding:5px 10px;width:20%;border:1px solid #ddd;}
+		td input{width:100%;border:none;outline:none;font-size:16px;font-family: '微软雅黑'}
+		.editing{background-color:#ffc;}
+		.editing input{background-color:#ffc;}
+	</style>
+	<script>
+		/*
+			页面上的事件绑定数量越多，性能越受影响
+			优化：尽量减少不必要的事件绑定
+					利用冒泡的原理
+
+					50事件绑定 ==> 1个事件绑定
+		 */
+		window.onload = function(){
+			// 可编辑的表格
+			// 编辑：把单元的内容变成一个输入框
+			var table = document.getElementById('dataList');
+			var tds = table.getElementsByTagName('td');
+
+			table.onclick = function (e) {
+
+			    e = e || window.event;
+			    console.log(e);
+			    //触发当前事件的源对象
+				var self = e.target;
+				console.log(self.tagName);
+				// 判断是否点击了td
+				if(self.tagName.toLowerCase() == 'td'){
+					// 当前单元格td
+					
+					// 添加编辑状态
+					self.className = 'editing';
+
+					// 先获取表格内容
+					var content = self.innerHTML;
+
+					// 生成输入框,并把原单元格内容写入输入框
+					var input = document.createElement('input');
+					input.type = 'text';
+					input.value = content;
+
+					// 把单元格内容变成输入框(先清空内容)
+					self.innerHTML = '';
+					self.appendChild(input);
+
+					// 自动获得焦点
+					// 用focus()方法
+					input.focus();
+
+
+					// 输入框失去焦点时，把输入框的内容写入单元格
+					// this:当前对象
+					input.onblur = function (evt) {
+						// this:在这里表示输入框input
+						self.innerHTML = this.value;
+
+						// 去掉编辑样式
+						self.className = '';
+					}
+				}
+			}
+
+			/*// 绑定点击事件
+			for(var i=0;i<tds.length;i++){
+				tds[i].onclick = function(){
+					
+				}
+			}*/
+
+			// target & currentTarget
+			/*var box = document.getElementById('box');
+			var btn = box.firstElementChild;
+			btn.onclick = function(e){
+				console.log('btn click',e.target,e.currentTarget);
+			}
+			box.onclick = function(e){
+				console.log('box click',e.target,e.currentTarget);
+			}
+			document.onclick = function(e){
+				console.log('doc click',e.target,e.currentTarget);
+			}*/
+		}
+	</script>
+</head>
+<body>
+	<div id="box"><button>按钮</button></div>
+	<table id="dataList">
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+		<tr>
+			<td>单元格1</td>
+			<td>单元格2</td>
+			<td>单元格3</td>
+			<td>单元格4</td>
+			<td>单元格5</td>
+		</tr>
+	</table>
+	<table></table>
+</body>
+</html>

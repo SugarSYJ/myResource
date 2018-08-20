@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>数组方法</title>
+	<script>
+		var arr = ['吃饭','睡觉','上网','逛街','玩游戏','爬山','跑步'];
+		// var arrStr = arr.join();
+		// document.write(arrStr);
+		
+		// 把所有爱好显示到页面
+		// 通过for循环
+		var html = '';
+		for(var i=0;i<arr.length;i++){
+			html += '<p>' + arr[i] + '</p>';
+		}
+		// document.write(html);
+
+		// ES5
+		// ES5的方法，不支持ie8以下的浏览器（ie8-）
+		// forEach()
+		/*var html = ''
+		arr.forEach(function(val,index){
+			console.log(val,index);
+			html += '<strong>' + val + '</strong>';
+		});
+		document.write(html);*/
+
+		// map()
+		// return返回的值是新数组的内容
+		var arr2 = arr.map(function(val,index){
+			console.log(val,index);
+			return '<div>' + val + index + '</div>';
+		});
+		console.log(arr,arr2);
+
+		// 复制一个数组
+		var arr3 = arr.slice(0);
+		var arr4 = arr.map(function(val){
+			return val;
+		});
+
+		var arr = [1,5,8,10,20,30];//[1,25,64,100,400,900]
+		var arr2 = arr.map(function(val){
+			return val*val
+		});
+		console.log(arr,arr2);
+
+		// 过滤数组
+		// 取出大于10的值组成的数组
+		var arr = [10,9,20,5,30,33,54];
+		// var newarr = [];
+		// for(var i=0;i<arr.length;i++){
+		// 	if(arr[i] > 10){
+		// 		newarr.push(arr[i]);
+		// 	}
+		// }
+		
+		// ES的方法
+		var newarr = arr.filter(function(val,index){
+			return val>10;
+		})
+		// console.log(newarr);
+		
+
+		// 找出以下数组中所有小于10的元素并组成一个新的数组
+		var arr = [10,15,2,32,5,4,20,8,48,54,6];
+		var arr2 = arr.filter(function(val){
+			return val < 10;
+		});
+		console.log(arr2);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h3>
+            已知字符串 “a,a,b,c,c,d” 编程实现以下功能。
+            统计每个字符出现的次数，结果显示 a：2、b：1、c：2、d：1
+            去掉重复的字符，使结果显示 abcd
+        </h3>
+        <script type="text/javascript">
+            var str = 'aabccd';
+            for(var i=0;i<str.length;i++){
+            }
+            str= str.split('a').join('');
+            for(var j=0;j<str.length;j++){
+            }
+            var resA = i - j;
+            str= str.split('b').join('');
+            for(var n1=0;n1<str.length;n1++){
+            }
+            var resB = j - n1;
+            str= str.split('c').join('');
+            for(var n2=0;n2<str.length;n2++){
+            }
+            var resC = n1 - n2;
+            str= str.split('d').join('');
+            for(var n3=0;n3<str.length;n3++){
+            }
+            var resD = n2 - n3;
+            document.write('显示结果：a：'+resA+'、b：'+resB+'、c：'+resC+'、d：'+resD);
+        </script>
+    </body>
+</html>

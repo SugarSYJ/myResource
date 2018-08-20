@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>输出按钮的内容</title>
+	<script>
+	window.onload = function(){
+		/*
+			输出按钮的内容和索引
+		 */
+		var buttons = document.getElementsByTagName('button');//6个元素,类数组
+
+		for(var i=0;i<buttons.length;i++){console.log(buttons[i])
+			//1.这里的代码，循环过程执行
+			buttons[i].index = i;
+			buttons[i].onclick = function(){
+				//3.这里的代码，在点击事件触发时才会执行
+				
+				// 打印按钮的内容
+				// alert(this.innerHTML);
+
+				// 打印按钮的索引值
+				alert(this.index)
+			}
+		}
+		//2. 这里的代码，循环结束后执行(i已经变成了6)
+		//
+		
+		var obj = {name:'xx'}
+		obj.age = 18;
+		obj.age
+	}
+		
+	</script>
+</head>
+<body>
+	<button>按钮1</button>
+	<button>按钮2</button>
+	<button>按钮3</button>
+	<button>按钮4</button>
+	<button>按钮5</button>
+	<button>按钮6</button>
+</body>
+</html>

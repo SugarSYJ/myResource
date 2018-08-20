@@ -1,0 +1,154 @@
+/* 
+* @Author: Marte
+* @Date:   2017-10-23 15:00:02
+* @Last Modified by:   Marte
+* @Last Modified time: 2017-10-24 21:00:12
+*/
+#banner .container{
+    height:463px;
+    background:url("../images/banner.jpg") no-repeat;
+}
+#news .container{
+    height:241px;
+}
+#news .news_l{
+    width:437px;
+    height:227px;
+    padding:14px 27px 0 16px;
+}
+#news .news_l h3{
+    font-size:19px;
+    line-height:63px;
+}
+#news .news_l ul li{
+    height:24px;
+    width:437px;
+    padding-left:18px;
+    background:url("../images/news1.jpg") no-repeat left center;
+}
+#news .news_l ul li a{
+    display:block;
+    font-size:14px;
+    line-height:24px;
+}
+#news .news_c{
+    width:223px;
+    height:227px;
+    padding:14px 0 0 27px;
+    background:#F1F1F1;
+}
+#news .news_c h3{
+    font-size:19px;
+    line-height:63px;
+    color:#252525;
+}
+#news .news_c1{
+    font-size:14px;
+    line-height:24px;
+    color:#989898;
+}
+#news .news_c2{
+    font-size:13px;
+    color:#989898;
+    line-height:25px;
+    height:25px;
+    padding-bottom:14px;
+}
+#news .news_c3{
+    font-size:13px;
+    line-height:23px;
+    color:#919191;
+}
+#news .news_r{
+    width:235px;
+    height:227px;
+    padding-top:14px;
+    background:url("../images/news2.jpg") no-repeat right bottom;
+    background-color:#FBFBFB;
+}
+#news .news_r h3{
+    font-size:19px;
+    line-height:63px;
+    color:#252525;
+}
+#news .news_r p{
+    font-size:13px;
+    line-height:22px;
+    color:#929292;
+}
+#market .container{
+    height:281px;
+}
+#market .market1{
+    line-height:51px;
+    font-size:19px;
+    height:51px;
+    padding-top:14px;
+    padding-left:20px;
+    color:#535353;
+}
+#market .market2 div{
+    height:242px;
+    width:210px;
+    padding:0 20px 0 20px;
+}
+#market .market2 p{
+    font-size:13px;
+    line-height:25px;
+    height:25px;
+    padding-top:11px;
+}
+#links .container{
+    height:250px;
+    background: #E5E5E5;
+}
+#links .links_l{
+    height:218px;
+    width:472px;
+}
+#links h3{
+    font-size:18px;
+    line-height:38px;
+    color:#7F7F7F;
+}
+#links .links_l h3{
+    margin-left:20px;
+    padding-left:12px;
+    height:38px;
+    width:440px;
+    border-bottom:1px solid #C1C1C1;
+}
+#links .links_l ul li{
+    font-size:14px;
+    line-height:24px;
+    color:#626262;
+    background:url("../images/links1.jpg") no-repeat 0 center;
+}
+#links .links_l .links_l1{
+    width:90px;
+    padding-left:20px;
+    height:178px;
+    padding-top:14px;
+    padding-right:70px;
+}
+#links .links_l .links_l1 li{
+    padding-left:17px;
+}
+#links .links_l .links_l2{
+    width:140px;
+    padding-top:14px;
+    height:178px;
+}
+#links .links_l .links_l2 li{
+    padding-left:13px;
+}
+#links .links_l .links_l3{
+    width:85px;
+    padding-top:14px;
+    height:178px;
+    padding-right:30px;
+}
+#links .links_l .links_l3 li{
+    padding-left:13px;
+}
+

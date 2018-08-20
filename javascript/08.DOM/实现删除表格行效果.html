@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style>
+            table{border:1px soild #ddd;border-collapse: collapse;}
+            td{border:1px solid #ddd;padding:5px 10px;}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var datalist = document.getElementsByClassName('datalist')[0];
+                var btn1 = document.getElementsByClassName('btn1');
+                var btn2 = document.getElementsByClassName('btn2');
+                for(var i=0;i<btn1.length;i++){
+                    (function(i){
+                        btn1[i].onclick = function(){
+                            if(confirm('你确定删除？')){
+                                var currentTr = this.parentNode.parentNode;
+                                currentTr.parentNode.removeChild(currentTr);
+                            }
+                            // var a = this.parentNode.parentNode;
+                            // a.parentNode.removeChild(a);
+                        }
+                    })(i)
+                }
+                for(var i=0;i<btn2.length;i++){
+                    btn2[i].id = i;
+                    (function(i){
+                        btn2[i].onclick = function(){
+                            if(confirm('你确定添加？')){
+                                var currentTr = this.parentNode.parentNode;
+                                var a = currentTr.cloneNode(true);
+                                currentTr.parentNode.appendChild(a);
+                            }
+                        }
+                    })(i)
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <table class="datalist">
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>单元格01</td>
+                    <td>单元格02</td>
+                    <td>单元格03</td>
+                    <td>单元格04</td>
+                    <td>单元格05</td>
+                    <td><button class="btn1">删除</button><button class="btn2">添加</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>

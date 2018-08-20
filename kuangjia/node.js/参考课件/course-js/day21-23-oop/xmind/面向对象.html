@@ -1,0 +1,351 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+<meta content="text/css" http-equiv="Content-Style-Type">
+<title>javascript</title>
+</head>
+<body>
+<h1 align="center" class="root">
+<a name="2r8t3hddjj6uj9a7u23jdiaq9d">javascript</a>
+</h1>
+<div align="center" class="globalOverview">
+<img src="%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_files/images/javascript.jpg"></div>
+<h2 class="topic">
+<a name="2rl30v613vdjvbkfbea4gguji2">Lesson 21-23 面向对象(OOP)</a>
+</h2>
+<h3 class="topic">
+<a name="54pc5j5omvp5jo6rih49o1fjio">&nbsp;面向过程</a>
+</h3>
+<div class="notesContainer">
+<p>根据想要实现的步骤一步步实现 </p>
+<p>使用时按顺序一个个调用</p>
+<p></p>
+</div>
+<h3 class="topic">
+<a name="6jqstl6611dmknacved51c061v">&nbsp;理解对象</a>
+</h3>
+<h3 class="topic">
+<a name="7e4v0r8pql8p2cp858robdi36l">&nbsp;&nbsp;定义：对象是无序属性集合，其属性可以包含基本值、对象或者函数</a>
+</h3>
+<h3 class="topic">
+<a name="4qp9rtgjg45eqfnecmdurm4ra8">&nbsp;&nbsp;把问题分解成各个对象，每个对象都有自己独立的属性和行为，不同的对象做不同的事情</a>
+</h3>
+<h3 class="topic">
+<a name="746djhuuvidkfha0p9p794stu3">&nbsp;&nbsp;特性</a>
+</h3>
+<h3 class="topic">
+<a name="1uos9psvjt8qpmsh405f428mqg">&nbsp;&nbsp;&nbsp;封装</a>
+</h3>
+<div class="notesContainer">
+<p>封装，也就是把客观事物封装成抽象的类，并且类可以把自己的数据和方法只让可信的类或者对象操作，对不可信的进行信息隐藏。</p>
+<p></p>
+<p>封装(encapsulation)又叫隐藏实现(Hiding the implementation)。就是只公开代码单元的对外接口，而隐藏其具体实现。</p>
+<p></p>
+<p>比如你的手机，手机的键盘，屏幕，听筒等，就是其对外接口。你只需要知道如何按键就可以使用手机，而不需要了解手机内部的电路是如何工作的。封装机制就像手机一样只将对外接口暴露，而不需要用户去了解其内部实现。细心观察，现实中很多东西都具有这样的特点。</p>
+</div>
+<h3 class="topic">
+<a name="66fn80pfrukm884p79an2pvqvo">&nbsp;&nbsp;&nbsp;继承</a>
+</h3>
+<div class="notesContainer">
+<p>面向对象编程 (OOP) 语言的一个主要功能就是&ldquo;继承&rdquo;。继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。</p>
+</div>
+<h3 class="topic">
+<a name="6e5i73jcn9g3q18v12hs8pkjp5">&nbsp;&nbsp;&nbsp;&nbsp;基类/父类</a>
+</h3>
+<h3 class="topic">
+<a name="4o61tfoi4pfp8pl24q0qjdj5ja">&nbsp;&nbsp;&nbsp;&nbsp;子类/派生类</a>
+</h3>
+<h3 class="topic">
+<a name="31fubcra00fahdgo0f280p5tjf">&nbsp;创建对象</a>
+</h3>
+<h3 class="topic">
+<a name="50d28k67ljsu6cljo35cuauqro">&nbsp;&nbsp;基于 Object 对象</a>
+</h3>
+<h3 class="topic">
+<a name="4fgj1gmkvnqhhcdue169e3tjnj">&nbsp;&nbsp;&nbsp;var obj = new Objact();</a>
+</h3>
+<h3 class="topic">
+<a name="7aiuf29fmpe2au4rpsv3k8cgif">&nbsp;&nbsp;&nbsp;缺点：会产生大量的重复代码</a>
+</h3>
+<h3 class="topic">
+<a name="7mdt02emjitt2p55b2eetajafm">&nbsp;&nbsp;对象字面量模式</a>
+</h3>
+<h3 class="topic">
+<a name="64va45d6ahdvh9af53nccdiv0g">&nbsp;&nbsp;&nbsp;var obj = {};</a>
+</h3>
+<h3 class="topic">
+<a name="5m3t1pl628ijd156t2kk37t6q0">&nbsp;&nbsp;&nbsp;缺点：会产生大量的重复代码</a>
+</h3>
+<h3 class="topic">
+<a name="223jief4o01ahvrvumpjatshce">&nbsp;&nbsp;工厂模式</a>
+</h3>
+<h3 class="topic">
+<a name="7ld1ekh6glahdrvq8hrfvhk0or">&nbsp;&nbsp;&nbsp;用函数来封装以特定接口创建对象的细节</a>
+</h3>
+<h3 class="topic">
+<a name="5rdaslf1d8f16hcoph90r91ijk">&nbsp;&nbsp;&nbsp;function creatPerson(name,age,job){
+	var o=new Object();
+	o.name=name;
+	o.age=age;
+	o.job=job;
+	return o
+}</a>
+</h3>
+<h3 class="topic">
+<a name="2tejtve94sdkr3jikfr6tfpd8i">&nbsp;&nbsp;&nbsp;缺点：没有解决对象识别的问题</a>
+</h3>
+<h3 class="topic">
+<a name="2argvv3evhvt7jupk6h7lf40la">&nbsp;&nbsp;构造函数模式</a>
+</h3>
+<h3 class="topic">
+<a name="4p5aglbb7oduic0rlpgkf74vo6">&nbsp;&nbsp;&nbsp;function Person(name,age,job){
+	this.name=name;
+	this.age=age;
+	this.job=job;
+	this.sayName=function sayName(){alert(this.name);};
+};
+var person1=new Person("Nick",21,"Front-end-Engineer");</a>
+</h3>
+<h3 class="topic">
+<a name="2ekcpv8ti5ehoboq9aqmprhpk6">&nbsp;&nbsp;&nbsp;和工厂模式的区别：</a>
+</h3>
+<h3 class="topic">
+<a name="6rm2sb7nl302erm0ro9tja6s1o">&nbsp;&nbsp;&nbsp;&nbsp;函数名首写字母为大写</a>
+</h3>
+<div class="notesContainer">
+<p>虽然标准没有严格规定首写字母为大写，但按照惯例，构造函数的首写字母用大写</p>
+</div>
+<h3 class="topic">
+<a name="7auavteqjo9lr3dhk0jfiiq9qe">&nbsp;&nbsp;&nbsp;&nbsp;没有显示的创建对象</a>
+</h3>
+<h3 class="topic">
+<a name="2puk1o45i5dsu3ak0g9uhuheld">&nbsp;&nbsp;&nbsp;&nbsp;直接将属性和方法赋值给了this对象</a>
+</h3>
+<h3 class="topic">
+<a name="46qcm04gi5ilp3jtck97lnfi7d">&nbsp;&nbsp;&nbsp;&nbsp;没有return语句</a>
+</h3>
+<h3 class="topic">
+<a name="6b9c1ghqak06c5npildcs703h6">&nbsp;&nbsp;&nbsp;&nbsp;使用new创建对象</a>
+</h3>
+<h3 class="topic">
+<a name="2c0v1q664n79cb8ic0kv1i6d5a">&nbsp;&nbsp;&nbsp;&nbsp;能够识别对象（这正是构造函数模式胜于工厂模式的地方）instanceof</a>
+</h3>
+<h3 class="topic">
+<a name="7f37hkb74f3s9fvov3ide3bdqo">&nbsp;&nbsp;&nbsp;用这种方式调用构造函数会经历一下四个步骤</a>
+</h3>
+<h3 class="topic">
+<a name="5bvqbvvvd3ief7qe4ubdug97ua">&nbsp;&nbsp;&nbsp;&nbsp;创建一个新对象</a>
+</h3>
+<h3 class="topic">
+<a name="06ij1fvapnptt1ggrtqidkdsni">&nbsp;&nbsp;&nbsp;&nbsp;将构造函数的作用域赋给新对象</a>
+</h3>
+<h3 class="topic">
+<a name="6orgpl2tun31bsmc6h8uvm3n5v">&nbsp;&nbsp;&nbsp;&nbsp;执行构造函数中的代码（为这个新对象添加属性）</a>
+</h3>
+<h3 class="topic">
+<a name="2kh5ituh1846m41enmp1alod88">&nbsp;&nbsp;&nbsp;&nbsp;返回新对象</a>
+</h3>
+<h3 class="topic">
+<a name="28hh1qlvcck9rbk12q3h27du47">&nbsp;&nbsp;&nbsp;缺点：每个方法都要在每个实例上创建一遍</a>
+</h3>
+<h3 class="topic">
+<a name="5382hkhidng3ejabacocvbuoi2">&nbsp;&nbsp;&nbsp;&nbsp;上例中sayName方法相当于this.sayName=new Funciton("alert(name,age,job)")</a>
+</h3>
+<h3 class="topic">
+<a name="1osf49evcqmc8slo83l9c3sd22">&nbsp;&nbsp;&nbsp;&nbsp;解决方法	</a>
+</h3>
+<h3 class="topic">
+<a name="61cgifakja1ie5hbe3ove7s8p5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function Person(name,age,job){
+	this.name=name;
+	this.age=age;
+	this.job=job;
+    this.sayName=sayName
+};
+function sayName(){alert(this.name);};
+//将sayName添加到全局变量中，这样显然有很多不足</a>
+</h3>
+<h3 class="topic">
+<a name="15r1t1lltajbp61md66df9cf00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原型模式</a>
+</h3>
+<h3 class="topic">
+<a name="7t011aoabkc8oj22i0bk6vho94">&nbsp;&nbsp;删除属性 delete obj.attribute</a>
+</h3>
+<h3 class="topic">
+<a name="2kop3o4o38egvk9ua27l5ajdn2">&nbsp;&nbsp;原型模式</a>
+</h3>
+<h3 class="topic">
+<a name="5ehkbn8j0chd2ujs9429vam7h7">&nbsp;&nbsp;&nbsp;概念</a>
+</h3>
+<h3 class="topic">
+<a name="2bo8lgio3nb3ei5t1l3kkauuro">&nbsp;&nbsp;&nbsp;&nbsp;每个函数都有一个prototype（原型）属性，这个属性是一个指针，指向一个对象，而这个对象的用途是包含可以
+由特定类型的所有实例共享的属性和方法</a>
+</h3>
+<h3 class="topic">
+<a name="5c1gd6jrketapst8beg0q6869v">&nbsp;&nbsp;&nbsp;&nbsp;使用原型对象的好处是可以让所有构造函数（对象实例）共享它所包含的属性和方法</a>
+</h3>
+<h3 class="topic">
+<a name="2mvr69r5207fegimidsa9vm799">&nbsp;&nbsp;&nbsp;&nbsp;创建原型:function Person(){};
+Person.prototype.name="nick";</a>
+</h3>
+<h3 class="topic">
+<a name="6l6n303tjfcnfd49mvhk3qs20v">&nbsp;&nbsp;&nbsp;prototype</a>
+</h3>
+<h3 class="topic">
+<a name="037u82lb4b9q3euo5nusv5p49c">&nbsp;&nbsp;&nbsp;&nbsp;constructor</a>
+</h3>
+<h3 class="topic">
+<a name="49mcru8vnt3t2gqbj3jsh9ome3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;所有原型对象都会自动获得一个constructor（构造函数）属性，包含一个指向prototype属性所在函数的指针</a>
+</h3>
+<h3 class="topic">
+<a name="56bsbsljn9ta02kf8k9pnse41j">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object.prototype.constructor === Object</a>
+</h3>
+<h3 class="topic">
+<a name="1fdutpmlfigf63ep8gf62tvcai">&nbsp;&nbsp;&nbsp;&nbsp;isPrototypeOf</a>
+</h3>
+<h3 class="topic">
+<a name="6mspdsc4fg9cufg29amtvll6r9">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;判断一个对象是否指向了该构造函数的原型对象</a>
+</h3>
+<h3 class="topic">
+<a name="5etmn6ovmoenj2uqqvhq1irbga">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object.prototype.isPrototypeOf(obj)</a>
+</h3>
+<h3 class="topic">
+<a name="7elbbv60q2l7kfggfthtdqh8no">&nbsp;&nbsp;&nbsp;创建</a>
+</h3>
+<h3 class="topic">
+<a name="7kncv3rbprsj37ck43j12fd5im">&nbsp;&nbsp;&nbsp;&nbsp;对象字面量模式</a>
+</h3>
+<h3 class="topic">
+<a name="4dgpmvc93cep3avhqfpc35hh3j">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function Person(){};
+Person.prototype={
+	name="Nick",
+	sayName=function(){alert(this.name)}
+}</a>
+</h3>
+<h3 class="topic">
+<a name="3jtfagjktb3bjr99o0cd26n1eq">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;constructor 不指向原型而指向 Object</a>
+</h3>
+<h3 class="topic">
+<a name="0m3k244qceqcd0avm8tgah7afi">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj.prototype = {constructor: obj};</a>
+</h3>
+<h3 class="topic">
+<a name="4vjp8a924fg9f349n6s39dbcii">&nbsp;&nbsp;&nbsp;&nbsp;使用构造函数</a>
+</h3>
+<h3 class="topic">
+<a name="1hls23bemmf18cas25hcos8olk">&nbsp;&nbsp;&nbsp;内置的引用类型原型</a>
+</h3>
+<h3 class="topic">
+<a name="3hkl1or8m6nc15vl28ou93rr53">&nbsp;&nbsp;&nbsp;&nbsp;Array</a>
+</h3>
+<h3 class="topic">
+<a name="28vsnnut6bkqli138qfucibp1v">&nbsp;&nbsp;&nbsp;&nbsp;Date</a>
+</h3>
+<h3 class="topic">
+<a name="7757lot9gs6va4pjn53fu5sp2v">&nbsp;&nbsp;&nbsp;&nbsp;String</a>
+</h3>
+<h3 class="topic">
+<a name="0b8pti7pr5slv2lqhuuuepuqvd">&nbsp;&nbsp;&nbsp;&nbsp;...</a>
+</h3>
+<h3 class="topic">
+<a name="42di962k4bnjriv50bc7dv2na9">&nbsp;&nbsp;&nbsp;实例与原型的先后顺序</a>
+</h3>
+<h3 class="topic">
+<a name="7c6rjsfm7sjfulp8da9oi7fut5">&nbsp;&nbsp;&nbsp;&nbsp;先实例后原型</a>
+</h3>
+<h3 class="topic">
+<a name="66i230i3adgtge9qhc9b73uq17">&nbsp;&nbsp;&nbsp;查找属性</a>
+</h3>
+<h3 class="topic">
+<a name="542i1r40fvpeg12dr7k4jkoebf">&nbsp;&nbsp;&nbsp;&nbsp;obj.hasOwnPrototype() (只查找实例)</a>
+</h3>
+<h3 class="topic">
+<a name="5tf7jct0dvs5cmej5v5r50ka1o">&nbsp;&nbsp;&nbsp;&nbsp;'key' in obj （实例和原型）</a>
+</h3>
+<h3 class="topic">
+<a name="5cqk6sf3btf28gj4okpspugjgb">&nbsp;&nbsp;&nbsp;&nbsp;obj['key'] == undefined （实例和原型）</a>
+</h3>
+<h3 class="topic">
+<a name="3lmrgqe0omdd95nq26oebc7phr">&nbsp;&nbsp;&nbsp;原型对象的问题（缺点）</a>
+</h3>
+<h3 class="topic">
+<a name="65b3jh9746ggpuh274prllp9kd">&nbsp;&nbsp;&nbsp;&nbsp;1、省略了为构造函数传递初始化参数这一环节，结果所有实例在默认情况下都将取得相同的属性值</a>
+</h3>
+<h3 class="topic">
+<a name="3tfosas76se2j8cd5iv96h0on2">&nbsp;&nbsp;&nbsp;&nbsp;2、当在实例中对引用类型的值进行操作时，很有可能改变原型中的值。（共享问题）</a>
+</h3>
+<h3 class="topic">
+<a name="3hl51gjhaf2atrhs2euu2756q6">&nbsp;&nbsp;继承</a>
+</h3>
+<div class="notesContainer">
+<p>面向对象编程 (OOP) 语言的一个主要功能就是&ldquo;继承&rdquo;。继承是指这样一种能力：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。</p>
+</div>
+<h3 class="topic">
+<a name="3cno7c23280ql543b7ajga55e7">&nbsp;&nbsp;&nbsp;实现</a>
+</h3>
+<h3 class="topic">
+<a name="3naj92b3pglkmm6jo04946cv6h">&nbsp;&nbsp;&nbsp;&nbsp;SubObj.prototype = new ParentObj() （无法传参）</a>
+</h3>
+<h3 class="topic">
+<a name="2q6hic8hatoff4spl38m95uuf6">&nbsp;&nbsp;&nbsp;&nbsp;ParentObject.call（this, arg1,arg2）/apply (对象冒充)</a>
+</h3>
+<h3 class="topic">
+<a name="33ph5j1tjcp17jk3u5c8afisr1">&nbsp;&nbsp;&nbsp;&nbsp;ParentObject.apply（this, [arg1,arg2]）/apply (对象冒充)</a>
+</h3>
+<h3 class="topic">
+<a name="35jj1gfrmuakaap2gjrttd7rcd">&nbsp;&nbsp;&nbsp;基类/父类</a>
+</h3>
+<h3 class="topic">
+<a name="03rqb2nrefbj372i3jbrcsqdl3">&nbsp;&nbsp;&nbsp;&nbsp;被继承的类称</a>
+</h3>
+<h3 class="topic">
+<a name="1etnt3qo8i9onc1rdv942fmk3h">&nbsp;&nbsp;&nbsp;子类/派生类</a>
+</h3>
+<h3 class="topic">
+<a name="7b6hs0vlgllshq068l5kf1h3la">&nbsp;&nbsp;&nbsp;&nbsp;通过继承创建的新类</a>
+</h3>
+<h3 class="topic">
+<a name="2pkjn1fbahq5m8f2tk71o5gtb3">&nbsp;&nbsp;&nbsp;特点</a>
+</h3>
+<h3 class="topic">
+<a name="7itvuhu2p7h6mk746l31u9k6bc">&nbsp;&nbsp;&nbsp;&nbsp;子类拥有父类的属性和方法</a>
+</h3>
+<h3 class="topic">
+<a name="0h4fd0853e3hghrm83ut95ltd7">&nbsp;&nbsp;&nbsp;&nbsp;子类可以有自己新的属性和方法</a>
+</h3>
+<h3 class="topic">
+<a name="5j8kcvkm92e1l3m8bif4gvbohk">&nbsp;&nbsp;&nbsp;&nbsp;子类可以重写父类的方法</a>
+</h3>
+<h3 class="topic">
+<a name="413a7t53n2vskkch879g8147cc">&nbsp;&nbsp;&nbsp;优点</a>
+</h3>
+<h3 class="topic">
+<a name="0d74cef01nk5l4pc9ic974973a">&nbsp;&nbsp;&nbsp;&nbsp;代码复用：子类可以拥有父类的属性和方法</a>
+</h3>
+<h3 class="topic">
+<a name="2s123eghemnsnuci7v15jjlp15">&nbsp;&nbsp;&nbsp;&nbsp;灵活性：子类可以追加或修改属性和方法</a>
+</h3>
+<h3 class="topic">
+<a name="54bnospd2hrt89qbdaqrcgt950">&nbsp;闭包</a>
+</h3>
+<h3 class="topic">
+<a name="2lof8q05vf05d8i1rlnnjorclc">&nbsp;&nbsp;函数嵌套函数</a>
+</h3>
+<h3 class="topic">
+<a name="2tli9hq7sibfb3nd61o2m88a5n">&nbsp;&nbsp;垃圾回收机制</a>
+</h3>
+<h3 class="topic">
+<a name="582t4d467kmaitovvvjlp6rq6s">&nbsp;&nbsp;作用域（私有变量）</a>
+</h3>
+<h3 class="topic">
+<a name="76cum7mncq89i9aj6gu120q12b">&nbsp;&nbsp;匿名函数</a>
+</h3>
+<h3 class="topic">
+<a name="4gedove3a01oa32j2eif0tcp9s">&nbsp;this 关键字</a>
+</h3>
+<div class="notesContainer">
+<p>事件：事件源本身</p>
+<p>正在运行的函数所依附的对象</p>
+<p></p>
+</div>
+</body>
+</html>

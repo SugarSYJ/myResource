@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+            .ngbird{width: 120px;position:absolute;left:0;top:0;}
+            .right{transform:rotateY(180deg);}
+            .top{transform:rotateZ(30deg);}
+            .bottom{transform:rotateZ(-30deg);}
+        </style>
+        <script type="text/javascript">
+            window.onload = function(){
+                var ngbird = document.images[0];
+                var speed = 10;
+                document.onkeydown = function(e){
+                    var left = ngbird.offsetLeft;
+                    var top = ngbird.offsetTop;
+                    var className = '';
+                    if(e.keyCode === 37){
+                        left -= speed;
+                        className = 'left';
+                        if(left<0){
+                            left=window.innerWidth;
+                        }
+                    }else if(e.keyCode === 38){
+                        top -= speed;
+                        className = 'top';
+                        if(top<0){
+                            top = window.innerHeight;
+                        }
+                    }else if(e.keyCode === 39){
+                        left += speed;
+                        if(left>window.innerWidth){
+                            left = 0;
+                        }
+                        className = 'right';
+                    }else if(e.keyCode === 40){
+                        top += speed;
+                        className = 'bottom';
+                        if(top>window.innerHeight){
+                            top = 0;
+                        }
+                    }
+                    ngbird.style.left = left + 'px';
+                    ngbird.style.top = top + 'px';
+                    ngbird.className = 'ngbird ' + className;
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <!-- 愤怒的小鸟    键盘实现上下左右移动 -->
+        <img src="img/bird.jpg" class="ngbird">
+    </body>
+</html>

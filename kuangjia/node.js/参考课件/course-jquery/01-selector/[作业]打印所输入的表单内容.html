@@ -1,0 +1,175 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS选择器</title>
+    <script src="../jquery/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        // d
+        
+        // 绑定点击事件
+        // $('.center :submit').click(function(e){
+        //     var _msg ='';
+        //     for(var i=0;i<$('p').length;i++){
+        //         var label = $('p').eq(i)[0].children[0].innerHTML
+        //         var val = $('p').eq(i)[0].children[1];
+        //         if(val.tagName == 'INPUT' || val.tagName == 'SELECT'){
+        //             val = val.value;
+        //         }else{
+        //             val = val.children[0].nextSibling.nodeValue;
+        //         }
+        //         _msg += label + ': ' + val + '<br>';
+        //     }
+        //     $('.msg').html(_msg);
+        //     // 阻止浏览器默认行为
+        //     e.preventDefault()
+        // });
+
+
+        // $('.center :submit').click(function(e){
+        //     var _msg = '';
+            // each用于循环jquery对象
+            // $('p').each(function(){
+            //     // find查找后代元素
+            //     var _label = $(this).find('label').html();
+            //     var _value = $(this).find('input,select');
+
+            //     if(_value.is('select')){
+            //         // selected表示已选择的option元素
+            //         // text只获取元素的文本
+            //         _value = _value.find('option:selected').text();
+            //     }else if(_value.is(':checkbox') || _value.is(':radio')){
+            //         _value = _value.parent().text();
+            //     }else{
+            //         _value = _value.val();
+            //     }
+
+            //     _msg += _label + ': ' + _value +'<br>';
+
+
+            // });
+        //     $('.msg').html(_msg);
+        //     // 阻止浏览器默认行为
+        //     e.preventDefault();
+        // });
+
+        /*
+            1. each() //用于循环jquery对象
+            2. find() //查找后代元素
+            3. prev() //获取前一个元素
+            4. parent() //获取父元素
+            5. text()   //获取文本
+            6. is() //用于判断
+            7. :selected //获取已选择的option元素
+            8.return true;// 终止当前循环，进入下一个循环
+             return false// 退出整个each循环
+         */
+        $('.center :submit').click(function(e){
+            var _msg = '';
+
+            // 输入框
+            var $input = $('input:text,input:password');
+            var $select = $('select');
+            var $checkbox = $('input:checkbox');
+            var $radio = $('input:radio');
+
+            // each用于循环jquery对象
+            $input.each(function(){
+                // prev取当前jquery对象的前一个兄弟元素
+                var _label = $(this).prev().html();//previousSibling
+                //前
+                var _value = $(this).val();
+                _msg += _label + ': ' + _value + '<br>'
+            });
+
+            // find查找后代元素, :selected表示已选择的option元素
+            _msg += $select.prev().html() + ': ' + $select.find('option:selected').html() + '<br>';
+
+            _msg += '爱好：';
+            $checkbox.each(function () {
+                //是否已选中
+                console.log(this.checked);
+                if(this.checked){
+                    _msg += $(this).parent().text() + ', ';
+                }
+            });
+            _msg += '<br>';
+
+
+            $radio.each(function(){
+                if(this.checked){
+                    _msg += '是否已婚: ' + $(this).parent().text() + '<br>';
+
+                    // 终止当前循环，进入下一个循环
+                    return true;
+
+                    // 退出整个each循环
+                    return false;
+                }
+            });
+            
+
+            $('.msg').html(_msg);
+
+            e.preventDefault();
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <form>
+        <p>
+            <label for="username">用户名</label>
+            <input type="text" id="username" placeholder="请输入用户名">
+        </p>
+        <p>
+            <label for="nickname">昵称</label>
+            <input type="text" id="nickname" placeholder="输入一个昵称">
+        </p>
+        <p>
+            <label for="password">密码</label>
+            <input type="password" id="password">
+        </p>
+        <p>
+            <label for="passwordchecked">确认密码</label>
+            <input type="password" id="passwordchecked">
+        </p>
+        <p>
+            <label for="sex">性别</label>
+            <select id="sex">
+                <option value="男">男</option>
+                <option value="女">女</option>
+            </select>
+        </p>
+        <p>
+            <label for="">爱好</label>
+            <label>
+                <input type="checkbox" value="旅游">旅游</label>
+            <label>
+                <input type="checkbox" value="睡觉">睡觉</label>
+            <label>
+                <input type="checkbox" value="上网">上网</label>
+                <label>
+                <input type="checkbox" value="看电影">看电影</label>
+        </p>
+        <p>
+            <label for="">是否已婚</label>
+            <label>
+                <input type="radio" value="已婚" name="married">是</label>
+            <label>
+                <input type="radio" value="未婚" name="married">否</label>
+        </p>
+        <div class="center">
+            <input type="hidden" value="注册表单">
+            <input type="button" value="返回" />
+            <button type="submit">提交</button>
+            <button type="reset">重置</button>
+        </div>
+    </form>
+    <div class="msg"></div>
+</body>
+
+</html>

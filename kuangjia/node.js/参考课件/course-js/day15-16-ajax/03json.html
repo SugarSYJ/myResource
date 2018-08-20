@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+
+    <script type="text/javascript">
+        //对像
+        var student = { sex: 0, heigth: 195, age: 30, abstract2: '我是属性值' };
+        console.log(student.abstract2);
+        student.abstract2 = 2;
+        student.sex = 1;
+        //将 json 对像转成字符串 
+        var str = JSON.stringify(student);
+        console.log(str);
+
+        //字符串
+        //
+        var studentStr = '{ "sex": 0, "heigth": "身高", "age": 30 }';
+        //将 json 字符串转成对像
+        console.log(JSON.parse(studentStr));
+        //将 json 字符串转成对像
+        console.log(eval('(' + studentStr + ')'));
+    </script>
+</head>
+<body>
+
+</body>
+</html>

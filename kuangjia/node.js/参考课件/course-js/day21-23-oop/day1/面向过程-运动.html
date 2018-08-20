@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        .ball {
+            width: 30px;
+            height: 30px;
+            background-color: #00ff21;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+    <script type="text/javascript">
+
+        document.onclick = function (event) {
+            var ball = new Object();
+            ball.width = 30;
+            ball.height = 30;
+            ball.background = '#00ff21';
+            ball.left = event.clientX;
+            ball.top = event.clientY;
+            ball.element = document.createElement('div');
+            ball.element.className = 'ball';
+            ball.element.style.left = ball.left + 'px';
+            ball.element.style.top = ball.top + 'px';
+            ball.element.style.width = ball.width + 'px';
+            ball.element.style.height = ball.height + 'px';
+            document.body.appendChild(ball.element);
+            //event = event || window.event;
+            //var left = event.clientX;
+            //var top = event.clientY;
+            //var ball = document.createElement('div');
+            //ball.className = 'ball';
+            //ball.style.left = left + 'px';
+            //ball.style.top = top + 'px';
+            //document.body.appendChild(ball);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

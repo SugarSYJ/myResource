@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>01弹窗插件</title>
+	<link rel="stylesheet" href="lib/popover/css/popover.css">
+	<script src="lib/popover/popover.js"></script>
+	<script>
+		document.addEventListener('DOMContentLoaded',function(){
+			var btnLogin = document.querySelector('.btnLogin');
+
+			btnLogin.onclick = function(){
+				// new Popover({title:'老谢的弹窗',overlay:0})
+				new Confirm();
+			}
+		})
+	</script>
+</head>
+<body>
+	<button class="btnLogin">弹窗</button>
+</body>
+</html>

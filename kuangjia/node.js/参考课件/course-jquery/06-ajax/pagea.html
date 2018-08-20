@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <!--<script src="../jquery/jquery-2.1.1.min.js"></script>-->
+    <style type="text/css">
+        .mask{width:200px; height:100px; background:red;}
+    </style>
+</head>
+<body>
+    <h1>pagea.html</h1>
+    <input type="text" id="txt" />
+    <button id="btn2">传值</button>
+
+    <script type="text/javascript">
+        $(function () {
+            
+            $('#btn2').click(function () {
+                //跳转页面
+                console.log('dk')
+                window.location.href = 'pageb.html?txt=' + $('#txt').val();
+            })
+        })
+    </script>
+</body>
+</html>

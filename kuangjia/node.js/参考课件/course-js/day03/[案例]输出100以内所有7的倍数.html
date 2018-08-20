@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>[案例]输出100以内所有7的倍数</title>
+	
+</head>
+<body>
+	<script>
+		/*
+			[案例]输出100以内所有7的倍数
+		 */
+		var num = 100;
+		while(num>0){
+			// 判断7的倍数
+			if(num%7 == 0){
+				document.write(num + ', ');
+			}
+			
+			// 变量更新
+			num--;
+		}
+
+		/*
+			打印100–200之间所有能被3或者7整除的数
+		 */
+		var num = 100;
+		document.write('<br><br>100–200之间所有能被3或者7整除的数:');
+		while(num<=200){
+			if(num%3==0 || num%7 ==0){
+				document.write(num + ', ');
+			}
+
+			// 变量更新
+			num++;
+		}
+	</script>
+</body>
+</html>
